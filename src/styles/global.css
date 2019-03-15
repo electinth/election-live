@@ -1,0 +1,9 @@
+@import "~normalize.css";
+
+body {
+  background: #fff;
+  font-family: Noto Sans, Bai Jamjuree, sans-serif;
+  color: #212121;
+  font-size: 14px;
+  line-height: 1.5;
+}
