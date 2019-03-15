@@ -1,21 +1,23 @@
-## Prerequisites
+## Development
+
+### Prerequisites
 
 - Node.js
 - Yarn
 
-## Install dependencies
+### Install dependencies
 
 ```
 yarn
 ```
 
-## Develop
+### Running development server
 
 ```
 yarn develop
 ```
 
-Resources for developers:
+### Resources for developers
 
 - &rarr; [Gatsby recipes](https://www.gatsbyjs.org/docs/recipes/)
 - &rarr; [Project structure](https://www.gatsbyjs.org/docs/gatsby-project-structure/)
