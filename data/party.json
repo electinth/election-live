@@ -1,0 +1,488 @@
+[
+  {
+    "name": "กรีน",
+    "color": "#69c80a",
+    "hilightColor": "#295f06",
+    "count": 107
+  },
+  {
+    "name": "กลาง",
+    "color": "#c3067e",
+    "hilightColor": "#ef9443",
+    "count": 46
+  },
+  {
+    "name": "กสิกรไทย",
+    "color": "#829aa7",
+    "hilightColor": "#957370",
+    "count": 1
+  },
+  {
+    "name": "คนงานไทย",
+    "color": "#cf3636",
+    "hilightColor": "#959595",
+    "count": 2
+  },
+  {
+    "name": "คนธรรมดาแห่งประเทศไทย",
+    "color": "#d9771c",
+    "hilightColor": "#20222b",
+    "count": 4
+  },
+  {
+    "name": "ครูไทยเพื่อประชาชน",
+    "color": "#175a38",
+    "hilightColor": "#ad432b",
+    "count": 323
+  },
+  {
+    "name": "คลองไทย",
+    "color": "#0eafeb",
+    "hilightColor": "#096bb5",
+    "count": 50
+  },
+  {
+    "name": "ความหวังใหม่",
+    "color": "#e6b750",
+    "hilightColor": "9da",
+    "count": 33
+  },
+  {
+    "name": "เครือข่ายชาวนาแห่งประเทศไทย",
+    "color": "#0c327a",
+    "hilightColor": "#f4990e",
+    "count": 82
+  },
+  {
+    "name": "ชาติไทยพัฒนา",
+    "color": "#231c72",
+    "hilightColor": "#b7192d",
+    "count": 315
+  },
+  {
+    "name": "ชาติพัฒนา",
+    "color": "#223c88",
+    "hilightColor": "#e12127",
+    "count": 266
+  },
+  {
+    "name": "ชาติพันธุ์ไทย",
+    "color": "#406887",
+    "hilightColor": "#ce272d",
+    "count": 33
+  },
+  {
+    "name": "ฐานรากไทย",
+    "color": "#105495",
+    "hilightColor": "#97905c",
+    "count": 28
+  },
+  {
+    "name": "ถิ่นกาขาวชาววิไล",
+    "color": "#bd646d",
+    "hilightColor": "#51658c",
+    "count": 58
+  },
+  {
+    "name": "ทางเลือกใหม่",
+    "color": "#026aec",
+    "hilightColor": "#a4a5a6",
+    "count": 121
+  },
+  {
+    "name": "แทนคุณแผ่นดิน",
+    "color": "#2b2d66",
+    "hilightColor": "#e41f27",
+    "count": 99
+  },
+  {
+    "name": "ไทยธรรม",
+    "color": "#ec5c2c",
+    "hilightColor": "#6b3387",
+    "count": 39
+  },
+  {
+    "name": "ไทยรักษาชาติ",
+    "color": "#01019a",
+    "hilightColor": "#fc1011",
+    "count": 176
+  },
+  {
+    "name": "ไทยรุ่งเรือง",
+    "color": "#674590",
+    "hilightColor": "#f2eb28",
+    "count": 28
+  },
+  {
+    "name": "ไทยศรีวิไลย์",
+    "color": "#0c5197",
+    "hilightColor": "#8c97a7",
+    "count": 225
+  },
+  {
+    "name": "ไทรักธรรม",
+    "color": "#e43ba2",
+    "hilightColor": "#0e96d5",
+    "count": 301
+  },
+  {
+    "name": "ประชากรไทย",
+    "color": "#0f41ce",
+    "hilightColor": "#ffffff",
+    "count": 91
+  },
+  {
+    "name": "ประชาชนปฏิรูป",
+    "color": "#dfde4a",
+    "hilightColor": "#020561",
+    "count": 311
+  },
+  {
+    "name": "ประชาชาติ",
+    "color": "#a35f26",
+    "hilightColor": "#dbb667",
+    "count": 212
+  },
+  {
+    "name": "ประชาไทย",
+    "color": "#1d1376",
+    "hilightColor": "#c22e2d",
+    "count": 91
+  },
+  {
+    "name": "ประชาธรรมไทย",
+    "color": "#c32429",
+    "hilightColor": "#010cab",
+    "count": 254
+  },
+  {
+    "name": "ประชาธิปไตยเพื่อประชาชน",
+    "color": "#d63a40",
+    "hilightColor": "#4f4c66",
+    "count": 9
+  },
+  {
+    "name": "ประชาธิปไตยใหม่",
+    "color": "#eb4138",
+    "hilightColor": "#3b4729",
+    "count": 206
+  },
+  {
+    "name": "ประชาธิปัตย์",
+    "color": "#437fba",
+    "hilightColor": "#ffffff",
+    "count": 350
+  },
+  {
+    "name": "ประชานิยม",
+    "color": "#ea1f25",
+    "hilightColor": "#2c378b",
+    "count": 320
+  },
+  {
+    "name": "ประชาภิวัฒน์",
+    "color": "#076350",
+    "hilightColor": "#ffffff",
+    "count": 346
+  },
+  {
+    "name": "ผึ้งหลวง",
+    "color": "#e08119",
+    "hilightColor": "#4c4c99",
+    "count": 91
+  },
+  {
+    "name": "แผ่นดินธรรม",
+    "color": "#594835",
+    "hilightColor": "#e32425",
+    "count": 146
+  },
+  {
+    "name": "พลเมืองไทย",
+    "color": "#2d3180",
+    "hilightColor": "#e6232b",
+    "count": 159
+  },
+  {
+    "name": "พลังคนกีฬา",
+    "color": "#35899a",
+    "hilightColor": "#b23523",
+    "count": 1
+  },
+  {
+    "name": "พลังครูไทย",
+    "color": "#d3cdba",
+    "hilightColor": "#80423d",
+    "count": 37
+  },
+  {
+    "name": "พลังชาติไทย",
+    "color": "#08663b",
+    "hilightColor": "#bc1a19",
+    "count": 329
+  },
+  {
+    "name": "พลังท้องถิ่นไท",
+    "color": "#259747",
+    "hilightColor": "#c2232b",
+    "count": 346
+  },
+  {
+    "name": "พลังไทยดี",
+    "color": "#82ea13",
+    "hilightColor": "#07089c",
+    "count": 13
+  },
+  {
+    "name": "พลังไทยรักชาติ",
+    "color": "#fef102",
+    "hilightColor": "#055bac",
+    "count": 52
+  },
+  {
+    "name": "พลังไทยรักไทย",
+    "color": "#245896",
+    "hilightColor": "#a22724",
+    "count": 227
+  },
+  {
+    "name": "พลังไทสร้างชาติ",
+    "color": "#6ab36d",
+    "hilightColor": "#ce2c5b",
+    "count": 159
+  },
+  {
+    "name": "พลังธรรมใหม่",
+    "color": "#e9b54a",
+    "hilightColor": "#32538a",
+    "count": 134
+  },
+  {
+    "name": "พลังประชาธิปไตย",
+    "color": "#c4403a",
+    "hilightColor": "#778aa3",
+    "count": 158
+  },
+  {
+    "name": "พลังประชารัฐ",
+    "color": "#3e61a8",
+    "hilightColor": "#dd3239",
+    "count": 350
+  },
+  {
+    "name": "พลังปวงชนไทย",
+    "color": "#181f97",
+    "hilightColor": "#f30708",
+    "count": 273
+  },
+  {
+    "name": "พลังแผ่นดินทอง",
+    "color": "#fbf008",
+    "hilightColor": "#3f279b",
+    "count": 20
+  },
+  {
+    "name": "พลังรัก",
+    "color": "#36aadc",
+    "hilightColor": "#b7313f",
+    "count": 28
+  },
+  {
+    "name": "พลังแรงงานไทย",
+    "color": "#73c9ec",
+    "hilightColor": "#ede5a0",
+    "count": 16
+  },
+  {
+    "name": "พลังศรัทธา",
+    "color": "#059b3a",
+    "hilightColor": "#e32327",
+    "count": 85
+  },
+  {
+    "name": "พลังสหกรณ์",
+    "color": "#395a3d",
+    "hilightColor": "#1e8fd3",
+    "count": 13
+  },
+  {
+    "name": "พลังสังคม",
+    "color": "#c67328",
+    "hilightColor": "#345c8a",
+    "count": 126
+  },
+  {
+    "name": "พัฒนาประเทศไทย",
+    "color": "#0722af",
+    "hilightColor": "#c44028",
+    "count": 5
+  },
+  {
+    "name": "เพื่อคนไทย",
+    "color": "#0a217d",
+    "hilightColor": "#eb1313",
+    "count": 36
+  },
+  {
+    "name": "เพื่อชาติ",
+    "color": "#c0bcc3",
+    "hilightColor": "#e71f21",
+    "count": 349
+  },
+  {
+    "name": "เพื่อชีวิตใหม่",
+    "color": "#aa6a9b",
+    "hilightColor": "#0a930c",
+    "count": 14
+  },
+  {
+    "name": "เพื่อไทย",
+    "color": "#cf1e38",
+    "hilightColor": "#0c0c80",
+    "count": 250
+  },
+  {
+    "name": "เพื่อไทยพัฒนา",
+    "color": "#142d89",
+    "hilightColor": "#e00616",
+    "count": 32
+  },
+  {
+    "name": "เพื่อธรรม",
+    "color": "#000099",
+    "hilightColor": "#fd0708",
+    "count": 41
+  },
+  {
+    "name": "เพื่อนไทย",
+    "color": "#bc0911",
+    "hilightColor": "#161d98",
+    "count": 154
+  },
+  {
+    "name": "เพื่อแผ่นดิน",
+    "color": "#f20707",
+    "hilightColor": "#172062",
+    "count": 210
+  },
+  {
+    "name": "เพื่อสหกรณ์ไทย",
+    "color": "#dc8428",
+    "hilightColor": "#87837a",
+    "count": 4
+  },
+  {
+    "name": "ภราดรภาพ",
+    "color": "#0c5a38",
+    "hilightColor": "#27498b",
+    "count": 164
+  },
+  {
+    "name": "ภาคีเครือข่ายไทย",
+    "color": "#f36e2d",
+    "hilightColor": "#0e4636",
+    "count": 137
+  },
+  {
+    "name": "ภูมิใจไทย",
+    "color": "#102986",
+    "hilightColor": "#ce0506",
+    "count": 350
+  },
+  {
+    "name": "ภูมิพลังเกษตรกรไทย",
+    "color": "#148e14",
+    "hilightColor": "#f8f836",
+    "count": 40
+  },
+  {
+    "name": "มติประชา",
+    "color": "#2f3293",
+    "hilightColor": "#ed1d25",
+    "count": 19
+  },
+  {
+    "name": "มหาชน",
+    "color": "#33338f",
+    "hilightColor": "#e72429",
+    "count": 190
+  },
+  {
+    "name": "ยางพาราไทย",
+    "color": "#7a3e21",
+    "hilightColor": "#86bb85",
+    "count": 5
+  },
+  {
+    "name": "รวมใจไทย",
+    "color": "#313091",
+    "hilightColor": "#e5212c",
+    "count": 51
+  },
+  {
+    "name": "รวมพลังประชาชาติไทย",
+    "color": "#303d8e",
+    "hilightColor": "#d6272b",
+    "count": 350
+  },
+  {
+    "name": "รักท้องถิ่นไทย",
+    "color": "#27ac67",
+    "hilightColor": "#e42c49",
+    "count": 25
+  },
+  {
+    "name": "รักษ์ธรรม",
+    "color": "#3839a8",
+    "hilightColor": "#78bf47",
+    "count": 1
+  },
+  {
+    "name": "รักษ์ผืนป่าประเทศไทย",
+    "color": "#8dbf44",
+    "hilightColor": "#402715",
+    "count": 349
+  },
+  {
+    "name": "เศรษฐกิจใหม่",
+    "color": "#184474",
+    "hilightColor": "#c83437",
+    "count": 331
+  },
+  {
+    "name": "สยามพัฒนา",
+    "color": "#f7c704",
+    "hilightColor": "#2260f1",
+    "count": 44
+  },
+  {
+    "name": "สังคมประชาธิปไตยไทย",
+    "color": "#d32524",
+    "hilightColor": "#2321a7",
+    "count": 23
+  },
+  {
+    "name": "สามัญชน",
+    "color": "#010101",
+    "hilightColor": "#f41b24",
+    "count": 16
+  },
+  {
+    "name": "เสรีรวมไทย",
+    "color": "#edd63f",
+    "hilightColor": "#19198e",
+    "count": 350
+  },
+  {
+    "name": "อนาคตไทย",
+    "color": "#ad1b34",
+    "hilightColor": "#1b416f",
+    "count": 1
+  },
+  {
+    "name": "อนาคตใหม่",
+    "color": "#f4792e",
+    "hilightColor": "#0c3255",
+    "count": 350
+  }
+]
