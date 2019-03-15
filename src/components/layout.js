@@ -1,5 +1,6 @@
 import React from "react"
 import "../styles/global.css"
+import NavBar from "./NavBar"
 
 export default function Layout({ children }) {
   return (
@@ -20,6 +21,9 @@ export default function Layout({ children }) {
         >
           In VOTE We TRUST
         </p>
+      </div>
+      <div style={{ margin: "16px" }}>
+        <NavBar />
       </div>
       <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
         {children}

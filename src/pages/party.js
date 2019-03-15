@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 
 export default () => (
   <Layout>
-    <h1>Map View</h1>
+    <h1>Party View</h1>
+    <p>All parties</p>
   </Layout>
 )
