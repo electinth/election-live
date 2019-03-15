@@ -1,3 +1,8 @@
+## Prerequisites
+
+- Node.js
+- Yarn
+
 ## Install dependencies
 
 ```
