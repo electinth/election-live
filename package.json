@@ -15,11 +15,18 @@
   "dependencies": {
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
+    "d3": "^5.7.0",
+    "d3-array": "^2.0.3",
+    "d3-scale": "^2.2.2",
+    "d3-selection": "^1.4.0",
+    "d3kit": "^3.2.0",
     "gatsby": "^2.1.31",
     "gatsby-plugin-emotion": "^4.0.6",
     "gatsby-plugin-web-font-loader": "^1.0.4",
+    "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "react": "^16.8.4",
+    "react-d3kit": "^2.0.0",
     "react-dom": "^16.8.4"
   },
   "devDependencies": {
