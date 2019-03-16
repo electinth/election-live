@@ -5,14 +5,14 @@ import NavBar from "./NavBar"
 export default function Layout({ children }) {
   return (
     <React.Fragment>
-      <div style={{ margin: "13px 16px" }}>
+      <div css={{ margin: "13px 16px" }}>
         <img
           src={require("../styles/images/site-logo.png")}
           alt="ELECT"
-          style={{ maxWidth: 150, width: "100%", display: "block" }}
+          css={{ maxWidth: 150, width: "100%", display: "block" }}
         />
         <p
-          style={{
+          css={{
             margin: "10px 0",
             fontSize: "0.75rem",
             color: "#4a4a4a",
@@ -22,10 +22,10 @@ export default function Layout({ children }) {
           In VOTE We TRUST
         </p>
       </div>
-      <div style={{ margin: "16px" }}>
+      <div css={{ margin: "16px" }}>
         <NavBar />
       </div>
-      <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
+      <div css={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
         {children}
       </div>
     </React.Fragment>
