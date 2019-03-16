@@ -2,30 +2,26 @@ import React from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import { css } from "@emotion/core"
+import { Location } from '@reach/router'
 
-export default function NavBar() {
+const Navbar = ({ location }) => {
 
   const stylesLink = css`
-    color: inherit;
+    color: black;
     text-decoration: none;
     display: inline-block;
     position: relative;
     margin: 0 1rem;
-    &:active::before {
-      content: "";
-      display: block;
-      position: absolute;
-      right: 0;
-      bottom: -2px;
-      height: 2px;
-      left: 0;
-      background: #ef314a;
-    }
+  `
+
+  const stylesActiveLink = css`
+    ${stylesLink}
+    border-bottom: 2px solid #ef314a;
   `
 
   const linkTo = (url, text) => (
     <Link
-      css={stylesLink}
+      css={location.pathname === url ? stylesActiveLink : stylesLink}
       to={url}
     >
       {text}
@@ -49,3 +45,9 @@ export default function NavBar() {
     </Nav>
   )
 }
+
+export default props => (
+  <Location>
+    {locationProps => <Navbar {...locationProps} {...props} />}
+  </Location>
+);
