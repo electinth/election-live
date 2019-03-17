@@ -1,5 +1,6 @@
 import React from "react"
 import "../styles/global.css"
+import GlobalPanel from "./GlobalPanel"
 import NavBar from "./NavBar"
 
 export default function Layout({ children }) {
@@ -22,6 +23,7 @@ export default function Layout({ children }) {
           In VOTE We TRUST
         </p>
       </div>
+      <GlobalPanel />
       <div css={{ margin: "16px" }}>
         <NavBar />
       </div>
