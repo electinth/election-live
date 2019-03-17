@@ -7,7 +7,7 @@ const {
   parties,
   partyPath,
   zonePath,
-} = require("./src/data/information")
+} = require("./src/models/information")
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions

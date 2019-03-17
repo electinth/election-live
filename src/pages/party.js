@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
-import { parties, partyPath, getPartyById } from "../data/information"
+import { parties, partyPath, getPartyById } from "../models/information"
 import { Link } from "gatsby"
 
 export default ({ pageContext }) => (

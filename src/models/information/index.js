@@ -6,13 +6,13 @@ import { fail } from "assert"
  */
 
 /** @type {IParty[]} */
-export const parties = require("./parties.json")
+export const parties = require("./_parties.json")
 
 /** @type {IProvince[]} */
-export const provinces = require("./provinces.json")
+export const provinces = require("./_provinces.json")
 
 /** @type {IZone[]} */
-export const zones = require("./zones.json")
+export const zones = require("./_zones.json")
 
 /**
  * @param {IParty} party
