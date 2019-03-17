@@ -804,6 +804,11 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@reach/visually-hidden@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@reach/visually-hidden/-/visually-hidden-0.1.2.tgz#96605cdcbd4585c76b56fed779904423e1f87794"
+  integrity sha512-x/ewdWFlUphyF4pEth5U2FNS29vz/OOxAKcxc+XWbX96XUTobfIvLjYfQWawcP6+Eavy7zGvobpeHj7GVegTRA==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
