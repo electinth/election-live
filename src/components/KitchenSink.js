@@ -13,7 +13,8 @@ export function KitchenSink() {
 }
 
 function PartyStatsRow() {
-  // @todo #1 Implement <PartyStatsRow /> component
+  // @todo #1
+  //  Implement <PartyStatsRow /> component
   return "TODO"
 }
 
