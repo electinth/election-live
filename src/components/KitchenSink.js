@@ -1,4 +1,5 @@
 import React from "react"
+import { PartyStatsRow } from "./PartyStatsRow"
 
 export function KitchenSink() {
   return (
@@ -10,11 +11,6 @@ export function KitchenSink() {
       </Example>
     </section>
   )
-}
-
-function PartyStatsRow() {
-  // @todo #1 Implement <PartyStatsRow /> component
-  return "..."
 }
 
 function Example({ maxWidth, children }) {
