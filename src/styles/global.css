@@ -7,3 +7,9 @@ body {
   font-size: 14px;
   line-height: 1.5;
 }
+
+/**
+ * @todo #1 Add default link style
+ *  - Maybe make it a different color and remove the underline.
+ *  - Make sure it is keyboard accessible.
+ */
