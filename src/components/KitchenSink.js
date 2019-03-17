@@ -13,9 +13,8 @@ export function KitchenSink() {
 }
 
 function PartyStatsRow() {
-  // @todo #1
-  //  Implement <PartyStatsRow /> component
-  return "TODO"
+  // @todo #1 Implement <PartyStatsRow /> component
+  return "..."
 }
 
 function Example({ maxWidth, children }) {
