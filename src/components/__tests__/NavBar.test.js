@@ -14,7 +14,6 @@ describe("Navbar", () => {
 
   test('should have 4 Links', () => {
     const root = renderer.root
-    console.log(renderer.toJSON())
     const links = root.findAll((el) => el.type === Link)
     expect(links).toHaveLength(4)
   })
