@@ -17,6 +17,16 @@ This web application is built using [Gatsby](https://www.gatsbyjs.org). We chose
 
 [0pdd](https://github.com/yegor256/0pdd#what-does-it-do) helps us keep track of TODOs by converting `@todo` markers in source code into GitHub issue. The created issue will be closed automatically when the corresponding `@todo` marker is removed from the source code.
 
+To add a todo, put a comment in the source code beginning with `@todo`, followed by issue number. If there’s no associated issue, just use the catch-all issue #1. Example:
+
+```js
+// @todo #1 Add Analytics, e.g. Google Analytics.
+//  Check out Gatsby docs for how to add analytics
+//  - Main Guide: https://www.gatsbyjs.org/docs/adding-analytics/
+//  - Google Analytics: https://www.gatsbyjs.org/docs/adding-analytics/#using-gatsby-plugin-google-analytics
+//  - Google Tag Manager: https://www.gatsbyjs.org/packages/gatsby-plugin-google-tagmanager/
+```
+
 ### Prerequisites
 
 - Node.js (10.x)
