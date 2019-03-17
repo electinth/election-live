@@ -1,0 +1,695 @@
+[
+  {
+    "code": "BKK",
+    "name": "กรุงเทพมหานคร",
+    "zone": 30,
+    "eligible": 4500189,
+    "regionId": 3,
+    "units": 6150,
+    "id": 10
+  },
+  {
+    "code": "SPK",
+    "name": "สมุทรปราการ",
+    "zone": 7,
+    "eligible": 1033945,
+    "regionId": 3,
+    "units": 1336,
+    "id": 11
+  },
+  {
+    "code": "NBI",
+    "name": "นนทบุรี",
+    "zone": 6,
+    "eligible": 1001744,
+    "regionId": 3,
+    "units": 1261,
+    "id": 12
+  },
+  {
+    "code": "PTE",
+    "name": "ปทุมธานี",
+    "zone": 6,
+    "eligible": 893448,
+    "regionId": 3,
+    "units": 1143,
+    "id": 13
+  },
+  {
+    "code": "AYA",
+    "name": "พระนครศรีอยุธยา",
+    "zone": 4,
+    "eligible": 649038,
+    "regionId": 3,
+    "units": 1023,
+    "id": 14
+  },
+  {
+    "code": "ATG",
+    "name": "อ่างทอง",
+    "zone": 1,
+    "eligible": 226924,
+    "regionId": 3,
+    "units": 474,
+    "id": 15
+  },
+  {
+    "code": "LRI",
+    "name": "ลพบุรี",
+    "zone": 4,
+    "eligible": 601816,
+    "regionId": 3,
+    "units": 1017,
+    "id": 16
+  },
+  {
+    "code": "SBR",
+    "name": "สิงห์บุรี",
+    "zone": 1,
+    "eligible": 170539,
+    "regionId": 3,
+    "units": 209,
+    "id": 17
+  },
+  {
+    "code": "CNT",
+    "name": "ชัยนาท",
+    "zone": 2,
+    "eligible": 266130,
+    "regionId": 3,
+    "units": 503,
+    "id": 18
+  },
+  {
+    "code": "SRI",
+    "name": "สระบุรี",
+    "zone": 3,
+    "eligible": 501668,
+    "regionId": 3,
+    "units": 737,
+    "id": 19
+  },
+  {
+    "code": "CBI",
+    "name": "ชลบุรี",
+    "zone": 8,
+    "eligible": 1155295,
+    "regionId": 3,
+    "units": 1390,
+    "id": 20
+  },
+  {
+    "code": "RYG",
+    "name": "ระยอง",
+    "zone": 4,
+    "eligible": 544834,
+    "regionId": 3,
+    "units": 779,
+    "id": 21
+  },
+  {
+    "code": "CTI",
+    "name": "จันทบุรี",
+    "zone": 3,
+    "eligible": 421935,
+    "regionId": 3,
+    "units": 806,
+    "id": 22
+  },
+  {
+    "code": "TRT",
+    "name": "ตราด",
+    "zone": 1,
+    "eligible": 172749,
+    "regionId": 3,
+    "units": 305,
+    "id": 23
+  },
+  {
+    "code": "CCO",
+    "name": "ฉะเชิงเทรา",
+    "zone": 4,
+    "eligible": 557061,
+    "regionId": 3,
+    "units": 891,
+    "id": 24
+  },
+  {
+    "code": "PRI",
+    "name": "ปราจีนบุรี",
+    "zone": 3,
+    "eligible": 382527,
+    "regionId": 3,
+    "units": 744,
+    "id": 25
+  },
+  {
+    "code": "NYK",
+    "name": "นครนายก",
+    "zone": 1,
+    "eligible": 207138,
+    "regionId": 3,
+    "units": 456,
+    "id": 26
+  },
+  {
+    "code": "SKW",
+    "name": "สระแก้ว",
+    "zone": 3,
+    "eligible": 427935,
+    "regionId": 3,
+    "units": 789,
+    "id": 27
+  },
+  {
+    "code": "NMA",
+    "name": "นครราชสีมา",
+    "zone": 14,
+    "eligible": 2086177,
+    "regionId": 2,
+    "units": 4352,
+    "id": 30
+  },
+  {
+    "code": "BRM",
+    "name": "บุรีรัมย์",
+    "zone": 8,
+    "eligible": 1228938,
+    "regionId": 2,
+    "units": 2460,
+    "id": 31
+  },
+  {
+    "code": "SRN",
+    "name": "สุรินทร์",
+    "zone": 7,
+    "eligible": 1078581,
+    "regionId": 2,
+    "units": 2127,
+    "id": 32
+  },
+  {
+    "code": "SSK",
+    "name": "ศรีสะเกษ",
+    "zone": 8,
+    "eligible": 1150390,
+    "regionId": 2,
+    "units": 2716,
+    "id": 33
+  },
+  {
+    "code": "UBN",
+    "name": "อุบลราชธานี",
+    "zone": 10,
+    "eligible": 1441557,
+    "regionId": 2,
+    "units": 2951,
+    "id": 34
+  },
+  {
+    "code": "YST",
+    "name": "ยโสธร",
+    "zone": 3,
+    "eligible": 432903,
+    "regionId": 2,
+    "units": 892,
+    "id": 35
+  },
+  {
+    "code": "CPM",
+    "name": "ชัยภูมิ",
+    "zone": 6,
+    "eligible": 900419,
+    "regionId": 2,
+    "units": 1885,
+    "id": 36
+  },
+  {
+    "code": "ACR",
+    "name": "อำนาจเจริญ",
+    "zone": 2,
+    "eligible": 298335,
+    "regionId": 2,
+    "units": 629,
+    "id": 37
+  },
+  {
+    "code": "BKN",
+    "name": "บึงกาฬ",
+    "zone": 2,
+    "eligible": 322439,
+    "regionId": 2,
+    "units": 596,
+    "id": 38
+  },
+  {
+    "code": "NBP",
+    "name": "หนองบัวลำภู",
+    "zone": 3,
+    "eligible": 400091,
+    "regionId": 2,
+    "units": 771,
+    "id": 39
+  },
+  {
+    "code": "KKN",
+    "name": "ขอนแก่น",
+    "zone": 10,
+    "eligible": 1446596,
+    "regionId": 2,
+    "units": 2637,
+    "id": 40
+  },
+  {
+    "code": "UDN",
+    "name": "อุดรธานี",
+    "zone": 8,
+    "eligible": 1232778,
+    "regionId": 2,
+    "units": 2177,
+    "id": 41
+  },
+  {
+    "code": "LEI",
+    "name": "เลย",
+    "zone": 3,
+    "eligible": 502476,
+    "regionId": 2,
+    "units": 1009,
+    "id": 42
+  },
+  {
+    "code": "NKI",
+    "name": "หนองคาย",
+    "zone": 3,
+    "eligible": 405481,
+    "regionId": 2,
+    "units": 780,
+    "id": 43
+  },
+  {
+    "code": "MKM",
+    "name": "มหาสารคาม",
+    "zone": 5,
+    "eligible": 777442,
+    "regionId": 2,
+    "units": 1777,
+    "id": 44
+  },
+  {
+    "code": "RET",
+    "name": "ร้อยเอ็ด",
+    "zone": 7,
+    "eligible": 1052817,
+    "regionId": 2,
+    "units": 2544,
+    "id": 45
+  },
+  {
+    "code": "KSN",
+    "name": "กาฬสินธุ์",
+    "zone": 5,
+    "eligible": 785171,
+    "regionId": 2,
+    "units": 1590,
+    "id": 46
+  },
+  {
+    "code": "SNK",
+    "name": "สกลนคร",
+    "zone": 6,
+    "eligible": 894142,
+    "regionId": 2,
+    "units": 1631,
+    "id": 47
+  },
+  {
+    "code": "NPM",
+    "name": "นครพนม",
+    "zone": 4,
+    "eligible": 557403,
+    "regionId": 2,
+    "units": 1100,
+    "id": 48
+  },
+  {
+    "code": "MDH",
+    "name": "มุกดาหาร",
+    "zone": 2,
+    "eligible": 271984,
+    "regionId": 2,
+    "units": 576,
+    "id": 49
+  },
+  {
+    "code": "CMI",
+    "name": "เชียงใหม่",
+    "zone": 9,
+    "eligible": 1310314,
+    "regionId": 1,
+    "units": 2618,
+    "id": 50
+  },
+  {
+    "code": "LPN",
+    "name": "ลำพูน",
+    "zone": 2,
+    "eligible": 336143,
+    "regionId": 1,
+    "units": 679,
+    "id": 51
+  },
+  {
+    "code": "LPG",
+    "name": "ลำปาง",
+    "zone": 4,
+    "eligible": 624785,
+    "regionId": 1,
+    "units": 1182,
+    "id": 52
+  },
+  {
+    "code": "UTT",
+    "name": "อุตรดิตถ์",
+    "zone": 2,
+    "eligible": 371167,
+    "regionId": 1,
+    "units": 707,
+    "id": 53
+  },
+  {
+    "code": "PRE",
+    "name": "แพร่",
+    "zone": 2,
+    "eligible": 374321,
+    "regionId": 1,
+    "units": 749,
+    "id": 54
+  },
+  {
+    "code": "NAN",
+    "name": "น่าน",
+    "zone": 3,
+    "eligible": 389552,
+    "regionId": 1,
+    "units": 921,
+    "id": 55
+  },
+  {
+    "code": "PYO",
+    "name": "พะเยา",
+    "zone": 3,
+    "eligible": 393937,
+    "regionId": 1,
+    "units": 848,
+    "id": 56
+  },
+  {
+    "code": "CRI",
+    "name": "เชียงราย",
+    "zone": 7,
+    "eligible": 936643,
+    "regionId": 1,
+    "units": 1933,
+    "id": 57
+  },
+  {
+    "code": "MSN",
+    "name": "แม่ฮ่องสอน",
+    "zone": 1,
+    "eligible": 174412,
+    "regionId": 1,
+    "units": 458,
+    "id": 58
+  },
+  {
+    "code": "NSN",
+    "name": "นครสวรรค์",
+    "zone": 6,
+    "eligible": 844321,
+    "regionId": 1,
+    "units": 1611,
+    "id": 60
+  },
+  {
+    "code": "UTI",
+    "name": "อุทัยธานี",
+    "zone": 2,
+    "eligible": 260740,
+    "regionId": 3,
+    "units": 614,
+    "id": 61
+  },
+  {
+    "code": "KPT",
+    "name": "กำแพงเพชร",
+    "zone": 4,
+    "eligible": 566665,
+    "regionId": 1,
+    "units": 1089,
+    "id": 62
+  },
+  {
+    "code": "TAK",
+    "name": "ตาก",
+    "zone": 3,
+    "eligible": 389107,
+    "regionId": 1,
+    "units": 660,
+    "id": 63
+  },
+  {
+    "code": "STI",
+    "name": "สุโขทัย",
+    "zone": 3,
+    "eligible": 482359,
+    "regionId": 1,
+    "units": 961,
+    "id": 64
+  },
+  {
+    "code": "PLK",
+    "name": "พิษณุโลก",
+    "zone": 5,
+    "eligible": 693009,
+    "regionId": 1,
+    "units": 1270,
+    "id": 65
+  },
+  {
+    "code": "PCT",
+    "name": "พิจิตร",
+    "zone": 3,
+    "eligible": 433418,
+    "regionId": 1,
+    "units": 976,
+    "id": 66
+  },
+  {
+    "code": "PNB",
+    "name": "เพชรบูรณ์",
+    "zone": 5,
+    "eligible": 784924,
+    "regionId": 1,
+    "units": 1622,
+    "id": 67
+  },
+  {
+    "code": "RBR",
+    "name": "ราชบุรี",
+    "zone": 5,
+    "eligible": 675806,
+    "regionId": 3,
+    "units": 1006,
+    "id": 70
+  },
+  {
+    "code": "KRI",
+    "name": "กาญจนบุรี",
+    "zone": 5,
+    "eligible": 631046,
+    "regionId": 3,
+    "units": 1032,
+    "id": 71
+  },
+  {
+    "code": "SPB",
+    "name": "สุพรรณบุรี",
+    "zone": 4,
+    "eligible": 677450,
+    "regionId": 3,
+    "units": 1238,
+    "id": 72
+  },
+  {
+    "code": "NPT",
+    "name": "นครปฐม",
+    "zone": 5,
+    "eligible": 724053,
+    "regionId": 3,
+    "units": 1146,
+    "id": 73
+  },
+  {
+    "code": "SKN",
+    "name": "สมุทรสาคร",
+    "zone": 3,
+    "eligible": 425114,
+    "regionId": 3,
+    "units": 570,
+    "id": 74
+  },
+  {
+    "code": "SKM",
+    "name": "สมุทรสงคราม",
+    "zone": 1,
+    "eligible": 157769,
+    "regionId": 3,
+    "units": 260,
+    "id": 75
+  },
+  {
+    "code": "PBI",
+    "name": "เพชรบุรี",
+    "zone": 3,
+    "eligible": 382319,
+    "regionId": 3,
+    "units": 683,
+    "id": 76
+  },
+  {
+    "code": "PKN",
+    "name": "ประจวบคีรีขันธ์",
+    "zone": 3,
+    "eligible": 416942,
+    "regionId": 3,
+    "units": 611,
+    "id": 77
+  },
+  {
+    "code": "NST",
+    "name": "นครศรีธรรมราช",
+    "zone": 8,
+    "eligible": 1205067,
+    "regionId": 4,
+    "units": 2013,
+    "id": 80
+  },
+  {
+    "code": "KBI",
+    "name": "กระบี่",
+    "zone": 2,
+    "eligible": 343212,
+    "regionId": 4,
+    "units": 575,
+    "id": 81
+  },
+  {
+    "code": "PNA",
+    "name": "พังงา",
+    "zone": 1,
+    "eligible": 202831,
+    "regionId": 4,
+    "units": 346,
+    "id": 82
+  },
+  {
+    "code": "PKT",
+    "name": "ภูเก็ต",
+    "zone": 2,
+    "eligible": 294706,
+    "regionId": 4,
+    "units": 366,
+    "id": 83
+  },
+  {
+    "code": "SNI",
+    "name": "สุราษฎร์ธานี",
+    "zone": 6,
+    "eligible": 803478,
+    "regionId": 4,
+    "units": 1381,
+    "id": 84
+  },
+  {
+    "code": "RNG",
+    "name": "ระนอง",
+    "zone": 1,
+    "eligible": 135654,
+    "regionId": 4,
+    "units": 203,
+    "id": 85
+  },
+  {
+    "code": "CPN",
+    "name": "ชุมพร",
+    "zone": 3,
+    "eligible": 397075,
+    "regionId": 4,
+    "units": 730,
+    "id": 86
+  },
+  {
+    "code": "SKA",
+    "name": "สงขลา",
+    "zone": 8,
+    "eligible": 1068299,
+    "regionId": 4,
+    "units": 1745,
+    "id": 90
+  },
+  {
+    "code": "STN",
+    "name": "สตูล",
+    "zone": 2,
+    "eligible": 231596,
+    "regionId": 4,
+    "units": 364,
+    "id": 91
+  },
+  {
+    "code": "TRG",
+    "name": "ตรัง",
+    "zone": 3,
+    "eligible": 492133,
+    "regionId": 4,
+    "units": 884,
+    "id": 92
+  },
+  {
+    "code": "PLG",
+    "name": "พัทลุง",
+    "zone": 3,
+    "eligible": 411771,
+    "regionId": 4,
+    "units": 765,
+    "id": 93
+  },
+  {
+    "code": "PTN",
+    "name": "ปัตตานี",
+    "zone": 4,
+    "eligible": 488512,
+    "regionId": 4,
+    "units": 803,
+    "id": 94
+  },
+  {
+    "code": "YLA",
+    "name": "ยะลา",
+    "zone": 3,
+    "eligible": 364635,
+    "regionId": 4,
+    "units": 577,
+    "id": 95
+  },
+  {
+    "code": "NWT",
+    "name": "นราธิวาส",
+    "zone": 4,
+    "eligible": 551570,
+    "regionId": 4,
+    "units": 927,
+    "id": 96
+  }
+]
