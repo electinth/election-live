@@ -48,8 +48,10 @@ class GlobalPanel extends Component {
 
   // data simulation by vote count completeness
   // @todo #1 Extract data subscription part to create-subscription.
+  /**
+   * @return {GlobalScoreInfo}
+   */
   calculateScore(complete = 0.0) {
-    // @todo #1 Model the types of score subscription.
     return [
       {
         id: "01d",
