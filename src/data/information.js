@@ -1,15 +1,18 @@
 import { fail } from "assert"
 
+/**
+ * This file represents the static information about Thailand General Election 2019
+ * such as available parties, election zones, etc.
+ */
+
 /** @type {IParty[]} */
-const parties = require("./parties.json")
+export const parties = require("./parties.json")
 
 /** @type {IProvince[]} */
-const provinces = require("./provinces.json")
+export const provinces = require("./provinces.json")
 
 /** @type {IZone[]} */
-const zones = require("./zones.json")
-
-export { parties, provinces, zones }
+export const zones = require("./zones.json")
 
 /**
  * @param {IParty} party
@@ -34,6 +37,8 @@ function provincePath(province) {
 
 /**
  * @param {number} id
+ * @todo #1 Improve performance of `getProvinceById` to be O(1),
+ *  e.g. by pre-generating a map.
  */
 export function getProvinceById(id) {
   id = +id
@@ -44,6 +49,8 @@ export function getProvinceById(id) {
 
 /**
  * @param {number} id
+ * @todo #1 Improve performance of `getPartyById` to be O(1),
+ *  e.g. by pre-generating a map.
  */
 export function getPartyById(id) {
   id = +id

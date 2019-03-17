@@ -19,7 +19,7 @@ class GlobalPanel extends Component {
       <div
         css={{
           margin: "16px",
-          "margin-bottom": "0",
+          marginBottom: "0",
           position: "absolute",
           top: 0,
           height: "60px",
@@ -47,7 +47,9 @@ class GlobalPanel extends Component {
   }
 
   // data simulation by vote count completeness
+  // @todo #1 Extract data subscription part to create-subscription.
   calculateScore(complete = 0.0) {
+    // @todo #1 Model the types of score subscription.
     return [
       {
         id: "01d",

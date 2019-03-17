@@ -3,6 +3,7 @@ import "../styles/global.css"
 import GlobalPanel from "./GlobalPanel"
 import NavBar from "./NavBar"
 
+// @todo #1 Implement responsive layout and navigation
 export default function Layout({ children }) {
   return (
     <React.Fragment>
