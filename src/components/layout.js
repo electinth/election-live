@@ -33,9 +33,7 @@ export default function Layout({ children }) {
       <div css={{ margin: "16px" }}>
         <NavBar />
       </div>
-      <div css={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
-        {children}
-      </div>
+      {children}
       <Footer />
     </React.Fragment>
   )
