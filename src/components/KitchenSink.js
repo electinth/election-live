@@ -19,16 +19,18 @@ export function KitchenSink() {
 }
 
 function Example({ maxWidth, children }) {
+  const borderWidth = 4
   return (
     <div
       css={{
         display: "flex",
         width: "100%",
-        maxWidth: maxWidth + 8,
-        padding: "4px 0",
+        // This weird technique allows horizontal borders to disappear
+        // when viewing on device with smaller screens.
+        maxWidth: maxWidth + 2 * borderWidth,
+        padding: `${borderWidth}px 0`,
         justifyContent: "center",
         background: "#ccc",
-        verticalAlign: "top",
       }}
     >
       <div css={{ background: "white", flex: 1, maxWidth: maxWidth }}>
