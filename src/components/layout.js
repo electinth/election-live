@@ -2,6 +2,7 @@ import React from "react"
 import "../styles/global.css"
 import GlobalPanel from "./GlobalPanel"
 import NavBar from "./NavBar"
+import { Footer } from "./Footer"
 
 // @todo #1 Implement responsive layout and navigation
 export default function Layout({ children }) {
@@ -31,6 +32,7 @@ export default function Layout({ children }) {
       <div css={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
         {children}
       </div>
+      <Footer />
     </React.Fragment>
   )
 }
