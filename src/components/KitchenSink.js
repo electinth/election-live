@@ -1,13 +1,18 @@
 import React from "react"
 import { PartyStatsRow } from "./PartyStatsRow"
+import { CandidateStatsRow } from "./CandidateStatsRow"
 
 export function KitchenSink() {
   return (
     <section>
       <h1>Kitchen Sink</h1>
-      <h2>Vote</h2>
+      <h2>PartyStatsRow</h2>
       <Example maxWidth={375}>
         <PartyStatsRow />
+      </Example>
+      <h2>CandidateStatsRow</h2>
+      <Example maxWidth={375}>
+        <CandidateStatsRow />
       </Example>
     </section>
   )
