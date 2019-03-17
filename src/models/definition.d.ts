@@ -43,7 +43,11 @@ interface IZone {
  * Data summarizing the national election result in terms of how many
  * people from each party ended up in the House of Representatives.
  */
-type HouseOfRepresentativesSummary = HouseOfRepresentativesSummaryRow[]
+type HouseOfRepresentativesSummary = {
+  /** Number from 0-1 representing completion of the counting process. */
+  complete: number
+  party_scores: HouseOfRepresentativesSummaryRow[]
+}
 type HouseOfRepresentativesSummaryRow = {
   /** A unique ID for this row. */
   id: string
