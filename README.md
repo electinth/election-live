@@ -27,6 +27,8 @@ To add a todo, put a comment in the source code beginning with `@todo`, followed
 //  - Google Tag Manager: https://www.gatsbyjs.org/packages/gatsby-plugin-google-tagmanager/
 ```
 
+Note that if the `@todo` spans multiple lines, subsequent lines must be indented with 1 extra space. [See `@todo` formatting rules.](https://github.com/yegor256/pdd#how-to-format)
+
 ### Prerequisites
 
 - Node.js (10.x)
