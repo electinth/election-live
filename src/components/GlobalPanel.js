@@ -49,7 +49,7 @@ class GlobalPanel extends Component {
   // data simulation by vote count completeness
   // @todo #1 Extract data subscription part to create-subscription.
   /**
-   * @return {GlobalScoreInfo}
+   * @return {HouseOfRepresentativesSummary}
    */
   calculateScore(complete = 0.0) {
     return [

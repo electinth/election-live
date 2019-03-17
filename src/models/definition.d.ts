@@ -40,10 +40,11 @@ interface IZone {
 }
 
 /**
- * Global score info, summarizing the national election result. 
+ * Data summarizing the national election result in terms of how many
+ * people from each party ended up in the House of Representatives.
  */
-type GlobalScoreInfo = GlobalScoreInfoRow[]
-type GlobalScoreInfoRow = {
+type HouseOfRepresentativesSummary = HouseOfRepresentativesSummaryRow[]
+type HouseOfRepresentativesSummaryRow = {
   /** A unique ID for this row. */
   id: string
 
