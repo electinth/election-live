@@ -5,6 +5,10 @@ import NavBar from "./NavBar"
 import { Footer } from "./Footer"
 
 // @todo #1 Implement responsive layout and navigation
+
+// @todo #1 Add page title using Helmet
+//  (see: https://www.gatsbyjs.org/docs/add-page-metadata)
+
 export default function Layout({ children }) {
   return (
     <React.Fragment>
