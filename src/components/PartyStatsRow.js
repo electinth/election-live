@@ -1,36 +1,34 @@
 import React from "react"
 import VisuallyHidden from "@reach/visually-hidden"
-export function PartyStatsRow() {
-  // @todo #12 Make <PartyStatsRow /> accept props and display values based on props.
 
+/**
+ * @param {{ party: IParty, constituencySeats: number, partyListSeats: number, maxSeats: number }} props
+ */
+export function PartyStatsRow(props) {
+  const totalSeats = props.constituencySeats + props.partyListSeats
+  const barWidth = `${((totalSeats / props.maxSeats) * 100).toFixed(2)}%`
   // @todo #14 Implement score bar in <PartyStatsRow />.
 
+  // @todo #14 Update <PartyStatsRow /> according to design.
+
   return (
-    <article css={{ position: "relative", height: 96, padding: "0.5rem" }}>
-      <h3 css={{ margin: 0, fontSize: "1.5rem" }}>ชื่อพรรค</h3>
-      <p css={{ margin: 0 }}>
+    <article>
+      <h3>{props.party.name}</h3>
+      <p>
         <VisuallyHidden>ทั้งหมด </VisuallyHidden>
-        <span
-          css={{
-            position: "absolute",
-            right: "0.5rem",
-            top: 0,
-            fontSize: "2rem",
-          }}
-        >
-          70
-        </span>
-        <VisuallyHidden> ที่นั่ง (</VisuallyHidden>
-        <span css={{ position: "absolute", right: "0.5rem", top: 45 }}>
-          14%
-        </span>
-        <VisuallyHidden>) </VisuallyHidden>
+        {totalSeats}
+        <VisuallyHidden> ที่นั่ง</VisuallyHidden>
       </p>
-      <p css={{ margin: 0 }}>ต้องการอีก 50 เพื่อเป็นอันดับหนึ่ง</p>
       <p css={{ margin: 0 }}>
-        สส.เขต 20 <VisuallyHidden> ที่นั่ง </VisuallyHidden>
-        สส.ปาร์ตี้ลิสต์ 50 <VisuallyHidden> ที่นั่ง</VisuallyHidden>
+        สส.เขต {props.constituencySeats}
+        <VisuallyHidden> ที่นั่ง,</VisuallyHidden> สส.ปาร์ตี้ลิสต์{" "}
+        {props.partyListSeats}
+        <VisuallyHidden> ที่นั่ง</VisuallyHidden>
       </p>
+      <div
+        css={{ height: 5, background: "#890" }}
+        style={{ width: barWidth }}
+      />
     </article>
   )
 }

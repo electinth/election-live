@@ -1,7 +1,18 @@
 import React from "react"
-import { PartyStatsRow } from "./PartyStatsRow"
 import { CandidateStatsRow } from "./CandidateStatsRow"
 import { NationwideSummaryView } from "./NationwideSummaryView"
+import { once } from "lodash"
+import { getPartyById } from "../models/information"
+
+const getNationwideSummaryData = once(() =>
+  require("../models/mockData/NationwideSummary1.json")
+)
+const getPartyStatsNationwide = once(() =>
+  require("../models/mockData/PartyStatsNationwide.json").map(f => ({
+    ...f,
+    party: getPartyById(f._partyId),
+  }))
+)
 
 export function KitchenSink() {
   return (
@@ -15,20 +26,16 @@ export function KitchenSink() {
         <Example title="320px" maxWidth={320}>
           <NationwideSummaryView
             loading={false}
-            data={require("../models/mockData/NationwideSummary1.json")}
+            headerData={getNationwideSummaryData()}
+            partyStats={getPartyStatsNationwide()}
           />
         </Example>
         <Example title="375px" maxWidth={375}>
           <NationwideSummaryView
             loading={false}
-            data={require("../models/mockData/NationwideSummary1.json")}
+            headerData={getNationwideSummaryData()}
+            partyStats={getPartyStatsNationwide()}
           />
-        </Example>
-      </Gallery>
-
-      <Gallery title="PartyStatsRow">
-        <Example maxWidth={375}>
-          <PartyStatsRow />
         </Example>
       </Gallery>
 

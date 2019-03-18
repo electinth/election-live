@@ -103,7 +103,7 @@ type HouseOfRepresentativesSummaryRow = {
   type: "district" | "partylist" | "other"
 }
 
-type NationwideSummary = {
+type NationwideSummaryHeaderData = {
   /** Number of zones in total */
   totalZoneCount: number
   /** Number of zones that completed counting. */
@@ -113,3 +113,9 @@ type NationwideSummary = {
   /** Number of eligible voters. */
   eligibleVoterCount: number
 }
+
+type PartyStats = {
+  party: IParty
+  constituencySeats: number
+  partyListSeats: number
+}[]
