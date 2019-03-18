@@ -1,6 +1,8 @@
 import React from "react"
-import { PartyStatsRow } from "./PartyStatsRow"
+import PartyStatsRow from "./PartyStatsRow"
 import { CandidateStatsRow } from "./CandidateStatsRow"
+
+// @todo #24 implement <PartyStatsList> for <PartyStatsrow /> .
 
 export function KitchenSink() {
   return (
@@ -8,7 +10,7 @@ export function KitchenSink() {
       <h1>Kitchen Sink</h1>
       <h2>PartyStatsRow</h2>
       <Example maxWidth={375}>
-        <PartyStatsRow />
+        <PartyStatsRow partyName="เพื่อเธอ" totalVotes={20} />
       </Example>
       <h2>CandidateStatsRow</h2>
       <Example maxWidth={375}>
