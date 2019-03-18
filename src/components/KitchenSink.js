@@ -14,7 +14,7 @@ const getPartyStatsNationwide = once(() =>
   }))
 )
 
-export function KitchenSink() {
+export default function KitchenSink() {
   return (
     <section>
       <h1>Kitchen Sink</h1>

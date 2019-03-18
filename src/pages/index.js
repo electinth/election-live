@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
-import { KitchenSink } from "../components/KitchenSink"
+import KitchenSink from "../components/KitchenSink"
 
 export default ({ pageContext }) => (
   <Layout>
