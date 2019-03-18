@@ -1,5 +1,5 @@
 import React from "react"
-import PartyStatsRow from "./PartyStatsRow"
+import PartyStatsList from "./PartyStatsList"
 
 // @ts-check
 
@@ -44,27 +44,6 @@ function NationwideSummaryHeader(props) {
       <p>
         มีผู้มาใช้สิทธิ์ {data.totalVoteCount} คน ({percentage}%)
       </p>
-    </div>
-  )
-}
-
-/**
- * @param {{ partyStats: PartyStats }} props
- */
-function PartyStatsList(props) {
-  const maxSeats = Math.max(
-    ...props.partyStats.map(p => p.constituencySeats + p.partyListSeats)
-  )
-  return (
-    <div>
-      {props.partyStats.map(row => (
-        <PartyStatsRow
-          party={row.party}
-          constituencySeats={row.constituencySeats}
-          partyListSeats={row.partyListSeats}
-          maxSeats={maxSeats}
-        />
-      ))}
     </div>
   )
 }
