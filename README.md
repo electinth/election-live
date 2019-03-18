@@ -1,4 +1,4 @@
-# election-live
+# election-live ![CircleCI](https://img.shields.io/circleci/project/github/codeforthailand/election-live/master.svg?logo=circleci) ![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/codeforthailand/election-live.svg) ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/codeforthailand/election-live.svg)
 
 Live Scoreboard for Thailand General Election 2562 (2019).
 
