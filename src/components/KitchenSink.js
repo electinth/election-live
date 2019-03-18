@@ -1,6 +1,6 @@
 import React from "react"
-import { CandidateStatsRow } from "./CandidateStatsRow"
-import { NationwideSummaryView } from "./NationwideSummaryView"
+import CandidateStatsRow from "./CandidateStatsRow"
+import NationwideSummaryView from "./NationwideSummaryView"
 import { once } from "lodash"
 import { getPartyById } from "../models/information"
 

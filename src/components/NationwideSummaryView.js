@@ -7,7 +7,7 @@ import Loading from "./Loading"
 /**
  * @param {{ loading: boolean, headerData?: NationwideSummaryHeaderData, partyStats?: PartyStats }} props
  */
-export function NationwideSummaryView(props) {
+export default function NationwideSummaryView(props) {
   const renderContents = () => {
     if (props.loading) {
       return <Loading />
