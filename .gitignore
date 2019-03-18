@@ -70,3 +70,6 @@ yarn-error.log
 
 # Use yarn instead of npm!
 package-lock.json
+
+# Test result
+junit.xml
