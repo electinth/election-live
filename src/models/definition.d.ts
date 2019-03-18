@@ -8,6 +8,10 @@ interface IParty {
   name: string
   codeTH: string
   codeEN: string
+  // @todo #1 Add a representative color to each party.
+  //  Uncomment the following code once a property "color"
+  //  is added to every party in `information/_parties.json`.
+  //  color: string
 }
 
 /**

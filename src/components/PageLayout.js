@@ -9,6 +9,9 @@ import Footer from "./Footer"
 // @todo #1 Add page title using Helmet
 //  (see: https://www.gatsbyjs.org/docs/add-page-metadata)
 
+// @todo #1 Add gatsby-plugin-layout to prevent the whole layout from unmounting every time.
+//  (see: https://www.gatsbyjs.org/docs/layout-components/#how-to-prevent-layout-components-from-unmounting)
+
 export default function Layout({ children }) {
   return (
     <React.Fragment>
