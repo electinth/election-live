@@ -1,5 +1,6 @@
 import React from "react"
 import PartyStatsList from "./PartyStatsList"
+import Loading from "./Loading"
 
 // @ts-check
 
@@ -9,8 +10,7 @@ import PartyStatsList from "./PartyStatsList"
 export function NationwideSummaryView(props) {
   const renderContents = () => {
     if (props.loading) {
-      // @todo #1 Design and implement a loading state
-      return "..."
+      return <Loading />
     } else {
       return (
         <div>
