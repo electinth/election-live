@@ -5,6 +5,12 @@ jobs:
     docker:
       - image: circleci/node:10.15.3
     steps:
+      - run:
+          name: Install CodeClimate
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /tmp/cc-test-reporter
+            chmod +x /tmp/cc-test-reporter
+            /tmp/cc-test-reporter before-build
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
@@ -15,7 +21,8 @@ jobs:
             - ./node_modules
       - run:
           name: test
-          command: yarn test --ci --coverage --reporters=default --reporters=jest-junit
+          command: |
+            yarn test --ci --coverage --reporters=default --reporters=jest-junit
       - store_artifacts:
           path: junit.xml
           prefix: tests
@@ -24,3 +31,7 @@ jobs:
           prefix: coverage
       - store_test_results:
           path: junit.xml
+      - run:
+          name: CodeClimate
+          command: |
+            /tmp/cc-test-reporter after-build --coverage-input-type lcov
