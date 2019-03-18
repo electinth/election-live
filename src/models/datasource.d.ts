@@ -42,7 +42,7 @@ declare namespace ElectionDataSource {
    */
   interface ZoneStatsMap {
     [provinceId: string]: {
-      [zoneId: string]: {
+      [zoneNo: string]: {
         /** Number of election units */
         units: number
         /** Number of eligible voters */
@@ -89,17 +89,35 @@ declare namespace ElectionDataSource {
 
   /**
    * A file for each province which contains all necessary data to render
-   * the Per-Zone Summary
+   * the Per-Zone Summary.
    *
-   * - Nationwide Summary
-   * - Filtered Summary
-   * - Election Map
-   * - Score Bar
+   * - Per-Zone Summary
+   * - Per-Province Summary (if we want to implement one)
+   *
+   * We use one file for each province, instead of one file for each zone
+   * because we want to allow user to switch between zones as quickly as possible.
    */
-  interface SummaryJSON {
+  interface PerProvinceJSON {
     updatedAt: DateString
-    zoneWinningCandidateMap: ZoneWinningCandidateMap
-    zoneStatsMap: ZoneStatsMap
-    partyScoreMap: PartyScoreMap
+    zoneInformationMap: {
+      [zoneNo: string]: {
+        candidates: Candidate[]
+      }
+    }
+  }
+
+  interface Candidate {
+    /** Candidate number */
+    no: number
+    /** Score (number of votes) */
+    score: number
+    /** Party ID */
+    partyId: number
+    /** นาย/นางสาว/นาง */
+    title: string
+    /** Candidate’s first name */
+    firstName: string
+    /** Candidate’s last name */
+    lastName: string
   }
 }
