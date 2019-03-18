@@ -8,6 +8,7 @@ declare namespace ElectionDataSource {
    * - Nationwide summary
    * - Filtered summary
    * - Election map
+   * - Score bar
    */
   interface SummaryJSON {
     updatedAt: DateString
@@ -78,7 +79,7 @@ declare namespace ElectionDataSource {
    * The total score each party received, aggregated nationwide.
    *
    * This is required for calculating:
-   * - Party list member count for each party.
+   * - Party list member count for each party. -> Score bar
    */
   interface PartyScoreMap {
     [partyNo: string]: {
