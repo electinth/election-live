@@ -5,22 +5,22 @@ declare namespace ElectionDataSource {
   /**
    * The summary file which contains all necessary data to render these sections.
    *
-   * - Nationwide summary
-   * - Filtered summary
-   * - Election map
-   * - Score bar
+   * - Nationwide Summary
+   * - Filtered Summary
+   * - Election Map
+   * - Score Bar
    */
   interface SummaryJSON {
     updatedAt: DateString
-    zoneWinnerMap: ZoneWinnerMap
+    zoneWinningCandidateMap: ZoneWinningCandidateMap
     zoneStatsMap: ZoneStatsMap
     partyScoreMap: PartyScoreMap
   }
 
   /**
-   * Information representing the highest-voted candidate for each district.
+   * Information representing the winning candidate for each district.
    */
-  interface ZoneWinnerMap {
+  interface ZoneWinningCandidateMap {
     [provinceId: string]: {
       [zoneNo: string]: {
         /** Candidate number */
@@ -87,7 +87,19 @@ declare namespace ElectionDataSource {
     }
   }
 
-  // @todo #1 Define JSON data format for each province.
-  //  This data should contain necessary information to display
-  //  - Per-zone summary
+  /**
+   * A file for each province which contains all necessary data to render
+   * the Per-Zone Summary
+   *
+   * - Nationwide Summary
+   * - Filtered Summary
+   * - Election Map
+   * - Score Bar
+   */
+  interface SummaryJSON {
+    updatedAt: DateString
+    zoneWinningCandidateMap: ZoneWinningCandidateMap
+    zoneStatsMap: ZoneStatsMap
+    partyScoreMap: PartyScoreMap
+  }
 }
