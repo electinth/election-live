@@ -1,5 +1,5 @@
 import React from "react"
-import { PartyStatsRow } from "./PartyStatsRow"
+import PartyStatsRow from "./PartyStatsRow"
 
 // @ts-check
 

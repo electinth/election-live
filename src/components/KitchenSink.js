@@ -14,6 +14,8 @@ const getPartyStatsNationwide = once(() =>
   }))
 )
 
+// @todo #24 implement <PartyStatsList> for <PartyStatsrow /> .
+
 export function KitchenSink() {
   return (
     <section>
