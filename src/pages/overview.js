@@ -1,8 +1,8 @@
 import React from "react"
-import Layout from "../components/layout"
+import PageLayout from "../components/PageLayout"
 
 export default () => (
-  <Layout>
+  <PageLayout>
     <h1>Overview</h1>
-  </Layout>
+  </PageLayout>
 )
