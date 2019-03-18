@@ -2,7 +2,7 @@ import React from "react"
 import "../styles/global.css"
 import GlobalPanel from "./GlobalPanel"
 import NavBar from "./NavBar"
-import { Footer } from "./Footer"
+import Footer from "./Footer"
 
 // @todo #1 Implement responsive layout and navigation
 

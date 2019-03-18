@@ -1,6 +1,6 @@
 import React from "react"
 
-export function Footer() {
+export default function Footer() {
   // @todo #1 Polish the footer
   return (
     <footer css={{ textAlign: "center", padding: "0.5rem", marginTop: "1rem" }}>
