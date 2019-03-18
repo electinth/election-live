@@ -22,14 +22,7 @@ declare namespace ElectionDataSource {
    */
   interface ZoneWinningCandidateMap {
     [provinceId: string]: {
-      [zoneNo: string]: {
-        /** Candidate number */
-        no: number
-        /** Score (number of votes) */
-        score: number
-        /** Party ID */
-        partyId: number
-      }
+      [zoneNo: string]: Candidate
     }
   }
 
