@@ -80,6 +80,30 @@ We [use](https://www.gatsbyjs.org/docs/emotion/) [emotion](https://emotion.sh/) 
   - Doesn’t require importing the CSS helper (`import { css } from '@emotion/core'`).
   - Can be automatically formatted using [Prettier](https://prettier.io/).
 
+### Use JSDoc instead of `propTypes`
+
+Using JSDoc allows us to specify types of component props more expressively, and allows enhanced integration (and refactoring capability) with Visual Studio Code.
+
+You can define all props in one line:
+
+```js
+/**
+ * @param {{ party: IParty, hidden: boolean }} props
+ */
+export default function Unimplemented(props) {
+```
+
+...or you can also spell out each prop as a `@param` (where some props needs extra elaboration):
+
+```js
+/**
+ * @param {object} props
+ * @param {IParty} props.party
+ * @param {number} props.changeRate - The rate of change in score
+ */
+export default function MyComponent(props) {
+```
+
 ## Build the project into a static web page
 
 ```
