@@ -59,6 +59,20 @@ interface IZoneFilter {
 }
 
 /**
+ * Names of available zone filters
+ */
+type ZoneFilterName =
+  | "all"
+  | "northern"
+  | "northeastern"
+  | "central"
+  | "southern"
+  | "urban"
+  | "rural"
+  | "gerrymandering"
+  | "swing"
+
+/**
  * Data summarizing the national election result in terms of how many
  * people from each party ended up in the House of Representatives.
  */
