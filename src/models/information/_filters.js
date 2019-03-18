@@ -1,7 +1,11 @@
 // @ts-check
 
 /**
- * @type {{ [filterName: string]: IZoneFilter }}
+ * Available filters.
+ *
+ * To add a new filter, please also add a new entry in ZoneFilterName type.
+ *
+ * @type {{ [filterName in ZoneFilterName]: IZoneFilter }}
  */
 export const filters = {
   all: {

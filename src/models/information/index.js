@@ -14,6 +14,8 @@ export const provinces = require("./_provinces.json")
 /** @type {IZone[]} */
 export const zones = require("./_zones.json")
 
+export * from "./_filters"
+
 /**
  * @param {IParty} party
  */
