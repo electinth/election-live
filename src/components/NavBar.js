@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { ClassNames } from "@emotion/core"
 
 export default function Navbar() {
+  // @todo #1 Adjust NavBar style according to latest design (desktop).
   const stylesLink = {
     color: "black",
     textDecoration: "none",
