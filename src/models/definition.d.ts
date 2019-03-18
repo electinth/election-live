@@ -81,6 +81,7 @@ type HouseOfRepresentativesSummary = {
   complete: number
   party_scores: HouseOfRepresentativesSummaryRow[]
 }
+
 type HouseOfRepresentativesSummaryRow = {
   /** A unique ID for this row. */
   id: string
@@ -100,4 +101,15 @@ type HouseOfRepresentativesSummaryRow = {
    * - `other`: Grouped from other fields.
    */
   type: "district" | "partylist" | "other"
+}
+
+type NationwideSummary = {
+  /** Number of zones in total */
+  totalZoneCount: number
+  /** Number of zones that completed counting. */
+  completedZoneCount: number
+  /** Number of votes. */
+  totalVoteCount: number
+  /** Number of eligible voters. */
+  eligibleVoterCount: number
 }
