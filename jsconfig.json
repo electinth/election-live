@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2016",
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "strict": true,
+    "noEmit": true
   },
   "include": ["src", "gatsby-*.js"],
   "exclude": ["node_modules", "**/node_modules/*"]
