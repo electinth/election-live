@@ -40,6 +40,25 @@ interface IZone {
 }
 
 /**
+ * Zone filter criterion
+ */
+interface IZoneFilter {
+  /**
+   * Determine if the zone should be included in the result.
+   * @param province
+   * @param zone
+   */
+  criterion(province: IProvince, zone: IZone): boolean
+
+  name: {
+    th: string
+    en: string
+  }
+
+  help?: string
+}
+
+/**
  * Data summarizing the national election result in terms of how many
  * people from each party ended up in the House of Representatives.
  */
@@ -66,5 +85,5 @@ type HouseOfRepresentativesSummaryRow = {
    *   See: https://github.com/Cleverse/thailand-party-list-calculator
    * - `other`: Grouped from other fields.
    */
-  type: 'district' | 'partylist' | 'other'
+  type: "district" | "partylist" | "other"
 }
