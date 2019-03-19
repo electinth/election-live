@@ -29,7 +29,8 @@
     "normalize.css": "^8.0.1",
     "react": "^16.8.4",
     "react-d3kit": "^2.0.0",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "thailand-party-list-calculator": "^1.0.2"
   },
   "devDependencies": {
     "babel-jest": "^24.5.0",
