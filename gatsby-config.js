@@ -9,6 +9,12 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: "gatsby-plugin-layout",
+      options: {
+        component: require.resolve(`./src/components/PageLayout`),
+      },
+    },
 
     // @todo #1 Add Analytics, e.g. Google Analytics.
     //  Check out Gatsby docs for how to add analytics

@@ -1,8 +1,8 @@
 import React from "react"
-import PageLayout from "../components/PageLayout"
+import PageContent from "../components/PageContent"
 
 export default () => (
-  <PageLayout>
+  <PageContent>
     <h1>Overview</h1>
-  </PageLayout>
+  </PageContent>
 )

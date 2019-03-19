@@ -3,18 +3,16 @@ import "../styles/global.css"
 import GlobalPanel from "./GlobalPanel"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
+import { PageContentContextProvider, PageContentOutlet } from "./PageContent"
 
 // @todo #1 Implement responsive layout and navigation
 
 // @todo #1 Add page title using Helmet
 //  (see: https://www.gatsbyjs.org/docs/add-page-metadata)
 
-// @todo #1 Add gatsby-plugin-layout to prevent the whole layout from unmounting every time.
-//  (see: https://www.gatsbyjs.org/docs/layout-components/#how-to-prevent-layout-components-from-unmounting)
-
-export default function Layout({ children }) {
+export default function PageLayout({ children }) {
   return (
-    <React.Fragment>
+    <PageContentContextProvider>
       <div css={{ margin: "13px 16px" }}>
         <img
           src={require("../styles/images/site-logo.png")}
@@ -36,8 +34,9 @@ export default function Layout({ children }) {
       <div css={{ margin: "16px" }}>
         <NavBar />
       </div>
+      <PageContentOutlet />
       {children}
       <Footer />
-    </React.Fragment>
+    </PageContentContextProvider>
   )
 }

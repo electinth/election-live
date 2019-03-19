@@ -1,10 +1,10 @@
 import React from "react"
-import PageLayout from "../components/PageLayout"
+import PageContent from "../components/PageContent"
 import KitchenSink from "../components/KitchenSink"
 
 export default ({ pageContext }) => (
-  <PageLayout>
+  <PageContent>
     <h1>Map View</h1>
     <KitchenSink />
-  </PageLayout>
+  </PageContent>
 )
