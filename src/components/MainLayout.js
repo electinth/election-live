@@ -7,7 +7,7 @@ import Footer from "./Footer"
 import { Link } from "gatsby"
 import { Responsive, media, WIDE_NAV_MIN_WIDTH } from "../styles"
 import ContentWrapper from "./ContentWrapper"
-import Unimplemented from "./Unimplemented"
+import CompactScoreBar from "./CompactScoreBar"
 
 export default function MainLayout({ children }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
@@ -55,6 +55,19 @@ export default function MainLayout({ children }) {
         }}
       >
         <NavBar />
+      </div>
+      <div
+        css={{
+          height: 50,
+          overflow: "hidden",
+          borderBottom: "1px solid #eee",
+          [media(WIDE_NAV_MIN_WIDTH)]: { display: "none" },
+        }}
+      >
+        <Responsive
+          breakpoint={WIDE_NAV_MIN_WIDTH}
+          narrow={<CompactScoreBar />}
+        />
       </div>
       {children}
       <Footer />

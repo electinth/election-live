@@ -6,9 +6,14 @@ import { getPartyById } from "../../models/information"
 import MainLayout from "../../components/MainLayout"
 
 function kitchenSink(gallery, example) {
+  // @todo #1 Add kitchen sink for CompactScoreBar
+
+  // @todo #1 Add kitchen sink for DesktopScoreBar
+
   gallery("ElectionMap", () => {
     example("Blank Election Map", { maxWidth: 375 }, () => <ElectionMap />)
   })
+
   gallery("NationwideSummaryView", () => {
     const headerData = require("../../models/mockData/NationwideSummary1.json")
     const partyStats = require("../../models/mockData/PartyStatsNationwide.json").map(
@@ -17,20 +22,36 @@ function kitchenSink(gallery, example) {
         party: getPartyById(basePartyStatRow._partyId),
       })
     )
-    example("Loading", { maxWidth: 320 }, () => (
-      <NationwideSummaryView loading={true} />
-    ))
-    example("Loaded", { maxWidth: 320 }, () => (
-      <NationwideSummaryView
-        loading={false}
-        headerData={headerData}
-        partyStats={partyStats}
-      />
-    ))
+    example(
+      "Loading",
+      {
+        maxWidth: 320,
+      },
+      () => <NationwideSummaryView loading={true} />
+    )
+    example(
+      "Loaded",
+      {
+        maxWidth: 320,
+      },
+      () => (
+        <NationwideSummaryView
+          loading={false}
+          headerData={headerData}
+          partyStats={partyStats}
+        />
+      )
+    )
   })
 
   gallery("CandidateStatsRow", () => {
-    example("Basic example", { maxWidth: 320 }, () => <CandidateStatsRow />)
+    example(
+      "Basic example",
+      {
+        maxWidth: 320,
+      },
+      () => <CandidateStatsRow />
+    )
   })
 }
 
