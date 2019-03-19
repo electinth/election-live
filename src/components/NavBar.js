@@ -3,17 +3,22 @@ import { Link } from "gatsby"
 import { ClassNames } from "@emotion/core"
 
 export default function Navbar() {
-  // @todo #1 Adjust NavBar style according to latest design (desktop).
   const stylesLink = {
-    color: "black",
+    color: "#ccc",
     textDecoration: "none",
     display: "inline-block",
     position: "relative",
     margin: "0 1rem",
+    fontSize: "18px",
+    paddingBottom: "8px",
+    paddingTop: "8px",
+    fontFamily: "The Matter",
+    fontWeight: "200",
   }
 
   const stylesActiveLink = {
-    borderBottom: "2px solid #ef314a",
+    color: "black",
+    borderBottom: "3px solid black",
   }
 
   const linkTo = (url, text) => (
@@ -34,9 +39,8 @@ export default function Navbar() {
     <nav
       css={{
         display: "block",
-        border: "solid #4a4a4a",
+        border: "solid #eee",
         borderWidth: "1px 0",
-        padding: "0.75rem 0",
         textAlign: "center",
       }}
     >
