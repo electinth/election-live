@@ -7,12 +7,7 @@ import { maxSeats } from "../calculation/partyStats"
  */
 export default function PartyStatsList(props) {
   return (
-    <div
-      css={{
-        overflowY: "scroll",
-        height: "500px",
-      }}
-    >
+    <div>
       {props.partyStats.map(row => (
         <PartyStatsRow
           key={`party-stats-row-${row.party.id}`}

@@ -45,7 +45,8 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
                 css={{
                   [media(DESKTOP_MIN_WIDTH)]: {
                     height: 440,
-                    overflow: "auto",
+                    overflowX: "hidden",
+                    overflowY: "auto",
                     WebkitOverflowScrolling: "touch",
                   },
                 }}

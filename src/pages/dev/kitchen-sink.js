@@ -1,9 +1,10 @@
 import React from "react"
 import CandidateStatsRow from "../../components/CandidateStatsRow"
-import NationwideSummaryView from "../../components/NationwideSummaryView"
 import ElectionMap from "../../components/ElectionMap"
 import { getPartyById } from "../../models/information"
 import MainLayout from "../../components/MainLayout"
+import PartyStatsList from "../../components/PartyStatsList"
+import NationwideSummaryHeader from "../../components/NationwideSummaryHeader"
 
 function kitchenSink(gallery, example) {
   // @todo #1 Add kitchen sink for CompactScoreBar
@@ -14,28 +15,42 @@ function kitchenSink(gallery, example) {
     example("Blank Election Map", { maxWidth: 375 }, () => <ElectionMap />)
   })
 
-  gallery("NationwideSummaryView", () => {
-    const headerData = require("../../models/mockData/NationwideSummary1.json")
-    const partyStats = require("../../models/mockData/PartyStatsNationwide.json").map(
+  gallery("NationwideSummaryHeader", () => {
+    const headerData = {
+      totalZoneCount: 350,
+      completedZoneCount: 202,
+      totalVoteCount: 17452385,
+      eligibleVoterCount: 51427890,
+    }
+
+    example("Loading", { maxWidth: 320 }, () => (
+      <div style={{ padding: 16 }}>
+        <NationwideSummaryHeader loading={true} {...headerData} />
+      </div>
+    ))
+    example("Loaded", { maxWidth: 320 }, () => (
+      <div style={{ padding: 16 }}>
+        <NationwideSummaryHeader loading={false} {...headerData} />
+      </div>
+    ))
+  })
+
+  gallery("PartyStatsList", () => {
+    const partyStats = require("../../components/__mocks__/PartyStatsNationwide.json").map(
       basePartyStatRow => ({
         ...basePartyStatRow,
         party: getPartyById(basePartyStatRow._partyId),
       })
     )
-    example("Loading", { maxWidth: 320 }, () => (
-      <div style={{ padding: 16 }}>
-        <NationwideSummaryView loading={true} />
-      </div>
-    ))
-    example("Loaded", { maxWidth: 320 }, () => (
-      <div style={{ padding: 16 }}>
-        <NationwideSummaryView
-          loading={false}
-          headerData={headerData}
-          partyStats={partyStats}
-        />
-      </div>
-    ))
+    example(
+      "List of parties",
+      { maxWidth: 320, height: 400, scrollable: true },
+      () => (
+        <div style={{ padding: 16 }}>
+          <PartyStatsList partyStats={partyStats} />
+        </div>
+      )
+    )
   })
 
   gallery("CandidateStatsRow", () => {
@@ -73,11 +88,7 @@ export default () => {
       {sections.map(s => (
         <Gallery key={s.title} title={s.title}>
           {s.examples.map((ex, i) => (
-            <Example
-              key={i}
-              title="Blank Election Map"
-              maxWidth={ex.options.maxWidth}
-            >
+            <Example key={i} title={ex.title} {...ex.options || {}}>
               {ex.render()}
             </Example>
           ))}
@@ -117,7 +128,7 @@ function Gallery({ title, children }) {
   )
 }
 
-function Example({ title, maxWidth, children }) {
+function Example({ title, maxWidth, height, scrollable, children }) {
   const borderWidth = 4
   return (
     <div
@@ -128,9 +139,28 @@ function Example({ title, maxWidth, children }) {
         justifyContent: "center",
       }}
     >
-      <div css={{ background: "white", flex: 1, maxWidth: maxWidth }}>
+      <div
+        css={{
+          background: "white",
+          flex: 1,
+          maxWidth: maxWidth,
+        }}
+      >
         <h3 css={{ margin: 0, background: "#ddd" }}>{title}</h3>
-        <div>{children}</div>
+        <div
+          style={{
+            height,
+            ...(scrollable
+              ? {
+                  overflowX: "hidden",
+                  overflowY: "auto",
+                  WebkitOverflowScrolling: "touch",
+                }
+              : { overflow: "hidden" }),
+          }}
+        >
+          {children}
+        </div>
       </div>
     </div>
   )

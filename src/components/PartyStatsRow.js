@@ -5,12 +5,12 @@ import { DISPLAY_FONT } from "../styles"
 /**
  * @param {{ party: IParty, constituencySeats: number, partyListSeats: number, maxSeats: number }} props
  */
-const PartyStatsRow = function(props) {
+const PartyStatsRow = props => {
   const totalSeats = props.constituencySeats + props.partyListSeats
   const barWidth = `${((totalSeats / props.maxSeats) * 100).toFixed(2)}%`
 
   return (
-    <article css={{ position: "relative", height: 96, padding: "0.5rem" }}>
+    <article css={{ position: "relative", height: 96, padding: "0.5rem 0" }}>
       <h3 css={{ margin: 0, fontSize: "1.5rem", fontFamily: DISPLAY_FONT }}>
         {props.party.name}
       </h3>
@@ -23,7 +23,7 @@ const PartyStatsRow = function(props) {
             height: "2rem",
             borderRadius: "50%",
             position: "absolute",
-            right: "0.5rem",
+            right: 0,
             top: 10,
             textAlign: "center",
           }}
