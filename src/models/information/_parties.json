@@ -3,25 +3,29 @@
     "id": 1,
     "name": "ประชาธิปัตย์",
     "codeTH": "ปชป",
-    "codeEN": "DP"
+    "codeEN": "DP",
+    "color": "#437fba"
   },
   {
     "id": 2,
     "name": "ประชากรไทย",
     "codeTH": "ปชท",
-    "codeEN": "TCP"
+    "codeEN": "TCP",
+    "color": "#0f41ce"
   },
   {
     "id": 3,
     "name": "มหาชน",
     "codeTH": "พมช",
-    "codeEN": "MCP"
+    "codeEN": "MCP",
+    "color": "#33338f"
   },
   {
     "id": 4,
     "name": "กสิกรไทย",
     "codeTH": "กท",
-    "codeEN": "KT"
+    "codeEN": "KT",
+    "color": "#829aa7"
   },
   {
     "id": 5,
@@ -33,49 +37,57 @@
     "id": 6,
     "name": "ความหวังใหม่",
     "codeTH": "ควม",
-    "codeEN": "NAP"
+    "codeEN": "NAP",
+    "color": "#e6b750"
   },
   {
     "id": 7,
     "name": "เครือข่ายชาวนาแห่งประเทศไทย",
     "codeTH": "พนท",
-    "codeEN": "FNTP"
+    "codeEN": "FNTP",
+    "color": "#0c327a"
   },
   {
     "id": 8,
     "name": "เพื่อไทย",
     "codeTH": "พท",
-    "codeEN": "PT"
+    "codeEN": "PT",
+    "color": "#cf1e38"
   },
   {
     "id": 9,
     "name": "เพื่อแผ่นดิน",
     "codeTH": "พผ",
-    "codeEN": "PP"
+    "codeEN": "PP",
+    "color": "#f20707"
   },
   {
     "id": 10,
     "name": "ชาติพัฒนา",
     "codeTH": "ชพน",
-    "codeEN": "CPN"
+    "codeEN": "CPN",
+    "color": "#223c88"
   },
   {
     "id": 11,
     "name": "แทนคุณแผ่นดิน",
     "codeTH": "ทคผ",
-    "codeEN": "TKP"
+    "codeEN": "TKP",
+    "color": "#2b2d66"
   },
   {
     "id": 12,
     "name": "ชาติไทยพัฒนา",
     "codeTH": "ชทพ",
-    "codeEN": "CP"
+    "codeEN": "CP",
+    "color": "#231c72"
   },
   {
     "id": 13,
     "name": "อนาคตไทย",
     "codeTH": "อท",
-    "codeEN": "TF"
+    "codeEN": "TF",
+    "color": "#ad1b34"
   },
   {
     "id": 14,
@@ -87,7 +99,8 @@
     "id": 15,
     "name": "ภูมิใจไทย",
     "codeTH": "ภท",
-    "codeEN": "BJT"
+    "codeEN": "BJT",
+    "color": "#102986"
   },
   {
     "id": 16,
@@ -99,19 +112,22 @@
     "id": 17,
     "name": "สังคมประชาธิปไตยไทย",
     "codeTH": "สปท",
-    "codeEN": "TSDP"
+    "codeEN": "TSDP",
+    "color": "#d32524"
   },
   {
     "id": 18,
     "name": "ไทยรักษาชาติ",
     "codeTH": "ทษช",
-    "codeEN": "TSN"
+    "codeEN": "TSN",
+    "color": "#01019a"
   },
   {
     "id": 19,
     "name": "พลังคนกีฬา",
     "codeTH": "พก",
-    "codeEN": "SPOT"
+    "codeEN": "SPOT",
+    "color": "#35899a"
   },
   {
     "id": 20,
@@ -135,13 +151,15 @@
     "id": 23,
     "name": "เพื่อธรรม",
     "codeTH": "พธ",
-    "codeEN": "PHT"
+    "codeEN": "PHT",
+    "color": "#000099"
   },
   {
     "id": 24,
     "name": "ประชาธิปไตยใหม่",
     "codeTH": "ปธม",
-    "codeEN": "NDP"
+    "codeEN": "NDP",
+    "color": "#eb4138"
   },
   {
     "id": 25,
@@ -165,25 +183,29 @@
     "id": 28,
     "name": "ยางพาราไทย",
     "codeTH": "ยพท",
-    "codeEN": "TR"
+    "codeEN": "TR",
+    "color": "#7a3e21"
   },
   {
     "id": 29,
     "name": "ครูไทยเพื่อประชาชน",
     "codeTH": "คพช",
-    "codeEN": "TTPP"
+    "codeEN": "TTPP",
+    "color": "#175a38"
   },
   {
     "id": 30,
     "name": "พลังสหกรณ์",
     "codeTH": "พพส",
-    "codeEN": "COOP"
+    "codeEN": "COOP",
+    "color": "#395a3d"
   },
   {
     "id": 31,
     "name": "พลังท้องถิ่นไท",
     "codeTH": "ทถท",
-    "codeEN": "TLP"
+    "codeEN": "TLP",
+    "color": "#259747"
   },
   {
     "id": 32,
@@ -195,13 +217,15 @@
     "id": 33,
     "name": "ถิ่นกาขาวชาววิไล",
     "codeTH": "ถกชว",
-    "codeEN": "TKCV"
+    "codeEN": "TKCV",
+    "color": "#bd646d"
   },
   {
     "id": 34,
     "name": "รักษ์ผืนป่าประเทศไทย",
     "codeTH": "รป",
-    "codeEN": "FCV"
+    "codeEN": "FCV",
+    "color": "#8dbf44"
   },
   {
     "id": 35,
@@ -225,19 +249,22 @@
     "id": 38,
     "name": "ไทรักธรรม",
     "codeTH": "ทธ",
-    "codeEN": "TT"
+    "codeEN": "TT",
+    "color": "#e43ba2"
   },
   {
     "id": 39,
     "name": "เสรีรวมไทย",
     "codeTH": "สร",
-    "codeEN": "TLP"
+    "codeEN": "TLP",
+    "color": "#edd63f"
   },
   {
     "id": 40,
     "name": "รักษ์ธรรม",
     "codeTH": "รธ",
-    "codeEN": "RT"
+    "codeEN": "RT",
+    "color": "#3839a8"
   },
   {
     "id": 41,
@@ -249,7 +276,8 @@
     "id": 42,
     "name": "เพื่อชาติ",
     "codeTH": "พพช",
-    "codeEN": "PC"
+    "codeEN": "PC",
+    "color": "#c0bcc3"
   },
   {
     "id": 43,
@@ -273,19 +301,22 @@
     "id": 46,
     "name": "พลังประชาธิปไตย",
     "codeTH": "พปต",
-    "codeEN": "DF"
+    "codeEN": "DF",
+    "color": "#c4403a"
   },
   {
     "id": 47,
     "name": "ภราดรภาพ",
     "codeTH": "ภดภ",
-    "codeEN": "PDP"
+    "codeEN": "PDP",
+    "color": "#0c5a38"
   },
   {
     "id": 48,
     "name": "พลังไทยรักชาติ",
     "codeTH": "พทรช",
-    "codeEN": "PTRC"
+    "codeEN": "PTRC",
+    "color": "#fef102"
   },
   {
     "id": 49,
@@ -297,7 +328,8 @@
     "id": 50,
     "name": "เพื่อชีวิตใหม่",
     "codeTH": "พชม",
-    "codeEN": "PCM"
+    "codeEN": "PCM",
+    "color": "#aa6a9b"
   },
   {
     "id": 51,
@@ -315,13 +347,15 @@
     "id": 53,
     "name": "คนธรรมดาแห่งประเทศไทย",
     "codeTH": "พคท",
-    "codeEN": "CPT"
+    "codeEN": "CPT",
+    "color": "#d9771c"
   },
   {
     "id": 54,
     "name": "รักท้องถิ่นไทย",
     "codeTH": "รถท",
-    "codeEN": "RTT"
+    "codeEN": "RTT",
+    "color": "#27ac67"
   },
   {
     "id": 55,
@@ -333,7 +367,8 @@
     "id": 56,
     "name": "ผึ้งหลวง",
     "codeTH": "ผล",
-    "codeEN": "PL"
+    "codeEN": "PL",
+    "color": "#e08119"
   },
   {
     "id": 57,
@@ -345,7 +380,8 @@
     "id": 58,
     "name": "เพื่อสหกรณ์ไทย",
     "codeTH": "พพสท",
-    "codeEN": "PST"
+    "codeEN": "PST",
+    "color": "#dc8428"
   },
   {
     "id": 59,
@@ -357,211 +393,246 @@
     "id": 60,
     "name": "ประชาธิปไตยเพื่อประชาชน",
     "codeTH": "ปพป",
-    "codeEN": "DFP"
+    "codeEN": "DFP",
+    "color": "#d63a40"
   },
   {
     "id": 61,
     "name": "ทางเลือกใหม่",
     "codeTH": "ทลม",
-    "codeEN": "NEWA"
+    "codeEN": "NEWA",
+    "color": "#026aec"
   },
   {
     "id": 62,
     "name": "มติประชา",
     "codeTH": "มปช",
-    "codeEN": "PVP"
+    "codeEN": "PVP",
+    "color": "#2f3293"
   },
   {
     "id": 63,
     "name": "ประชาภิวัฒน์",
     "codeTH": "ปชภ",
-    "codeEN": "PRA"
+    "codeEN": "PRA",
+    "color": "#076350"
   },
   {
     "id": 64,
     "name": "พลเมืองไทย",
     "codeTH": "พพพ",
-    "codeEN": "TCP"
+    "codeEN": "TCP",
+    "color": "#2d3180"
   },
   {
     "id": 65,
     "name": "รวมใจไทย",
     "codeTH": "รจท",
-    "codeEN": "RJP"
+    "codeEN": "RJP",
+    "color": "#313091"
   },
   {
     "id": 66,
     "name": "พลังธรรมใหม่",
     "codeTH": "พธม",
-    "codeEN": "NPD"
+    "codeEN": "NPD",
+    "color": "#e9b54a"
   },
   {
     "id": 67,
     "name": "ประชาชนปฏิรูป",
     "codeTH": "ปชช",
-    "codeEN": "PPR"
+    "codeEN": "PPR",
+    "color": "#dfde4a"
   },
   {
     "id": 68,
     "name": "อนาคตใหม่",
     "codeTH": "อนค",
-    "codeEN": "FWP"
+    "codeEN": "FWP",
+    "color": "#f4792e"
   },
   {
     "id": 69,
     "name": "ไทยธรรม",
     "codeTH": "ทษช",
-    "codeEN": "THMP"
+    "codeEN": "THMP",
+    "color": "#ec5c2c"
   },
   {
     "id": 70,
     "name": "เพื่อนไทย",
     "codeTH": "พ",
-    "codeEN": "TF"
+    "codeEN": "TF",
+    "color": "#bc0911"
   },
   {
     "id": 71,
     "name": "ไทยศรีวิไลย์",
     "codeTH": "ทศล",
-    "codeEN": "TCL"
+    "codeEN": "TCL",
+    "color": "#0c5197"
   },
   {
     "id": 72,
     "name": "รวมพลังประชาชาติไทย",
     "codeTH": "รปช",
-    "codeEN": "ACT"
+    "codeEN": "ACT",
+    "color": "#303d8e"
   },
   {
     "id": 73,
     "name": "สยามพัฒนา",
     "codeTH": "พน",
-    "codeEN": "SD"
+    "codeEN": "SD",
+    "color": "#f7c704"
   },
   {
     "id": 74,
     "name": "เพื่อคนไทย",
     "codeTH": "พคท",
-    "codeEN": "PKTP"
+    "codeEN": "PKTP",
+    "color": "#0a217d"
   },
   {
     "id": 75,
     "name": "พลังปวงชนไทย",
     "codeTH": "พลท",
-    "codeEN": "PLTP"
+    "codeEN": "PLTP",
+    "color": "#181f97"
   },
   {
     "id": 76,
     "name": "พลังไทยรักไทย",
     "codeTH": "พทรท",
-    "codeEN": "PTRT"
+    "codeEN": "PTRT",
+    "color": "#245896"
   },
   {
     "id": 77,
     "name": "พลังชาติไทย",
     "codeTH": "พพชท",
-    "codeEN": "TNPP"
+    "codeEN": "TNPP",
+    "color": "#08663b"
   },
   {
     "id": 78,
     "name": "ประชาชาติ",
     "codeTH": "ปช",
-    "codeEN": "PCC"
+    "codeEN": "PCC",
+    "color": "#a35f26"
   },
   {
     "id": 79,
     "name": "แผ่นดินธรรม",
     "codeTH": "ผธ",
-    "codeEN": "LDHP"
+    "codeEN": "LDHP",
+    "color": "#594835"
   },
   {
     "id": 80,
     "name": "คลองไทย",
     "codeTH": "คลท",
-    "codeEN": "KTP"
+    "codeEN": "KTP",
+    "color": "#0eafeb"
   },
   {
     "id": 81,
     "name": "ประชาธรรมไทย",
     "codeTH": "ปธม",
-    "codeEN": "TPJ"
+    "codeEN": "TPJ",
+    "color": "#c32429"
   },
   {
     "id": 82,
     "name": "ประชานิยม",
     "codeTH": "ปย",
-    "codeEN": "PYP"
+    "codeEN": "PYP",
+    "color": "#ea1f25"
   },
   {
     "id": 83,
     "name": "พลังประชารัฐ",
     "codeTH": "พปชร",
-    "codeEN": "PPRP"
+    "codeEN": "PPRP",
+    "color": "#3e61a8"
   },
   {
     "id": 84,
     "name": "เศรษฐกิจใหม่",
     "codeTH": "ศม",
-    "codeEN": "NEP"
+    "codeEN": "NEP",
+    "color": "#184474"
   },
   {
     "id": 85,
     "name": "ไทยรุ่งเรือง",
     "codeTH": "ทรร",
-    "codeEN": "NRRP"
+    "codeEN": "NRRP",
+    "color": "#674590"
   },
   {
     "id": 86,
     "name": "พลังรัก",
     "codeTH": "พลร",
-    "codeEN": "PFL"
+    "codeEN": "PFL",
+    "color": "#36aadc"
   },
   {
     "id": 87,
     "name": "ชาติพันธุ์ไทย",
     "codeTH": "ชพท",
-    "codeEN": "TEP"
+    "codeEN": "TEP",
+    "color": "#406887"
   },
   {
     "id": 88,
     "name": "ภูมิพลังเกษตรกรไทย",
     "codeTH": "พภกท",
-    "codeEN": "BKTP"
+    "codeEN": "BKTP",
+    "color": "#148e14"
   },
   {
     "id": 89,
     "name": "พลังสังคม",
     "codeTH": "พพ",
-    "codeEN": "PPS"
+    "codeEN": "PPS",
+    "color": "#c67328"
   },
   {
     "id": 90,
     "name": "พลังแรงงานไทย",
     "codeTH": "พรงท",
-    "codeEN": "TPLP"
+    "codeEN": "TPLP",
+    "color": "#73c9ec"
   },
   {
     "id": 91,
     "name": "พลังไทสร้างชาติ",
     "codeTH": "พทช",
-    "codeEN": "PBN"
+    "codeEN": "PBN",
+    "color": "#6ab36d"
   },
   {
     "id": 92,
     "name": "พลังศรัทธา",
     "codeTH": "พลธ",
-    "codeEN": "POFP"
+    "codeEN": "POFP",
+    "color": "#059b3a"
   },
   {
     "id": 93,
     "name": "พลังแผ่นดินทอง",
     "codeTH": "พผดท",
-    "codeEN": "PPDT"
+    "codeEN": "PPDT",
+    "color": "#fbf008"
   },
   {
     "id": 94,
     "name": "กลาง",
     "codeTH": "พก",
-    "codeEN": "GP"
+    "codeEN": "GP",
+    "color": "#c3067e"
   },
   {
     "id": 95,
@@ -573,55 +644,64 @@
     "id": 96,
     "name": "ประชาไทย",
     "codeTH": "ปรชท",
-    "codeEN": "TPPTP"
+    "codeEN": "TPPTP",
+    "color": "#1d1376"
   },
   {
     "id": 97,
     "name": "กรีน",
     "codeTH": "กร",
-    "codeEN": "GREEN"
+    "codeEN": "GREEN",
+    "color": "#69c80a"
   },
   {
     "id": 98,
     "name": "พัฒนาประเทศไทย",
     "codeTH": "พพปท",
-    "codeEN": "TDPT"
+    "codeEN": "TDPT",
+    "color": "#0722af"
   },
   {
     "id": 99,
     "name": "ฐานรากไทย",
     "codeTH": "ฐรท",
-    "codeEN": "FDP"
+    "codeEN": "FDP",
+    "color": "#105495"
   },
   {
     "id": 100,
     "name": "สามัญชน",
     "codeTH": "พสมช",
-    "codeEN": "CMP"
+    "codeEN": "CMP",
+    "color": "#010101"
   },
   {
     "id": 101,
     "name": "พลังครูไทย",
     "codeTH": "พพคท",
-    "codeEN": "TTP"
+    "codeEN": "TTP",
+    "color": "#d3cdba"
   },
   {
     "id": 102,
     "name": "ภาคีเครือข่ายไทย",
     "codeTH": "ภคท",
-    "codeEN": "THN"
+    "codeEN": "THN",
+    "color": "#f36e2d"
   },
   {
     "id": 103,
     "name": "พลังไทยดี",
     "codeTH": "พพทด",
-    "codeEN": "TDPP"
+    "codeEN": "TDPP",
+    "color": "#82ea13"
   },
   {
     "id": 104,
     "name": "เพื่อไทยพัฒนา",
     "codeTH": "ทพท",
-    "codeEN": "PHTP"
+    "codeEN": "PHTP",
+    "color": "#142d89"
   },
   {
     "id": 108,
@@ -633,6 +713,7 @@
     "id": 109,
     "name": "คนงานไทย",
     "codeTH": "คท",
-    "codeEN": "TW"
+    "codeEN": "TW",
+    "color": "#cf3636"
   }
 ]

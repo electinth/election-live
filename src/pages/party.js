@@ -1,6 +1,11 @@
 import React from "react"
 import MainLayout from "../components/MainLayout"
-import { parties, partyPath, getPartyById } from "../models/information"
+import {
+  parties,
+  partyPath,
+  getPartyById,
+  partyColor,
+} from "../models/information"
 import { Link } from "gatsby"
 
 export default ({ pageContext }) => (
@@ -15,7 +20,9 @@ export default ({ pageContext }) => (
     <ul>
       {parties.map(p => (
         <li key={p.id}>
-          <Link to={partyPath(p)}>{p.name}</Link>
+          <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
+            {p.name}
+          </Link>
         </li>
       ))}
     </ul>

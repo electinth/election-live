@@ -58,3 +58,10 @@ export function getPartyById(id) {
   id = +id
   return parties.filter(p => p.id === id)[0] || fail(`Party ID ${id} not found`)
 }
+
+/**
+ * @param {IParty} party
+ */
+export function partyColor(party) {
+  return party.color || "#000000"
+}
