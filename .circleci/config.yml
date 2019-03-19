@@ -40,3 +40,12 @@ jobs:
 
             /tmp/cc-test-reporter after-build --coverage-input-type lcov
       # @todo #1 Setup deployment to live environment.
+      #
+      # @todo #1 Setup CircleCI to obtain lighthouse report.
+      #  This can be done by these steps:
+      #  (1) Run `yarn build` to generate a built bundle
+      #  (2) Start a temporary web server.
+      #  (3) Run lighthouse CLI to obtain report.
+      #       (See: https://github.com/GoogleChrome/lighthouse)
+      #  (4) Store artifact in CircleCI using `store_artifacts` command.
+      #
