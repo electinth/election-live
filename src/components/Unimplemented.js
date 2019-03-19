@@ -3,11 +3,13 @@ import React from "react"
 /**
  * @param {object} props
  * @param {string} props.componentName - Name of the component that’s unimplemented
+ * @param {number} [props.height] - Height of the component
  */
-export default function Unimplemented({ componentName: name }) {
+export default function Unimplemented({ componentName, height }) {
   return (
     <div
       css={{
+        boxSizing: "border-box",
         border: "2px solid #999",
         background: "#ddd",
         color: "#080",
@@ -17,6 +19,7 @@ export default function Unimplemented({ componentName: name }) {
         justifyContent: "center",
         overflow: "hidden",
         fontFamily: "Menlo, Consolas, monospace",
+        height: height,
       }}
     >
       <div
@@ -30,7 +33,7 @@ export default function Unimplemented({ componentName: name }) {
           transform: "rotate(-30deg)",
         }}
       />
-      <div css={{ position: "relative" }}>{`<${name} />`}</div>
+      <div css={{ position: "relative" }}>{`<${componentName} />`}</div>
     </div>
   )
 }

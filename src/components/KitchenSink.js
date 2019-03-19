@@ -3,10 +3,12 @@ import CandidateStatsRow from "./CandidateStatsRow"
 import NationwideSummaryView from "./NationwideSummaryView"
 import { once } from "lodash"
 import { getPartyById } from "../models/information"
+import ElectionMap from "./ElectionMap"
 
 const getNationwideSummaryData = once(() =>
   require("../models/mockData/NationwideSummary1.json")
 )
+
 const getPartyStatsNationwide = once(() =>
   require("../models/mockData/PartyStatsNationwide.json").map(f => ({
     ...f,
@@ -18,6 +20,12 @@ export default function KitchenSink() {
   return (
     <section>
       <h1>Kitchen Sink</h1>
+
+      <Gallery title="ElectionMap">
+        <Example title="Blank Election Map" maxWidth={375}>
+          <ElectionMap />
+        </Example>
+      </Gallery>
 
       <Gallery title="NationwideSummaryView">
         <Example title="Loading" maxWidth={320}>
