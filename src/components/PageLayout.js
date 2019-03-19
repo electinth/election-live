@@ -1,9 +1,9 @@
 import React from "react"
-import "../styles/global.css"
 import GlobalPanel from "./GlobalPanel"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import { PageContentContextProvider, PageContentOutlet } from "./PageContent"
+import { GlobalStyle } from "../styles"
 
 // @todo #1 Implement responsive layout and navigation
 
@@ -13,6 +13,7 @@ import { PageContentContextProvider, PageContentOutlet } from "./PageContent"
 export default function PageLayout({ children }) {
   return (
     <PageContentContextProvider>
+      <GlobalStyle />
       <div css={{ margin: "13px 16px" }}>
         <img
           src={require("../styles/images/site-logo.png")}
