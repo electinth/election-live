@@ -1,12 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
 import { ClassNames } from "@emotion/core"
+import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 
 export default function Navbar() {
   const stylesLink = {
     color: "#ccc",
     textDecoration: "none",
-    display: "inline-block",
+    display: "block",
     position: "relative",
     margin: "0 1rem",
     fontSize: "18px",
@@ -14,11 +15,12 @@ export default function Navbar() {
     paddingTop: "8px",
     fontFamily: "The Matter",
     fontWeight: "200",
+    [media(WIDE_NAV_MIN_WIDTH)]: { display: "inline-block" },
   }
 
   const stylesActiveLink = {
     color: "black",
-    borderBottom: "3px solid black",
+    [media(WIDE_NAV_MIN_WIDTH)]: { borderBottom: "3px solid black" },
   }
 
   const linkTo = (url, text) => (
