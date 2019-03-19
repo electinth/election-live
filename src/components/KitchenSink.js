@@ -59,7 +59,17 @@ export default function KitchenSink() {
 function Gallery({ title, children }) {
   return (
     <div>
-      <h2 css={{ padding: "0 1rem" }}>{title}</h2>
+      <h2
+        id={title}
+        css={{
+          margin: 0,
+          padding: "1rem",
+          background: "#F0324B",
+          color: "white",
+        }}
+      >
+        {title}
+      </h2>
       <div
         css={{
           display: "flex",
