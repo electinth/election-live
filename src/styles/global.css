@@ -2,7 +2,7 @@
 
 body {
   background: #fff;
-  font-family: Noto Sans, Bai Jamjuree, sans-serif;
+  font-family: Noto Sans, Noto Sans Thai, Bai Jamjuree, sans-serif;
   color: #212121;
   font-size: 14px;
   line-height: 1.5;
@@ -13,3 +13,24 @@ body {
  *  - Maybe make it a different color and remove the underline.
  *  - Make sure it is keyboard accessible.
  */
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  src: url("fonts/NotoSansThaiUI-Regular.woff2") format("woff2"),
+    url("fonts/NotoSansThaiUI-Regular.woff") format("woff");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  src: url("fonts/NotoSansThaiUI-Bold.woff2") format("woff2"),
+    url("fonts/NotoSansThaiUI-Bold.woff") format("woff");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "The Matter";
+  src: url("fonts/thematter-bold.woff2") format("woff2"),
+    url("fonts/thematter-bold.woff") format("woff");
+  font-weight: bold;
+}
