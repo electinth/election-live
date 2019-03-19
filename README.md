@@ -13,6 +13,7 @@ Live Scoreboard for Thailand General Election 2562 (2019).
   - [Resources for developers](#resources-for-developers)
   - [How to add new pages](#how-to-add-new-pages)
   - [Styling](#styling)
+  - [Responsive Design](#responsive-design)
   - [Use JSDoc instead of `propTypes`](#use-jsdoc-instead-of-proptypes)
 - [Build the project into a static web page](#build-the-project-into-a-static-web-page)
 
@@ -81,7 +82,7 @@ We [use](https://www.gatsbyjs.org/docs/emotion/) [emotion](https://emotion.sh/) 
       <div
         css={{
           fontSize: 18,
-          "@media (min-width: 600px)": {
+          [media(600)]: {
             fontSize: 20,
           },
         }}
@@ -95,6 +96,89 @@ We [use](https://www.gatsbyjs.org/docs/emotion/) [emotion](https://emotion.sh/) 
   - VS Code can help autocomplete CSS properties and values.
   - Doesn’t require importing the CSS helper (`import { css } from '@emotion/core'`).
   - Can be automatically formatted using [Prettier](https://prettier.io/).
+
+### Responsive Design
+
+Development of the UI is done using mobile-first approach.
+The main benefit is that it allows many component to be reused easily.
+Most components for mobile can be use as-is on the desktop (just position it in a way that makes sense), while usually components for desktop must be re-implemented for mobile from scratch.
+
+This results in one simple rule: `@media (max-width)` should not be used. Instead, put in the mobile styling first, then use `@media (min-width)` to enhance the component for desktop.
+
+When it come to pre-rendered React applications, there are two main approaches to responsive design: CSS-based and React-based. Each approach has its own pros and cons. We use both approaches in this project, its trade-offs are discussed below:
+
+1. **CSS-based.** We render the same HTML, but use CSS to apply styling.
+
+   - **Pro:** The same markup can be shared.
+   - **Pro:** Can be pre-rendered. This makes the component appear immediately while page is loading.
+   - **Con:** Usually results in a more complex code, especially when a component looks very different on different screen sizes.
+
+   Usage:
+
+   ```js
+   import { media } from "../styles"
+
+   function Thing() {
+     return (
+       <div
+         css={{
+           // Mobile-first:
+           display: "block",
+           // then enhance to desktop:
+           [media(600)]: { display: "inline-block" },
+         }}
+       >
+         ...
+       </div>
+     )
+   }
+   ```
+
+2. **React-based.** Different markup is rendered based on window size.
+
+   - **Pro:** Can use different markup for different screen sizes. This usually results in simpler code.
+   - **Con:** Cannot be pre-rendered, because the server cannot send different HTML code based on screen size. Our `<Responsive />` component will only be mounted after JavaScript is loaded.
+
+   Usage:
+
+   ```js
+   import { Responsive } from "../styles"
+
+   function Thing() {
+     return (
+       <Responsive
+         breakpoint={600}
+         narrow={<ComponentForMobile />}
+         wide={<ComponentForDesktop />}
+       />
+     )
+   }
+   ```
+
+   Note that **`<Responsive />` will not be pre-rendered.** This means that sometimes you might need to use both approaches together to prevent layout jumping. For example, if a component is 50 pixels high on mobile and 100 pixels high on desktop:
+
+   ```js
+   import { Responsive } from "../styles"
+
+   function Thing() {
+     const breakpoint = 600
+     return (
+       <div
+         css={{
+           // Reserve the space for component to be mounted.
+           height: 50,
+           [media(breakpoint)]: { height: 100 },
+         }}
+       >
+         <Responsive
+           breakpoint={breakpoint}
+           narrow={<ComponentForMobile />}
+           wide={<ComponentForDesktop />}
+         />
+       </div>
+     )
+   }
+   ```
 
 ### Use JSDoc instead of `propTypes`
 
