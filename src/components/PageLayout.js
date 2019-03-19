@@ -68,7 +68,7 @@ function DevModeDisclaimer() {
         },
       }}
     >
-      <strong>Development mode</strong>
+      <strong>In development</strong>
       <br />
       Using mock data
       <br />

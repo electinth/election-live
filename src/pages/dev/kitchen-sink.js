@@ -1,24 +1,25 @@
 import React from "react"
-import CandidateStatsRow from "./CandidateStatsRow"
-import NationwideSummaryView from "./NationwideSummaryView"
+import CandidateStatsRow from "../../components/CandidateStatsRow"
+import NationwideSummaryView from "../../components/NationwideSummaryView"
+import ElectionMap from "../../components/ElectionMap"
+import { getPartyById } from "../../models/information"
 import { once } from "lodash"
-import { getPartyById } from "../models/information"
-import ElectionMap from "./ElectionMap"
+import PageContent from "../../components/PageContent"
 
 const getNationwideSummaryData = once(() =>
-  require("../models/mockData/NationwideSummary1.json")
+  require("../../models/mockData/NationwideSummary1.json")
 )
 
 const getPartyStatsNationwide = once(() =>
-  require("../models/mockData/PartyStatsNationwide.json").map(f => ({
+  require("../../models/mockData/PartyStatsNationwide.json").map(f => ({
     ...f,
     party: getPartyById(f._partyId),
   }))
 )
 
-export default function KitchenSink() {
+export default () => {
   return (
-    <section>
+    <PageContent>
       <h1>Kitchen Sink</h1>
 
       <Gallery title="ElectionMap">
@@ -52,7 +53,7 @@ export default function KitchenSink() {
           <CandidateStatsRow />
         </Example>
       </Gallery>
-    </section>
+    </PageContent>
   )
 }
 
