@@ -9,7 +9,12 @@ export default function PartyStatsList(props) {
     ...props.partyStats.map(p => p.constituencySeats + p.partyListSeats)
   )
   return (
-    <div>
+    <div
+      css={{
+        overflowY: "scroll",
+        height: "500px",
+      }}
+    >
       {props.partyStats.map(row => (
         <PartyStatsRow
           party={row.party}
