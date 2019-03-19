@@ -6,53 +6,69 @@ import { getPartyById } from "../../models/information"
 import { once } from "lodash"
 import PageContent from "../../components/PageContent"
 
-const getNationwideSummaryData = once(() =>
-  require("../../models/mockData/NationwideSummary1.json")
-)
+function kitchenSink(gallery, example) {
+  gallery("ElectionMap", () => {
+    example("Blank Election Map", { maxWidth: 375 }, () => <ElectionMap />)
+  })
+  gallery("NationwideSummaryView", () => {
+    const headerData = require("../../models/mockData/NationwideSummary1.json")
+    const partyStats = require("../../models/mockData/PartyStatsNationwide.json").map(
+      basePartyStatRow => ({
+        ...basePartyStatRow,
+        party: getPartyById(basePartyStatRow._partyId),
+      })
+    )
+    example("Loading", { maxWidth: 320 }, () => (
+      <NationwideSummaryView loading={true} />
+    ))
+    example("Loaded", { maxWidth: 320 }, () => (
+      <NationwideSummaryView
+        loading={false}
+        headerData={headerData}
+        partyStats={partyStats}
+      />
+    ))
+  })
 
-const getPartyStatsNationwide = once(() =>
-  require("../../models/mockData/PartyStatsNationwide.json").map(f => ({
-    ...f,
-    party: getPartyById(f._partyId),
-  }))
-)
+  gallery("CandidateStatsRow", () => {
+    example("Basic example", { maxWidth: 320 }, () => <CandidateStatsRow />)
+  })
+}
 
 export default () => {
+  const sections = []
+  let currentSection
+  kitchenSink(
+    (title, f) => {
+      const section = { title, examples: [] }
+      sections.push(section)
+      currentSection = section
+      try {
+        f()
+      } finally {
+        currentSection = null
+      }
+    },
+    (title, options, render) => {
+      currentSection.examples.push({ title, render, options })
+    }
+  )
   return (
     <PageContent>
       <h1>Kitchen Sink</h1>
-
-      <Gallery title="ElectionMap">
-        <Example title="Blank Election Map" maxWidth={375}>
-          <ElectionMap />
-        </Example>
-      </Gallery>
-
-      <Gallery title="NationwideSummaryView">
-        <Example title="Loading" maxWidth={320}>
-          <NationwideSummaryView loading={true} />
-        </Example>
-        <Example title="320px" maxWidth={320}>
-          <NationwideSummaryView
-            loading={false}
-            headerData={getNationwideSummaryData()}
-            partyStats={getPartyStatsNationwide()}
-          />
-        </Example>
-        <Example title="375px" maxWidth={375}>
-          <NationwideSummaryView
-            loading={false}
-            headerData={getNationwideSummaryData()}
-            partyStats={getPartyStatsNationwide()}
-          />
-        </Example>
-      </Gallery>
-
-      <Gallery title="CandidateStatsRow">
-        <Example maxWidth={375}>
-          <CandidateStatsRow />
-        </Example>
-      </Gallery>
+      {sections.map(s => (
+        <Gallery key={s.title} title={s.title}>
+          {s.examples.map((ex, i) => (
+            <Example
+              key={i}
+              title="Blank Election Map"
+              maxWidth={ex.options.maxWidth}
+            >
+              {ex.render()}
+            </Example>
+          ))}
+        </Gallery>
+      ))}
     </PageContent>
   )
 }
