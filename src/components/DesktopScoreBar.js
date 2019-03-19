@@ -16,6 +16,7 @@ import { createComponent } from "react-d3kit"
  * @prop {string} id A unique ID for this row.
  * @prop {string} name Party name.
  * @prop {string} color Color representing the party.
+ * @prop {number} count Number of seats.
  * @prop {"district" | "partylist" | "other"} type
  *  Type of this row.
  *
