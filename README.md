@@ -2,6 +2,22 @@
 
 Live Scoreboard for Thailand General Election 2562 (2019).
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Development](#development)
+  - [@todo comments \*](#todo-comments-)
+  - [Prerequisites](#prerequisites)
+  - [Install dependencies](#install-dependencies)
+  - [Running development server](#running-development-server)
+  - [Resources for developers](#resources-for-developers)
+  - [How to add new pages](#how-to-add-new-pages)
+  - [Styling](#styling)
+  - [Use JSDoc instead of `propTypes`](#use-jsdoc-instead-of-proptypes)
+- [Build the project into a static web page](#build-the-project-into-a-static-web-page)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Development
 
 This web application is built using [Gatsby](https://www.gatsbyjs.org). We chose to use Gatsby because:
