@@ -1,5 +1,5 @@
 import React from "react"
-import { DESKTOP_MEDIA, media, WIDE_NAV_MIN_WIDTH } from "../styles"
+import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 
 export default function ContentWrapper({ children, maxWidth = 1200 }) {
   return (
