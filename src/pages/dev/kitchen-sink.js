@@ -3,8 +3,7 @@ import CandidateStatsRow from "../../components/CandidateStatsRow"
 import NationwideSummaryView from "../../components/NationwideSummaryView"
 import ElectionMap from "../../components/ElectionMap"
 import { getPartyById } from "../../models/information"
-import { once } from "lodash"
-import PageContent from "../../components/PageContent"
+import MainLayout from "../../components/MainLayout"
 
 function kitchenSink(gallery, example) {
   gallery("ElectionMap", () => {
@@ -54,7 +53,7 @@ export default () => {
     }
   )
   return (
-    <PageContent>
+    <MainLayout>
       <h1>Kitchen Sink</h1>
       {sections.map(s => (
         <Gallery key={s.title} title={s.title}>
@@ -69,7 +68,7 @@ export default () => {
           ))}
         </Gallery>
       ))}
-    </PageContent>
+    </MainLayout>
   )
 }
 

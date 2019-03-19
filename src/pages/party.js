@@ -1,10 +1,10 @@
 import React from "react"
-import PageContent from "../components/PageContent"
+import MainLayout from "../components/MainLayout"
 import { parties, partyPath, getPartyById } from "../models/information"
 import { Link } from "gatsby"
 
 export default ({ pageContext }) => (
-  <PageContent>
+  <MainLayout>
     <h1>Party View</h1>
     {pageContext.partyId ? (
       <h2>{getPartyById(pageContext.partyId).name}</h2>
@@ -19,5 +19,5 @@ export default ({ pageContext }) => (
         </li>
       ))}
     </ul>
-  </PageContent>
+  </MainLayout>
 )
