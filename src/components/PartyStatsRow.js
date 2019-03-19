@@ -1,6 +1,7 @@
 import React from "react"
 import VisuallyHidden from "@reach/visually-hidden"
 import { DISPLAY_FONT } from "../styles"
+import { partyColor } from "../models/information"
 
 /**
  * @param {{ party: IParty, constituencySeats: number, partyListSeats: number, maxSeats: number }} props
@@ -40,7 +41,7 @@ const PartyStatsRow = props => {
         <VisuallyHidden> ที่นั่ง</VisuallyHidden>
       </p>
       <div
-        css={{ height: 5, background: "#890" }}
+        css={{ height: 5, background: partyColor(props.party) }}
         style={{ width: barWidth }}
       />
     </article>
