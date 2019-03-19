@@ -5,7 +5,11 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Noto Sans", "Bai Jamjuree"],
+          families: [
+            "Libre Baskerville:400,400i,700",
+            "Noto Sans:400,700",
+            "Bai Jamjuree:400,600",
+          ],
         },
       },
     },
@@ -24,5 +28,11 @@ module.exports = {
 
     // @todo #1 Add PWA manifest file using gatsby-plugin-manifest.
     //  (see: https://www.gatsbyjs.org/docs/add-a-manifest-file/)
+
+    // @todo #1 Add `gatsby-plugin-netlify` for Netlify headers.
+    //  (see: https://www.gatsbyjs.org/packages/gatsby-plugin-netlify/)
+
+    // @todo #1 Add `gatsby-plugin-htaccess` for deployment to Apache-based server.
+    //  (see: https://www.gatsbyjs.org/packages/gatsby-plugin-htaccess/)
   ],
 }

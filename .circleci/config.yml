@@ -39,3 +39,4 @@ jobs:
             export CC_TEST_REPORTER_ID=288aa84aed5e2836e6e216cbdc7270562db0578317d2e08a2a8cf02d53be6857
 
             /tmp/cc-test-reporter after-build --coverage-input-type lcov
+      # @todo #1 Setup deployment to live environment.
