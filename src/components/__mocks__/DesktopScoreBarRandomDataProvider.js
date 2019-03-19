@@ -11,7 +11,9 @@ export function useRandomScoreBarData() {
   useEffect(() => {
     const interval = setInterval(() => {
       setState(state => {
-        const complete = state.complete ? state.complete + 0.05 : 0.3
+        const complete = state.complete
+          ? Math.min(state.complete + 0.05, 1)
+          : 0.3
         return {
           complete,
           data: calculateScore(complete),
