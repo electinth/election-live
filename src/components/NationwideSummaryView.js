@@ -33,6 +33,7 @@ export default function NationwideSummaryView(props) {
  * @param {{ headerData: NationwideSummaryHeaderData }} props
  */
 function NationwideSummaryHeader(props) {
+  // @todo #1 Polish design of NationwideSummaryHeader according to the design.
   const data = props.headerData
   const percentage = Math.round(
     (data.totalVoteCount / data.eligibleVoterCount) * 100
