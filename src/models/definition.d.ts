@@ -9,6 +9,8 @@ interface IParty {
   codeTH: string
   codeEN: string
   color?: string
+  /** Number of party list candidates */
+  partylist: number
 }
 
 /**
