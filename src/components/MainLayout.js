@@ -1,7 +1,7 @@
 import React from "react"
 import PageContent from "../components/PageContent"
 
-import GlobalPanel from "./GlobalPanel"
+import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import { Link } from "gatsby"
@@ -13,7 +13,7 @@ export default ({ children }) => (
     <div css={{ margin: "13px 16px" }}>
       <Logo />
     </div>
-    <GlobalPanel />
+    <DesktopScoreBarContainer />
     <div css={{ margin: "16px" }}>
       <NavBar />
     </div>
