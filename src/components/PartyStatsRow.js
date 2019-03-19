@@ -1,5 +1,6 @@
 import React from "react"
 import VisuallyHidden from "@reach/visually-hidden"
+import { DISPLAY_FONT } from "../styles"
 
 /**
  * @param {{ party: IParty, constituencySeats: number, partyListSeats: number, maxSeats: number }} props
@@ -10,7 +11,9 @@ const PartyStatsRow = function(props) {
 
   return (
     <article css={{ position: "relative", height: 96, padding: "0.5rem" }}>
-      <h3 css={{ margin: 0, fontSize: "1.5rem" }}>{props.party.name}</h3>
+      <h3 css={{ margin: 0, fontSize: "1.5rem", fontFamily: DISPLAY_FONT }}>
+        {props.party.name}
+      </h3>
       <p css={{ margin: 0 }}>
         <VisuallyHidden> ทั้งหมด </VisuallyHidden>
         <div

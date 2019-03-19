@@ -2,13 +2,16 @@ import "./global.css"
 import React from "react"
 import { Global } from "@emotion/core"
 
+export const BODY_FONT = "Noto Sans, Noto Sans Thai, Bai Jamjuree, sans-serif"
+export const DISPLAY_FONT = "Libre Baskerville, The Matter, serif"
+
 export function GlobalStyle() {
   return (
     <Global
       styles={{
         body: {
           background: "#fff",
-          fontFamily: "Noto Sans, Noto Sans Thai, Bai Jamjuree, sans-serif",
+          fontFamily: BODY_FONT,
           color: "#212121",
           fontSize: "14px",
           lineHeight: "1.5",
