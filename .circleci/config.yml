@@ -45,7 +45,6 @@ jobs:
       #  This can be done by these steps:
       #  (1) Run `yarn build` to generate a built bundle
       #  (2) Start a temporary web server.
-      #  (3) Run lighthouse CLI to obtain report.
-      #       (See: https://github.com/GoogleChrome/lighthouse)
+      #  (3) Run lighthouse CLI to obtain report. (See: https://github.com/GoogleChrome/lighthouse)
       #  (4) Store artifact in CircleCI using `store_artifacts` command.
       #
