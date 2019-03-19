@@ -1,10 +1,8 @@
 import React from "react"
 import DesktopScoreBar from "./DesktopScoreBar"
-import { useHouseOfRepresentativesSummaryState } from "../models/live"
+import { useRandomScoreBarData } from "./__mocks__/DesktopScoreBarRandomDataProvider"
 
-function DesktopScoreBarContainer() {
-  const state = useHouseOfRepresentativesSummaryState()
-  return <DesktopScoreBar data={state.data.party_scores} />
+export default function DesktopScoreBarContainer() {
+  const data = useRandomScoreBarData()
+  return <DesktopScoreBar data={data} />
 }
-
-export default DesktopScoreBarContainer

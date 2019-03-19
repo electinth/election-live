@@ -5,11 +5,24 @@ import { getPartyById } from "../../models/information"
 import MainLayout from "../../components/MainLayout"
 import PartyStatsList from "../../components/PartyStatsList"
 import NationwideSummaryHeader from "../../components/NationwideSummaryHeader"
+import DesktopScoreBar from "../../components/DesktopScoreBar"
+import { useRandomScoreBarData } from "../../components/__mocks__/DesktopScoreBarRandomDataProvider"
 
 function kitchenSink(gallery, example) {
   // @todo #1 Add kitchen sink for CompactScoreBar
 
   // @todo #1 Add kitchen sink for DesktopScoreBar
+
+  gallery("DesktopScoreBar", () => {
+    example("Blank", { maxWidth: 960 }, () => <DesktopScoreBar data={[]} />)
+    function MockDesktopScoreBarWithRandomData() {
+      const data = useRandomScoreBarData()
+      return <DesktopScoreBar data={data} />
+    }
+    example("Random data", { maxWidth: 960 }, () => (
+      <MockDesktopScoreBarWithRandomData />
+    ))
+  })
 
   gallery("ElectionMap", () => {
     example("Blank Election Map", { maxWidth: 375 }, () => <ElectionMap />)

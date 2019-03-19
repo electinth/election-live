@@ -6,6 +6,25 @@ import _ from "lodash"
 import { TOTAL_REPRESENTATIVE } from "../models/rules"
 import { createComponent } from "react-d3kit"
 
+/**
+ * @typedef {object} Props
+ * @prop {Row[]} data
+ */
+
+/**
+ * @typedef {object} Row
+ * @prop {string} id A unique ID for this row.
+ * @prop {string} name Party name.
+ * @prop {string} color Color representing the party.
+ * @prop {"district" | "partylist" | "other"} type
+ *  Type of this row.
+ *
+ *  - `district`: From election result of each district.
+ *  - `partylist`: Derived from election result.
+ *    See: https://github.com/Cleverse/thailand-party-list-calculator
+ *  - `other`: Grouped from other fields.
+ */
+
 class DesktopScoreBar extends SvgChart {
   static getDefaultOptions() {
     return helper.deepExtend(super.getDefaultOptions(), {
@@ -171,4 +190,6 @@ class DesktopScoreBar extends SvgChart {
   }
 }
 
-export default createComponent(DesktopScoreBar)
+export default /** @type {React.FunctionComponent<Props>} */ (createComponent(
+  DesktopScoreBar
+))

@@ -1,35 +1,27 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import _ from "lodash"
 
-let houseOfRepresentativesSummaryState = {
-  loading: true,
-  data: /** @type {HouseOfRepresentativesSummary} */ ({
-    complete: 0,
-    party_scores: [],
-  }),
+let initialState = {
+  complete: 0,
+  data: [],
 }
 
-export function useHouseOfRepresentativesSummaryState() {
-  const [state, setState] = useState(houseOfRepresentativesSummaryState)
+export function useRandomScoreBarData() {
+  const [state, setState] = useState(initialState)
   useEffect(() => {
-    const complete = houseOfRepresentativesSummaryState.loading
-      ? 0.3
-      : houseOfRepresentativesSummaryState.data.complete + 0.05
     const interval = setInterval(() => {
-      houseOfRepresentativesSummaryState = {
-        loading: false,
-        data: {
-          complete: Math.min(1, complete),
-          party_scores: calculateScore(complete),
-        },
-      }
-      setState(houseOfRepresentativesSummaryState)
+      setState(state => {
+        const complete = state.complete ? state.complete + 0.05 : 0.3
+        return {
+          complete,
+          data: calculateScore(complete),
+        }
+      })
     }, 5000)
 
     return () => clearInterval(interval)
   }, [])
-
-  return state
+  return state.data
 }
 
 function calculateScore(complete = 0.0) {

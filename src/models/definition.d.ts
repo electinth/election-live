@@ -76,48 +76,6 @@ type ZoneFilterName =
   | "gerrymandering"
   | "swing"
 
-/**
- * Data summarizing the national election result in terms of how many
- * people from each party ended up in the House of Representatives.
- */
-type HouseOfRepresentativesSummary = {
-  /** Number from 0-1 representing completion of the counting process. */
-  complete: number
-  party_scores: HouseOfRepresentativesSummaryRow[]
-}
-
-type HouseOfRepresentativesSummaryRow = {
-  /** A unique ID for this row. */
-  id: string
-
-  /** Party name. */
-  name: string
-
-  /** Color representing the party. */
-  color: string
-
-  /**
-   * Type of this row.
-   *
-   * - `district`: From election result of each district.
-   * - `partylist`: Derived from election result.
-   *   See: https://github.com/Cleverse/thailand-party-list-calculator
-   * - `other`: Grouped from other fields.
-   */
-  type: "district" | "partylist" | "other"
-}
-
-type NationwideSummaryHeaderData = {
-  /** Number of zones in total */
-  totalZoneCount: number
-  /** Number of zones that completed counting. */
-  completedZoneCount: number
-  /** Number of votes. */
-  totalVoteCount: number
-  /** Number of eligible voters. */
-  eligibleVoterCount: number
-}
-
 type PartyStats = {
   party: IParty
   constituencySeats: number
