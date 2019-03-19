@@ -22,26 +22,20 @@ function kitchenSink(gallery, example) {
         party: getPartyById(basePartyStatRow._partyId),
       })
     )
-    example(
-      "Loading",
-      {
-        maxWidth: 320,
-      },
-      () => <NationwideSummaryView loading={true} />
-    )
-    example(
-      "Loaded",
-      {
-        maxWidth: 320,
-      },
-      () => (
+    example("Loading", { maxWidth: 320 }, () => (
+      <div style={{ padding: 16 }}>
+        <NationwideSummaryView loading={true} />
+      </div>
+    ))
+    example("Loaded", { maxWidth: 320 }, () => (
+      <div style={{ padding: 16 }}>
         <NationwideSummaryView
           loading={false}
           headerData={headerData}
           partyStats={partyStats}
         />
-      )
-    )
+      </div>
+    ))
   })
 
   gallery("CandidateStatsRow", () => {

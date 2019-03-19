@@ -66,7 +66,11 @@ export default function MainLayout({ children }) {
       >
         <Responsive
           breakpoint={WIDE_NAV_MIN_WIDTH}
-          narrow={<CompactScoreBar />}
+          narrow={
+            <ContentWrapper>
+              <CompactScoreBar />
+            </ContentWrapper>
+          }
         />
       </div>
       {children}
