@@ -1,11 +1,8 @@
 import React from "react"
-import { createComponent } from "react-d3kit"
-import RawScoreBar from "./ScoreBar"
+import DesktopScoreBar from "./DesktopScoreBar"
 import { useHouseOfRepresentativesSummaryState } from "../models/live"
 
-const ScoreBar = createComponent(RawScoreBar)
-
-function GlobalPanel() {
+function DesktopScoreBarContainer() {
   const state = useHouseOfRepresentativesSummaryState()
   return (
     <div
@@ -19,9 +16,9 @@ function GlobalPanel() {
         right: 0,
       }}
     >
-      <ScoreBar data={state.data.party_scores} />
+      <DesktopScoreBar data={state.data.party_scores} />
     </div>
   )
 }
 
-export default GlobalPanel
+export default DesktopScoreBarContainer

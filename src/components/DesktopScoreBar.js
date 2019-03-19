@@ -4,8 +4,9 @@ import { scaleBand, scaleLinear } from "d3-scale"
 import { SvgChart, helper } from "d3kit"
 import _ from "lodash"
 import { TOTAL_REPRESENTATIVE } from "../models/rules"
+import { createComponent } from "react-d3kit"
 
-class ScoreBar extends SvgChart {
+class DesktopScoreBar extends SvgChart {
   static getDefaultOptions() {
     return helper.deepExtend(super.getDefaultOptions(), {
       maxValue: TOTAL_REPRESENTATIVE,
@@ -170,4 +171,4 @@ class ScoreBar extends SvgChart {
   }
 }
 
-export default ScoreBar
+export default createComponent(DesktopScoreBar)

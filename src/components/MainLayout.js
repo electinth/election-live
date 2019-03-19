@@ -4,25 +4,14 @@ import PageContent from "../components/PageContent"
 import GlobalPanel from "./GlobalPanel"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
+import { Link } from "gatsby"
+
+const DESKTOP = "@media (min-width: 1152px)"
 
 export default ({ children }) => (
   <PageContent>
     <div css={{ margin: "13px 16px" }}>
-      <img
-        src={require("../styles/images/site-logo.png")}
-        alt="ELECT"
-        css={{ maxWidth: 150, width: "100%", display: "block" }}
-      />
-      <p
-        css={{
-          margin: "10px 0",
-          fontSize: "0.75rem",
-          color: "#4a4a4a",
-          lineHeight: "1.2",
-        }}
-      >
-        In VOTE We TRUST
-      </p>
+      <Logo />
     </div>
     <GlobalPanel />
     <div css={{ margin: "16px" }}>
@@ -32,3 +21,23 @@ export default ({ children }) => (
     <Footer />
   </PageContent>
 )
+
+function Logo() {
+  return (
+    <Link
+      to="/"
+      css={{
+        display: "block",
+        overflow: "hidden",
+        width: 26,
+        [DESKTOP]: { width: "auto" },
+      }}
+    >
+      <img
+        src={require("../styles/images/site-logo.png")}
+        alt="ELECT"
+        css={{ width: 150, display: "block" }}
+      />
+    </Link>
+  )
+}
