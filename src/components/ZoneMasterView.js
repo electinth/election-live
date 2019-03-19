@@ -103,7 +103,11 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           <Placeholder height="100%">แสดงผล: ทั่วประเทศ</Placeholder>
         </div>
         <div css={{ flex: "none", marginLeft: 10, width: 50 }}>
-          <Placeholder height="100%">🔍</Placeholder>
+          <Placeholder height="100%">
+            <span role="img" aria-label="mobile zone search">
+              🔍
+            </span>
+          </Placeholder>
         </div>
       </div>
     )
