@@ -1,7 +1,6 @@
 import React, { useReducer } from "react"
 import CandidateStatsRow from "../../components/CandidateStatsRow"
 import ElectionMap from "../../components/ElectionMap"
-import { getPartyById } from "../../models/information"
 import MainLayout from "../../components/MainLayout"
 import PartyStatsList from "../../components/PartyStatsList"
 import NationwideSummaryHeader from "../../components/NationwideSummaryHeader"

@@ -1,7 +1,6 @@
 import React from "react"
 import MainLayout from "../components/MainLayout"
 import ZoneMasterView from "../components/ZoneMasterView"
-import Placeholder from "../components/Placeholder"
 import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import PartyStatsList from "../components/PartyStatsList"
 import { getMockPartyStatsNationwide } from "../components/__mocks__/PartyStatsMockData"
