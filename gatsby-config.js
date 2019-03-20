@@ -31,8 +31,18 @@ module.exports = {
     //  - Google Analytics: https://www.gatsbyjs.org/docs/adding-analytics/#using-gatsby-plugin-google-analytics
     //  - Google Tag Manager: https://www.gatsbyjs.org/packages/gatsby-plugin-google-tagmanager/
 
-    // @todo #1 Add PWA manifest file using gatsby-plugin-manifest.
-    //  (see: https://www.gatsbyjs.org/docs/add-a-manifest-file/)
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: "ELECT LIVE",
+        short_name: "ELECT LIVE",
+        start_url: "/",
+        background_color: "#6b37bf",
+        theme_color: "#6b37bf",
+        display: "standalone",
+        icon: "src/styles/images/site-logo.png",
+      },
+    },
 
     // @todo #1 Add `gatsby-plugin-netlify` for Netlify headers.
     //  (see: https://www.gatsbyjs.org/packages/gatsby-plugin-netlify/)
