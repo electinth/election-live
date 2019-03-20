@@ -18,13 +18,25 @@ export default ({ pageContext }) => (
 )
 
 function NationwideSummaryHeaderContainer() {
-  // @todo #1 Replace mock data in NationwideSummaryHeaderContainer
-  //  with subscription to the Data Model.
+  const summaryState = useSummaryData()
+
+  // @todo #52 Calculate `totalZoneCount` based on filter instead of hardcoded 350.
+  const totalZoneCount = 350
+
+  if (summaryState.loading)
+    return <NationwideSummaryHeader loading totalZoneCount={totalZoneCount} />
+
+  const summary = summaryState.data
+  const allZoneStats = _.chain(summary.zoneStatsMap)
+    .values()
+    .flatMap(m => _.values(m))
+    .value()
+
   const mockData = {
-    totalZoneCount: 350,
-    completedZoneCount: 202,
-    totalVoteCount: 17452385,
-    eligibleVoterCount: 51427890,
+    totalZoneCount,
+    completedZoneCount: _.sumBy(allZoneStats, s => (s.finished ? 1 : 0)),
+    totalVoteCount: _.sumBy(allZoneStats, s => s.votesTotal),
+    eligibleVoterCount: _.sumBy(allZoneStats, s => s.eligible),
   }
   return <NationwideSummaryHeader {...mockData} />
 }
