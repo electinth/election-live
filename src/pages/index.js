@@ -37,14 +37,14 @@ export default ({ pageContext }) => (
 
 function InertFilter({ value: filterNameFromRoute, children }) {
   const [filterName, setFilterName] = useState(filterNameFromRoute || "all")
-  console.log("filterName", filterName)
 
   useEffect(() => {
     if (filterNameFromRoute !== null) {
-      console.log("filterNameFromRoute", filterNameFromRoute)
-      setFilterName(filterNameFromRoute)
+      if (filterName !== filterNameFromRoute) {
+        setFilterName(filterNameFromRoute)
+      }
     }
-  }, [filterNameFromRoute])
+  }, [filterName, filterNameFromRoute])
 
   return children(filterName)
 }
