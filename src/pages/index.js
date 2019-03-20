@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useLayoutEffect } from "react"
 import _ from "lodash"
 import MainLayout from "../components/MainLayout"
 import ZoneMasterView from "../components/ZoneMasterView"
@@ -33,7 +33,7 @@ export default ({ pageContext }) => (
 function InertFilter({ value: filterNameFromRoute, children }) {
   const [filterName, setFilterName] = useState(filterNameFromRoute || "all")
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (filterNameFromRoute !== null) {
       if (filterName !== filterNameFromRoute) {
         setFilterName(filterNameFromRoute)
