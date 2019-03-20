@@ -11,6 +11,7 @@ import {
   getRandomScoreBarData,
 } from "../../components/__mocks__/DesktopScoreBarRandomData"
 import { getMockDesktopScoreBarData } from "../../components/__mocks__/DesktopScoreBarMockData"
+import { getMockPartyStatsNationwide } from "../../components/__mocks__/PartyStatsMockData"
 
 function kitchenSink(gallery, example) {
   // @todo #1 Add kitchen sink for CompactScoreBar
@@ -72,18 +73,13 @@ function kitchenSink(gallery, example) {
   })
 
   gallery("PartyStatsList", () => {
-    const partyStats = require("../../components/__mocks__/PartyStatsNationwide.json").map(
-      basePartyStatRow => ({
-        ...basePartyStatRow,
-        party: getPartyById(basePartyStatRow._partyId),
-      })
-    )
+    const mockPartyStats = getMockPartyStatsNationwide()
     example(
       "List of parties",
       { maxWidth: 320, height: 400, scrollable: true },
       () => (
         <div style={{ padding: 16 }}>
-          <PartyStatsList partyStats={partyStats} />
+          <PartyStatsList partyStats={mockPartyStats} />
         </div>
       )
     )
