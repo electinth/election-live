@@ -1,7 +1,11 @@
 module.exports = {
   plugins: [
-    "gatsby-plugin-emotion",
-    "gatsby-plugin-react-helmet",
+    {
+      resolve: "gatsby-plugin-emotion",
+    },
+    {
+      resolve: "gatsby-plugin-react-helmet",
+    },
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
@@ -33,7 +37,8 @@ module.exports = {
     // @todo #1 Add `gatsby-plugin-netlify` for Netlify headers.
     //  (see: https://www.gatsbyjs.org/packages/gatsby-plugin-netlify/)
 
-    // @todo #1 Add `gatsby-plugin-htaccess` for deployment to Apache-based server.
-    //  (see: https://www.gatsbyjs.org/packages/gatsby-plugin-htaccess/)
+    {
+      resolve: "gatsby-plugin-htaccess",
+    },
   ],
 }
