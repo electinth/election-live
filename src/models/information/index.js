@@ -37,26 +37,26 @@ function provincePath(province) {
   return `/province/${province.code.toLowerCase()}`
 }
 
-/**
- * @param {number} id
- * @todo #1 Improve performance of `getProvinceById` to be O(1),
- *  e.g. by pre-generating a map.
- */
-export function getProvinceById(id) {
-  id = +id
-  return (
-    provinces.filter(p => p.id === id)[0] || fail(`Province ID ${id} not found`)
-  )
-}
+const provincesMap = new Map(provinces.map(province => [province.id, province]))
 
 /**
  * @param {number} id
- * @todo #1 Improve performance of `getPartyById` to be O(1),
- *  e.g. by pre-generating a map.
+ */
+export function getProvinceById(id) {
+  id = +id
+
+  return provincesMap.get(id) || fail(`Province ID ${id} not found`)
+}
+
+const partiesMap = new Map(parties.map(party => [party.id, party]))
+
+/**
+ * @param {number} id
  */
 export function getPartyById(id) {
   id = +id
-  return parties.filter(p => p.id === id)[0] || fail(`Party ID ${id} not found`)
+
+  return partiesMap.get(id) || fail(`Party ID ${id} not found`)
 }
 
 /**
