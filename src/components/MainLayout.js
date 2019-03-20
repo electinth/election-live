@@ -102,6 +102,8 @@ function Logo() {
 function Hamburger({ onClick, active }) {
   // @todo #1 Implement Hamburger menu according to design.
 
+  // Hamburger from Codepen @naturalclar
+  // https://codepen.io/naturalclar/pen/zEwvbg
   const styles = {
     container: {
       height: "20px",
