@@ -1,14 +1,14 @@
 import React, { useReducer, useEffect } from "react"
-import { PageContentContextProvider, PageContentOutlet } from "./PageContent"
-import { GlobalStyle } from "../styles"
 import { Link } from "gatsby"
 
-// @todo #1 Add page title using Helmet
-//  (see: https://www.gatsbyjs.org/docs/add-page-metadata)
+import { PageContentContextProvider, PageContentOutlet } from "./PageContent"
+import DocumentHead from "./DocumentHead"
+import { GlobalStyle } from "../styles"
 
 export default function PageLayout({ children }) {
   return (
     <PageContentContextProvider>
+      <DocumentHead />
       <GlobalStyle />
       <PageContentOutlet />
       {children}
