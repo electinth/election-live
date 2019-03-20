@@ -6,12 +6,7 @@ import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import PartyStatsList from "../components/PartyStatsList"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { partyStatsFromSummaryJSON } from "../models/PartyStats"
-import {
-  zones,
-  filters,
-  getProvinceById,
-  checkFilter,
-} from "../models/information"
+import { zones, filters, checkFilter } from "../models/information"
 import { ZoneFilterContextProvider } from "../components/ZoneFilterPanel"
 
 export default ({ pageContext }) => (
