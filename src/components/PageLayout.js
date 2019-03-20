@@ -49,6 +49,13 @@ function DevModeDisclaimer() {
       >
         &rarr; Go to kitchen sink!
       </Link>
+      <br />
+      <a
+        href="https://github.com/codeforthailand/election-live"
+        css={{ color: "#ff0", textDecoration: "none" }}
+      >
+        &rarr; Go to GitHub!
+      </a>
     </div>
   )
 }
