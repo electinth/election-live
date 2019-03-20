@@ -3,6 +3,7 @@ import Placeholder from "./Placeholder"
 import ContentWrapper from "./ContentWrapper"
 import { media, DESKTOP_MIN_WIDTH } from "../styles"
 import ElectionMap from "./ElectionMap"
+import Unimplemented from "./Unimplemented"
 
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
@@ -69,10 +70,18 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
             }}
           >
             <div css={{ marginTop: 10 }}>
-              <Placeholder height={40}>(ค้นหาเขต)</Placeholder>
+              {
+                // @todo #1 Create a 1st version of ZoneSearchField component
+                //  in place of the Placeholder. May be a dummy component.
+              }
+              <Unimplemented componentName="ZoneSearchField" height={40} />
             </div>
             <div css={{ marginTop: 10 }}>
-              <Placeholder height={400}>(Filters)</Placeholder>
+              {
+                // @todo #1 Create a 1st version of ZoneFilterPanel component
+                //  in place of the Placeholder. May be a dummy component.
+              }
+              <Unimplemented componentName="ZoneFilterPanel" height={400} />
             </div>
           </div>
 
@@ -114,7 +123,8 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   }
 
   function renderMobileTabs() {
-    // @todo #42 Render mobile tabs
+    // @todo #42 Implement the first version of mobile tabs
+    //  May be a dummy component that looks like the real one.
     return <Placeholder height={40}>สรุปข้อมูล | แผนที่</Placeholder>
   }
 }
