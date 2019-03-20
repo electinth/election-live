@@ -6,7 +6,12 @@ import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import PartyStatsList from "../components/PartyStatsList"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { partyStatsFromSummaryJSON } from "../models/PartyStats"
-import { zones, filters, checkFilter } from "../models/information"
+import {
+  zones,
+  filters,
+  checkFilter,
+  getZoneByProvinceIdAndZoneNo,
+} from "../models/information"
 import { ZoneFilterContextProvider } from "../components/ZoneFilterPanel"
 
 export default ({ pageContext }) => (
@@ -17,12 +22,8 @@ export default ({ pageContext }) => (
       {filterName => (
         <ZoneFilterContextProvider value={filterName}>
           <ZoneMasterView
-            contentHeader={
-              <NationwideSummaryHeaderContainer filterName={filterName} />
-            }
-            contentBody={
-              <NationwidePartyStatsContainer filterName={filterName} />
-            }
+            contentHeader={<SummaryHeaderContainer filterName={filterName} />}
+            contentBody={<PartyStatsContainer filterName={filterName} />}
           />
         </ZoneFilterContextProvider>
       )}
@@ -48,7 +49,7 @@ function InertFilter({ value: filterNameFromRoute, children }) {
  * @param {object} props
  * @param {ZoneFilterName} props.filterName
  */
-function NationwideSummaryHeaderContainer({ filterName }) {
+function SummaryHeaderContainer({ filterName }) {
   const summaryState = useSummaryData()
   const currentFilter = filters[filterName]
   const totalZoneCount = zones.filter(zone => checkFilter(currentFilter, zone))
@@ -67,8 +68,20 @@ function NationwideSummaryHeaderContainer({ filterName }) {
 
   const summary = summaryState.data
   const allZoneStats = _.chain(summary.zoneStatsMap)
-    .values()
-    .flatMap(m => _.values(m))
+    .flatMap((zoneNoStatsMap, provinceId) =>
+      _.map(zoneNoStatsMap, (stats, zoneNo) => ({
+        provinceId: +provinceId,
+        zoneNo: +zoneNo,
+        stats,
+      }))
+    )
+    .filter(row =>
+      checkFilter(
+        currentFilter,
+        getZoneByProvinceIdAndZoneNo(row.provinceId, row.zoneNo)
+      )
+    )
+    .map(row => row.stats)
     .value()
 
   const mockData = {
@@ -80,7 +93,7 @@ function NationwideSummaryHeaderContainer({ filterName }) {
   return <NationwideSummaryHeader title={title} {...mockData} />
 }
 
-function NationwidePartyStatsContainer({ filterName }) {
+function PartyStatsContainer({ filterName }) {
   const summaryState = useSummaryData()
   if (summaryState.loading) return null
 
