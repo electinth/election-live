@@ -100,6 +100,48 @@ function Logo() {
 }
 
 function Hamburger({ onClick, active }) {
-  // @todo #1 Implement Hamburger menu according to design.
-  return <button onClick={onClick}>{active ? "🍟" : "🍔"}</button>
+  // Hamburger from Codepen @naturalclar
+  // https://codepen.io/naturalclar/pen/zEwvbg
+  const styles = {
+    container: {
+      height: "20px",
+      width: "20px",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      cursor: "pointer",
+      paddingTop: "6px",
+    },
+    line: {
+      height: "2px",
+      width: "20px",
+      background: "#212121",
+      transition: "all 0.2s ease",
+    },
+    lineTop: {
+      transform: active ? "rotate(45deg)" : "none",
+      transformOrigin: "top left",
+      marginBottom: "5px",
+    },
+    lineMiddle: {
+      opacity: active ? 0 : 1,
+      transform: active ? "translateX(-16px)" : "none",
+    },
+    lineBottom: {
+      transform: active ? "translateX(-1px) rotate(-45deg)" : "none",
+      transformOrigin: "top left",
+      marginTop: "5px",
+    },
+  }
+  return (
+    <button onClick={onClick}>
+      {
+        <div style={styles.container}>
+          <div style={{ ...styles.line, ...styles.lineTop }} />
+          <div style={{ ...styles.line, ...styles.lineMiddle }} />
+          <div style={{ ...styles.line, ...styles.lineBottom }} />
+        </div>
+      }
+    </button>
+  )
 }
