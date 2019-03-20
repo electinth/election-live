@@ -8,9 +8,9 @@ import DesktopScoreBar from "../../components/DesktopScoreBar"
 import {
   useRandomScoreBarData,
   getRandomScoreBarData,
-} from "../../components/__mocks__/DesktopScoreBarRandomData"
-import { getMockDesktopScoreBarData } from "../../components/__mocks__/DesktopScoreBarMockData"
-import { getMockPartyStatsNationwide } from "../../components/__mocks__/PartyStatsMockData"
+} from "../../components/__fixtures__/DesktopScoreBarRandomData"
+import { getMockDesktopScoreBarData } from "../../components/__fixtures__/DesktopScoreBarMockData"
+import { getMockPartyStatsNationwide } from "../../components/__fixtures__/PartyStatsMockData"
 
 function kitchenSink(gallery, example) {
   // @todo #1 Add kitchen sink for CompactScoreBar
