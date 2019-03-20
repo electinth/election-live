@@ -16,7 +16,7 @@ export function useRandomScoreBarData() {
           : 0.3
         return {
           complete,
-          data: calculateScore(complete),
+          data: getRandomScoreBarData(complete),
         }
       })
     }, 5000)
@@ -26,7 +26,7 @@ export function useRandomScoreBarData() {
   return state.data
 }
 
-function calculateScore(complete = 0.0) {
+export function getRandomScoreBarData(complete = 0.0) {
   return [
     {
       id: "01d",

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useReducer } from "react"
 import CandidateStatsRow from "../../components/CandidateStatsRow"
 import ElectionMap from "../../components/ElectionMap"
 import { getPartyById } from "../../models/information"
@@ -6,7 +6,10 @@ import MainLayout from "../../components/MainLayout"
 import PartyStatsList from "../../components/PartyStatsList"
 import NationwideSummaryHeader from "../../components/NationwideSummaryHeader"
 import DesktopScoreBar from "../../components/DesktopScoreBar"
-import { useRandomScoreBarData } from "../../components/__mocks__/DesktopScoreBarRandomData"
+import {
+  useRandomScoreBarData,
+  getRandomScoreBarData,
+} from "../../components/__mocks__/DesktopScoreBarRandomData"
 import { getMockDesktopScoreBarData } from "../../components/__mocks__/DesktopScoreBarMockData"
 
 function kitchenSink(gallery, example) {
@@ -14,6 +17,7 @@ function kitchenSink(gallery, example) {
 
   gallery("DesktopScoreBar", () => {
     example("Blank", { maxWidth: 960 }, () => <DesktopScoreBar data={[]} />)
+
     function MockDesktopScoreBarWithRandomData() {
       const data = useRandomScoreBarData()
       return <DesktopScoreBar data={data} />
@@ -21,6 +25,23 @@ function kitchenSink(gallery, example) {
     example("Random data", { maxWidth: 960 }, () => (
       <MockDesktopScoreBarWithRandomData />
     ))
+
+    function MockDesktopScoreBarWithRandomButton() {
+      const [data, randomize] = useReducer(
+        () => getRandomScoreBarData(0.5),
+        getRandomScoreBarData(0.5)
+      )
+      return (
+        <div>
+          <DesktopScoreBar data={data} />
+          <button onClick={randomize}>Randomize!</button>
+        </div>
+      )
+    }
+    example("Random data with button", { maxWidth: 960 }, () => (
+      <MockDesktopScoreBarWithRandomButton />
+    ))
+
     example("Mock data - all seats filled", { maxWidth: 960 }, () => (
       <DesktopScoreBar data={getMockDesktopScoreBarData(1)} />
     ))
@@ -159,6 +180,7 @@ function Example({ title, maxWidth, height, scrollable, children }) {
           background: "white",
           flex: 1,
           maxWidth: maxWidth,
+          overflow: "hidden",
         }}
       >
         <h3 css={{ margin: 0, background: "#ddd" }}>{title}</h3>
