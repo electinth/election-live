@@ -39,13 +39,25 @@ export function GlobalStyle() {
   )
 }
 
+/**
+ * @param {object} props
+ * @param {number} props.breakpoint
+ *  The breakpoint to switch between `wide` and `narrow`
+ * @param {React.ReactNode} props.prerender
+ *  Thing to prerender to static HTML
+ * @param {React.ReactNode} props.wide
+ *  Thing to display when window width ≥ breakpoint
+ * @param {React.ReactNode} props.narrow
+ *  Thing to display when window width < breakpoint
+ */
 export function Responsive({
   breakpoint = DESKTOP_MIN_WIDTH,
   wide = null,
   narrow = null,
+  prerender = null,
 }) {
   const width = useWindowWidth()
-  return width != null && width >= breakpoint ? wide : narrow
+  return width == null ? prerender : width >= breakpoint ? wide : narrow
 }
 
 function useWindowWidth() {
