@@ -1,4 +1,4 @@
-# election-live ![CircleCI](https://img.shields.io/circleci/project/github/codeforthailand/election-live/master.svg?logo=circleci) ![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/codeforthailand/election-live.svg) ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/codeforthailand/election-live.svg)
+# election-live [![CircleCI](https://img.shields.io/circleci/project/github/codeforthailand/election-live/master.svg?logo=circleci)](https://circleci.com/gh/codeforthailand/election-live) [![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/codeforthailand/election-live.svg)](https://codeclimate.com/github/codeforthailand/election-live/maintainability) [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/codeforthailand/election-live.svg)](https://codeclimate.com/github/codeforthailand/election-live/maintainability)
 
 Live Scoreboard for Thailand General Election 2562 (2019).
 
@@ -46,13 +46,17 @@ Note that if the `@todo` spans multiple lines, subsequent lines must be indented
 
 ### Prerequisites
 
+You need to install these tools first in order to develop this project:
+
 - Node.js (10.x)
 - Yarn
 
 ### Install dependencies
 
+Before you can start the development server, you have to install the dependencies first.
+
 ```
-yarn
+yarn install
 ```
 
 ### Running development server
