@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import _ from "lodash"
 import MainLayout from "../components/MainLayout"
 import ZoneMasterView from "../components/ZoneMasterView"
@@ -6,24 +6,69 @@ import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import PartyStatsList from "../components/PartyStatsList"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+import {
+  zones,
+  filters,
+  getProvinceById,
+  checkFilter,
+} from "../models/information"
+import { ZoneFilterContextProvider } from "../components/ZoneFilterPanel"
 
 export default ({ pageContext }) => (
   <MainLayout>
-    <ZoneMasterView
-      contentHeader={<NationwideSummaryHeaderContainer />}
-      contentBody={<NationwidePartyStatsContainer />}
-    />
+    <InertFilter
+      value={pageContext.zoneView ? null : pageContext.filterName || "all"}
+    >
+      {filterName => (
+        <ZoneFilterContextProvider value={filterName}>
+          <ZoneMasterView
+            contentHeader={
+              <NationwideSummaryHeaderContainer filterName={filterName} />
+            }
+            contentBody={
+              <NationwidePartyStatsContainer filterName={filterName} />
+            }
+          />
+        </ZoneFilterContextProvider>
+      )}
+    </InertFilter>
   </MainLayout>
 )
 
-function NationwideSummaryHeaderContainer() {
+function InertFilter({ value: filterNameFromRoute, children }) {
+  const [filterName, setFilterName] = useState(filterNameFromRoute || "all")
+  console.log("filterName", filterName)
+
+  useEffect(() => {
+    if (filterNameFromRoute !== null) {
+      console.log("filterNameFromRoute", filterNameFromRoute)
+      setFilterName(filterNameFromRoute)
+    }
+  }, [filterNameFromRoute])
+
+  return children(filterName)
+}
+
+/**
+ * @param {object} props
+ * @param {ZoneFilterName} props.filterName
+ */
+function NationwideSummaryHeaderContainer({ filterName }) {
   const summaryState = useSummaryData()
+  const currentFilter = filters[filterName]
+  const totalZoneCount = zones.filter(zone => checkFilter(currentFilter, zone))
+    .length
+  const title = currentFilter.name.th
 
-  // @todo #52 Calculate `totalZoneCount` based on filter instead of hardcoded 350.
-  const totalZoneCount = 350
-
-  if (summaryState.loading)
-    return <NationwideSummaryHeader loading totalZoneCount={totalZoneCount} />
+  if (summaryState.loading) {
+    return (
+      <NationwideSummaryHeader
+        title={title}
+        loading
+        totalZoneCount={totalZoneCount}
+      />
+    )
+  }
 
   const summary = summaryState.data
   const allZoneStats = _.chain(summary.zoneStatsMap)
@@ -37,13 +82,16 @@ function NationwideSummaryHeaderContainer() {
     totalVoteCount: _.sumBy(allZoneStats, s => s.votesTotal),
     eligibleVoterCount: _.sumBy(allZoneStats, s => s.eligible),
   }
-  return <NationwideSummaryHeader {...mockData} />
+  return <NationwideSummaryHeader title={title} {...mockData} />
 }
 
-function NationwidePartyStatsContainer() {
+function NationwidePartyStatsContainer({ filterName }) {
   const summaryState = useSummaryData()
   if (summaryState.loading) return null
+
   const summary = summaryState.data
-  const partyStats = partyStatsFromSummaryJSON(summary)
+  const currentFilter = filters[filterName]
+  const partyStats = partyStatsFromSummaryJSON(summary, currentFilter)
+
   return <PartyStatsList partyStats={partyStats} />
 }

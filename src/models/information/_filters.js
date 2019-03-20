@@ -1,3 +1,5 @@
+import { getProvinceById } from "."
+
 // @ts-check
 
 /**
@@ -76,4 +78,19 @@ export const filters = {
     },
     criterion: (province, zone) => false,
   },
+}
+
+/**
+ * @param {ZoneFilterName} filterName
+ */
+export function filterPath(filterName) {
+  return filterName === "all" ? "/" : `/filters/${filterName}`
+}
+
+/**
+ * @param {IZoneFilter} filter
+ * @param {IZone} zone
+ */
+export function checkFilter(filter, zone) {
+  return filter.criterion(getProvinceById(zone.provinceId), zone)
 }

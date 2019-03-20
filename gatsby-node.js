@@ -7,6 +7,8 @@ const {
   parties,
   partyPath,
   zonePath,
+  filters,
+  filterPath,
 } = require("./src/models/information")
 
 exports.createPages = async ({ actions }) => {
@@ -26,12 +28,24 @@ exports.createPages = async ({ actions }) => {
     for (const zone of zones.filter(z => z.provinceId === province.id)) {
       createPage({
         path: zonePath(zone),
-        component: path.resolve(`src/pages/party.js`),
+        component: path.resolve(`src/pages/index.js`),
         context: {
-          provinceId: province.id,
-          zoneNo: zone.no,
+          zoneView: {
+            provinceId: province.id,
+            zoneNo: zone.no,
+          },
         },
       })
     }
+  }
+
+  for (const filterName of Object.keys(filters)) {
+    createPage({
+      path: filterPath(filterName),
+      component: path.resolve(`src/pages/index.js`),
+      context: {
+        filterName: filterName,
+      },
+    })
   }
 }

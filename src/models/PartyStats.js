@@ -1,5 +1,10 @@
 import _ from "lodash"
-import { parties, getPartyById } from "./information"
+import {
+  parties,
+  getPartyById,
+  getZoneByProvinceIdAndZoneNo,
+  checkFilter,
+} from "./information"
 import { calculatePartyList } from "thailand-party-list-calculator"
 
 /**
@@ -16,14 +21,26 @@ import { calculatePartyList } from "thailand-party-list-calculator"
 
 /**
  * @param {ElectionDataSource.SummaryJSON} summary
+ * @param {IZoneFilter} filter
  */
-export function partyStatsFromSummaryJSON(summary) {
+export function partyStatsFromSummaryJSON(summary, filter) {
   // Calculate the constituency seat count for each party.
-  const constituencySeatCount = _(summary.zoneWinningCandidateMap)
-    .values()
-    .flatMap(z => _.values(z))
-    .countBy(c => c.partyId)
-    .value()
+  const constituencySeatCount = {}
+  const filteredConstituencySeatCount = {}
+  for (const provinceIdStr of Object.keys(summary.zoneWinningCandidateMap)) {
+    const zoneNoWinningCandidateMap =
+      summary.zoneWinningCandidateMap[provinceIdStr]
+    for (const zoneNoStr of Object.keys(zoneNoWinningCandidateMap)) {
+      const candidate = zoneNoWinningCandidateMap[zoneNoStr]
+      const zone = getZoneByProvinceIdAndZoneNo(+provinceIdStr, +zoneNoStr)
+      const partyId = candidate.partyId
+      constituencySeatCount[partyId] = (constituencySeatCount[partyId] || 0) + 1
+      if (checkFilter(filter, zone)) {
+        filteredConstituencySeatCount[partyId] =
+          (filteredConstituencySeatCount[partyId] || 0) + 1
+      }
+    }
+  }
 
   // Calculate seat counts for ecah party.
   const partyStats = _(parties)
@@ -41,13 +58,14 @@ export function partyStatsFromSummaryJSON(summary) {
       const party = getPartyById(partyId)
       return {
         party,
-        constituencySeats: calculated.electedMemberCount,
+        constituencySeats: filteredConstituencySeatCount[party.id] || 0,
         partyListSeats: calculated.partyListMemberCount,
       }
     })
     .sortBy(row => row.constituencySeats + row.partyListSeats)
     .reverse()
     .value()
+
   return partyStats
 }
 

@@ -48,6 +48,29 @@ export function getProvinceById(id) {
   return provincesMap.get(id) || fail(`Province ID ${id} not found`)
 }
 
+const zoneMap = new Map(
+  zones.map(zone => [zoneKey(zone.provinceId, zone.no), zone])
+)
+
+/**
+ * @param {number} provinceId
+ * @param {number} zoneNo
+ */
+export function getZoneByProvinceIdAndZoneNo(provinceId, zoneNo) {
+  provinceId = +provinceId
+  zoneNo = +zoneNo
+
+  return zoneMap.get(zoneKey(provinceId, zoneNo))
+}
+
+/**
+ * @param {number} provinceId
+ * @param {number} zoneNo
+ */
+function zoneKey(provinceId, zoneNo) {
+  return provinceId + ":" + zoneNo
+}
+
 const partiesMap = new Map(parties.map(party => [party.id, party]))
 
 /**

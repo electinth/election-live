@@ -5,12 +5,15 @@ import React from "react"
 /**
  * @param {object} props
  * @param {boolean} props.loading
+ * @param {React.ReactNode} props.title
  * @param {number} props.totalZoneCount
  * @param {number} [props.completedZoneCount]
  * @param {number} [props.totalVoteCount]
  * @param {number} [props.eligibleVoterCount]
  */
 export default function NationwideSummaryHeader(props) {
+  const { title } = props
+
   if (props.loading) {
     return render(props.totalZoneCount, "...", "...", "0")
   } else {
@@ -34,7 +37,7 @@ export default function NationwideSummaryHeader(props) {
   ) {
     return (
       <div>
-        <h1>ทั่วประเทศ</h1>
+        <h1>{title}</h1>
         <p>เขตทั้งหมด {totalZoneCount} เขต</p>
         <p>นับเสร็จแล้ว {completedZoneCount} เขต</p>
         <p>

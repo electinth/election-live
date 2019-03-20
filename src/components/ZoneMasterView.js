@@ -4,6 +4,7 @@ import ContentWrapper from "./ContentWrapper"
 import { media, DESKTOP_MIN_WIDTH } from "../styles"
 import ElectionMap from "./ElectionMap"
 import Unimplemented from "./Unimplemented"
+import { ZoneFilterPanel } from "./ZoneFilterPanel"
 
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
@@ -77,11 +78,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               <Unimplemented componentName="ZoneSearchField" height={40} />
             </div>
             <div css={{ marginTop: 10 }}>
-              {
-                // @todo #1 Create a 1st version of ZoneFilterPanel component
-                //  in place of the Placeholder. May be a dummy component.
-              }
-              <Unimplemented componentName="ZoneFilterPanel" height={400} />
+              <ZoneFilterPanel />
             </div>
           </div>
 

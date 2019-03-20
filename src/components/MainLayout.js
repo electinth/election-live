@@ -12,7 +12,7 @@ import CompactScoreBar from "./CompactScoreBar"
 export default function MainLayout({ children }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
   return (
-    <PageContent>
+    <div>
       <ContentWrapper>
         <div
           css={{
@@ -75,7 +75,7 @@ export default function MainLayout({ children }) {
       </div>
       {children}
       <Footer />
-    </PageContent>
+    </div>
   )
 }
 
