@@ -6,6 +6,7 @@ import { maxSeats } from "../calculation/partyStats"
  * @param {{ partyStats: PartyStats }} props
  */
 export default function PartyStatsList(props) {
+  const totalSeats = maxSeats(props.partyStats)
   return (
     <div>
       {props.partyStats.map(row => (
@@ -14,7 +15,7 @@ export default function PartyStatsList(props) {
           party={row.party}
           constituencySeats={row.constituencySeats}
           partyListSeats={row.partyListSeats}
-          maxSeats={maxSeats(props.partyStats)}
+          maxSeats={totalSeats}
         />
       ))}
     </div>

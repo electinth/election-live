@@ -39,6 +39,9 @@ module.exports = {
 
     {
       resolve: "gatsby-plugin-htaccess",
+      // @todo #1 Allow _some_ caching for HTML files (e.g. 30~60 seconds).
+      //  Right now, generated .htaccess file sets caching age to 0, which can
+      //  cause unnecessarily high load.
     },
   ],
 }

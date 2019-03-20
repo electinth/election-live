@@ -1,15 +1,18 @@
 import React from "react"
+import _ from "lodash"
 import MainLayout from "../components/MainLayout"
 import ZoneMasterView from "../components/ZoneMasterView"
 import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import PartyStatsList from "../components/PartyStatsList"
-import { getMockPartyStatsNationwide } from "../components/__mocks__/PartyStatsMockData"
+import { useSummaryData } from "../models/LiveDataSubscription"
+import { parties, getPartyById } from "../models/information"
+import { calculatePartyList } from "thailand-party-list-calculator"
 
 export default ({ pageContext }) => (
   <MainLayout>
     <ZoneMasterView
       contentHeader={<NationwideSummaryHeaderContainer />}
-      contentBody={<PartyStatsContainer />}
+      contentBody={<NationwidePartyStatsContainer />}
     />
   </MainLayout>
 )
@@ -26,9 +29,43 @@ function NationwideSummaryHeaderContainer() {
   return <NationwideSummaryHeader {...mockData} />
 }
 
-function PartyStatsContainer() {
-  // @todo #1 Replace mock data in PartyStatsContainer
-  //  with subscription to the Data Model.
-  const mockPartyStats = getMockPartyStatsNationwide()
-  return <PartyStatsList partyStats={mockPartyStats} />
+function NationwidePartyStatsContainer() {
+  const summaryState = useSummaryData()
+  if (summaryState.loading) return null
+  const summary = summaryState.data
+
+  // @todo #53 [Refactor] Move party stats calculation logic to models/PartyStats.
+
+  // Calculate the constituency seat count for each party.
+  const constituencySeatCount = _(summary.zoneWinningCandidateMap)
+    .values()
+    .flatMap(z => _.values(z))
+    .countBy(c => c.partyId)
+    .value()
+
+  // Calculate seat counts for ecah party.
+  const partyStats = _(parties)
+    .map(party => {
+      return {
+        id: party.id,
+        electedMemberCount: constituencySeatCount[party.id] || 0,
+        voteCount: summary.partyScoreMap[party.id] || 0,
+        partyListCandidateCount: party.partylist,
+      }
+    })
+    .thru(calculatePartyList)
+    .map(calculated => {
+      const partyId = calculated.id
+      const party = getPartyById(partyId)
+      return {
+        party,
+        constituencySeats: calculated.electedMemberCount,
+        partyListSeats: calculated.partyListMemberCount,
+      }
+    })
+    .sortBy(row => row.constituencySeats + row.partyListSeats)
+    .reverse()
+    .value()
+
+  return <PartyStatsList partyStats={partyStats} />
 }

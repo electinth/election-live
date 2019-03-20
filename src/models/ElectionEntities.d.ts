@@ -75,6 +75,7 @@ type ZoneFilterName =
   | "gerrymandering"
   | "swing"
 
+// @todo #53 [Refactor] Move PartyStats type to models/PartyStats.
 type PartyStats = {
   party: IParty
   constituencySeats: number
