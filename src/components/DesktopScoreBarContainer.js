@@ -1,5 +1,7 @@
 import React from "react"
 import DesktopScoreBar from "./DesktopScoreBar"
+
+// @todo #52 [Refactor] Move components/__mocks__ to __fixtures__
 import { getMockDesktopScoreBarData } from "./__mocks__/DesktopScoreBarMockData"
 
 export default function DesktopScoreBarContainer() {
