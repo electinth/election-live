@@ -20,7 +20,7 @@ export default function PageLayout({ children }) {
 function DevModeDisclaimer() {
   const [disclaimerHidden, hideDisclaimer] = useReducer(() => true, false)
   useEffect(() => {
-    const t = setTimeout(() => hideDisclaimer(), 2000)
+    const t = setTimeout(() => hideDisclaimer(), 3000)
     return () => clearTimeout(t)
   }, [])
   return (
@@ -34,7 +34,7 @@ function DevModeDisclaimer() {
         left: 5,
         transform: "rotate(-10deg)",
         padding: "5px 10px",
-        opacity: 0,
+        opacity: 0.75,
         transition: "0.5s opacity",
         "&:hover, &[data-show-disclaimer]": {
           opacity: 1,
