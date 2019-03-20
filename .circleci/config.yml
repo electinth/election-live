@@ -5,6 +5,24 @@ jobs:
     docker:
       - image: circleci/node:10.15.3
     steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - public
+  test:
+    working_directory: ~/election-live
+    docker:
+      - image: circleci/node:10.15.3
+    steps:
       - run:
           name: Install Code Climate
           command: |
@@ -39,8 +57,6 @@ jobs:
             export CC_TEST_REPORTER_ID=288aa84aed5e2836e6e216cbdc7270562db0578317d2e08a2a8cf02d53be6857
 
             /tmp/cc-test-reporter after-build --coverage-input-type lcov
-      # @todo #1 Setup deployment to live environment.
-      #
       # @todo #1 Setup CircleCI to obtain lighthouse report.
       #  This can be done by these steps:
       #  (1) Run `yarn build` to generate a built bundle
@@ -48,3 +64,25 @@ jobs:
       #  (3) Run lighthouse CLI to obtain report. (See: https://github.com/GoogleChrome/lighthouse)
       #  (4) Store artifact in CircleCI using `store_artifacts` command.
       #
+  deploy:
+    working_directory: ~/election-live
+    docker:
+      - image: circleci/node:10.15.3
+    steps:
+      - attach_workspace:
+          at: .
+      - deploy:
+          name: Deploy
+          command: rsync -avz public/ "$DEPLOYMENT_TARGET_HOST:$DEPLOYMENT_TARGET_PATH/"
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - build
+      - test
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
