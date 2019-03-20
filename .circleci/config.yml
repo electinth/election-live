@@ -75,7 +75,7 @@ jobs:
           name: Deploy
           command: |
             sudo apt update && sudo apt install rsync
-            rsync -avz public/ "$DEPLOYMENT_TARGET_HOST:$DEPLOYMENT_TARGET_PATH/"
+            rsync -rvz public/ "$DEPLOYMENT_TARGET_HOST:$DEPLOYMENT_TARGET_PATH/"
 workflows:
   version: 2
   build-test-deploy:
