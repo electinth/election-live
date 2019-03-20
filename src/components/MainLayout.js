@@ -100,8 +100,6 @@ function Logo() {
 }
 
 function Hamburger({ onClick, active }) {
-  // @todo #1 Implement Hamburger menu according to design.
-
   // Hamburger from Codepen @naturalclar
   // https://codepen.io/naturalclar/pen/zEwvbg
   const styles = {
@@ -137,19 +135,13 @@ function Hamburger({ onClick, active }) {
   }
   return (
     <button onClick={onClick}>
-      {active ? (
+      {
         <div style={styles.container}>
           <div style={{ ...styles.line, ...styles.lineTop }} />
           <div style={{ ...styles.line, ...styles.lineMiddle }} />
           <div style={{ ...styles.line, ...styles.lineBottom }} />
         </div>
-      ) : (
-        <div style={styles.container}>
-          <div style={{ ...styles.line, ...styles.lineTop }} />
-          <div style={{ ...styles.line, ...styles.lineMiddle }} />
-          <div style={{ ...styles.line, ...styles.lineBottom }} />
-        </div>
-      )}
+      }
     </button>
   )
 }
