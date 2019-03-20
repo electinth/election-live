@@ -1,6 +1,6 @@
-import { maxSeats } from "../partyStats"
+import { partyStatsMaxSeats } from "../PartyStats"
 
-describe("maxSteats", () => {
+describe("partyStatsMaxSeats", () => {
   test("when have only one party, just sum up constituencySeats + partyListSeats", () => {
     const partyStats = [
       {
@@ -9,7 +9,7 @@ describe("maxSteats", () => {
       },
     ]
 
-    expect(maxSeats(partyStats)).toEqual(2)
+    expect(partyStatsMaxSeats(partyStats)).toEqual(2)
   })
 
   test("when have more than one, just sum only for the max of constituencySeats + partyListSeats", () => {
@@ -24,6 +24,6 @@ describe("maxSteats", () => {
       },
     ]
 
-    expect(maxSeats(partyStats)).toEqual(25)
+    expect(partyStatsMaxSeats(partyStats)).toEqual(25)
   })
 })

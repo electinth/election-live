@@ -1,12 +1,12 @@
 import React from "react"
 import PartyStatsRow from "./PartyStatsRow"
-import { maxSeats } from "../calculation/partyStats"
+import { partyStatsMaxSeats } from "../models/PartyStats"
 
 /**
- * @param {{ partyStats: PartyStats }} props
+ * @param {{ partyStats: import('../models/PartyStats').PartyStats }} props
  */
 export default function PartyStatsList(props) {
-  const totalSeats = maxSeats(props.partyStats)
+  const totalSeats = partyStatsMaxSeats(props.partyStats)
   return (
     <div>
       {props.partyStats.map(row => (

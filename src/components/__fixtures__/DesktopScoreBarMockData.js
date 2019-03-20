@@ -2,7 +2,7 @@ import _ from "lodash"
 import { calculatePartyList } from "thailand-party-list-calculator"
 import { parties, getPartyById } from "../../models/information"
 
-const summary = /** @type {ElectionDataSource.SummaryJSON} */ (require("../../models/__mocks__/Summary1.json"))
+const summary = /** @type {ElectionDataSource.SummaryJSON} */ (require("../../models/__fixtures__/Summary1.json"))
 
 export function getMockDesktopScoreBarData(_progress) {
   const constituencySeatCount = _(summary.zoneWinningCandidateMap)
