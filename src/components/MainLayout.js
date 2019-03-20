@@ -1,5 +1,4 @@
 import React, { useReducer } from "react"
-import PageContent from "../components/PageContent"
 
 import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
 import NavBar from "./NavBar"
