@@ -1,19 +1,17 @@
 import React, { useReducer, useEffect } from "react"
 import { Link } from "gatsby"
 
-import { PageContentContextProvider, PageContentOutlet } from "./PageContent"
 import DocumentHead from "./DocumentHead"
 import { GlobalStyle } from "../styles"
 
 export default function PageLayout({ children }) {
   return (
-    <PageContentContextProvider>
+    <React.Fragment>
       <DocumentHead />
       <GlobalStyle />
-      <PageContentOutlet />
       {children}
       <DevModeDisclaimer />
-    </PageContentContextProvider>
+    </React.Fragment>
   )
 }
 
