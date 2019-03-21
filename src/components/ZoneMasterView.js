@@ -136,7 +136,6 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
 
   function renderMobileZoneFilterAndSearch() {
     const boxHeight = 56
-    // @todo #42 Height and margins for mobile zone filter and search?
     return (
       <div css={{ display: "flex", height: boxHeight, padding: "0 10px" }}>
         <button
@@ -157,7 +156,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
             </ZoneFilterContext.Consumer>
           </div>
         </button>
-        <div css={{ flex: "none", marginLeft: 10, width: boxHeight }}>
+        <div css={{ flex: "none", marginLeft: 16, width: boxHeight }}>
           <button
             css={{
               ...buttonStyle,
