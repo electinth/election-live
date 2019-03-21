@@ -5,10 +5,11 @@ import { media, DESKTOP_MIN_WIDTH, buttonStyle, labelColor } from "../styles"
 import ElectionMap from "./ElectionMap"
 import Unimplemented from "./Unimplemented"
 import { ZoneFilterPanel } from "./ZoneFilterPanel"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { applyMiddleware } from "redux"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 
 import { zonesForSearch, filters as areaFilters } from "../models/information"
 
@@ -145,7 +146,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
             onClick={() => setState({ isSearchOpen: true })}
           >
             <span role="img" aria-label="mobile zone search">
-              <FontAwesomeIcon icon="search" />
+              <FontAwesomeIcon icon={faSearch} />
             </span>
           </div>
         </div>
@@ -185,7 +186,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               })
             }
           >
-            <FontAwesomeIcon icon="times" />
+            <FontAwesomeIcon icon={faTimes} />
           </div>
 
           <div

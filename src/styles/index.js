@@ -2,11 +2,6 @@ import "./global.css"
 import React, { useLayoutEffect, useState } from "react"
 import { Global } from "@emotion/core"
 
-import { library } from "@fortawesome/fontawesome-svg-core"
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
-
-library.add(faSearch, faTimes)
-
 export const BODY_FONT = "Noto Sans, Noto Sans Thai, Bai Jamjuree, sans-serif"
 export const DISPLAY_FONT = "Libre Baskerville, The Matter, serif"
 
