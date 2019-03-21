@@ -49,6 +49,8 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
         <ul css={{ listStyle: "none", padding: 0 }}>
           {zonesForSearch
             .filter(z => {
+              // @todo #1 Update zone filtering logic to allow searching
+              //  by postal code and province name.
               return z.inclusionAreas.indexOf(state.zoneQuery) > -1
             })
             .map(z => {
