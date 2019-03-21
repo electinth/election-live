@@ -13,7 +13,7 @@ import { zonesForSearch } from "../models/information"
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
   const [state, setState] = useState({
-    isSearchOpen: true,
+    isSearchOpen: false,
     isFilterOpen: false,
     zoneQuery: null,
   })
