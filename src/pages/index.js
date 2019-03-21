@@ -20,6 +20,8 @@ import {
 import { ZoneFilterContext } from "../components/ZoneFilterPanel"
 import CloseButton from "../components/CloseButton"
 import { navigate } from "gatsby"
+import { DISPLAY_FONT, labelColor } from "../styles"
+import Unimplemented from "../components/Unimplemented"
 
 export default ({ pageContext }) => (
   <MainLayout activeNavBarSection="by-area">
@@ -132,9 +134,36 @@ function ZoneView({ provinceId, zoneNo }) {
   return (
     <div>
       <CloseButton onClick={() => navigate(filterPath(activeFilter))} />
-      <h1>{province.name}</h1>
-      <h2>เขตเลือกตั้งที่ {zoneNo}</h2>
-      <p>{zone.details}</p>
+      <div
+        css={{
+          textAlign: "center",
+        }}
+      >
+        <h1 css={{ fontFamily: DISPLAY_FONT }}>{province.name}</h1>
+        <h2 css={{ fontFamily: DISPLAY_FONT, color: labelColor }}>
+          เขตเลือกตั้งที่ {zoneNo}
+        </h2>
+        <p>{zone.details}</p>
+        <Unimplemented componentName="scorebar" height={50} />
+        <Unimplemented componentName="stats" height={100} />
+        <ul
+          css={{
+            overflow: "scroll",
+            listStyle: "none",
+            margin: 0,
+            marginTop: 10,
+            padding: 0,
+          }}
+        >
+          {_.range(0, 20).map(a => {
+            return (
+              <li key={a}>
+                <Unimplemented componentName={`scorebar ${a}`} height={50} />
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </div>
   )
 }
