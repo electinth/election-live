@@ -132,11 +132,22 @@ function ZoneView({ provinceId, zoneNo }) {
   const province = getProvinceById(provinceId)
   const activeFilter = useContext(ZoneFilterContext)
   return (
-    <div>
+    <div
+      css={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <CloseButton onClick={() => navigate(filterPath(activeFilter))} />
       <div
         css={{
           textAlign: "center",
+          flex: "none",
         }}
       >
         <h1 css={{ fontFamily: DISPLAY_FONT }}>{province.name}</h1>
@@ -146,19 +157,27 @@ function ZoneView({ provinceId, zoneNo }) {
         <p>{zone.details}</p>
         <Unimplemented componentName="scorebar" height={50} />
         <Unimplemented componentName="stats" height={100} />
+      </div>
+      <div css={{ flex: "auto", position: "relative" }}>
         <ul
           css={{
-            overflow: "scroll",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
             listStyle: "none",
             margin: 0,
             marginTop: 10,
             padding: 0,
+            overflowX: "hidden",
+            overflowY: "auto",
           }}
         >
           {_.range(0, 20).map(a => {
             return (
               <li key={a}>
-                <Unimplemented componentName={`scorebar ${a}`} height={50} />
+                <Unimplemented componentName={`candidate ${a}`} height={50} />
               </li>
             )
           })}
