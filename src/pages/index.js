@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react"
+import React, { useState, useLayoutEffect, useContext } from "react"
 import _ from "lodash"
 import MainLayout from "../components/MainLayout"
 import ZoneMasterView from "../components/ZoneMasterView"
@@ -14,8 +14,12 @@ import {
   filters,
   checkFilter,
   getZoneByProvinceIdAndZoneNo,
+  getProvinceById,
+  filterPath,
 } from "../models/information"
 import { ZoneFilterContext } from "../components/ZoneFilterPanel"
+import CloseButton from "../components/CloseButton"
+import { navigate } from "gatsby"
 
 export default ({ pageContext }) => (
   <MainLayout activeNavBarSection="by-area">
@@ -115,9 +119,15 @@ function PartyStatsContainer({ filterName }) {
 }
 
 function ZoneView({ provinceId, zoneNo }) {
+  const zone = getZoneByProvinceIdAndZoneNo(provinceId, zoneNo)
+  const province = getProvinceById(provinceId)
+  const activeFilter = useContext(ZoneFilterContext)
   return (
     <div>
-      {provinceId} - {zoneNo}
+      <CloseButton onClick={() => navigate(filterPath(activeFilter))} />
+      <h1>{province.name}</h1>
+      <h2>เขตเลือกตั้งที่ {zoneNo}</h2>
+      <p>{zone.details}</p>
     </div>
   )
 }

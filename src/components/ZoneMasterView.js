@@ -1,4 +1,4 @@
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useCallback, useState } from "react"
 import {
@@ -13,6 +13,8 @@ import ElectionMap from "./ElectionMap"
 import { ZoneFilterPanel, ZoneFilterContext } from "./ZoneFilterPanel"
 import { ZoneSearchPanel } from "./ZoneSearchPanel"
 import { filters } from "../models/information"
+import CloseButton from "./CloseButton"
+import { keyframes } from "@emotion/core"
 
 /**
  * @param {object} props
@@ -34,12 +36,17 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
     <div>
       <ContentWrapper>
         <div
+          data-hidden={popup ? true : undefined}
           css={{
             position: "fixed",
             left: 0,
             right: 0,
             bottom: 0,
             zIndex: 2,
+            transition: "0.5s transform",
+            "&[data-hidden]": {
+              transform: "translateY(120%)",
+            },
             ...hideOnDesktop,
           }}
         >
@@ -257,21 +264,7 @@ function MobileSidebar({ title, children, active, onClose, width = 200 }) {
         },
       }}
     >
-      <button
-        css={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          fontSize: 20,
-          border: 0,
-          background: "transparent",
-          padding: "8px 12px",
-          cursor: "pointer",
-        }}
-        onClick={onClose}
-      >
-        <FontAwesomeIcon icon={faTimes} />
-      </button>
+      <CloseButton onClick={onClose} />
       <div css={{ marginTop: 10 }}>
         <div css={{ color: labelColor, fontWeight: 600 }}>{title}</div>
         {children}
@@ -289,10 +282,12 @@ function Popup({ children }) {
         right: 0,
         bottom: 0,
         left: 0,
-        zIndex: 12,
+        zIndex: 20,
         background: "#eee",
+        animation: `${popup} 0.5s`,
         [media(DESKTOP_MIN_WIDTH)]: {
           position: "absolute",
+          animation: "none",
         },
       }}
     >
@@ -300,3 +295,12 @@ function Popup({ children }) {
     </div>
   )
 }
+
+const popup = keyframes({
+  from: {
+    transform: "translateY(100%)",
+  },
+  to: {
+    transform: "translateY(0%)",
+  },
+})

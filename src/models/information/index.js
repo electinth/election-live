@@ -41,6 +41,7 @@ const provincesMap = new Map(provinces.map(province => [province.id, province]))
 
 /**
  * @param {number} id
+ * @returns {IProvince}
  */
 export function getProvinceById(id) {
   id = +id
@@ -64,6 +65,7 @@ export const zonesForSearch = zones.map(zone => {
 /**
  * @param {number} provinceId
  * @param {number} zoneNo
+ * @returns {IZone}
  */
 export function getZoneByProvinceIdAndZoneNo(provinceId, zoneNo) {
   provinceId = +provinceId
@@ -87,6 +89,7 @@ export const partyLogo = x =>
 
 /**
  * @param {number} id
+ * @returns {IParty}
  */
 export function getPartyById(id) {
   id = +id
