@@ -19,7 +19,6 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   return (
     <div>
       <ContentWrapper>
-        {renderSearchAndFilterPanel()}
         <div
           css={{
             position: "fixed",
@@ -79,13 +78,6 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               },
             }}
           >
-            <div css={{ marginTop: 10 }}>
-              {
-                // @todo #1 Create a 1st version of ZoneSearchField component
-                //  in place of the Placeholder. May be a dummy component.
-              }
-              <Unimplemented componentName="ZoneSearchField" height={40} />
-            </div>
             <div css={{ marginTop: 10 }}>
               <ZoneFilterPanel />
             </div>
@@ -155,46 +147,16 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
     return <Placeholder height={40}>สรุปข้อมูล | แผนที่</Placeholder>
   }
 
-  function renderSearchAndFilterPanel() {
-    return (
-      <div
-        css={{
-          position: "absolute",
-          display: state.isSearchOpen || state.isFilterOpen ? "block" : "none",
-          left: 0,
-          top: 0,
-          width: "100%",
-          height: "100%",
-          background: "white",
-          zIndex: 1000,
-          minHeight: "100vh",
-        }}
-      >
-        <div css={{ padding: 20 }}>
-          <div
-            css={{ float: "right", fontSize: 20 }}
-            onClick={() =>
-              setState({
-                isSearchOpen: false,
-                isFilterOpen: false,
-                zoneQuery: "",
-              })
-            }
-          >
-            <FontAwesomeIcon icon={faTimes} />
-          </div>
-
-          <div
-            css={{
-              display: state.isSearchOpen ? "block" : "none",
-            }}
-          >
-            <div css={{ color: labelColor, fontWeight: 600 }}>
-              ค้นหาเขตเลือกตั้ง
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  // <div
+  //           css={{ float: "right", fontSize: 20 }}
+  //           onClick={() =>
+  //             setState({
+  //               isSearchOpen: false,
+  //               isFilterOpen: false,
+  //               zoneQuery: "",
+  //             })
+  //           }
+  //         >
+  //           <FontAwesomeIcon icon={faTimes} />
+  //         </div>
 }
