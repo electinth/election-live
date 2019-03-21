@@ -29,8 +29,15 @@ export default ({ pageContext }) => (
       {filterName => (
         <ZoneFilterContext.Provider value={filterName}>
           <ZoneMasterView
-            contentHeader={<SummaryHeaderContainer filterName={filterName} />}
-            contentBody={<PartyStatsContainer filterName={filterName} />}
+            contentHeader={
+              <SummaryHeaderContainer
+                key={filterName}
+                filterName={filterName}
+              />
+            }
+            contentBody={
+              <PartyStatsContainer key={filterName} filterName={filterName} />
+            }
             popup={
               pageContext.zoneView ? (
                 <ZoneView {...pageContext.zoneView} />

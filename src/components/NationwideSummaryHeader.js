@@ -1,6 +1,7 @@
 import React from "react"
 import { LABEL_FONT } from "../styles"
 import { numberWithCommas } from "../util/format"
+import AnimatedNumber from "./AnimatedNumber"
 
 // @ts-check
 
@@ -77,7 +78,9 @@ export default function NationwideSummaryHeader(props) {
               color: "black",
             }}
           >
-            {numberWithCommas(totalVoteCount)}
+            <AnimatedNumber value={totalVoteCount} initialValue={0}>
+              {count => numberWithCommas(count)}
+            </AnimatedNumber>
           </span>
           คน
           <span
@@ -89,7 +92,7 @@ export default function NationwideSummaryHeader(props) {
               color: "black",
             }}
           >
-            {percentage}%
+            <AnimatedNumber value={percentage} initialValue={0} />%
           </span>
         </div>
       </div>
