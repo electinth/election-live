@@ -10,8 +10,9 @@ import {
 } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import ElectionMap from "./ElectionMap"
-import { ZoneFilterPanel } from "./ZoneFilterPanel"
+import { ZoneFilterPanel, ZoneFilterContext } from "./ZoneFilterPanel"
 import { ZoneSearchPanel } from "./ZoneSearchPanel"
+import { filters } from "../models/information"
 
 /**
  * @param {object} props
@@ -135,7 +136,13 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
         >
           <div css={{ paddingLeft: 15, paddingTop: 5 }}>
             <div css={{ color: labelColor, fontSize: 12 }}>แสดงผล</div>
-            <div css={{ fontSize: 16, fontWeight: 600 }}>ทั่วประเทศ</div>
+
+            <ZoneFilterContext.Consumer>
+              {currentFilterName => {
+                const name = filters[currentFilterName].name.th
+                return <div css={{ fontSize: 16, fontWeight: 600 }}>{name}</div>
+              }}
+            </ZoneFilterContext.Consumer>
           </div>
         </div>
         <div css={{ flex: "none", marginLeft: 10, width: boxHeight }}>
@@ -168,14 +175,17 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           onClose={clearActiveSidebar}
           width={300}
         >
-          <ZoneSearchPanel autoFocus={activeSidebar === "search"} />
+          <ZoneSearchPanel
+            autoFocus={activeSidebar === "search"}
+            onSearchCompleted={clearActiveSidebar}
+          />
         </MobileSidebar>
         <MobileSidebar
           title="ตัวเลือกแสดงผล"
           active={activeSidebar === "filter"}
           onClose={clearActiveSidebar}
         >
-          <ZoneFilterPanel />
+          <ZoneFilterPanel onFilterSelect={clearActiveSidebar} />
         </MobileSidebar>
       </React.Fragment>
     )

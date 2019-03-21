@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useState, useRef, useLayoutEffect } from "react"
-import { zonesForSearch } from "../models/information"
+import { zonesForSearch, zonePath } from "../models/information"
 import { labelColor } from "../styles"
+import { Link } from "gatsby"
 
-export function ZoneSearchPanel({ autoFocus }) {
+export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
   const [state, setState] = useState({
     isSearchOpen: false,
     zoneQuery: null,
@@ -58,17 +59,23 @@ export function ZoneSearchPanel({ autoFocus }) {
                     padding: "20px 10px",
                     borderBottom: "1px solid black",
                   }}
-                  onClick={() =>
-                    // @todo link to zone page
-                    alert(` go to zone page ${z.zoneKey}`)
-                  }
                 >
-                  <div css={{ fontSize: 16 }}>
-                    <b>
-                      {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
-                    </b>
-                  </div>
-                  <div>{z.zone.details}</div>
+                  <Link
+                    to={zonePath(z.zone)}
+                    onClick={onSearchCompleted}
+                    css={{
+                      display: "block",
+                      color: "inherit",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <div css={{ fontSize: 16 }}>
+                      <b>
+                        {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
+                      </b>
+                    </div>
+                    <div>{z.zone.details}</div>
+                  </Link>
                 </li>
               )
             })}

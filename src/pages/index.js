@@ -15,7 +15,7 @@ import {
   checkFilter,
   getZoneByProvinceIdAndZoneNo,
 } from "../models/information"
-import { ZoneFilterContextProvider } from "../components/ZoneFilterPanel"
+import { ZoneFilterContext } from "../components/ZoneFilterPanel"
 
 export default ({ pageContext }) => (
   <MainLayout activeNavBarSection="by-area">
@@ -23,12 +23,12 @@ export default ({ pageContext }) => (
       value={pageContext.zoneView ? null : pageContext.filterName || "all"}
     >
       {filterName => (
-        <ZoneFilterContextProvider value={filterName}>
+        <ZoneFilterContext.Provider value={filterName}>
           <ZoneMasterView
             contentHeader={<SummaryHeaderContainer filterName={filterName} />}
             contentBody={<PartyStatsContainer filterName={filterName} />}
           />
-        </ZoneFilterContextProvider>
+        </ZoneFilterContext.Provider>
       )}
     </InertFilter>
   </MainLayout>

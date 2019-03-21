@@ -4,11 +4,11 @@ import { Link } from "gatsby"
 import React, { createContext } from "react"
 import { filterPath, filters as areaFilters } from "../models/information"
 
-const ZoneFilterContext = createContext(/** @type {ZoneFilterName} */ ("all"))
+export const ZoneFilterContext = createContext(
+  /** @type {ZoneFilterName} */ ("all")
+)
 
-export const ZoneFilterContextProvider = ZoneFilterContext.Provider
-
-export function ZoneFilterPanel() {
+export function ZoneFilterPanel({ onFilterSelect }) {
   return (
     <div>
       <div css={{ fontSize: 20, fontWeight: "bold" }}>เขตพื้นที่</div>
@@ -42,6 +42,7 @@ export function ZoneFilterPanel() {
               <li css={{ paddingTop: 10, paddingBottom: 10 }}>
                 <Link
                   to={filterPath(filterName)}
+                  onClick={onFilterSelect}
                   css={{
                     opacity: current ? 1 : 0.62,
                     display: "block",
