@@ -1,5 +1,4 @@
 import { fail } from "assert"
-import { Z_STREAM_ERROR } from "zlib"
 
 /**
  * This file represents the static information about Thailand General Election 2019

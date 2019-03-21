@@ -1,7 +1,7 @@
 import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
-import React, { createContext, useEffect } from "react"
+import React, { createContext } from "react"
 import { filterPath, filters as areaFilters } from "../models/information"
 
 const ZoneFilterContext = createContext(/** @type {ZoneFilterName} */ ("all"))

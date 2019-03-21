@@ -1,11 +1,32 @@
 import React from "react"
+import _ from "lodash"
 import DesktopScoreBar from "./DesktopScoreBar"
-
-import { getMockDesktopScoreBarData } from "./__fixtures__/DesktopScoreBarMockData"
+import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+import { useSummaryData } from "../models/LiveDataSubscription"
 
 export default function DesktopScoreBarContainer() {
-  // @todo #1 Replace hardcoded mock data in DesktopScoreBarContainer
-  //  with subscription to data model.
-  const data = getMockDesktopScoreBarData()
+  const summaryState = useSummaryData()
+  if (summaryState.loading) return null
+
+  const summary = summaryState.data
+  const partyStats = partyStatsFromSummaryJSON(summary)
+  const data = _.chain(partyStats)
+    .flatMap(row => /** @type {import('./DesktopScoreBar').Row[]} */ ([
+      {
+        id: `${row.party.id}d`,
+        type: "district",
+        name: row.party.name,
+        color: row.party.color,
+        count: row.constituencySeats,
+      },
+      {
+        id: `${row.party.id}p`,
+        type: "partylist",
+        name: row.party.name,
+        color: row.party.color,
+        count: row.partyListSeats,
+      },
+    ]))
+    .value()
   return <DesktopScoreBar data={data} />
 }

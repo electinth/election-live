@@ -17,7 +17,7 @@ import { createComponent } from "react-d3kit"
  * @prop {string} name Party name.
  * @prop {string} color Color representing the party.
  * @prop {number} count Number of seats.
- * @prop {"district" | "partylist" | "other"} type
+ * @prop {"district" | "partylist"} type
  *  Type of this row.
  *
  *  - `district`: From election result of each district.

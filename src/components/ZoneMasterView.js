@@ -1,6 +1,6 @@
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useState, useCallback } from "react"
+import React, { useCallback, useState } from "react"
 import {
   buttonStyle,
   DESKTOP_MIN_WIDTH,
@@ -10,8 +10,6 @@ import {
 } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import ElectionMap from "./ElectionMap"
-import Placeholder from "./Placeholder"
-import Unimplemented from "./Unimplemented"
 import { ZoneFilterPanel } from "./ZoneFilterPanel"
 import { ZoneSearchPanel } from "./ZoneSearchPanel"
 

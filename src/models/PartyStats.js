@@ -4,6 +4,7 @@ import {
   getPartyById,
   getZoneByProvinceIdAndZoneNo,
   checkFilter,
+  filters,
 } from "./information"
 import { calculatePartyList } from "thailand-party-list-calculator"
 
@@ -22,8 +23,9 @@ import { calculatePartyList } from "thailand-party-list-calculator"
 /**
  * @param {ElectionDataSource.SummaryJSON} summary
  * @param {IZoneFilter} filter
+ * @return {PartyStats}
  */
-export function partyStatsFromSummaryJSON(summary, filter) {
+export function partyStatsFromSummaryJSON(summary, filter = filters.all) {
   // Calculate the constituency seat count for each party.
   const constituencySeatCount = {}
   const filteredConstituencySeatCount = {}
