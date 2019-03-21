@@ -8,13 +8,15 @@ import { ZoneFilterPanel } from "./ZoneFilterPanel"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { applyMiddleware } from "redux"
 
-import { zonesForSearch } from "../models/information"
+import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
+
+import { zonesForSearch, filters as areaFilters } from "../models/information"
 
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
   const [state, setState] = useState({
     isSearchOpen: false,
-    isFilterOpen: false,
+    isFilterOpen: true,
     zoneQuery: null,
   })
 
@@ -246,6 +248,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
                         borderBottom: "1px solid black",
                       }}
                       onClick={() =>
+                        // @todo link to zone page
                         alert(`TODO: go to zone page ${z.zoneKey}`)
                       }
                     >
@@ -267,6 +270,48 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           >
             <div css={{ color: labelColor, fontWeight: 600 }}>
               ตัวเลือกแสดงผล
+            </div>
+            <div
+              css={{
+                borderBottom: "1px solid black",
+                marginBottom: 10,
+                marginTop: 10,
+              }}
+            >
+              <div css={{ fontSize: 20, fontWeight: "bold" }}>เขตพื้นที่</div>
+              <ul css={{ padding: 0, listStyle: "none" }}>
+                {["all", "northern", "northeastern", "central", "southern"].map(
+                  a => {
+                    return (
+                      <li key={a} css={{ paddingTop: 10, paddingBottom: 10 }}>
+                        <span css={{ marginRight: 10 }}>
+                          <FontAwesomeIcon icon={faCheckCircle} />
+                          <FontAwesomeIcon icon={faCircle} />
+                        </span>
+                        {areaFilters[a].name.th}
+                      </li>
+                    )
+                  }
+                )}
+              </ul>
+            </div>
+            <div>
+              <div css={{ fontSize: 20, fontWeight: "bold" }}>
+                ตัวเลือกพิเศษ
+              </div>
+              <ul css={{ padding: 0, listStyle: "none" }}>
+                {["rural", "gerrymandering", "swing"].map(a => {
+                  return (
+                    <li key={a} css={{ paddingTop: 10, paddingBottom: 10 }}>
+                      <span css={{ marginRight: 10 }}>
+                        <FontAwesomeIcon icon={faCheckCircle} />
+                        <FontAwesomeIcon icon={faCircle} />
+                      </span>
+                      {areaFilters[a].name.th}
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
           </div>
         </div>
