@@ -26,7 +26,7 @@ const PartyStatsRow = props => {
         <h3 css={{ margin: 0, fontSize: "1.5rem", fontFamily: DISPLAY_FONT }}>
           {props.party.name}
         </h3>
-        <p css={{ margin: 0 }}>
+        <div css={{ margin: 0 }}>
           <VisuallyHidden> ทั้งหมด </VisuallyHidden>
           <div
             css={{
@@ -51,13 +51,13 @@ const PartyStatsRow = props => {
               {totalSeats}
             </span>
           </div>
-        </p>
-        <p css={{ margin: 0 }}>
+        </div>
+        <div css={{ margin: 0 }}>
           ส.ส. เขต {props.constituencySeats}{" "}
           <VisuallyHidden> ที่นั่ง </VisuallyHidden>
           ส.ส. ปาร์ตี้ลิสต์ {props.partyListSeats}{" "}
           <VisuallyHidden> ที่นั่ง</VisuallyHidden>
-        </p>
+        </div>
         <div
           css={{ height: 5, background: partyColor(props.party) }}
           style={{ width: barWidth }}
