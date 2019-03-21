@@ -7,7 +7,7 @@ export const DISPLAY_FONT = "Libre Baskerville, The Matter, serif"
 
 // Note: Do not use `max-width`.
 // Instead, go mobile first and use `min-width` to enhance experience for desktop only.
-export const DESKTOP_MIN_WIDTH = 1152
+export const DESKTOP_MIN_WIDTH = 960
 
 /** Breakpoint to display navigation as wide. */
 export const WIDE_NAV_MIN_WIDTH = 720
