@@ -83,6 +83,9 @@ function zoneKey(provinceId, zoneNo) {
 
 const partiesMap = new Map(parties.map(party => [party.id, party]))
 
+export const partyLogo = x =>
+  `//elect.in.th/candidates/statics/party-logos/${x}.png`
+
 /**
  * @param {number} id
  */
