@@ -8,7 +8,7 @@ const ZoneFilterContext = createContext(/** @type {ZoneFilterName} */ ("all"))
 
 export const ZoneFilterContextProvider = ZoneFilterContext.Provider
 
-export function ZoneFilterPanel({ triggerSearch = false }) {
+export function ZoneFilterPanel() {
   return (
     <div>
       <div css={{ fontSize: 20, fontWeight: "bold" }}>เขตพื้นที่</div>

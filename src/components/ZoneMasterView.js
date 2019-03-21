@@ -13,6 +13,12 @@ import ElectionMap from "./ElectionMap"
 import { ZoneFilterPanel } from "./ZoneFilterPanel"
 import { ZoneSearchPanel } from "./ZoneSearchPanel"
 
+/**
+ * @param {object} props
+ * @param {React.ReactNode} props.contentHeader
+ * @param {React.ReactNode} props.contentBody
+ * @param {React.ReactNode} props.popup
+ */
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
   const [activeSidebar, setActiveSidebar] = useState(
@@ -56,7 +62,8 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               {renderMobileZoneFilterAndSearch()}
             </div>
 
-            <div css={{ marginTop: 10 }}>
+            <div css={{ marginTop: 10, position: "relative" }}>
+              {popup ? <Popup>{popup}</Popup> : null}
               {contentHeader}
               <div
                 css={{
@@ -159,8 +166,9 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           title="ค้นหาเขตเลือกตั้ง"
           active={activeSidebar === "search"}
           onClose={clearActiveSidebar}
+          width={300}
         >
-          <ZoneSearchPanel />
+          <ZoneSearchPanel autoFocus={activeSidebar === "search"} />
         </MobileSidebar>
         <MobileSidebar
           title="ตัวเลือกแสดงผล"
@@ -207,7 +215,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   }
 }
 
-function MobileSidebar({ title, children, active, onClose }) {
+function MobileSidebar({ title, children, active, onClose, width = 200 }) {
   return (
     <div
       data-active={active ? true : undefined}
@@ -218,34 +226,42 @@ function MobileSidebar({ title, children, active, onClose }) {
         top: 0,
         left: 0,
         bottom: 0,
-        width: 200,
+        width: width,
         zIndex: 10,
         padding: "0 16px",
         transform: "translateX(-120%)",
         transition: "0.5s transform",
-        overflowX: "auto",
-        overflowY: "hidden",
+        overflowX: "hidden",
+        overflowY: "auto",
         WebkitOverflowScrolling: "touch",
         "&[data-active]": {
           transform: "translateX(0%)",
         },
       }}
     >
-      <div
+      <button
         css={{
           position: "absolute",
           top: 0,
-          right: 20,
+          right: 0,
           fontSize: 20,
+          border: 0,
+          background: "transparent",
+          padding: "8px 12px",
+          cursor: "pointer",
         }}
         onClick={onClose}
       >
         <FontAwesomeIcon icon={faTimes} />
-      </div>
+      </button>
       <div css={{ marginTop: 10 }}>
         <div css={{ color: labelColor, fontWeight: 600 }}>{title}</div>
         {children}
       </div>
     </div>
   )
+}
+
+function Popup() {
+  return <div>neiw</div>
 }
