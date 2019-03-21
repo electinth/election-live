@@ -142,9 +142,36 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   }
 
   function renderMobileTabs() {
-    // @todo #42 Implement the first version of mobile tabs
-    //  May be a dummy component that looks like the real one.
-    return <Placeholder height={40}>สรุปข้อมูล | แผนที่</Placeholder>
+    const menuStyle = {
+      width: "50%",
+      display: "inline-block",
+      verticalAlign: "middle",
+      lineHeight: "48px",
+    }
+
+    return (
+      <div
+        css={{
+          background: "white",
+          textAlign: "center",
+          fontSize: 16,
+          borderTop: "1px solid #eee",
+          height: 48,
+          fontWeight: "bold",
+        }}
+      >
+        <span
+          css={{ ...menuStyle, borderTop: true ? "2px solid black" : "0px" }}
+        >
+          สรุปข้อมูล
+        </span>
+        <span
+          css={{ ...menuStyle, borderTop: false ? "2px solid black" : "0px" }}
+        >
+          แผนที่
+        </span>
+      </div>
+    )
   }
 
   // <div
