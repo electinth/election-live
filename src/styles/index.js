@@ -16,6 +16,14 @@ export function media(minWidth) {
   return `@media (min-width: ${minWidth}px)`
 }
 
+export const labelColor = "#888888"
+
+export const buttonStyle = {
+  cursor: "pointer",
+  border: "1px solid #EEEEEE",
+  boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
+}
+
 export function GlobalStyle() {
   return (
     <Global
