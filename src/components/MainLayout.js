@@ -8,7 +8,11 @@ import { Responsive, media, WIDE_NAV_MIN_WIDTH } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
 
-export default function MainLayout({ children }) {
+/**
+ * @param {object} props
+ * @param {import('./NavBar').NavBarSectionName} props.activeNavBarSection
+ */
+export default function MainLayout({ children, activeNavBarSection }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
   return (
     <div>
@@ -53,7 +57,7 @@ export default function MainLayout({ children }) {
           "&[data-active]": { display: "block" },
         }}
       >
-        <NavBar />
+        <NavBar activeNavBarSection={activeNavBarSection} />
       </div>
       <div
         css={{

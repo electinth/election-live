@@ -3,7 +3,15 @@ import { Link } from "gatsby"
 import { ClassNames } from "@emotion/core"
 import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 
-export default function Navbar() {
+/**
+ * @typedef {'by-area' | 'by-party' | 'overview' | 'source'} NavBarSectionName
+ */
+
+/**
+ * @param {object} props
+ * @param {NavBarSectionName} props.activeNavBarSection
+ */
+export default function Navbar(props) {
   const stylesLink = {
     color: "#ccc",
     textDecoration: "none",
@@ -16,25 +24,25 @@ export default function Navbar() {
     fontFamily: "The Matter",
     fontWeight: "200",
     [media(WIDE_NAV_MIN_WIDTH)]: { display: "inline-block" },
+    "&[data-active]": {
+      color: "black",
+      [media(WIDE_NAV_MIN_WIDTH)]: { borderBottom: "3px solid black" },
+    },
   }
 
-  const stylesActiveLink = {
-    color: "black",
-    [media(WIDE_NAV_MIN_WIDTH)]: { borderBottom: "3px solid black" },
-  }
-
-  const linkTo = (url, text) => (
-    <ClassNames>
-      {({ css }) => (
-        <Link
-          className={css(stylesLink)}
-          activeClassName={css(stylesActiveLink)}
-          to={url}
-        >
-          {text}
-        </Link>
-      )}
-    </ClassNames>
+  /**
+   * @param {NavBarSectionName} sectionName
+   * @param {string} url
+   * @param {React.ReactNode} text
+   */
+  const linkTo = (sectionName, url, text) => (
+    <Link
+      css={stylesLink}
+      data-active={sectionName === props.activeNavBarSection ? true : undefined}
+      to={url}
+    >
+      {text}
+    </Link>
   )
 
   return (
@@ -46,10 +54,10 @@ export default function Navbar() {
         textAlign: "center",
       }}
     >
-      {linkTo("/", "ดูผลตามพื้นที่")}
-      {linkTo("/party/", "ดูผลตามพรรค")}
-      {linkTo("/overview/", "ภาพรวมผลลัพธ์")}
-      {linkTo("/source/", "ข้อมูลเรามาจากไหน")}
+      {linkTo("by-area", "/", "ดูผลตามพื้นที่")}
+      {linkTo("by-party", "/party/", "ดูผลตามพรรค")}
+      {linkTo("overview", "/overview/", "ภาพรวมผลลัพธ์")}
+      {linkTo("source", "/source/", "ข้อมูลเรามาจากไหน")}
     </nav>
   )
 }

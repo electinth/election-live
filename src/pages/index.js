@@ -15,7 +15,7 @@ import {
 import { ZoneFilterContextProvider } from "../components/ZoneFilterPanel"
 
 export default ({ pageContext }) => (
-  <MainLayout>
+  <MainLayout activeNavBarSection="by-area">
     <InertFilter
       value={pageContext.zoneView ? null : pageContext.filterName || "all"}
     >

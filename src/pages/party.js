@@ -9,7 +9,7 @@ import {
 import { Link } from "gatsby"
 
 export default ({ pageContext }) => (
-  <MainLayout>
+  <MainLayout activeNavBarSection="by-party">
     <h1>Party View</h1>
     {pageContext.partyId ? (
       <h2>{getPartyById(pageContext.partyId).name}</h2>
