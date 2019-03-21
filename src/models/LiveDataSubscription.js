@@ -9,7 +9,7 @@ export function useSummaryData() {
   })
   useEffect(() => {
     setTimeout(() => {
-      import("./__fixtures__/Summary1.json").then(result => {
+      import("./__fixtures__/Summary20190321155702.json").then(result => {
         console.log(result)
         setState({
           loading: false,
