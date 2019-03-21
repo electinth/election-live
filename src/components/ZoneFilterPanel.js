@@ -1,14 +1,9 @@
-import React, { createContext, useState } from "react"
-import {
-  filters as areaFilters,
-  filterPath,
-  zonesForSearch,
-} from "../models/information"
-import { Link } from "gatsby"
-import { labelColor } from "../styles"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "gatsby"
+import React, { createContext, useState } from "react"
+import { filterPath, filters as areaFilters } from "../models/information"
+import { labelColor } from "../styles"
 
 const ZoneFilterContext = createContext(/** @type {ZoneFilterName} */ ("all"))
 

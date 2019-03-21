@@ -1,17 +1,12 @@
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useState } from "react"
-import Placeholder from "./Placeholder"
+import { buttonStyle, DESKTOP_MIN_WIDTH, labelColor, media } from "../styles"
 import ContentWrapper from "./ContentWrapper"
-import { media, DESKTOP_MIN_WIDTH, buttonStyle, labelColor } from "../styles"
 import ElectionMap from "./ElectionMap"
+import Placeholder from "./Placeholder"
 import Unimplemented from "./Unimplemented"
 import { ZoneFilterPanel } from "./ZoneFilterPanel"
-import { applyMiddleware } from "redux"
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
-
-import { zonesForSearch, filters as areaFilters } from "../models/information"
 
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
@@ -196,130 +191,6 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           >
             <div css={{ color: labelColor, fontWeight: 600 }}>
               ค้นหาเขตเลือกตั้ง
-            </div>
-            <div>
-              <div>
-                <input
-                  css={{
-                    border: `1px solid ${labelColor}`,
-                    width: "100%",
-                    boxSizing: "border-box",
-                    padding: 10,
-                    fontSize: 16,
-                    marginTop: 20,
-                  }}
-                  ref={component => {
-                    if (component) {
-                      component.focus()
-                    }
-                  }}
-                  placeholder="ค้นหาจาก ชื่อ ตำบล อำเภอ หรือ จังหวัด"
-                  onChange={v => {
-                    const query = v.target.value
-                    if (query && query.length > 2) {
-                      setState({ zoneQuery: query, isSearchOpen: true })
-                    }
-                  }}
-                  value={state.zoneQuery}
-                />
-              </div>
-              <div
-                css={{
-                  top: 80,
-                  position: "absolute",
-                  right: 30,
-                  color: labelColor,
-                }}
-              >
-                <FontAwesomeIcon icon="search" />
-              </div>
-            </div>
-
-            <ul css={{ listStyle: "none", padding: 0 }}>
-              {zonesForSearch
-                .filter(z => {
-                  return z.inclusionAreas.indexOf(state.zoneQuery) > -1
-                })
-                .map(z => {
-                  return (
-                    <li
-                      key={`${z.zone.provinceId}-${z.zone.no}`}
-                      css={{
-                        padding: "20px 10px",
-                        borderBottom: "1px solid black",
-                      }}
-                      onClick={() =>
-                        // @todo link to zone page
-                        alert(`go to zone page ${z.zoneKey}`)
-                      }
-                    >
-                      <div css={{ fontSize: 16 }}>
-                        <b>
-                          {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
-                        </b>
-                      </div>
-                      <div>{z.zone.details}</div>
-                    </li>
-                  )
-                })}
-            </ul>
-          </div>
-          <div
-            css={{
-              display: state.isFilterOpen ? "relative" : "none",
-            }}
-          >
-            <div css={{ color: labelColor, fontWeight: 600 }}>
-              ตัวเลือกแสดงผล
-            </div>
-            <div
-              css={{
-                borderBottom: "1px solid black",
-                marginBottom: 10,
-                marginTop: 10,
-              }}
-            >
-              <div css={{ fontSize: 20, fontWeight: "bold" }}>เขตพื้นที่</div>
-              <ul css={{ padding: 0, listStyle: "none" }}>
-                {["all", "northern", "northeastern", "central", "southern"].map(
-                  a => {
-                    return (
-                      <li key={a} css={{ paddingTop: 10, paddingBottom: 10 }}>
-                        <span css={{ marginRight: 10 }}>
-                          <FontAwesomeIcon icon={faCheckCircle} />
-                          <FontAwesomeIcon icon={faCircle} />
-                        </span>
-                        {areaFilters[a].name.th}
-                      </li>
-                    )
-                  }
-                )}
-              </ul>
-            </div>
-            <div>
-              <div css={{ fontSize: 20, fontWeight: "bold" }}>
-                ตัวเลือกพิเศษ
-              </div>
-              <ul css={{ padding: 0, listStyle: "none" }}>
-                {[
-                  "rural",
-                  "gerrymandering",
-                  "swing",
-                  "rural",
-                  "gerrymandering",
-                  "swing",
-                ].map(a => {
-                  return (
-                    <li key={a} css={{ paddingTop: 10, paddingBottom: 10 }}>
-                      <span css={{ marginRight: 10 }}>
-                        <FontAwesomeIcon icon={faCheckCircle} />
-                        <FontAwesomeIcon icon={faCircle} />
-                      </span>
-                      {areaFilters[a].name.th}
-                    </li>
-                  )
-                })}
-              </ul>
             </div>
           </div>
         </div>
