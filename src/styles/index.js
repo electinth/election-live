@@ -22,6 +22,10 @@ export const buttonStyle = {
   cursor: "pointer",
   border: "1px solid #EEEEEE",
   boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
+  padding: 0,
+  margin: 0,
+  font: "inherit",
+  textAlign: "inherit",
 }
 
 export function GlobalStyle() {

@@ -38,7 +38,13 @@ export default function NationwideSummaryHeader(props) {
   ) {
     return (
       <div css={{ textAlign: "center" }}>
-        <h1 css={{ fontFamily: DISPLAY_FONT, borderBottom: "1px solid" }}>
+        <h1
+          css={{
+            fontFamily: DISPLAY_FONT,
+            borderBottom: "1px solid",
+            marginTop: 0,
+          }}
+        >
           {title}
         </h1>
         <div css={{ borderBottom: "1px solid", paddingBottom: 10 }}>

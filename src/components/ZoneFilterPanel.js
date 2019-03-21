@@ -1,14 +1,21 @@
 import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
-import React, { createContext } from "react"
+import React, { createContext, useRef, useLayoutEffect } from "react"
 import { filterPath, filters as areaFilters } from "../models/information"
 
 export const ZoneFilterContext = createContext(
   /** @type {ZoneFilterName} */ ("all")
 )
 
-export function ZoneFilterPanel({ onFilterSelect }) {
+export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
+  const currentLinkRef = useRef(/** @type {HTMLAnchorElement} */ (null))
+  useLayoutEffect(() => {
+    if (autoFocus && currentLinkRef.current) {
+      currentLinkRef.current.focus()
+    }
+  }, [autoFocus])
+
   return (
     <div>
       <div css={{ fontSize: 20, fontWeight: "bold" }}>เขตพื้นที่</div>
@@ -43,6 +50,7 @@ export function ZoneFilterPanel({ onFilterSelect }) {
                 <Link
                   to={filterPath(filterName)}
                   onClick={onFilterSelect}
+                  ref={current ? currentLinkRef : undefined}
                   css={{
                     opacity: current ? 1 : 0.62,
                     display: "block",

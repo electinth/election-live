@@ -56,15 +56,21 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               position: "relative",
               zIndex: 1,
               margin: "0 auto",
-              [media(DESKTOP_MIN_WIDTH)]: { order: 3, width: 288, margin: 0 },
+              [media(DESKTOP_MIN_WIDTH)]: {
+                order: 3,
+                width: 320,
+                margin: 0,
+                padding: 16,
+              },
             }}
           >
-            <div css={{ marginTop: 10, ...hideOnDesktop }}>
+            {popup ? <Popup>{popup}</Popup> : null}
+
+            <div css={{ margin: "10px 0", ...hideOnDesktop }}>
               {renderMobileZoneFilterAndSearch()}
             </div>
 
-            <div css={{ marginTop: 10, position: "relative" }}>
-              {popup ? <Popup>{popup}</Popup> : null}
+            <div css={{ position: "relative" }}>
               {contentHeader}
               <div
                 css={{
@@ -126,17 +132,16 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
     // @todo #42 Height and margins for mobile zone filter and search?
     return (
       <div css={{ display: "flex", height: boxHeight, padding: "0 10px" }}>
-        <div
+        <button
           css={{
+            ...buttonStyle,
             flex: 1,
             height: boxHeight,
-            ...buttonStyle,
           }}
           onClick={() => setActiveSidebar("filter")}
         >
-          <div css={{ paddingLeft: 15, paddingTop: 5 }}>
+          <div css={{ padding: "0 15px" }}>
             <div css={{ color: labelColor, fontSize: 12 }}>แสดงผล</div>
-
             <ZoneFilterContext.Consumer>
               {currentFilterName => {
                 const name = filters[currentFilterName].name.th
@@ -144,23 +149,23 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               }}
             </ZoneFilterContext.Consumer>
           </div>
-        </div>
+        </button>
         <div css={{ flex: "none", marginLeft: 10, width: boxHeight }}>
-          <div
+          <button
             css={{
+              ...buttonStyle,
               width: boxHeight,
               height: boxHeight,
               verticalAlign: "middle",
               textAlign: "center",
               lineHeight: `${boxHeight}px`,
-              ...buttonStyle,
             }}
             onClick={() => setActiveSidebar("search")}
           >
             <span role="img" aria-label="mobile zone search">
               <FontAwesomeIcon icon={faSearch} />
             </span>
-          </div>
+          </button>
         </div>
       </div>
     )
@@ -185,7 +190,10 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           active={activeSidebar === "filter"}
           onClose={clearActiveSidebar}
         >
-          <ZoneFilterPanel onFilterSelect={clearActiveSidebar} />
+          <ZoneFilterPanel
+            autoFocus={activeSidebar === "filter"}
+            onFilterSelect={clearActiveSidebar}
+          />
         </MobileSidebar>
       </React.Fragment>
     )
@@ -272,6 +280,23 @@ function MobileSidebar({ title, children, active, onClose, width = 200 }) {
   )
 }
 
-function Popup() {
-  return <div>neiw</div>
+function Popup({ children }) {
+  return (
+    <div
+      css={{
+        position: "fixed",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 12,
+        background: "#eee",
+        [media(DESKTOP_MIN_WIDTH)]: {
+          position: "absolute",
+        },
+      }}
+    >
+      {children}
+    </div>
+  )
 }

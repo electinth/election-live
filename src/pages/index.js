@@ -27,6 +27,11 @@ export default ({ pageContext }) => (
           <ZoneMasterView
             contentHeader={<SummaryHeaderContainer filterName={filterName} />}
             contentBody={<PartyStatsContainer filterName={filterName} />}
+            popup={
+              pageContext.zoneView ? (
+                <ZoneView {...pageContext.zoneView} />
+              ) : null
+            }
           />
         </ZoneFilterContext.Provider>
       )}
@@ -107,4 +112,12 @@ function PartyStatsContainer({ filterName }) {
   )
 
   return <PartyStatsList partyStats={partyStats} />
+}
+
+function ZoneView({ provinceId, zoneNo }) {
+  return (
+    <div>
+      {provinceId} - {zoneNo}
+    </div>
+  )
 }
