@@ -250,7 +250,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
                       }}
                       onClick={() =>
                         // @todo link to zone page
-                        alert(`TODO: go to zone page ${z.zoneKey}`)
+                        alert(`go to zone page ${z.zoneKey}`)
                       }
                     >
                       <div css={{ fontSize: 16 }}>
