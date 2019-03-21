@@ -16,7 +16,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
   const [state, setState] = useState({
     isSearchOpen: false,
-    isFilterOpen: true,
+    isFilterOpen: false,
     zoneQuery: null,
   })
 
@@ -300,7 +300,14 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
                 ตัวเลือกพิเศษ
               </div>
               <ul css={{ padding: 0, listStyle: "none" }}>
-                {["rural", "gerrymandering", "swing"].map(a => {
+                {[
+                  "rural",
+                  "gerrymandering",
+                  "swing",
+                  "rural",
+                  "gerrymandering",
+                  "swing",
+                ].map(a => {
                   return (
                     <li key={a} css={{ paddingTop: 10, paddingBottom: 10 }}>
                       <span css={{ marginRight: 10 }}>
