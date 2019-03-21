@@ -5,7 +5,10 @@ import ZoneMasterView from "../components/ZoneMasterView"
 import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import PartyStatsList from "../components/PartyStatsList"
 import { useSummaryData } from "../models/LiveDataSubscription"
-import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+import {
+  partyStatsFromSummaryJSON,
+  partyStatsRowTotalSeats,
+} from "../models/PartyStats"
 import {
   zones,
   filters,
@@ -99,7 +102,9 @@ function PartyStatsContainer({ filterName }) {
 
   const summary = summaryState.data
   const currentFilter = filters[filterName]
-  const partyStats = partyStatsFromSummaryJSON(summary, currentFilter)
+  const partyStats = partyStatsFromSummaryJSON(summary, currentFilter).filter(
+    row => partyStatsRowTotalSeats(row) > 0
+  )
 
   return <PartyStatsList partyStats={partyStats} />
 }
