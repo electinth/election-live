@@ -8,6 +8,9 @@ import { Responsive, media, WIDE_NAV_MIN_WIDTH } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
 
+// @todo #1 Change the style to match the design
+//  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
+
 /**
  * @param {object} props
  * @param {import('./NavBar').NavBarSectionName} props.activeNavBarSection
