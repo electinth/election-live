@@ -1,4 +1,5 @@
 import { fail } from "assert"
+import { Z_STREAM_ERROR } from "zlib"
 
 /**
  * This file represents the static information about Thailand General Election 2019
@@ -51,6 +52,15 @@ export function getProvinceById(id) {
 const zoneMap = new Map(
   zones.map(zone => [zoneKey(zone.provinceId, zone.no), zone])
 )
+
+export const zonesForSearch = zones.map(zone => {
+  return {
+    inclusionAreas: zone.details.replace(/(\(ยกเว้น.+\)?)/g, ""),
+    zone: getZoneByProvinceIdAndZoneNo(zone.provinceId, zone.no),
+    province: getProvinceById(zone.provinceId),
+    zoneKey: zoneKey(zone.provinceId, zone.no),
+  }
+})
 
 /**
  * @param {number} provinceId

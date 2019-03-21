@@ -2,6 +2,11 @@ import "./global.css"
 import React, { useLayoutEffect, useState } from "react"
 import { Global } from "@emotion/core"
 
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
+
+library.add(faSearch, faTimes)
+
 export const BODY_FONT = "Noto Sans, Noto Sans Thai, Bai Jamjuree, sans-serif"
 export const DISPLAY_FONT = "Libre Baskerville, The Matter, serif"
 
@@ -14,6 +19,14 @@ export const WIDE_NAV_MIN_WIDTH = 720
 
 export function media(minWidth) {
   return `@media (min-width: ${minWidth}px)`
+}
+
+export const labelColor = "#888888"
+
+export const buttonStyle = {
+  cursor: "pointer",
+  border: "1px solid #EEEEEE",
+  boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
 }
 
 export function GlobalStyle() {

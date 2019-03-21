@@ -1,16 +1,27 @@
-import React from "react"
+import React, { useState } from "react"
 import Placeholder from "./Placeholder"
 import ContentWrapper from "./ContentWrapper"
-import { media, DESKTOP_MIN_WIDTH } from "../styles"
+import { media, DESKTOP_MIN_WIDTH, buttonStyle, labelColor } from "../styles"
 import ElectionMap from "./ElectionMap"
 import Unimplemented from "./Unimplemented"
 import { ZoneFilterPanel } from "./ZoneFilterPanel"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { applyMiddleware } from "redux"
+
+import { zonesForSearch } from "../models/information"
 
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
+  const [state, setState] = useState({
+    isSearchOpen: true,
+    isFilterOpen: false,
+    zoneQuery: null,
+  })
+
   return (
     <div>
       <ContentWrapper>
+        {renderSearchAndFilterPanel()}
         <div
           css={{
             position: "fixed",
@@ -34,13 +45,13 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               position: "relative",
               zIndex: 1,
               margin: "0 auto",
-              maxWidth: 288,
               [media(DESKTOP_MIN_WIDTH)]: { order: 3, width: 288, margin: 0 },
             }}
           >
             <div css={{ marginTop: 10, ...hideOnDesktop }}>
               {renderMobileZoneFilterAndSearch()}
             </div>
+
             <div css={{ marginTop: 10 }}>
               {contentHeader}
               <div
@@ -102,18 +113,39 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   )
 
   function renderMobileZoneFilterAndSearch() {
+    const boxHeight = 56
     // @todo #42 Height and margins for mobile zone filter and search?
     return (
-      <div css={{ display: "flex", height: 50 }}>
-        <div css={{ flex: 1 }}>
-          <Placeholder height="100%">แสดงผล: ทั่วประเทศ</Placeholder>
+      <div css={{ display: "flex", height: boxHeight, padding: "0 10px" }}>
+        <div
+          css={{
+            flex: 1,
+            height: boxHeight,
+            ...buttonStyle,
+          }}
+          onClick={() => setState({ isFilterOpen: true })}
+        >
+          <div css={{ paddingLeft: 15, paddingTop: 5 }}>
+            <div css={{ color: labelColor, fontSize: 12 }}>แสดงผล</div>
+            <div css={{ fontSize: 16, fontWeight: 600 }}>ทั่วประเทศ</div>
+          </div>
         </div>
-        <div css={{ flex: "none", marginLeft: 10, width: 50 }}>
-          <Placeholder height="100%">
+        <div css={{ flex: "none", marginLeft: 10, width: boxHeight }}>
+          <div
+            css={{
+              width: boxHeight,
+              height: boxHeight,
+              verticalAlign: "middle",
+              textAlign: "center",
+              lineHeight: `${boxHeight}px`,
+              ...buttonStyle,
+            }}
+            onClick={() => setState({ isSearchOpen: true })}
+          >
             <span role="img" aria-label="mobile zone search">
-              🔍
+              <FontAwesomeIcon icon="search" />
             </span>
-          </Placeholder>
+          </div>
         </div>
       </div>
     )
@@ -123,5 +155,122 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
     // @todo #42 Implement the first version of mobile tabs
     //  May be a dummy component that looks like the real one.
     return <Placeholder height={40}>สรุปข้อมูล | แผนที่</Placeholder>
+  }
+
+  function renderSearchAndFilterPanel() {
+    return (
+      <div
+        css={{
+          position: "absolute",
+          display: state.isSearchOpen || state.isFilterOpen ? "block" : "none",
+          left: 0,
+          top: 0,
+          width: "100%",
+          height: "100%",
+          background: "white",
+          zIndex: 1000,
+          minHeight: window.innerHeight,
+        }}
+      >
+        <div css={{ padding: 20 }}>
+          <div
+            css={{ float: "right", fontSize: 20 }}
+            onClick={() =>
+              setState({
+                isSearchOpen: false,
+                isFilterOpen: false,
+                zoneQuery: "",
+              })
+            }
+          >
+            <FontAwesomeIcon icon="times" />
+          </div>
+
+          <div
+            css={{
+              display: state.isSearchOpen ? "block" : "none",
+            }}
+          >
+            <div css={{ color: labelColor, fontWeight: 600 }}>
+              ค้นหาเขตเลือกตั้ง
+            </div>
+            <div>
+              <div>
+                <input
+                  css={{
+                    border: `1px solid ${labelColor}`,
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: 10,
+                    fontSize: 16,
+                    marginTop: 20,
+                  }}
+                  ref={component => {
+                    if (component) {
+                      component.focus()
+                    }
+                  }}
+                  placeholder="ค้นหาจาก ชื่อ ตำบล อำเภอ หรือ จังหวัด"
+                  onChange={v => {
+                    const query = v.target.value
+                    if (query && query.length > 2) {
+                      setState({ zoneQuery: query, isSearchOpen: true })
+                    }
+                  }}
+                  value={state.zoneQuery}
+                />
+              </div>
+              <div
+                css={{
+                  top: 80,
+                  position: "absolute",
+                  right: 30,
+                  color: labelColor,
+                }}
+              >
+                <FontAwesomeIcon icon="search" />
+              </div>
+            </div>
+
+            <ul css={{ listStyle: "none", padding: 0 }}>
+              {zonesForSearch
+                .filter(z => {
+                  return z.inclusionAreas.indexOf(state.zoneQuery) > -1
+                })
+                .map(z => {
+                  return (
+                    <li
+                      key={`${z.zone.provinceId}-${z.zone.no}`}
+                      css={{
+                        padding: "20px 10px",
+                        borderBottom: "1px solid black",
+                      }}
+                      onClick={() =>
+                        alert(`TODO: go to zone page ${z.zoneKey}`)
+                      }
+                    >
+                      <div css={{ fontSize: 16 }}>
+                        <b>
+                          {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
+                        </b>
+                      </div>
+                      <div>{z.zone.details}</div>
+                    </li>
+                  )
+                })}
+            </ul>
+          </div>
+          <div
+            css={{
+              display: state.isFilterOpen ? "relative" : "none",
+            }}
+          >
+            <div css={{ color: labelColor, fontWeight: 600 }}>
+              ตัวเลือกแสดงผล
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 }
