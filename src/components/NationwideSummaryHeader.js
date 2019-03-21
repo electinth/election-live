@@ -1,5 +1,6 @@
 import React from "react"
-import { DISPLAY_FONT, labelColor } from "../styles"
+import { LABEL_FONT } from "../styles"
+import { numberWithCommas } from "../util/format"
 
 // @ts-check
 
@@ -37,17 +38,18 @@ export default function NationwideSummaryHeader(props) {
     percentage
   ) {
     return (
-      <div css={{ textAlign: "center" }}>
+      <div css={{ textAlign: "center", marginBottom: 10 }}>
         <h1
           css={{
-            fontFamily: DISPLAY_FONT,
+            fontFamily: LABEL_FONT,
             borderBottom: "1px solid",
-            marginTop: 0,
+            paddingBottom: 10,
+            margin: 0,
           }}
         >
           {title}
         </h1>
-        <div css={{ borderBottom: "1px solid", paddingBottom: 10 }}>
+        <div css={{ borderBottom: "1px solid", paddingTop: 5 }}>
           {buildNationwideSubSummaryHeader("เขตทั้งหมด", totalZoneCount, 0)}
           {buildNationwideSubSummaryHeader(
             "นับเสร็จแล้ว",
@@ -55,32 +57,33 @@ export default function NationwideSummaryHeader(props) {
             1
           )}
         </div>
-        <p
+        <div
           css={{
             textAlign: "left",
-            color: labelColor,
+            color: "black",
             fontSize: "1.1em",
             borderBottom: "1px solid black",
-            paddingBottom: 10,
+            paddingBottom: 5,
+            paddingTop: 5,
           }}
         >
           มีผู้มาใช้สิทธิ์
           <span
             css={{
               fontSize: "1.5rem",
-              fontFamily: DISPLAY_FONT,
+              fontFamily: LABEL_FONT,
               marginLeft: 30,
               marginRight: 10,
               color: "black",
             }}
           >
-            {totalVoteCount}
+            {numberWithCommas(totalVoteCount)}
           </span>
           คน
           <span
             css={{
               fontSize: "1.5rem",
-              fontFamily: DISPLAY_FONT,
+              fontFamily: LABEL_FONT,
               position: "absolute",
               right: 0,
               color: "black",
@@ -88,7 +91,7 @@ export default function NationwideSummaryHeader(props) {
           >
             {percentage}%
           </span>
-        </p>
+        </div>
       </div>
     )
   }
@@ -111,7 +114,7 @@ export default function NationwideSummaryHeader(props) {
           <span
             css={{
               fontSize: "1.1em",
-              color: labelColor,
+              color: "black",
               float: "left",
               marginTop: ".5em",
             }}
@@ -121,7 +124,7 @@ export default function NationwideSummaryHeader(props) {
           </span>
           <span
             css={{
-              fontFamily: DISPLAY_FONT,
+              fontFamily: LABEL_FONT,
               fontSize: "1.5rem",
               float: "right",
             }}

@@ -4,6 +4,7 @@ import { Global } from "@emotion/core"
 
 export const BODY_FONT = "Noto Sans, Noto Sans Thai, Bai Jamjuree, sans-serif"
 export const DISPLAY_FONT = "Libre Baskerville, The Matter, serif"
+export const LABEL_FONT = "The Matter, Libre Baskerville"
 
 // Note: Do not use `max-width`.
 // Instead, go mobile first and use `min-width` to enhance experience for desktop only.
