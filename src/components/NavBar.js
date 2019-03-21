@@ -12,20 +12,21 @@ import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
  */
 export default function Navbar(props) {
   const stylesLink = {
-    color: "#ccc",
+    color: "#FFFFFF",
+    opacity: "0.7",
     textDecoration: "none",
     display: "block",
     position: "relative",
     margin: "0 1rem",
-    fontSize: "18px",
+    fontSize: "16px",
     paddingBottom: "8px",
     paddingTop: "8px",
     fontFamily: "The Matter",
-    fontWeight: "200",
+    fontWeight: "100",
     [media(WIDE_NAV_MIN_WIDTH)]: { display: "inline-block" },
     "&[data-active]": {
-      color: "black",
-      [media(WIDE_NAV_MIN_WIDTH)]: { borderBottom: "3px solid black" },
+      opacity: "1",
+      [media(WIDE_NAV_MIN_WIDTH)]: { borderBottom: "3px solid white" },
     },
   }
 
@@ -48,9 +49,8 @@ export default function Navbar(props) {
     <nav
       css={{
         display: "block",
-        border: "solid #eee",
-        borderWidth: "1px 0",
         textAlign: "center",
+        backgroundColor: "#212121;",
       }}
     >
       {linkTo("by-area", "/", "ดูผลตามพื้นที่")}
