@@ -74,6 +74,10 @@ jobs:
             - "03:72:bd:d6:22:85:a5:6a:56:0d:a6:fa:d0:2f:40:a1"
       - attach_workspace:
           at: .
+      - run:
+          name: Hack .htaccess
+          command: |
+            sed -i -e 's/max-age=0/max-age=30/g' public/.htaccess
       - deploy:
           name: Deploy
           command: |
