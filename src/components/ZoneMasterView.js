@@ -1,20 +1,29 @@
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useState } from "react"
-import { buttonStyle, DESKTOP_MIN_WIDTH, labelColor, media } from "../styles"
+import React, { useState, useCallback } from "react"
+import {
+  buttonStyle,
+  DESKTOP_MIN_WIDTH,
+  labelColor,
+  media,
+  Responsive,
+} from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import ElectionMap from "./ElectionMap"
 import Placeholder from "./Placeholder"
 import Unimplemented from "./Unimplemented"
 import { ZoneFilterPanel } from "./ZoneFilterPanel"
+import { ZoneSearchPanel } from "./ZoneSearchPanel"
 
 export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
-  const [state, setState] = useState({
-    isSearchOpen: false,
-    isFilterOpen: false,
-    zoneQuery: null,
-  })
+  const [activeSidebar, setActiveSidebar] = useState(
+    /** @type {'filter' | 'search' | null} */ (null)
+  )
+  const clearActiveSidebar = useCallback(
+    () => setActiveSidebar(null),
+    setActiveSidebar
+  )
 
   return (
     <div>
@@ -66,20 +75,20 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
             </div>
           </div>
 
-          {/* Filters */}
+          {/* Filters panel */}
           <div
             css={{
               display: "none",
               [media(DESKTOP_MIN_WIDTH)]: {
                 display: "block",
                 order: 1,
-                width: 200,
                 margin: "0 0 10px",
+                padding: 0,
               },
             }}
           >
             <div css={{ marginTop: 10 }}>
-              <ZoneFilterPanel />
+              <ZoneFilterPanel triggerSearch={activeSidebar === "search"} />
             </div>
           </div>
 
@@ -98,6 +107,10 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
             <ElectionMap />
           </div>
         </div>
+        <Responsive
+          breakpoint={DESKTOP_MIN_WIDTH}
+          narrow={renderMobileSidebar()}
+        />
       </ContentWrapper>
     </div>
   )
@@ -113,7 +126,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
             height: boxHeight,
             ...buttonStyle,
           }}
-          onClick={() => setState({ isFilterOpen: true })}
+          onClick={() => setActiveSidebar("filter")}
         >
           <div css={{ paddingLeft: 15, paddingTop: 5 }}>
             <div css={{ color: labelColor, fontSize: 12 }}>แสดงผล</div>
@@ -130,7 +143,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               lineHeight: `${boxHeight}px`,
               ...buttonStyle,
             }}
-            onClick={() => setState({ isSearchOpen: true })}
+            onClick={() => setActiveSidebar("search")}
           >
             <span role="img" aria-label="mobile zone search">
               <FontAwesomeIcon icon={faSearch} />
@@ -138,6 +151,27 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           </div>
         </div>
       </div>
+    )
+  }
+
+  function renderMobileSidebar() {
+    return (
+      <React.Fragment>
+        <MobileSidebar
+          title="ค้นหาเขตเลือกตั้ง"
+          active={activeSidebar === "search"}
+          onClose={clearActiveSidebar}
+        >
+          <ZoneSearchPanel />
+        </MobileSidebar>
+        <MobileSidebar
+          title="ตัวเลือกแสดงผล"
+          active={activeSidebar === "filter"}
+          onClose={clearActiveSidebar}
+        >
+          <ZoneFilterPanel />
+        </MobileSidebar>
+      </React.Fragment>
     )
   }
 
@@ -173,17 +207,47 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
       </div>
     )
   }
+}
 
-  // <div
-  //           css={{ float: "right", fontSize: 20 }}
-  //           onClick={() =>
-  //             setState({
-  //               isSearchOpen: false,
-  //               isFilterOpen: false,
-  //               zoneQuery: "",
-  //             })
-  //           }
-  //         >
-  //           <FontAwesomeIcon icon={faTimes} />
-  //         </div>
+function MobileSidebar({ title, children, active, onClose }) {
+  return (
+    <div
+      data-active={active ? true : undefined}
+      css={{
+        background: "white",
+        boxShadow: "1px 0 1px rgba(0,0,0,0.25)",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        width: 200,
+        zIndex: 10,
+        padding: "0 16px",
+        transform: "translateX(-120%)",
+        transition: "0.5s transform",
+        overflowX: "auto",
+        overflowY: "hidden",
+        WebkitOverflowScrolling: "touch",
+        "&[data-active]": {
+          transform: "translateX(0%)",
+        },
+      }}
+    >
+      <div
+        css={{
+          position: "absolute",
+          top: 0,
+          right: 20,
+          fontSize: 20,
+        }}
+        onClick={onClose}
+      >
+        <FontAwesomeIcon icon={faTimes} />
+      </div>
+      <div css={{ marginTop: 10 }}>
+        <div css={{ color: labelColor, fontWeight: 600 }}>{title}</div>
+        {children}
+      </div>
+    </div>
+  )
 }

@@ -1,28 +1,16 @@
 import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
-import React, { createContext, useState } from "react"
-import {
-  zonesForSearch,
-  filterPath,
-  filters as areaFilters,
-} from "../models/information"
-import { labelColor } from "../styles"
+import React, { createContext, useEffect } from "react"
+import { filterPath, filters as areaFilters } from "../models/information"
 
 const ZoneFilterContext = createContext(/** @type {ZoneFilterName} */ ("all"))
 
 export const ZoneFilterContextProvider = ZoneFilterContext.Provider
 
-const styles = {
-  label: { color: labelColor, fontWeight: 600 },
-}
-
-export function ZoneFilterPanel() {
+export function ZoneFilterPanel({ triggerSearch = false }) {
   return (
     <div>
-      <div css={styles.label}> ค้นหาเขตเลือกตั้ง</div>
-      <ZoneSearch />
-      <div css={styles.label}>ตัวเลือกแสดงผล</div>
       <div css={{ fontSize: 20, fontWeight: "bold" }}>เขตพื้นที่</div>
       <ul css={{ padding: 0, listStyle: "none" }}>
         {renderFilter("all")}
@@ -74,73 +62,4 @@ export function ZoneFilterPanel() {
       </div>
     )
   }
-}
-
-function ZoneSearch() {
-  const [state, setState] = useState({
-    isSearchOpen: false,
-    isFilterOpen: false,
-    zoneQuery: null,
-  })
-  return (
-    <div>
-      <input
-        css={{
-          border: `1px solid ${labelColor}`,
-          width: "100%",
-          boxSizing: "border-box",
-          padding: 10,
-          fontSize: 16,
-          marginTop: 20,
-        }}
-        placeholder="ค้นหาจาก ชื่อ ตำบล อำเภอ หรือ จังหวัด"
-        onChange={v => {
-          const query = v.target.value
-          setState({ zoneQuery: query, isSearchOpen: query.length > 2 })
-        }}
-        value={state.zoneQuery}
-      />
-      <div
-        css={{
-          top: 80,
-          position: "absolute",
-          right: 30,
-          color: labelColor,
-        }}
-      >
-        <FontAwesomeIcon icon="search" />
-      </div>
-
-      {state.isSearchOpen && (
-        <ul css={{ listStyle: "none", padding: 0 }}>
-          {zonesForSearch
-            .filter(z => {
-              return z.inclusionAreas.indexOf(state.zoneQuery) > -1
-            })
-            .map(z => {
-              return (
-                <li
-                  key={`${z.zone.provinceId}-${z.zone.no}`}
-                  css={{
-                    padding: "20px 10px",
-                    borderBottom: "1px solid black",
-                  }}
-                  onClick={() =>
-                    // @todo link to zone page
-                    alert(` go to zone page ${z.zoneKey}`)
-                  }
-                >
-                  <div css={{ fontSize: 16 }}>
-                    <b>
-                      {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
-                    </b>
-                  </div>
-                  <div>{z.zone.details}</div>
-                </li>
-              )
-            })}
-        </ul>
-      )}
-    </div>
-  )
 }
