@@ -782,6 +782,13 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.16"
 
+"@fortawesome/free-regular-svg-icons@^5.8.0":
+  version "5.8.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-5.8.0.tgz#9b0761db47e4a095a069fbcd1f38189ba03ae2e4"
+  integrity sha512-RpI6yoyG8pIFFZTzNc18FH0SYeVvGvW22w+zNzF4BijXHCW88qSOztAuoTKhlSST968Styo/lhdNeW8lZCubwQ==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.16"
+
 "@fortawesome/free-solid-svg-icons@^5.8.0":
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.8.0.tgz#5bfc94dd0aebf569c834a83e0649b8ed2a39da50"
