@@ -107,7 +107,16 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
             }}
           >
             <div css={{ marginTop: 10 }}>
-              <ZoneFilterPanel triggerSearch={activeSidebar === "search"} />
+              {
+                // @todo #1 Implement and style search button on desktop.
+              }
+              <button
+                css={{ float: "right" }}
+                onClick={() => setActiveSidebar("search")}
+              >
+                Search
+              </button>
+              <ZoneFilterPanel />
             </div>
           </div>
 
@@ -129,6 +138,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
         <Responsive
           breakpoint={DESKTOP_MIN_WIDTH}
           narrow={renderMobileSidebar()}
+          wide={renderMobileSidebar()}
         />
       </ContentWrapper>
     </div>
@@ -283,7 +293,7 @@ function Popup({ children }) {
         left: 0,
         zIndex: 20,
         background: "#eee",
-        animation: `${popup} 0.5s`,
+        animation: `${popup} 0.7s`,
         [media(DESKTOP_MIN_WIDTH)]: {
           position: "absolute",
           animation: "none",
@@ -297,7 +307,10 @@ function Popup({ children }) {
 
 const popup = keyframes({
   from: {
-    transform: "translateY(100%)",
+    transform: "translateY(100%) scale(0.5)",
+  },
+  "50%": {
+    transform: "scale(0.5)",
   },
   to: {
     transform: "translateY(0%)",
