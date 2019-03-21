@@ -20,7 +20,7 @@ const PartyStatsRow = props => {
           marginRight: 10,
         }}
       >
-        <img src={partyLogo(props.party.name)} width="40" />
+        <img alt="" src={partyLogo(props.party.name)} width="40" />
       </div>
       <div css={{ float: "left" }}>
         <h3 css={{ margin: 0, fontSize: "1.5rem", fontFamily: DISPLAY_FONT }}>

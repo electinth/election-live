@@ -103,9 +103,9 @@ export default function NationwideSummaryHeader(props) {
       >
         <div
           css={{
-            paddingRight: idx == 0 ? "0.5rem" : 0,
-            paddingLeft: idx == 1 ? "0.5rem" : 0,
-            borderRight: idx == 0 ? "1px solid black" : "none",
+            paddingRight: idx === 0 ? "0.5rem" : 0,
+            paddingLeft: idx === 1 ? "0.5rem" : 0,
+            borderRight: idx === 0 ? "1px solid black" : "none",
           }}
         >
           <span

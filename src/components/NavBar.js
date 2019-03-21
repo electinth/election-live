@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "gatsby"
-import { ClassNames } from "@emotion/core"
 import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 
 /**
