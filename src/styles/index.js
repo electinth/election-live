@@ -21,6 +21,7 @@ export const labelColor = "#888888"
 
 export const buttonStyle = {
   cursor: "pointer",
+  background: "white",
   border: "1px solid #EEEEEE",
   boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
   padding: 0,
