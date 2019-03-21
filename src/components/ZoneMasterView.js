@@ -169,7 +169,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           height: "100%",
           background: "white",
           zIndex: 1000,
-          minHeight: window.innerHeight,
+          minHeight: "100vh",
         }}
       >
         <div css={{ padding: 20 }}>
