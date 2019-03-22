@@ -3,6 +3,8 @@ import _ from "lodash"
 import MainLayout from "../components/MainLayout"
 import ZoneMasterView from "../components/ZoneMasterView"
 import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
+import TotalVoterSummary from "../components/TotalVoterSummary"
+import NationwideSubSummaryHeader from "../components/NationwideSubSummaryBox"
 import PartyStatsList from "../components/PartyStatsList"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
@@ -131,6 +133,7 @@ function ZoneView({ provinceId, zoneNo }) {
   const zone = getZoneByProvinceIdAndZoneNo(provinceId, zoneNo)
   const province = getProvinceById(provinceId)
   const activeFilter = useContext(ZoneFilterContext)
+
   return (
     <div
       css={{
@@ -141,6 +144,7 @@ function ZoneView({ provinceId, zoneNo }) {
         bottom: 0,
         display: "flex",
         flexDirection: "column",
+        padding: 10,
       }}
     >
       <CloseButton onClick={() => navigate(filterPath(activeFilter))} />
@@ -154,9 +158,29 @@ function ZoneView({ provinceId, zoneNo }) {
         <h2 css={{ fontFamily: DISPLAY_FONT, color: labelColor }}>
           เขตเลือกตั้งที่ {zoneNo}
         </h2>
-        <p>{zone.details}</p>
-        <Unimplemented componentName="scorebar" height={50} />
-        <Unimplemented componentName="stats" height={100} />
+        <div>
+          <span>นับแล้ว</span>
+          <span
+            css={{ marginLeft: 10, fontSize: "2rem", fontFamily: DISPLAY_FONT }}
+          >
+            00%
+          </span>
+        </div>
+
+        <div
+          css={{
+            borderTop: "1px solid",
+            // borderBottom: "1px solid",
+            marginBottom: 10,
+          }}
+        >
+          <TotalVoterSummary totalVoteCount={123456} totalVotePercentage={78} />
+        </div>
+
+        <div css={{ borderBottom: "1px solid" }}>
+          <NationwideSubSummaryHeader label="บัตรดี" stat={77777} idx={0} />
+          <NationwideSubSummaryHeader label="บัตรเสีย" stat={8080} idx={1} />
+        </div>
       </div>
       <div css={{ flex: "auto", position: "relative" }}>
         <ul
