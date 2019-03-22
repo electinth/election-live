@@ -77,7 +77,6 @@ class ElectionMap extends SvgChart {
 
     // set up svg
     this.svg.style("position", "relative")
-    // .on("click", this.mapClick.bind(this))
 
     this.layers
       .get("center")
@@ -120,10 +119,9 @@ class ElectionMap extends SvgChart {
 
           if (zone) {
             const { size, padding } = this.options()
-            const target = allZones.filter(d => d === zone)
-            target.raise()
-
-            target
+            allZones
+              .filter(d => d === zone)
+              .raise()
               .transition()
               .style(
                 "transform",
@@ -146,24 +144,10 @@ class ElectionMap extends SvgChart {
       .append("g")
       .style("transform", "scale(1)translate(0px, 0px)")
       .style("pointer-events", "bounding-box")
+
+    // hack for testing
+    // window.theMap = this;
   }
-
-  // zoomIn() {
-  //   this.zoom = Math.min(this.zoom + 1, 3)
-  //   this.doZoom()
-  // }
-
-  // zoomOut() {
-  //   this.zoom = Math.max(this.zoom - 1, 1)
-  //   this.doZoom()
-  // }
-
-  // doZoom() {
-  //   this.layers
-  //     .get("center/zoom")
-  //     .transition()
-  //     .attr("transform", `scale(${this.zoom})`)
-  // }
 
   visualize() {
     if (!this.hasNonZeroArea()) return
@@ -188,6 +172,13 @@ class ElectionMap extends SvgChart {
   radius(d) {
     const match = this.dataLookup[d.id]
     return match && match.complete ? this.options().size : 0
+  }
+
+  resetZoom() {
+    this.layers
+      .get("center/zoom")
+      .transition()
+      .attr("transform", "translate(0,0)scale(1)")
   }
 
   render() {
