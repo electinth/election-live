@@ -134,6 +134,17 @@ function ZoneView({ provinceId, zoneNo }) {
   const province = getProvinceById(provinceId)
   const activeFilter = useContext(ZoneFilterContext)
 
+  const summaryState = useSummaryData()
+  const summary = summaryState.data
+  if (!summary) {
+    return null
+  }
+
+  const zoneStats = summary.zoneStatsMap[provinceId][zoneNo]
+  const votePercentage = Math.round(
+    (zoneStats.votesTotal / zoneStats.eligible) * 100
+  )
+
   return (
     <div
       css={{
@@ -163,7 +174,7 @@ function ZoneView({ provinceId, zoneNo }) {
           <span
             css={{ marginLeft: 10, fontSize: "2rem", fontFamily: DISPLAY_FONT }}
           >
-            00%
+            {zoneStats.progress}%
           </span>
         </div>
 
@@ -174,12 +185,23 @@ function ZoneView({ provinceId, zoneNo }) {
             marginBottom: 10,
           }}
         >
-          <TotalVoterSummary totalVoteCount={123456} totalVotePercentage={78} />
+          <TotalVoterSummary
+            totalVoteCount={zoneStats.votesTotal}
+            totalVotePercentage={votePercentage}
+          />
         </div>
 
         <div css={{ borderBottom: "1px solid" }}>
-          <NationwideSubSummaryHeader label="บัตรดี" stat={77777} idx={0} />
-          <NationwideSubSummaryHeader label="บัตรเสีย" stat={8080} idx={1} />
+          <NationwideSubSummaryHeader
+            label="บัตรดี"
+            stat={zoneStats.goodVotes}
+            idx={0}
+          />
+          <NationwideSubSummaryHeader
+            label="บัตรเสีย"
+            stat={zoneStats.badVotes}
+            idx={1}
+          />
         </div>
       </div>
       <div css={{ flex: "auto", position: "relative" }}>
