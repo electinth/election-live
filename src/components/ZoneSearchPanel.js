@@ -60,14 +60,16 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
                 <li
                   key={`${z.zone.provinceId}-${z.zone.no}`}
                   css={{
-                    padding: "20px 10px",
-                    borderBottom: "1px solid black",
+                    padding: "12px 0px",
+                    borderBottom: "1px solid gray",
+                    position: "relative",
                   }}
                 >
                   <Link
                     to={zonePath(z.zone)}
                     onClick={onSearchCompleted}
                     css={{
+                      width: "calc(100% - 24px)",
                       display: "block",
                       color: "inherit",
                       textDecoration: "none",
@@ -78,8 +80,26 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
                         {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
                       </b>
                     </div>
-                    <div>{z.zone.details}</div>
+                    <div
+                      css={{
+                        color: "gray",
+                      }}
+                    >
+                      {z.zone.details}
+                    </div>
                   </Link>
+                  <div
+                    css={{
+                      position: "absolute",
+                      right: "4px",
+                      top: "calc(50% - 3px)",
+                      border: "solid #212121",
+                      borderWidth: "0 2px 2px 0",
+                      // display: 'inline-block',
+                      padding: "4px",
+                      transform: "rotate(-45deg)",
+                    }}
+                  />
                 </li>
               )
             })}
