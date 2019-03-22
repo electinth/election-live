@@ -1,4 +1,9 @@
 module.exports = {
+  proxy: {
+    prefix: "/data",
+    url: "https://elect.thematter.co",
+  },
+
   plugins: [
     {
       resolve: "gatsby-plugin-emotion",
