@@ -125,9 +125,9 @@ function PartyStatsContainer({ filterName }) {
 
   const summary = summaryState.data
   const currentFilter = filters[filterName]
-  const partyStats = partyStatsFromSummaryJSON(summary, currentFilter).filter(
-    row => partyStatsRowTotalSeats(row) > 0
-  )
+  const partyStats = partyStatsFromSummaryJSON(summary, {
+    filter: currentFilter,
+  }).filter(row => partyStatsRowTotalSeats(row) > 0)
 
   return <PartyStatsList partyStats={partyStats} />
 }

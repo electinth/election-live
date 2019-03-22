@@ -35,37 +35,38 @@ declare namespace ElectionDataSource {
    */
   interface ZoneStatsMap {
     [provinceId: string]: {
-      [zoneNo: string]: {
-        /** Number of election units */
-        units: number
-        /** Number of eligible voters */
-        eligible: number
-        /** Number of voters who voted = (goodVotes + badVotes) = (votesM + votesF) */
-        votesTotal: number
-        /** Number of men who voted */
-        votesM: number
-        /** Number of women who voted */
-        votesF: number
-        /** Number of votes that are valid */
-        goodVotes: number
-        /** Number of votes that are invalid */
-        badVotes: number
-        /** Number of "no" votes (also counted as a good vote) */
-        noVotes: number
-
-        // @todo #1 How do we determine when vote counting for a certain zone is finished?
-        //  The problem is, we don’t know beforehand how many ballots we received.
-        //  And it also seems like the official API doesn’t provide the information
-        //  on progress of each zone, or whether the counting has finished.
-        //  Need to check with the committee to see if the data will be available,
-        //  and if not, decide the appropriate adjustments to the app.
-        //
-        /** Vote counting progress, between 0-1 */
-        progress: number
-        /** True if counting finished */
-        finished: boolean
-      }
+      [zoneNo: string]: ZoneStats
     }
+  }
+  interface ZoneStats {
+    /** Number of election units */
+    units: number
+    /** Number of eligible voters */
+    eligible: number
+    /** Number of voters who voted = (goodVotes + badVotes) = (votesM + votesF) */
+    votesTotal: number
+    /** Number of men who voted */
+    votesM: number
+    /** Number of women who voted */
+    votesF: number
+    /** Number of votes that are valid */
+    goodVotes: number
+    /** Number of votes that are invalid */
+    badVotes: number
+    /** Number of "no" votes (also counted as a good vote) */
+    noVotes: number
+
+    // @todo #1 How do we determine when vote counting for a certain zone is finished?
+    //  The problem is, we don’t know beforehand how many ballots we received.
+    //  And it also seems like the official API doesn’t provide the information
+    //  on progress of each zone, or whether the counting has finished.
+    //  Need to check with the committee to see if the data will be available,
+    //  and if not, decide the appropriate adjustments to the app.
+    //
+    /** Vote counting progress, between 0-1 */
+    progress: number
+    /** True if counting finished */
+    finished: boolean
   }
 
   /**
