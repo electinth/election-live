@@ -4,6 +4,12 @@ import { zonesForSearch, zonePath } from "../models/information"
 import { labelColor } from "../styles"
 import { Link } from "gatsby"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import Fuse from 'fuse.js'
+
+
+const fuse = new Fuse(zonesForSearch, {
+  keys: ['inclusionAreas', 'province.name']
+})
 
 export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
   // @todo #1 [UI polish] Polish the spacing in ZoneSearchPanel to match the design.
@@ -49,12 +55,8 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
 
       {state.isSearchOpen && (
         <ul css={{ listStyle: "none", padding: 0 }}>
-          {zonesForSearch
-            .filter(z => {
-              // @todo #1 Update zone filtering logic to allow searching
-              //  by postal code and province name.
-              return z.inclusionAreas.indexOf(state.zoneQuery) > -1
-            })
+          { // @todo #1 Update zone filtering logic to allow searching by postal code
+            fuse.search(state.zoneQuery)
             .map(z => {
               return (
                 <li
