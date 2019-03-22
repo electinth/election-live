@@ -260,7 +260,6 @@ export default function ZoneMasterView({
   }
 
   function renderMobileTabs() {
-    // @todo #1 Connect the mobile tabs to routing.
     const menuStyle = {
       width: "50%",
       display: "inline-block",
@@ -275,7 +274,13 @@ export default function ZoneMasterView({
           ...menuStyle,
           borderTop: currentMobileTab === targetTab ? "2px solid black" : "0px",
         }}
-        onClick={() => navigate(`${location.pathname}?tab=${targetTab}`)}
+        onClick={() => {
+          if (targetTab === "summary") {
+            navigate(`${location.pathname}`)
+          } else {
+            navigate(`${location.pathname}?tab=${targetTab}`)
+          }
+        }}
       >
         {text}
       </span>
