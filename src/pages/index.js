@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useContext } from "react"
+import React, { useState, useLayoutEffect, useContext, useEffect } from "react"
 import _ from "lodash"
 import MainLayout from "../components/MainLayout"
 import ZoneMasterView from "../components/ZoneMasterView"
@@ -25,34 +25,56 @@ import CloseButton from "../components/CloseButton"
 import { navigate } from "gatsby"
 import { DISPLAY_FONT, labelColor } from "../styles"
 
-export default ({ pageContext }) => (
+export default ({ pageContext, location }) => (
   <MainLayout activeNavBarSection="by-area">
-    <InertFilter
-      value={pageContext.zoneView ? null : pageContext.filterName || "all"}
-    >
-      {filterName => (
-        <ZoneFilterContext.Provider value={filterName}>
-          <ZoneMasterView
-            contentHeader={
-              <SummaryHeaderContainer
-                key={filterName}
-                filterName={filterName}
-              />
-            }
-            contentBody={
-              <PartyStatsContainer key={filterName} filterName={filterName} />
-            }
-            popup={
-              pageContext.zoneView ? (
-                <ZoneView {...pageContext.zoneView} />
-              ) : null
-            }
-          />
-        </ZoneFilterContext.Provider>
-      )}
-    </InertFilter>
+    <HomePageRedirector location={location}>
+      <InertFilter
+        value={pageContext.zoneView ? null : pageContext.filterName || "all"}
+      >
+        {filterName => (
+          <ZoneFilterContext.Provider value={filterName}>
+            <ZoneMasterView
+              contentHeader={
+                <SummaryHeaderContainer
+                  key={filterName}
+                  filterName={filterName}
+                />
+              }
+              contentBody={
+                <PartyStatsContainer key={filterName} filterName={filterName} />
+              }
+              popup={
+                pageContext.zoneView ? (
+                  <ZoneView {...pageContext.zoneView} />
+                ) : null
+              }
+            />
+          </ZoneFilterContext.Provider>
+        )}
+      </InertFilter>
+    </HomePageRedirector>
   </MainLayout>
 )
+
+function HomePageRedirector({ location, children }) {
+  const notReady =
+    location.pathname === "/" && location.hostname === "elect.thematter.co"
+  useEffect(() => {
+    if (notReady) {
+      window.location.replace("https://elect.in.th/")
+    }
+  }, [notReady])
+  if (notReady) {
+    return (
+      <h1
+        css={{ padding: "3rem", textAlign: "center", fontFamily: DISPLAY_FONT }}
+      >
+        Coming soon!
+      </h1>
+    )
+  }
+  return children
+}
 
 function InertFilter({ value: filterNameFromRoute, children }) {
   const [filterName, setFilterName] = useState(filterNameFromRoute || "all")
