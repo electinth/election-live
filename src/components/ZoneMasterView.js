@@ -25,8 +25,10 @@ import ElectionMapContainer from "./ElectionMapContainer"
  * @param {React.ReactNode} props.contentHeader
  * @param {React.ReactNode} props.contentBody
  * @param {React.ReactNode} props.popup
+ * @param {function} props.navigate
+ * @param {object} props.location
  */
-export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
+export default function ZoneMasterView({ contentHeader, contentBody, popup, navigate, location }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
   const [activeSidebar, setActiveSidebar] = useState(
     /** @type {'filter' | 'search' | null} */ (null)
@@ -36,12 +38,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
     setActiveSidebar
   )
 
-  // @todo #1 Convert this state to the route.
-  //  To keep the active filter, we can use query string (`location.search`).
-  //  e.g. `/filters/northern?tab=map`.
-  const [currentMobileTab, setCurrentMobileTab] = useState(
-    /** @type {'summary' | 'map'} */ ("summary")
-  )
+  const currentMobileTab = getTabFromUrl(location)
 
   return (
     <div>
@@ -264,7 +261,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           ...menuStyle,
           borderTop: currentMobileTab === targetTab ? "2px solid black" : "0px",
         }}
-        onClick={() => setCurrentMobileTab(targetTab)}
+        onClick={() => navigate(`${location.pathname}?tab=${targetTab}`) }
       >
         {text}
       </span>
@@ -342,6 +339,11 @@ function Popup({ children }) {
       {children}
     </div>
   )
+}
+
+function getTabFromUrl(location) {
+  const matches = location.search.match(/(\?|&)tab=(.+)(&|$)/)
+  return matches ? matches[2] : "summary"
 }
 
 const popup = keyframes({
