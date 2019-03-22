@@ -109,7 +109,18 @@ function kitchenSink(gallery, example) {
       {
         maxWidth: 320,
       },
-      () => <CandidateStatsRow />
+      () => {
+        const attrs = {
+          rank: 20,
+          partyName: "Poor People Party",
+          candidateName: "Mr. A",
+          candidateNo: 5,
+          score: 10000,
+          percentage: 50,
+          partyColor: "green",
+        }
+        return <CandidateStatsRow {...attrs} />
+      }
     )
   })
 }
