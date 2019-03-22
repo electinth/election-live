@@ -6,6 +6,7 @@ import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import TotalVoterSummary from "../components/TotalVoterSummary"
 import NationwideSubSummaryHeader from "../components/NationwideSubSummaryBox"
 import PartyStatsList from "../components/PartyStatsList"
+import CandidateStatsRow from "../components/CandidateStatsRow"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
   partyStatsFromSummaryJSON,
@@ -23,7 +24,6 @@ import { ZoneFilterContext } from "../components/ZoneFilterPanel"
 import CloseButton from "../components/CloseButton"
 import { navigate } from "gatsby"
 import { DISPLAY_FONT, labelColor } from "../styles"
-import Unimplemented from "../components/Unimplemented"
 
 export default ({ pageContext }) => (
   <MainLayout activeNavBarSection="by-area">
@@ -201,7 +201,7 @@ function ZoneView({ provinceId, zoneNo }) {
           {_.range(0, 20).map(a => {
             return (
               <li key={a}>
-                <Unimplemented componentName={`candidate ${a}`} height={50} />
+                <CandidateStatsRow candidate={a + 1} />
               </li>
             )
           })}
