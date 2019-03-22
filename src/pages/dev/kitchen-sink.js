@@ -17,7 +17,9 @@ function kitchenSink(gallery, example) {
   gallery("Home Page Redirect", () => {
     function RedirectSettings() {
       const [_, setRenderCount] = useState(0)
-      const redirectFlag = window && !window.localStorage.SKIP_ELECT_REDIRECT
+      const redirectFlag =
+        typeof window !== "undefined" &&
+        !window.localStorage.SKIP_ELECT_REDIRECT
       const toggle = () => {
         localStorage.SKIP_ELECT_REDIRECT = redirectFlag ? "1" : ""
         setRenderCount(x => x + 1)
