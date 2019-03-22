@@ -82,7 +82,7 @@ function SummaryHeaderContainer({ filterName }) {
     .length
   const title = currentFilter.name.th
 
-  if (summaryState.loading) {
+  if (!summaryState.completed) {
     return (
       <NationwideSummaryHeader
         title={title}
@@ -90,9 +90,6 @@ function SummaryHeaderContainer({ filterName }) {
         totalZoneCount={totalZoneCount}
       />
     )
-  }
-  if (!summaryState.completed) {
-    return null
   }
 
   const summary = summaryState.data
