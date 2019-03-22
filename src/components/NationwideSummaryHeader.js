@@ -58,7 +58,7 @@ export default function NationwideSummaryHeader(props) {
           />
           <NationwideSubSummaryBox
             label="นับเสร็จแล้ว"
-            stat={totalZoneCount}
+            stat={completedZoneCount}
             idx={1}
           />
         </div>
