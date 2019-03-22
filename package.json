@@ -42,6 +42,7 @@
     "lodash": "^4.17.11",
     "lunr": "^2.3.6",
     "mobx": "^5.9.0",
+    "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "react": "^16.8.4",
     "react-d3kit": "^2.0.0",

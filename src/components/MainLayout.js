@@ -9,6 +9,7 @@ import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
 import { Location } from "@reach/router"
 import { useSummaryData } from "../models/LiveDataSubscription"
+import moment from "moment"
 
 // @todo #1 Change the style to match the design
 //  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
@@ -23,7 +24,9 @@ export default function MainLayout({ children, activeNavBarSection }) {
   const summaryState = useSummaryData()
   if (summaryState.loading) return null
 
-  const updatedAt = summaryState.data.updatedAt
+  const updatedAt = moment(summaryState.data.updatedAt).format(
+    "YYYY/DD/MM hh:mm"
+  )
 
   return (
     <div>
