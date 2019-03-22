@@ -1,4 +1,4 @@
-import React, { useReducer } from "react"
+import React, { useReducer, useState } from "react"
 import CandidateStatsRow from "../../components/CandidateStatsRow"
 import ElectionMap from "../../components/ElectionMap"
 import MainLayout from "../../components/MainLayout"
@@ -14,6 +14,23 @@ import { getMockPartyStatsNationwide } from "../../components/__fixtures__/Party
 
 function kitchenSink(gallery, example) {
   // @todo #1 Add kitchen sink for CompactScoreBar
+  gallery("Home Page Redirect", () => {
+    function RedirectSettings() {
+      const [_, setRenderCount] = useState(0)
+      const redirectFlag = !localStorage.SKIP_ELECT_REDIRECT
+      const toggle = () => {
+        localStorage.SKIP_ELECT_REDIRECT = redirectFlag ? "1" : ""
+        setRenderCount(x => x + 1)
+      }
+      return (
+        <div css={{ padding: 16 }}>
+          Redirect is <strong>{redirectFlag ? "ON" : "OFF"}</strong>{" "}
+          <button onClick={toggle}>Toggle</button>
+        </div>
+      )
+    }
+    example("Settings", { maxWidth: 320 }, () => <RedirectSettings />)
+  })
 
   gallery("DesktopScoreBar", () => {
     example("Blank", { maxWidth: 960 }, () => <DesktopScoreBar data={[]} />)
