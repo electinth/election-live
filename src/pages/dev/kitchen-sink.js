@@ -10,6 +10,7 @@ import {
   getRandomScoreBarData,
   useRandomScoreBarData,
 } from "../../components/__fixtures__/DesktopScoreBarRandomData"
+import { useRandomElectionMapData } from "../../components/__fixtures__/ElectionMapRandomData"
 import { getMockPartyStatsNationwide } from "../../components/__fixtures__/PartyStatsMockData"
 
 function kitchenSink(gallery, example) {
@@ -67,7 +68,55 @@ function kitchenSink(gallery, example) {
   })
 
   gallery("ElectionMap", () => {
-    example("Blank Election Map", { maxWidth: 375 }, () => <ElectionMap />)
+    example("Blank Election Map", { maxWidth: 375 }, () => {
+      const [mapTip, setMapTip] = useState(null)
+      const data = useRandomElectionMapData()
+      return (
+        <div>
+          {mapTip && (
+            <div
+              css={{
+                position: "absolute",
+                zIndex: 10,
+                padding: 6,
+                backgroundColor: "#fff",
+                pointerEvents: "none",
+                boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.3)",
+                top: mapTip.mouseEvent.clientY + 10,
+                left: mapTip.mouseEvent.clientX + 10,
+              }}
+            >
+              <div>เขต {mapTip.zone.data.id}</div>
+              <div>พรรคผ่อน</div>
+              <div>
+                <small>นอนบ้างนะ</small>
+              </div>
+            </div>
+          )}
+          <ElectionMap
+            data={data}
+            onInit={map => {
+              // console.log('map', map);
+            }}
+            onZoneMouseenter={(zone, mouseEvent) => {
+              setMapTip({ zone, mouseEvent })
+              // console.log('zone', zone);
+            }}
+            onZoneMousemove={(zone, mouseEvent) => {
+              setMapTip({ zone, mouseEvent })
+              // console.log('zone', zone);
+            }}
+            onZoneMouseleave={(zone, mouseEvent) => {
+              setMapTip(null)
+              // console.log('zone', zone);
+            }}
+            onZoneClick={zone => {
+              // console.log('zoneClick', zone)
+            }}
+          />
+        </div>
+      )
+    })
   })
 
   gallery("NationwideSummaryHeader", () => {
