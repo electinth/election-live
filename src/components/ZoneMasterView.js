@@ -17,6 +17,7 @@ import CloseButton from "./CloseButton"
 import { keyframes } from "@emotion/core"
 import { zones, parties } from "../models/information"
 import _ from "lodash"
+import ErrorBoundary from "./ErrorBoundary"
 
 /**
  * @param {object} props
@@ -109,14 +110,20 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               },
             }}
           >
-            {popup ? <Popup>{popup}</Popup> : null}
+            {popup ? (
+              <Popup>
+                <ErrorBoundary name="popup">{popup}</ErrorBoundary>
+              </Popup>
+            ) : null}
 
             <div css={{ margin: "10px 0", ...hideOnDesktop }}>
               {renderMobileZoneFilterAndSearch()}
             </div>
 
             <div css={{ position: "relative" }}>
-              {contentHeader}
+              <ErrorBoundary name="contentHeader">
+                {contentHeader}
+              </ErrorBoundary>
               <div
                 css={{
                   [media(DESKTOP_MIN_WIDTH)]: {
@@ -127,7 +134,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
                   },
                 }}
               >
-                {contentBody}
+                <ErrorBoundary name="contentBody">{contentBody}</ErrorBoundary>
               </div>
             </div>
           </div>
@@ -154,7 +161,9 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               >
                 Search
               </button>
-              <ZoneFilterPanel />
+              <ErrorBoundary name="ZoneFilterPanel">
+                <ZoneFilterPanel />
+              </ErrorBoundary>
             </div>
           </div>
 
@@ -170,18 +179,20 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               },
             }}
           >
-            <ElectionMap
-              options={{
-                onclick: (d, i) => console.log("Click zone:", d, i),
-              }}
-              data={mapZones}
-            />
+            <ErrorBoundary name="ElectionMap">
+              <ElectionMap
+                options={{
+                  onclick: (d, i) => console.log("Click zone:", d, i),
+                }}
+                data={mapZones}
+              />
+            </ErrorBoundary>
           </div>
         </div>
         <Responsive
           breakpoint={DESKTOP_MIN_WIDTH}
-          narrow={renderMobileSidebar()}
-          wide={renderMobileSidebar()}
+          narrow={renderSidebars()}
+          wide={renderSidebars()}
         />
       </ContentWrapper>
     </div>
@@ -230,30 +241,34 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
     )
   }
 
-  function renderMobileSidebar() {
+  function renderSidebars() {
     return (
       <React.Fragment>
-        <MobileSidebar
+        <FloatingSidebar
           title="ค้นหาเขตเลือกตั้ง"
           active={activeSidebar === "search"}
           onClose={clearActiveSidebar}
           width={300}
         >
-          <ZoneSearchPanel
-            autoFocus={activeSidebar === "search"}
-            onSearchCompleted={clearActiveSidebar}
-          />
-        </MobileSidebar>
-        <MobileSidebar
+          <ErrorBoundary name="ZoneSearchPanel">
+            <ZoneSearchPanel
+              autoFocus={activeSidebar === "search"}
+              onSearchCompleted={clearActiveSidebar}
+            />
+          </ErrorBoundary>
+        </FloatingSidebar>
+        <FloatingSidebar
           title="ตัวเลือกแสดงผล"
           active={activeSidebar === "filter"}
           onClose={clearActiveSidebar}
         >
-          <ZoneFilterPanel
-            autoFocus={activeSidebar === "filter"}
-            onFilterSelect={clearActiveSidebar}
-          />
-        </MobileSidebar>
+          <ErrorBoundary name="ZoneFilterPanel">
+            <ZoneFilterPanel
+              autoFocus={activeSidebar === "filter"}
+              onFilterSelect={clearActiveSidebar}
+            />
+          </ErrorBoundary>
+        </FloatingSidebar>
       </React.Fragment>
     )
   }
@@ -293,7 +308,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   }
 }
 
-function MobileSidebar({ title, children, active, onClose, width = 200 }) {
+function FloatingSidebar({ title, children, active, onClose, width = 200 }) {
   return (
     <div
       data-active={active ? true : undefined}
