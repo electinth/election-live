@@ -1,15 +1,13 @@
 import axios from "axios"
 import _ from "lodash"
 import {
-  action,
   autorun,
   computed,
   observable,
   onBecomeObserved,
-  onBecomeUnobserved,
   runInAction,
 } from "mobx"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Debug } from "../util/Debug.js"
 
 const LATEST_FILE_URL =
@@ -21,11 +19,11 @@ const DATA_FILE_URL_BASE =
 /**
  * @template T
  * @typedef {object} DataState
- * @param {boolean} loading
- * @param {boolean} failed
- * @param {boolean} completed
- * @param {T} data
- * @param {Error} error
+ * @prop {boolean} loading
+ * @prop {boolean} failed
+ * @prop {boolean} completed
+ * @prop {T} data
+ * @prop {Error} error
  */
 
 const latestFileResource = createResource("latestFile")
@@ -133,22 +131,43 @@ function getLatestDataFileState(fileName) {
   return dataFileState
 }
 
+/**
+ * @template T
+ * @param {DataState<T>} state
+ */
+function useInertState(state) {
+  const ref = useRef(state)
+  const combine = (previous, current) => {
+    return {
+      ...previous,
+      ...current,
+      completed: current.completed || previous.completed,
+      data: current.data || previous.data,
+    }
+  }
+  const result = combine(ref.current, state)
+  useEffect(() => {
+    ref.current = result
+  })
+  return result
+}
+
 /** @return {DataState<ElectionDataSource.SummaryJSON>} */
 export function useSummaryData() {
   const state = useComputed(
     () => getLatestDataFileState("/SummaryJSON.json"),
     []
   )
-  return state
+  return useInertState(state)
 }
 
-/** @return {DataState<ElectionDataSource.SummaryJSON>} */
+/** @return {DataState<ElectionDataSource.PerProvinceJSON>} */
 export function usePerProvinceData(provinceId) {
   const state = useComputed(
     () => getLatestDataFileState(`/PerProvinceJSON/${provinceId}.json`),
     [provinceId]
   )
-  return state
+  return useInertState(state)
 }
 
 /** @return {{ loading: boolean, data?: ElectionDataSource.PerZoneData }} */

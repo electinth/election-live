@@ -6,7 +6,7 @@ import { useSummaryData } from "../models/LiveDataSubscription"
 
 export default function DesktopScoreBarContainer() {
   const summaryState = useSummaryData()
-  if (summaryState.loading) return null
+  if (!summaryState.completed) return null
 
   const summary = summaryState.data
   const partyStats = partyStatsFromSummaryJSON(summary)

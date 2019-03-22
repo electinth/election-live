@@ -113,7 +113,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
 
 function LatestDataIndicator() {
   const summaryState = useSummaryData()
-  if (summaryState.loading) return null
+  if (!summaryState.completed) return null
   const updatedAt = moment(summaryState.data.updatedAt).format(
     "YYYY/DD/MM hh:mm"
   )

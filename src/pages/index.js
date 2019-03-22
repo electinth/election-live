@@ -91,6 +91,9 @@ function SummaryHeaderContainer({ filterName }) {
       />
     )
   }
+  if (!summaryState.completed) {
+    return null
+  }
 
   const summary = summaryState.data
   const allZoneStats = _.chain(summary.zoneStatsMap)
@@ -121,7 +124,7 @@ function SummaryHeaderContainer({ filterName }) {
 
 function PartyStatsContainer({ filterName }) {
   const summaryState = useSummaryData()
-  if (summaryState.loading) return null
+  if (!summaryState.completed) return null
 
   const summary = summaryState.data
   const currentFilter = filters[filterName]
