@@ -1,22 +1,22 @@
 import React, { useReducer, useState } from "react"
 import CandidateStatsRow from "../../components/CandidateStatsRow"
+import DesktopScoreBar from "../../components/DesktopScoreBar"
 import ElectionMap from "../../components/ElectionMap"
 import MainLayout from "../../components/MainLayout"
-import PartyStatsList from "../../components/PartyStatsList"
 import NationwideSummaryHeader from "../../components/NationwideSummaryHeader"
-import DesktopScoreBar from "../../components/DesktopScoreBar"
-import {
-  useRandomScoreBarData,
-  getRandomScoreBarData,
-} from "../../components/__fixtures__/DesktopScoreBarRandomData"
+import PartyStatsList from "../../components/PartyStatsList"
 import { getMockDesktopScoreBarData } from "../../components/__fixtures__/DesktopScoreBarMockData"
+import {
+  getRandomScoreBarData,
+  useRandomScoreBarData,
+} from "../../components/__fixtures__/DesktopScoreBarRandomData"
 import { getMockPartyStatsNationwide } from "../../components/__fixtures__/PartyStatsMockData"
 
 function kitchenSink(gallery, example) {
   // @todo #1 Add kitchen sink for CompactScoreBar
   gallery("Home Page Redirect", () => {
     function RedirectSettings() {
-      const [_, setRenderCount] = useState(0)
+      const [, setRenderCount] = useState(0)
       const redirectFlag =
         typeof window !== "undefined" &&
         !window.localStorage.SKIP_ELECT_REDIRECT

@@ -1,82 +1,58 @@
-import React, { useState, useLayoutEffect, useContext, useEffect } from "react"
+import { navigate } from "gatsby"
 import _ from "lodash"
-import MainLayout from "../components/MainLayout"
-import ZoneMasterView from "../components/ZoneMasterView"
-import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
-import TotalVoterSummary from "../components/TotalVoterSummary"
-import NationwideSubSummaryHeader from "../components/NationwideSubSummaryBox"
-import PartyStatsList from "../components/PartyStatsList"
+import React, { useContext, useLayoutEffect, useState } from "react"
 import CandidateStatsRow from "../components/CandidateStatsRow"
+import CloseButton from "../components/CloseButton"
+import MainLayout from "../components/MainLayout"
+import NationwideSubSummaryHeader from "../components/NationwideSubSummaryBox"
+import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
+import PartyStatsList from "../components/PartyStatsList"
+import TotalVoterSummary from "../components/TotalVoterSummary"
+import { ZoneFilterContext } from "../components/ZoneFilterPanel"
+import ZoneMasterView from "../components/ZoneMasterView"
+import {
+  checkFilter,
+  filterPath,
+  filters,
+  getProvinceById,
+  getZoneByProvinceIdAndZoneNo,
+  zones,
+} from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
   partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
 } from "../models/PartyStats"
-import {
-  zones,
-  filters,
-  checkFilter,
-  getZoneByProvinceIdAndZoneNo,
-  getProvinceById,
-  filterPath,
-} from "../models/information"
-import { ZoneFilterContext } from "../components/ZoneFilterPanel"
-import CloseButton from "../components/CloseButton"
-import { navigate } from "gatsby"
 import { DISPLAY_FONT, labelColor } from "../styles"
 
-export default ({ pageContext, location }) => (
+export default ({ pageContext }) => (
   <MainLayout activeNavBarSection="by-area">
-    <HomePageRedirector location={location}>
-      <InertFilter
-        value={pageContext.zoneView ? null : pageContext.filterName || "all"}
-      >
-        {filterName => (
-          <ZoneFilterContext.Provider value={filterName}>
-            <ZoneMasterView
-              contentHeader={
-                <SummaryHeaderContainer
-                  key={filterName}
-                  filterName={filterName}
-                />
-              }
-              contentBody={
-                <PartyStatsContainer key={filterName} filterName={filterName} />
-              }
-              popup={
-                pageContext.zoneView ? (
-                  <ZoneView {...pageContext.zoneView} />
-                ) : null
-              }
-            />
-          </ZoneFilterContext.Provider>
-        )}
-      </InertFilter>
-    </HomePageRedirector>
+    <InertFilter
+      value={pageContext.zoneView ? null : pageContext.filterName || "all"}
+    >
+      {filterName => (
+        <ZoneFilterContext.Provider value={filterName}>
+          <ZoneMasterView
+            contentHeader={
+              <SummaryHeaderContainer
+                key={filterName}
+                filterName={filterName}
+              />
+            }
+            contentBody={
+              <PartyStatsContainer key={filterName} filterName={filterName} />
+            }
+            popup={
+              pageContext.zoneView ? (
+                <ZoneView {...pageContext.zoneView} />
+              ) : null
+            }
+          />
+        </ZoneFilterContext.Provider>
+      )}
+    </InertFilter>
   </MainLayout>
 )
-
-function HomePageRedirector({ location, children }) {
-  const notReady =
-    location.pathname === "/" &&
-    location.hostname === "elect.thematter.co" &&
-    (typeof window !== "undefined" && !window.localStorage.SKIP_ELECT_REDIRECT)
-  useEffect(() => {
-    if (notReady) {
-      window.location.replace("https://elect.in.th/")
-    }
-  }, [notReady])
-  if (notReady) {
-    return (
-      <h1
-        css={{ padding: "3rem", textAlign: "center", fontFamily: DISPLAY_FONT }}
-      >
-        Coming soon!
-      </h1>
-    )
-  }
-  return children
-}
 
 function InertFilter({ value: filterNameFromRoute, children }) {
   const [filterName, setFilterName] = useState(filterNameFromRoute || "all")
@@ -180,7 +156,7 @@ function ZoneView({ provinceId, zoneNo }) {
       >
         <h1 css={{ fontFamily: DISPLAY_FONT }}>{province.name}</h1>
         <h2 css={{ fontFamily: DISPLAY_FONT, color: labelColor }}>
-          เขตเลือกตั้งที่ {zoneNo}
+          เขตเลือกตั้งที่ {zone.no}
         </h2>
         <div>
           <span>นับแล้ว</span>

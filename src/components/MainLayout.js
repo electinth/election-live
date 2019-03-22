@@ -1,12 +1,13 @@
-import React, { useReducer } from "react"
+import React, { useReducer, useEffect } from "react"
 
 import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import { Link } from "gatsby"
-import { Responsive, media, WIDE_NAV_MIN_WIDTH } from "../styles"
+import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
+import { Location } from "@reach/router"
 
 // @todo #1 Change the style to match the design
 //  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
@@ -79,10 +80,38 @@ export default function MainLayout({ children, activeNavBarSection }) {
           }
         />
       </div>
-      {children}
+      <Location>
+        {({ location }) => (
+          <HomePageRedirector location={location}>
+            {children}
+          </HomePageRedirector>
+        )}
+      </Location>
       <Footer />
     </div>
   )
+}
+
+function HomePageRedirector({ location, children }) {
+  const notReady =
+    !/^\/dev/.test(location.pathname) &&
+    location.hostname === "elect.thematter.co" &&
+    (typeof window !== "undefined" && !window.localStorage.SKIP_ELECT_REDIRECT)
+  useEffect(() => {
+    if (notReady) {
+      window.location.replace("https://elect.in.th/")
+    }
+  }, [notReady])
+  if (notReady) {
+    return (
+      <h1
+        css={{ padding: "3rem", textAlign: "center", fontFamily: DISPLAY_FONT }}
+      >
+        Coming soon!
+      </h1>
+    )
+  }
+  return children
 }
 
 function Logo() {
