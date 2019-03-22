@@ -13,6 +13,9 @@ export default function DocumentHead() {
       ]}
     >
       <title>ELECT LIVE</title>
+      {
+        // @todo #1 Add social meta tag, e.g. open graph image, etc.
+      }
     </Helmet>
   )
 }
