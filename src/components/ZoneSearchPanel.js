@@ -6,6 +6,7 @@ import { Link } from "gatsby"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
+  // @todo #1 [UI polish] Polish the spacing in ZoneSearchPanel to match the design.
   const [state, setState] = useState({
     isSearchOpen: false,
     zoneQuery: null,
