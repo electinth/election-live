@@ -3,44 +3,57 @@ import { useState, useEffect } from "react"
 import { zones, parties } from "../models/information"
 import React from "react"
 import _ from "lodash"
+import { useSummaryData } from "../models/LiveDataSubscription"
+import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+
+function getMapData(summaryState) {
+  if (!summaryState.completed) {
+    return [
+      ...zones.map((zone, i) => {
+        return {
+          id: `${zone.provinceId}-${zone.no}`,
+          partyId: "nope",
+          complete: false,
+          show: false,
+        }
+      }),
+    ]
+  } else {
+    /** @type {ElectionDataSource.SummaryJSON} */
+    const summary = summaryState.data
+    const partyStats = partyStatsFromSummaryJSON(summary)
+    const partylist = []
+    for (const row of partyStats) {
+      for (let i = 0; i < row.partyListSeats; i++) {
+        partylist.push({
+          id: `pl-${partylist.length + 1}`,
+          partyId: row.party.id,
+          complete: Math.random() > 0.5,
+          show: true,
+        })
+      }
+    }
+    return [
+      ...zones.map((zone, i) => {
+        const candidate = (summary.zoneWinningCandidateMap[zone.provinceId] ||
+          {})[zone.no]
+        const stats = (summary.zoneStatsMap[zone.provinceId] || {})[zone.no]
+        return {
+          id: `${zone.provinceId}-${zone.no}`,
+          partyId: candidate ? candidate.partyId : "nope",
+          complete: stats.finished,
+          show: true,
+        }
+      }),
+      ...partylist,
+    ]
+  }
+}
 
 export default function ElectionMapContainer() {
-  // @todo #30 Push realtime result to election map instead of mock data
-  const mockElectedParties = [1, 8, 10, 12, 15, 39, 68, 72, 83, 84]
-  const [mapZones, setMapZones] = useState([
-    // zone
-    ...zones.map((zone, i) => {
-      return {
-        id: `${zone.provinceId}-${zone.no}`,
-        partyId: mockElectedParties[_.random(mockElectedParties.length)],
-        complete: Math.random() > 0.5,
-        show: ((zone.provinceId / 10) | 0) === 5, // hide non- nothern regions
-      }
-    }),
-    // senate
-    ..._.range(150).map(i => ({
-      id: `pl-${i + 1}`,
-      partyId: mockElectedParties[_.random(mockElectedParties.length)],
-      complete: Math.random() > 0.5,
-      show: true,
-    })),
-  ])
+  const summaryState = useSummaryData()
   const [mapTip, setMapTip] = useState(null)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMapZones(_zones => {
-        return _zones.map(zone =>
-          Math.random() > 0.7
-            ? zone
-            : {
-                ...zone,
-                partyId: parties[(Math.random() * parties.length) | 0].id,
-              }
-        )
-      })
-    }, 10000)
-    return () => clearInterval(interval)
-  }, [])
+  const mapZones = getMapData(summaryState)
 
   return (
     <div>
