@@ -194,7 +194,12 @@ class ElectionMap extends SvgChart {
 
   radius(d) {
     const match = this.dataLookup[d.id]
-    return match && match.complete ? this.options().size : 0
+    return match && match.complete ? 0 : this.options().size
+  }
+
+  opacity(d) {
+    const match = this.dataLookup[d.id]
+    return match && match.complete ? 1 : 0.5
   }
 
   resetZoom() {
@@ -250,6 +255,7 @@ class ElectionMap extends SvgChart {
       .select("rect")
       .transition(t)
       .attr("fill", d => this.color(d.data))
+      .attr("opacity", d => this.opacity(d.data))
       .attr("rx", d => this.radius(d.data))
 
     zoneSelection.exit().remove()

@@ -1,9 +1,16 @@
 import React, { useCallback, useContext, useMemo, useState } from "react"
-import { checkFilter, filters, zones } from "../models/information"
+import {
+  checkFilter,
+  filters,
+  zones,
+  zonePath,
+  getZoneByProvinceIdAndZoneNo,
+} from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { partyStatsFromSummaryJSON } from "../models/PartyStats"
 import ElectionMap from "./ElectionMap"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
+import { navigate } from "gatsby"
 
 /**
  *
@@ -12,6 +19,15 @@ import { ZoneFilterContext } from "./ZoneFilterPanel"
  */
 function getMapData(summaryState, filter) {
   if (!summaryState.completed) {
+    const partylist = []
+    while (partylist.length < 150) {
+      partylist.push({
+        id: `pl-${partylist.length + 1}`,
+        partyId: "nope",
+        complete: true,
+        show: false,
+      })
+    }
     return [
       ...zones.map((zone, i) => {
         return {
@@ -21,6 +37,7 @@ function getMapData(summaryState, filter) {
           show: false,
         }
       }),
+      ...partylist,
     ]
   } else {
     /** @type {ElectionDataSource.SummaryJSON} */
@@ -32,10 +49,18 @@ function getMapData(summaryState, filter) {
         partylist.push({
           id: `pl-${partylist.length + 1}`,
           partyId: row.party.id,
-          complete: Math.random() > 0.5,
+          complete: true,
           show: true,
         })
       }
+    }
+    while (partylist.length < 150) {
+      partylist.push({
+        id: `pl-${partylist.length + 1}`,
+        partyId: "nope",
+        complete: true,
+        show: false,
+      })
     }
     return [
       ...zones.map((zone, i) => {
@@ -75,7 +100,10 @@ export default function ElectionMapContainer() {
     setMapTip(null)
   }, [])
   const onZoneClick = useCallback(zone => {
-    console.log(zone)
+    const match = zone.data.id.match(/^(\d+)-(\d+)$/)
+    if (match) {
+      navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
+    }
   }, [])
   return (
     <div>
