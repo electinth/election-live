@@ -1,4 +1,5 @@
 import React from "react"
+import { config as fontAwesomeConfig } from "@fortawesome/fontawesome-svg-core"
 
 /**
  * Replaces the component renderer in a way that,
@@ -9,3 +10,6 @@ export function replaceComponentRenderer({ props, loader }) {
   const Component = props.pageResources.component
   return <Component {...props} pathContext={props.pageContext} />
 }
+
+// CSS is added in `src/styles/global.css`
+fontAwesomeConfig.autoAddCss = false
