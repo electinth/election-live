@@ -216,6 +216,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
   }
 
   function renderMobileTabs() {
+    // @todo #1 Connect the mobile tabs to routing.
     const menuStyle = {
       width: "50%",
       display: "inline-block",
