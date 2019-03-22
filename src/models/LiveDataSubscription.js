@@ -10,11 +10,8 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Debug } from "../util/Debug.js"
 
-const LATEST_FILE_URL =
-  "https://cors-anywhere.herokuapp.com/https://storage.googleapis.com/live-elect-dev/data/latest.json"
-
-const DATA_FILE_URL_BASE =
-  "https://cors-anywhere.herokuapp.com/https://storage.googleapis.com/live-elect-dev/data"
+const LATEST_FILE_URL = "/data/latest.json"
+const DATA_FILE_URL_BASE = "/data"
 
 /**
  * @template T
