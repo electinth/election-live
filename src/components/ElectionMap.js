@@ -26,7 +26,7 @@ class ElectionMap extends SvgChart {
   static getDefaultOptions() {
     return helper.deepExtend(super.getDefaultOptions(), {
       height: 560,
-      size: 8,
+      size: 9,
       padding: 1,
       margin: {
         top: 20,
@@ -288,14 +288,11 @@ class ElectionMap extends SvgChart {
     spanSelection.exit().remove()
 
     // resize to fit window
-    this.fit(
-      {
-        mode: "basic",
-        width: "100%",
-        height: this.options().height,
-      },
-      true
-    )
+    this.fit({
+      mode: "basic",
+      width: 375,
+      height: this.options().height,
+    })
   }
 }
 
