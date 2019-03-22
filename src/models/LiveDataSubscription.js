@@ -13,6 +13,9 @@ import { Debug } from "../util/Debug.js"
 const LATEST_FILE_URL = "/data/latest.json"
 const DATA_FILE_URL_BASE = "/data"
 
+const overrideDirectory = observable.box(null)
+global.ELECT_overrideDirectory = directory => overrideDirectory.set(directory)
+
 /**
  * @template T
  * @typedef {object} DataState
@@ -112,19 +115,24 @@ function createResource(name) {
 }
 
 function getLatestDataFileState(fileName) {
-  const latestState = latestFileResource.state
-  if (!latestState.completed) return latestState
-  const latestPointer = _.maxBy(latestState.data.pointers, "timestamp")
-  if (!latestPointer) {
-    return {
-      loading: false,
-      error: new Error("No latest pointer found"),
-      failed: true,
+  const latestDirectory = (() => {
+    if (overrideDirectory.get()) {
+      return overrideDirectory.get()
     }
-  }
-  const dataFileState = getDataFileResource(
-    `/${latestPointer.directory}${fileName}`
-  ).state
+    const latestState = latestFileResource.state
+    if (!latestState.completed) return latestState
+    const latestPointer = _.maxBy(latestState.data.pointers, "timestamp")
+    if (!latestPointer) {
+      return {
+        loading: false,
+        error: new Error("No latest pointer found"),
+        failed: true,
+      }
+    }
+    return latestPointer.directory
+  })()
+  const dataFileState = getDataFileResource(`/${latestDirectory}${fileName}`)
+    .state
   return dataFileState
 }
 
