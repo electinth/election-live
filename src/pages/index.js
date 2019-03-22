@@ -60,7 +60,7 @@ function HomePageRedirector({ location, children }) {
   const notReady =
     location.pathname === "/" &&
     location.hostname === "elect.thematter.co" &&
-    !localStorage.SKIP_ELECT_REDIRECT
+    (window && !window.localStorage.SKIP_ELECT_REDIRECT)
   useEffect(() => {
     if (notReady) {
       window.location.replace("https://elect.in.th/")
