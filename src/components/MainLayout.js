@@ -121,14 +121,24 @@ function Logo() {
       css={{
         display: "block",
         overflow: "hidden",
-        width: 26,
+        width: 35,
         [media(WIDE_NAV_MIN_WIDTH)]: { width: "auto" },
       }}
     >
-      <img
-        src={require("../styles/images/site-logo.png")}
+      <div
         alt="ELECT"
-        css={{ width: 150, display: "block" }}
+        css={{
+          width: 35,
+          height: 24,
+          display: "block",
+          backgroundSize: "cover",
+          backgroundImage: `url(${require("../styles/images/site-logo-square.png")})`,
+          [media(WIDE_NAV_MIN_WIDTH)]: {
+            backgroundImage: `url(${require("../styles/images/site-logo.png")})`,
+            width: 140,
+            height: 32,
+          },
+        }}
       />
     </Link>
   )
