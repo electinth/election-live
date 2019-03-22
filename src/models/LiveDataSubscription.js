@@ -1,16 +1,167 @@
+import axios from "axios"
+import _ from "lodash"
 import {
+  action,
+  autorun,
+  computed,
   observable,
   onBecomeObserved,
+  onBecomeUnobserved,
   runInAction,
-  computed,
-  autorun,
 } from "mobx"
-import { useMemo, useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import { Debug } from "../util/Debug.js"
 
-const summaryStore = observable({
-  loading: true,
-  dataBox: observable.box(null),
+const LATEST_FILE_URL =
+  "https://cors-anywhere.herokuapp.com/https://storage.googleapis.com/live-elect-dev/data/latest.json"
+
+const DATA_FILE_URL_BASE =
+  "https://cors-anywhere.herokuapp.com/https://storage.googleapis.com/live-elect-dev/data"
+
+/**
+ * @template T
+ * @typedef {object} DataState
+ * @param {boolean} loading
+ * @param {boolean} failed
+ * @param {boolean} completed
+ * @param {T} data
+ * @param {Error} error
+ */
+
+const latestFileResource = createResource("latestFile")
+onBecomeObserved(
+  latestFileResource,
+  "state",
+  _.once(() => {
+    latestFileResource.debug("Become observed")
+    fetchLatestFile()
+    setInterval(fetchLatestFile, 60000)
+  })
+)
+async function fetchLatestFile() {
+  return latestFileResource.fetch(async () => {
+    const url = LATEST_FILE_URL + "?cachebust=" + Math.floor(Date.now() / 30000)
+    const response = await axios.get(url)
+    return response.data
+  })
+}
+const getDataFileResource = _.memoize(path => {
+  const dataFileResource = createResource("dataFile:" + path)
+  onBecomeObserved(
+    dataFileResource,
+    "state",
+    _.once(() => {
+      dataFileResource.debug("Become observed")
+      fetchFile()
+    })
+  )
+  async function fetchFile() {
+    return dataFileResource.fetch(async () => {
+      const url = DATA_FILE_URL_BASE + path
+      const response = await axios.get(url)
+      return response.data
+    })
+  }
+  return dataFileResource
 })
+
+/**
+ * @param {*} name
+ * @param {*} fetcher
+ * @param {object} options
+ */
+function createResource(name) {
+  const debug = Debug("elect:resource:" + name)
+  const state = observable.box({
+    loading: true,
+    failed: false,
+    completed: false,
+    data: null,
+  })
+  return observable({
+    debug,
+    get state() {
+      return state.get()
+    },
+    async fetch(fetcher) {
+      debug("Fetching...")
+      runInAction(`fetch ${name} start`, () => {
+        state.set({ ...state.get(), loading: true })
+      })
+      try {
+        const data = await fetcher()
+        debug("Fetching success", data)
+        runInAction(`fetch ${name} success`, () => {
+          state.set({
+            ...state.get(),
+            failed: false,
+            completed: true,
+            loading: false,
+            data: data,
+            error: null,
+          })
+        })
+      } catch (error) {
+        debug("Fetching failed", error)
+        runInAction(`fetch ${name} failed`, () => {
+          state.set({
+            ...state.get(),
+            failed: true,
+            loading: false,
+            error: error,
+          })
+        })
+      }
+    },
+  })
+}
+
+function getLatestDataFileState(fileName) {
+  const latestState = latestFileResource.state
+  if (!latestState.completed) return latestState
+  const latestPointer = _.maxBy(latestState.data.pointers, "timestamp")
+  if (!latestPointer) {
+    return {
+      loading: false,
+      error: new Error("No latest pointer found"),
+      failed: true,
+    }
+  }
+  const dataFileState = getDataFileResource(
+    `/${latestPointer.directory}${fileName}`
+  ).state
+  return dataFileState
+}
+
+/** @return {DataState<ElectionDataSource.SummaryJSON>} */
+export function useSummaryData() {
+  const state = useComputed(
+    () => getLatestDataFileState("/SummaryJSON.json"),
+    []
+  )
+  return state
+}
+
+/** @return {DataState<ElectionDataSource.SummaryJSON>} */
+export function usePerProvinceData(provinceId) {
+  const state = useComputed(
+    () => getLatestDataFileState(`/PerProvinceJSON/${provinceId}.json`),
+    [provinceId]
+  )
+  return state
+}
+
+/** @return {{ loading: boolean, data?: ElectionDataSource.PerZoneData }} */
+export function usePerZoneData(provinceId, zoneNo) {
+  const perProvinceData = usePerProvinceData(provinceId)
+  if (perProvinceData.loading) {
+    return { loading: true }
+  }
+  return {
+    loading: false,
+    data: perProvinceData.data.zoneInformationMap[zoneNo],
+  }
+}
 
 /**
  * Utility function to subscribe to MobX.
@@ -27,50 +178,4 @@ function useComputed(fn, inputs) {
     [box]
   )
   return box.get()
-}
-
-onBecomeObserved(summaryStore.dataBox, () => {
-  setTimeout(() => {
-    import("./__fixtures__/Summary20190322080003.json").then(result => {
-      runInAction("Summary data loaded", () => {
-        summaryStore.loading = false
-        summaryStore.dataBox.set(result)
-      })
-    })
-  }, 1000)
-})
-
-/** @return {{ loading: boolean, data: ElectionDataSource.SummaryJSON }} */
-export function useSummaryData() {
-  // @todo #52 Replace mock data with real data loading logic.
-  return useComputed(
-    () => ({
-      loading: summaryStore.loading,
-      data: summaryStore.dataBox.get(),
-    }),
-    []
-  )
-}
-
-/** @return {{ loading: boolean, data?: ElectionDataSource.PerProvinceJSON }} */
-export function usePerProvinceData(provinceId) {
-  // @todo #52 Replace mock data for per-province with real data loading logic.
-  return provinceId === 10
-    ? {
-        loading: false,
-        data: require("./__fixtures__/Bangkok20190322080003.json"),
-      }
-    : { loading: true }
-}
-
-/** @return {{ loading: boolean, data?: ElectionDataSource.PerZoneData }} */
-export function usePerZoneData(provinceId, zoneNo) {
-  const perProvinceData = usePerProvinceData(provinceId)
-  if (perProvinceData.loading) {
-    return { loading: true }
-  }
-  return {
-    loading: false,
-    data: perProvinceData.data.zoneInformationMap[zoneNo],
-  }
 }
