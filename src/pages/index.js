@@ -124,7 +124,8 @@ function SummaryHeaderContainer({ filterName }) {
 
 function PartyStatsContainer({ filterName }) {
   const summaryState = useSummaryData()
-  if (!summaryState.completed) return null
+  // @todo #1 PartyStatsContainer: Handle case where data failed to load.
+  if (!summaryState.completed) return <Loading />
 
   const summary = summaryState.data
   const currentFilter = filters[filterName]
@@ -139,17 +140,20 @@ function ZoneView({ provinceId, zoneNo }) {
   const zone = getZoneByProvinceIdAndZoneNo(provinceId, zoneNo)
   const province = getProvinceById(provinceId)
   const activeFilter = useContext(ZoneFilterContext)
-
   const summaryState = useSummaryData()
-  const summary = summaryState.data
-  if (!summary) {
-    return null
-  }
 
-  const zoneStats = summary.zoneStatsMap[provinceId][zoneNo]
-  const votePercentage = Math.round(
-    (zoneStats.votesTotal / zoneStats.eligible) * 100
-  )
+  /**
+   * @template T
+   * @param {(data: { summary: ElectionDataSource.SummaryJSON; zoneStats: ElectionDataSource.ZoneStats }) => T} f
+   * @param {() => T} otherwise
+   */
+  const ifSummaryLoaded = (f, otherwise) =>
+    summaryState.completed
+      ? f({
+          summary: summaryState.data,
+          zoneStats: summaryState.data.zoneStatsMap[provinceId][zoneNo],
+        })
+      : otherwise()
 
   return (
     <div
@@ -197,7 +201,7 @@ function ZoneView({ provinceId, zoneNo }) {
                   fontFamily: DISPLAY_FONT,
                 }}
               >
-                {zoneStats.progress}%
+                {ifSummaryLoaded(data => data.zoneStats.progress, () => 0)}%
               </span>
             </div>
 
@@ -209,20 +213,34 @@ function ZoneView({ provinceId, zoneNo }) {
               }}
             >
               <TotalVoterSummary
-                totalVoteCount={zoneStats.votesTotal}
-                totalVotePercentage={votePercentage}
+                totalVoteCount={ifSummaryLoaded(
+                  data => data.zoneStats.votesTotal,
+                  () => 0
+                )}
+                totalVotePercentage={ifSummaryLoaded(
+                  data => {
+                    const zoneStats = data.zoneStats
+                    return Math.round(
+                      (zoneStats.votesTotal / zoneStats.eligible) * 100
+                    )
+                  },
+                  () => 0
+                )}
               />
             </div>
 
             <div css={{ borderBottom: "1px solid" }}>
               <NationwideSubSummaryHeader
                 label="บัตรดี"
-                stat={zoneStats.goodVotes}
+                stat={ifSummaryLoaded(
+                  data => data.zoneStats.goodVotes,
+                  () => 0
+                )}
                 idx={0}
               />
               <NationwideSubSummaryHeader
                 label="บัตรเสีย"
-                stat={zoneStats.badVotes}
+                stat={ifSummaryLoaded(data => data.zoneStats.badVotes, () => 0)}
                 idx={1}
               />
             </div>
@@ -230,7 +248,7 @@ function ZoneView({ provinceId, zoneNo }) {
           <ZoneCandidateList
             provinceId={provinceId}
             zoneNo={zoneNo}
-            goodVotes={zoneStats.goodVotes}
+            zoneStats={ifSummaryLoaded(data => data.zoneStats, () => null)}
           />
         </div>
       </div>
@@ -238,11 +256,20 @@ function ZoneView({ provinceId, zoneNo }) {
   )
 }
 
-function ZoneCandidateList({ provinceId, zoneNo, goodVotes }) {
+/**
+ * @param {object} props
+ * @param {number} props.provinceId
+ * @param {number} props.zoneNo
+ * @param {ElectionDataSource.ZoneStats} props.zoneStats
+ */
+function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
   const dataState = usePerZoneData(provinceId, zoneNo)
-  if (!dataState.completed) {
+  // @todo #1 ZoneCandidateList: Handle case where data failed to load.
+  if (!dataState.completed || !zoneStats) {
     return <Loading />
   }
+  const goodVotes = zoneStats.goodVotes
+  const noVotes = zoneStats.noVotes
   const data = dataState.data
   if (!data) {
     return (
@@ -253,6 +280,10 @@ function ZoneCandidateList({ provinceId, zoneNo, goodVotes }) {
   }
   return (
     <ul css={{ listStyle: "none", margin: 0, marginTop: 10, padding: 0 }}>
+      {
+        // @todo #1 Incorporate NO VOTES into ZoneCandidateList.
+      }
+      <li>NO VOTES — {noVotes}</li>
       {data.candidates.map((candidate, index) => {
         const party = getPartyById(candidate.partyId)
         const percentage = Math.round((candidate.score / goodVotes) * 100)
