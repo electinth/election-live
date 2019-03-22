@@ -7,7 +7,7 @@ import {
   getZoneByProvinceIdAndZoneNo,
 } from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
-import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+import { partyStatsFromSummaryJSON, isZoneFinished } from "../models/PartyStats"
 import ElectionMap from "./ElectionMap"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
@@ -70,7 +70,7 @@ function getMapData(summaryState, filter) {
         return {
           id: `${zone.provinceId}-${zone.no}`,
           partyId: candidate ? candidate.partyId : "nope",
-          complete: stats.finished,
+          complete: isZoneFinished(stats),
           show: checkFilter(filter, zone),
         }
       }),
