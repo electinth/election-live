@@ -80,7 +80,9 @@ export default function MainLayout({ children, activeNavBarSection }) {
                     marginRight: 10,
                   }}
                 >
-                  {menuMapping[activeNavBarSection].label}
+                  {menuMapping[activeNavBarSection]
+                    ? menuMapping[activeNavBarSection].label
+                    : "Menu"}
                 </div>
               </div>
             </ContentWrapper>
