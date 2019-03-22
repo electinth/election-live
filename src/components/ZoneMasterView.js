@@ -14,7 +14,7 @@ import { ZoneFilterPanel, ZoneFilterContext } from "./ZoneFilterPanel"
 import { ZoneSearchPanel } from "./ZoneSearchPanel"
 import { filters } from "../models/information"
 import CloseButton from "./CloseButton"
-import { keyframes } from "@emotion/core"
+import { css, keyframes } from "@emotion/core"
 import { zones, parties } from "../models/information"
 import _ from "lodash"
 import ErrorBoundary from "./ErrorBoundary"
@@ -28,7 +28,13 @@ import ElectionMapContainer from "./ElectionMapContainer"
  * @param {function} props.navigate
  * @param {object} props.location
  */
-export default function ZoneMasterView({ contentHeader, contentBody, popup, navigate, location }) {
+export default function ZoneMasterView({
+  contentHeader,
+  contentBody,
+  popup,
+  navigate,
+  location,
+}) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
   const [activeSidebar, setActiveSidebar] = useState(
     /** @type {'filter' | 'search' | null} */ (null)
@@ -133,10 +139,18 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup, navi
                 // @todo #1 Implement and style search button on desktop.
               }
               <button
-                css={{ float: "right" }}
+                css={{
+                  float: "right",
+                  border: 0,
+                  padding: "5px 8px",
+                  fontSize: "1.2em",
+                  cursor: "pointer",
+                  "&[focus]": { outline: 0 },
+                  "&[active]": { outline: 0 },
+                }}
                 onClick={() => setActiveSidebar("search")}
               >
-                Search
+                <FontAwesomeIcon icon={faSearch} />
               </button>
               <ErrorBoundary name="ZoneFilterPanel">
                 <ZoneFilterPanel />
@@ -261,7 +275,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup, navi
           ...menuStyle,
           borderTop: currentMobileTab === targetTab ? "2px solid black" : "0px",
         }}
-        onClick={() => navigate(`${location.pathname}?tab=${targetTab}`) }
+        onClick={() => navigate(`${location.pathname}?tab=${targetTab}`)}
       >
         {text}
       </span>
@@ -289,6 +303,7 @@ function FloatingSidebar({ title, children, active, onClose, width = 200 }) {
   return (
     <div
       data-active={active ? true : undefined}
+      onBlur={onClose}
       css={{
         background: "white",
         boxShadow: "1px 0 1px rgba(0,0,0,0.25)",
