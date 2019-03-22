@@ -74,7 +74,6 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               position: "relative",
               zIndex: 1,
               margin: "0 auto",
-              display: currentMobileTab === "summary" ? "block" : "none",
               [media(DESKTOP_MIN_WIDTH)]: {
                 display: "block",
                 order: 3,
@@ -94,7 +93,15 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               {renderMobileZoneFilterAndSearch()}
             </div>
 
-            <div css={{ position: "relative" }}>
+            <div
+              css={{
+                display: currentMobileTab === "summary" ? "block" : "none",
+                position: "relative",
+                [media(DESKTOP_MIN_WIDTH)]: {
+                  display: "block",
+                },
+              }}
+            >
               <ErrorBoundary name="contentHeader">
                 {contentHeader}
               </ErrorBoundary>
@@ -145,11 +152,11 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           <div
             css={{
               display: currentMobileTab === "map" ? "block" : "none",
+              margin: "10px auto",
+              width: 375,
               [media(DESKTOP_MIN_WIDTH)]: {
                 display: "block",
                 order: 2,
-                width: 375,
-                margin: "10px auto",
               },
             }}
           >
