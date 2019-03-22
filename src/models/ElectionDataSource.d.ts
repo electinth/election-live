@@ -93,10 +93,12 @@ declare namespace ElectionDataSource {
   interface PerProvinceJSON {
     updatedAt: DateString
     zoneInformationMap: {
-      [zoneNo: string]: {
-        candidates: Candidate[]
-      }
+      [zoneNo: string]: PerZoneData
     }
+  }
+
+  interface PerZoneData {
+    candidates: Candidate[]
   }
 
   interface Candidate {

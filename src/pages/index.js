@@ -17,13 +17,16 @@ import {
   getProvinceById,
   getZoneByProvinceIdAndZoneNo,
   zones,
+  getPartyById,
 } from "../models/information"
-import { useSummaryData } from "../models/LiveDataSubscription"
+import { useSummaryData, usePerZoneData } from "../models/LiveDataSubscription"
 import {
   partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
 } from "../models/PartyStats"
 import { DISPLAY_FONT, labelColor } from "../styles"
+import Loading from "../components/Loading"
+import Placeholder from "../components/Placeholder"
 
 export default ({ pageContext }) => (
   <MainLayout activeNavBarSection="by-area">
@@ -205,30 +208,61 @@ function ZoneView({ provinceId, zoneNo }) {
         </div>
       </div>
       <div css={{ flex: "auto", position: "relative" }}>
-        <ul
+        <div
           css={{
             position: "absolute",
             top: 0,
             left: 0,
             bottom: 0,
             right: 0,
-            listStyle: "none",
-            margin: 0,
-            marginTop: 10,
-            padding: 0,
             overflowX: "hidden",
             overflowY: "auto",
+            WebkitOverflowScrolling: "touch",
           }}
         >
-          {_.range(0, 20).map(a => {
-            return (
-              <li key={a}>
-                <CandidateStatsRow candidate={a + 1} />
-              </li>
-            )
-          })}
-        </ul>
+          <ZoneCandidateList
+            provinceId={provinceId}
+            zoneNo={zoneNo}
+            goodVotes={zoneStats.goodVotes}
+          />
+        </div>
       </div>
     </div>
+  )
+}
+
+function ZoneCandidateList({ provinceId, zoneNo, goodVotes }) {
+  const dataState = usePerZoneData(provinceId, zoneNo)
+  if (dataState.loading) {
+    return <Loading />
+  }
+  const data = dataState.data
+  if (!data) {
+    return (
+      <Placeholder height={150}>
+        No information for province {provinceId} zone {zoneNo}
+      </Placeholder>
+    )
+  }
+  return (
+    <ul css={{ listStyle: "none", margin: 0, marginTop: 10, padding: 0 }}>
+      {data.candidates.map((candidate, index) => {
+        const party = getPartyById(candidate.partyId)
+        const percentage = Math.round((candidate.score / goodVotes) * 100)
+        return (
+          <li key={candidate.no}>
+            <CandidateStatsRow
+              candidateName={`${candidate.firstName} ${candidate.lastName}`}
+              candidateNumber={candidate.no}
+              partyName={party.name}
+              partyColor={party.color}
+              rank={index + 1}
+              score={candidate.score}
+              percentage={percentage}
+            />
+          </li>
+        )
+      })}
+    </ul>
   )
 }

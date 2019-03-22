@@ -1,0 +1,245 @@
+{
+  "updatedAt": "2019/03/22 08:00:03",
+  "zoneInformationMap": {
+    "1": {
+      "no": 86,
+      "score": 2408,
+      "partyId": 33,
+      "title": "นาย",
+      "firstName": "เรียบ",
+      "lastName": "ประทุมฝาง"
+    },
+    "2": {
+      "no": 115,
+      "score": 2503,
+      "partyId": 34,
+      "title": "นางสาว",
+      "firstName": "สิริมา",
+      "lastName": "ธารีจารุ"
+    },
+    "3": {
+      "no": 138,
+      "score": 1965,
+      "partyId": 42,
+      "title": "นาย",
+      "firstName": "สันติ",
+      "lastName": "วิชัยพล"
+    },
+    "4": {
+      "no": 175,
+      "score": 1561,
+      "partyId": 12,
+      "title": "นางสาว",
+      "firstName": "สกุลทิพย์",
+      "lastName": "วิชญาโนทัย"
+    },
+    "5": {
+      "no": 208,
+      "score": 2904,
+      "partyId": 34,
+      "title": "นาย",
+      "firstName": "จักรทิพย์",
+      "lastName": "ปัทมะทิน"
+    },
+    "6": {
+      "no": 255,
+      "score": 2810,
+      "partyId": 102,
+      "title": "นาย",
+      "firstName": "คชษิน",
+      "lastName": "กาดัสซา"
+    },
+    "7": {
+      "no": 259,
+      "score": 2721,
+      "partyId": 68,
+      "title": "นาย",
+      "firstName": "ปิยะชาติ",
+      "lastName": "อำนวยเวช"
+    },
+    "8": {
+      "no": 288,
+      "score": 2059,
+      "partyId": 42,
+      "title": "นางสาว",
+      "firstName": "วีรินทร์",
+      "lastName": "ตันเสรีสกุล"
+    },
+    "9": {
+      "no": 344,
+      "score": 2072,
+      "partyId": 29,
+      "title": "นางสาว",
+      "firstName": "โสพรรณา",
+      "lastName": "ทิพย์โยธา"
+    },
+    "10": {
+      "no": 360,
+      "score": 1937,
+      "partyId": 67,
+      "title": "นาย",
+      "firstName": "กนก",
+      "lastName": "โพธิสุวรรณ"
+    },
+    "11": {
+      "no": 404,
+      "score": 2996,
+      "partyId": 47,
+      "title": "นางสาว",
+      "firstName": "ธันย์สิตา",
+      "lastName": "ชัยภูวเวโรจน์"
+    },
+    "12": {
+      "no": 417,
+      "score": 3760,
+      "partyId": 1,
+      "title": "นาย",
+      "firstName": "รัฐพงศ์",
+      "lastName": "ระหงษ์"
+    },
+    "13": {
+      "no": 447,
+      "score": 2393,
+      "partyId": 9,
+      "title": "นาย",
+      "firstName": "อรรถ",
+      "lastName": "ชาญวิชัย"
+    },
+    "14": {
+      "no": 502,
+      "score": 2657,
+      "partyId": 70,
+      "title": "นาย",
+      "firstName": "สราวุธ",
+      "lastName": "สุวิทยารัตน์"
+    },
+    "15": {
+      "no": 537,
+      "score": 2492,
+      "partyId": 47,
+      "title": "นางสาว",
+      "firstName": "อิสรีย์",
+      "lastName": "โชติพันธุ์"
+    },
+    "16": {
+      "no": 552,
+      "score": 1562,
+      "partyId": 1,
+      "title": "นาง",
+      "firstName": "ฮูวัยดีย๊ะ พิศสุวรรณ",
+      "lastName": "อุเซ็ง"
+    },
+    "17": {
+      "no": 589,
+      "score": 1436,
+      "partyId": 71,
+      "title": "นาย",
+      "firstName": "ธนวัฒน์",
+      "lastName": "พุกอุย"
+    },
+    "18": {
+      "no": 610,
+      "score": 2252,
+      "partyId": 12,
+      "title": "นาย",
+      "firstName": "เชาวฤทธิ์",
+      "lastName": "ทรงนวรัตน์"
+    },
+    "19": {
+      "no": 662,
+      "score": 2673,
+      "partyId": 64,
+      "title": "นาย",
+      "firstName": "ธีรเสฏฐ์",
+      "lastName": "เนตรทอง"
+    },
+    "20": {
+      "no": 696,
+      "score": 3745,
+      "partyId": 94,
+      "title": "นาย",
+      "firstName": "เผ่าชนะ",
+      "lastName": "ชูเวช"
+    },
+    "21": {
+      "no": 720,
+      "score": 3480,
+      "partyId": 47,
+      "title": "นางสาว",
+      "firstName": "ณัฐวลัย",
+      "lastName": "เนียนขาว"
+    },
+    "22": {
+      "no": 725,
+      "score": 2139,
+      "partyId": 31,
+      "title": "นาย",
+      "firstName": "โชคชัย",
+      "lastName": "อินทรประเสริฐ"
+    },
+    "23": {
+      "no": 762,
+      "score": 3084,
+      "partyId": 8,
+      "title": "นาย",
+      "firstName": "ธวัชชัย",
+      "lastName": "ทองสิมา"
+    },
+    "24": {
+      "no": 803,
+      "score": 2144,
+      "partyId": 94,
+      "title": "นาย",
+      "firstName": "ศรุต",
+      "lastName": "คงตระกูล"
+    },
+    "25": {
+      "no": 842,
+      "score": 2507,
+      "partyId": 77,
+      "title": "นาย",
+      "firstName": "กิตตพัฒน์",
+      "lastName": "จิรัฏฐวงศ์"
+    },
+    "26": {
+      "no": 866,
+      "score": 2496,
+      "partyId": 63,
+      "title": "นาย",
+      "firstName": "สิครินทร์",
+      "lastName": "ดามพ์วิจิตร"
+    },
+    "27": {
+      "no": 904,
+      "score": 2496,
+      "partyId": 77,
+      "title": "จ่าสิบเอก",
+      "firstName": "อาทร",
+      "lastName": "มีถาวร"
+    },
+    "28": {
+      "no": 929,
+      "score": 2574,
+      "partyId": 86,
+      "title": "นาย",
+      "firstName": "จิรายุ",
+      "lastName": "ภูพาน"
+    },
+    "29": {
+      "no": 944,
+      "score": 2405,
+      "partyId": 67,
+      "title": "นาย",
+      "firstName": "ภัทรพล",
+      "lastName": "หมดมลทิน"
+    },
+    "30": {
+      "no": 990,
+      "score": 2538,
+      "partyId": 29,
+      "title": "นาย",
+      "firstName": "สุนทร",
+      "lastName": "โนนศิริ"
+    }
+  }
+}

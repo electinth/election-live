@@ -1,0 +1,4122 @@
+{
+  "updatedAt": "2019/03/22 08:00:03",
+  "zoneWinningCandidateMap": {
+    "10": {
+      "1": {
+        "no": 86,
+        "score": 2408,
+        "partyId": 33,
+        "title": "นาย",
+        "firstName": "เรียบ",
+        "lastName": "ประทุมฝาง"
+      },
+      "2": {
+        "no": 115,
+        "score": 2503,
+        "partyId": 34,
+        "title": "นางสาว",
+        "firstName": "สิริมา",
+        "lastName": "ธารีจารุ"
+      },
+      "3": {
+        "no": 138,
+        "score": 1965,
+        "partyId": 42,
+        "title": "นาย",
+        "firstName": "สันติ",
+        "lastName": "วิชัยพล"
+      },
+      "4": {
+        "no": 175,
+        "score": 1561,
+        "partyId": 12,
+        "title": "นางสาว",
+        "firstName": "สกุลทิพย์",
+        "lastName": "วิชญาโนทัย"
+      },
+      "5": {
+        "no": 208,
+        "score": 2904,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "จักรทิพย์",
+        "lastName": "ปัทมะทิน"
+      },
+      "6": {
+        "no": 255,
+        "score": 2810,
+        "partyId": 102,
+        "title": "นาย",
+        "firstName": "คชษิน",
+        "lastName": "กาดัสซา"
+      },
+      "7": {
+        "no": 259,
+        "score": 2721,
+        "partyId": 68,
+        "title": "นาย",
+        "firstName": "ปิยะชาติ",
+        "lastName": "อำนวยเวช"
+      },
+      "8": {
+        "no": 288,
+        "score": 2059,
+        "partyId": 42,
+        "title": "นางสาว",
+        "firstName": "วีรินทร์",
+        "lastName": "ตันเสรีสกุล"
+      },
+      "9": {
+        "no": 344,
+        "score": 2072,
+        "partyId": 29,
+        "title": "นางสาว",
+        "firstName": "โสพรรณา",
+        "lastName": "ทิพย์โยธา"
+      },
+      "10": {
+        "no": 360,
+        "score": 1937,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "กนก",
+        "lastName": "โพธิสุวรรณ"
+      },
+      "11": {
+        "no": 404,
+        "score": 2996,
+        "partyId": 47,
+        "title": "นางสาว",
+        "firstName": "ธันย์สิตา",
+        "lastName": "ชัยภูวเวโรจน์"
+      },
+      "12": {
+        "no": 417,
+        "score": 3760,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "รัฐพงศ์",
+        "lastName": "ระหงษ์"
+      },
+      "13": {
+        "no": 447,
+        "score": 2393,
+        "partyId": 9,
+        "title": "นาย",
+        "firstName": "อรรถ",
+        "lastName": "ชาญวิชัย"
+      },
+      "14": {
+        "no": 502,
+        "score": 2657,
+        "partyId": 70,
+        "title": "นาย",
+        "firstName": "สราวุธ",
+        "lastName": "สุวิทยารัตน์"
+      },
+      "15": {
+        "no": 537,
+        "score": 2492,
+        "partyId": 47,
+        "title": "นางสาว",
+        "firstName": "อิสรีย์",
+        "lastName": "โชติพันธุ์"
+      },
+      "16": {
+        "no": 552,
+        "score": 1562,
+        "partyId": 1,
+        "title": "นาง",
+        "firstName": "ฮูวัยดีย๊ะ พิศสุวรรณ",
+        "lastName": "อุเซ็ง"
+      },
+      "17": {
+        "no": 589,
+        "score": 1436,
+        "partyId": 71,
+        "title": "นาย",
+        "firstName": "ธนวัฒน์",
+        "lastName": "พุกอุย"
+      },
+      "18": {
+        "no": 610,
+        "score": 2252,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "เชาวฤทธิ์",
+        "lastName": "ทรงนวรัตน์"
+      },
+      "19": {
+        "no": 662,
+        "score": 2673,
+        "partyId": 64,
+        "title": "นาย",
+        "firstName": "ธีรเสฏฐ์",
+        "lastName": "เนตรทอง"
+      },
+      "20": {
+        "no": 696,
+        "score": 3745,
+        "partyId": 94,
+        "title": "นาย",
+        "firstName": "เผ่าชนะ",
+        "lastName": "ชูเวช"
+      },
+      "21": {
+        "no": 720,
+        "score": 3480,
+        "partyId": 47,
+        "title": "นางสาว",
+        "firstName": "ณัฐวลัย",
+        "lastName": "เนียนขาว"
+      },
+      "22": {
+        "no": 725,
+        "score": 2139,
+        "partyId": 31,
+        "title": "นาย",
+        "firstName": "โชคชัย",
+        "lastName": "อินทรประเสริฐ"
+      },
+      "23": {
+        "no": 762,
+        "score": 3084,
+        "partyId": 8,
+        "title": "นาย",
+        "firstName": "ธวัชชัย",
+        "lastName": "ทองสิมา"
+      },
+      "24": {
+        "no": 803,
+        "score": 2144,
+        "partyId": 94,
+        "title": "นาย",
+        "firstName": "ศรุต",
+        "lastName": "คงตระกูล"
+      },
+      "25": {
+        "no": 842,
+        "score": 2507,
+        "partyId": 77,
+        "title": "นาย",
+        "firstName": "กิตตพัฒน์",
+        "lastName": "จิรัฏฐวงศ์"
+      },
+      "26": {
+        "no": 866,
+        "score": 2496,
+        "partyId": 63,
+        "title": "นาย",
+        "firstName": "สิครินทร์",
+        "lastName": "ดามพ์วิจิตร"
+      },
+      "27": {
+        "no": 904,
+        "score": 2496,
+        "partyId": 77,
+        "title": "จ่าสิบเอก",
+        "firstName": "อาทร",
+        "lastName": "มีถาวร"
+      },
+      "28": {
+        "no": 929,
+        "score": 2574,
+        "partyId": 86,
+        "title": "นาย",
+        "firstName": "จิรายุ",
+        "lastName": "ภูพาน"
+      },
+      "29": {
+        "no": 944,
+        "score": 2405,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "ภัทรพล",
+        "lastName": "หมดมลทิน"
+      },
+      "30": {
+        "no": 990,
+        "score": 2538,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "สุนทร",
+        "lastName": "โนนศิริ"
+      }
+    },
+    "11": {
+      "1": {
+        "no": 9023,
+        "score": 2865,
+        "partyId": 71,
+        "title": "ว่าที่ร้อยตรี",
+        "firstName": "สาธิต",
+        "lastName": "สุวรรณน้อย"
+      },
+      "2": {
+        "no": 9030,
+        "score": 1906,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "สมยศ",
+        "lastName": "สายทอง"
+      },
+      "3": {
+        "no": 9071,
+        "score": 2027,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "สนอง",
+        "lastName": "พานทอง"
+      },
+      "4": {
+        "no": 9086,
+        "score": 2297,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "เกรียงศักดิ์",
+        "lastName": "บุญประเสริฐ"
+      },
+      "5": {
+        "no": 9113,
+        "score": 3856,
+        "partyId": 63,
+        "title": "นาย",
+        "firstName": "ประสิทธิ์",
+        "lastName": "อนุเคราะห์"
+      },
+      "6": {
+        "no": 9153,
+        "score": 1557,
+        "partyId": 61,
+        "title": "นาง",
+        "firstName": "สุรีรัตน์",
+        "lastName": "แสนซิว"
+      },
+      "7": {
+        "no": 9161,
+        "score": 1924,
+        "partyId": 42,
+        "title": "นาย",
+        "firstName": "เถลิงยศ",
+        "lastName": "บุตุคำ"
+      }
+    },
+    "12": {
+      "1": {
+        "no": 4695,
+        "score": 3034,
+        "partyId": 71,
+        "title": "นางสาว",
+        "firstName": "พรทิพย์",
+        "lastName": "อินทศรี"
+      },
+      "2": {
+        "no": 4712,
+        "score": 3104,
+        "partyId": 9,
+        "title": "นางสาว",
+        "firstName": "ขวัญเรือน",
+        "lastName": "ช่วยงาน"
+      },
+      "3": {
+        "no": 4752,
+        "score": 3553,
+        "partyId": 24,
+        "title": "นาย",
+        "firstName": "บัณฑูรย์",
+        "lastName": "รินทระ"
+      },
+      "4": {
+        "no": 4781,
+        "score": 2385,
+        "partyId": 46,
+        "title": "นาย",
+        "firstName": "วรพจน์",
+        "lastName": "ศรีนอบน้อม"
+      },
+      "5": {
+        "no": 4810,
+        "score": 5724,
+        "partyId": 3,
+        "title": "นางสาว",
+        "firstName": "ศยามล",
+        "lastName": "ประทุมแก้ว"
+      },
+      "6": {
+        "no": 4832,
+        "score": 3396,
+        "partyId": 47,
+        "title": "นาย",
+        "firstName": "กฤษฏ์หิรัญ",
+        "lastName": "พิชญาภัคปุณณาสา"
+      }
+    },
+    "13": {
+      "1": {
+        "no": 5417,
+        "score": 2000,
+        "partyId": 64,
+        "title": "นางสาว",
+        "firstName": "พิชาภพ",
+        "lastName": "เสียงทอง"
+      },
+      "2": {
+        "no": 5446,
+        "score": 3306,
+        "partyId": 75,
+        "title": "นาย",
+        "firstName": "สมยศ",
+        "lastName": "อินมหา"
+      },
+      "3": {
+        "no": 5453,
+        "score": 3118,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "ณฤทธิ์",
+        "lastName": "นาควงษม์"
+      },
+      "4": {
+        "no": 5495,
+        "score": 2329,
+        "partyId": 79,
+        "title": "นางสาว",
+        "firstName": "ราตรี",
+        "lastName": "บูชา"
+      },
+      "5": {
+        "no": 5518,
+        "score": 3092,
+        "partyId": 81,
+        "title": "นาย",
+        "firstName": "ชนันธร",
+        "lastName": "ยาดีวิชัย"
+      },
+      "6": {
+        "no": 5548,
+        "score": 3410,
+        "partyId": 79,
+        "title": "นาย",
+        "firstName": "อุดมทรัพย์",
+        "lastName": "ใจจุมปู"
+      }
+    },
+    "14": {
+      "1": {
+        "no": 5862,
+        "score": 2707,
+        "partyId": 7,
+        "title": "นาย",
+        "firstName": "ณัฐวุฒิ",
+        "lastName": "วงษ์เพิก"
+      },
+      "2": {
+        "no": 5870,
+        "score": 2932,
+        "partyId": 31,
+        "title": "นาย",
+        "firstName": "พันธกานต์",
+        "lastName": "ปทุมวัน"
+      },
+      "3": {
+        "no": 5912,
+        "score": 5753,
+        "partyId": 71,
+        "title": "นาย",
+        "firstName": "อดิศร",
+        "lastName": "สังข์จันทร์"
+      },
+      "4": {
+        "no": 5924,
+        "score": 2483,
+        "partyId": 31,
+        "title": "นาย",
+        "firstName": "มนตรี",
+        "lastName": "จันทร"
+      }
+    },
+    "15": {
+      "1": {
+        "no": 10314,
+        "score": 2672,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "บุญสม",
+        "lastName": "มากสินธุ์"
+      }
+    },
+    "16": {
+      "1": {
+        "no": 7802,
+        "score": 2859,
+        "partyId": 73,
+        "title": "พันโท",
+        "firstName": "วันทา",
+        "lastName": "ล้วนจิ๋ว"
+      },
+      "2": {
+        "no": 7846,
+        "score": 3044,
+        "partyId": 3,
+        "title": "นาย",
+        "firstName": "ถนอม",
+        "lastName": "มีสนม"
+      },
+      "3": {
+        "no": 7874,
+        "score": 1800,
+        "partyId": 9,
+        "title": "นาย",
+        "firstName": "วิชาญ",
+        "lastName": "เพชรจำนงค์"
+      },
+      "4": {
+        "no": 7889,
+        "score": 3768,
+        "partyId": 34,
+        "title": "นาง",
+        "firstName": "สมปอง",
+        "lastName": "แดงประเสริฐ"
+      }
+    },
+    "17": {
+      "1": {
+        "no": 9452,
+        "score": 2978,
+        "partyId": 10,
+        "title": "นาย",
+        "firstName": "ศิวกรวิศิษฎ์",
+        "lastName": "อ่วมป่วน"
+      }
+    },
+    "18": {
+      "1": {
+        "no": 2279,
+        "score": 1834,
+        "partyId": 46,
+        "title": "นาย",
+        "firstName": "เพทาย",
+        "lastName": "ทัพมงคล"
+      },
+      "2": {
+        "no": 2300,
+        "score": 2525,
+        "partyId": 103,
+        "title": "นาย",
+        "firstName": "อนันต์",
+        "lastName": "น้อยศักดิ์"
+      }
+    },
+    "19": {
+      "1": {
+        "no": 9364,
+        "score": 2321,
+        "partyId": 83,
+        "title": "นางสาว",
+        "firstName": "กัลยา",
+        "lastName": "รุ่งวิจิตรชัย"
+      },
+      "2": {
+        "no": 9388,
+        "score": 2321,
+        "partyId": 8,
+        "title": "นาย",
+        "firstName": "อรรถพล",
+        "lastName": "วงษ์ประยูร"
+      },
+      "3": {
+        "no": 9431,
+        "score": 4957,
+        "partyId": 63,
+        "title": "นาย",
+        "firstName": "กฤษฎิ์ธนัช",
+        "lastName": "พิมทอง"
+      }
+    },
+    "20": {
+      "1": {
+        "no": 2061,
+        "score": 3347,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "ธนวันต์",
+        "lastName": "ธนฤกษ์มั่นคง"
+      },
+      "2": {
+        "no": 2082,
+        "score": 2183,
+        "partyId": 12,
+        "title": "นางสาว",
+        "firstName": "เมธ์วดี",
+        "lastName": "เชื้อผู้ดี"
+      },
+      "3": {
+        "no": 2099,
+        "score": 2067,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "ประมวล",
+        "lastName": "เอมเปีย"
+      },
+      "4": {
+        "no": 2136,
+        "score": 2434,
+        "partyId": 67,
+        "title": "นาวาอากาศเอก",
+        "firstName": "อำไพ",
+        "lastName": "ไม้เจริญ"
+      },
+      "5": {
+        "no": 2164,
+        "score": 4290,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "สมศักดิ์",
+        "lastName": "สุภาภรณ์"
+      },
+      "6": {
+        "no": 2195,
+        "score": 2214,
+        "partyId": 85,
+        "title": "นางสาว",
+        "firstName": "ภิญญาพัชญ์",
+        "lastName": "คเนจร ณ อยุธยา"
+      },
+      "7": {
+        "no": 2208,
+        "score": 4121,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "นิวัฒน์",
+        "lastName": "ธรรมสาธิต"
+      },
+      "8": {
+        "no": 2234,
+        "score": 2322,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "อภิสัณห์",
+        "lastName": "วัฒนานิรันดร์กุล"
+      }
+    },
+    "21": {
+      "1": {
+        "no": 7580,
+        "score": 3261,
+        "partyId": 38,
+        "title": "นาย",
+        "firstName": "ทิวา",
+        "lastName": "รักษากิจ"
+      },
+      "2": {
+        "no": 7588,
+        "score": 1713,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "ประคอง",
+        "lastName": "ภมร"
+      },
+      "3": {
+        "no": 7607,
+        "score": 3322,
+        "partyId": 17,
+        "title": "นาย",
+        "firstName": "เสมา",
+        "lastName": "สืบตระกูล"
+      },
+      "4": {
+        "no": 7647,
+        "score": 1346,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "กิจดี",
+        "lastName": "อริพ่าย"
+      }
+    },
+    "22": {
+      "1": {
+        "no": 1881,
+        "score": 2530,
+        "partyId": 87,
+        "title": "นาย",
+        "firstName": "สงคราม",
+        "lastName": "กุศลส่ง"
+      },
+      "2": {
+        "no": 1905,
+        "score": 2349,
+        "partyId": 61,
+        "title": "นาย",
+        "firstName": "ประพันธ์",
+        "lastName": "บุญมี"
+      },
+      "3": {
+        "no": 1936,
+        "score": 3823,
+        "partyId": 46,
+        "title": "นาย",
+        "firstName": "บุญฤทธิ์",
+        "lastName": "คนชม"
+      }
+    },
+    "23": {
+      "1": {
+        "no": 3281,
+        "score": 1758,
+        "partyId": 10,
+        "title": "นาย",
+        "firstName": "ไกรสีห์",
+        "lastName": "รัตนเศียร"
+      }
+    },
+    "24": {
+      "1": {
+        "no": 1950,
+        "score": 2548,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "วินัย",
+        "lastName": "ส้มทับทัย"
+      },
+      "2": {
+        "no": 1985,
+        "score": 1957,
+        "partyId": 84,
+        "title": "นาย",
+        "firstName": "สุรชัย",
+        "lastName": "ดำรงสุสกุล"
+      },
+      "3": {
+        "no": 2010,
+        "score": 3235,
+        "partyId": 64,
+        "title": "นาย",
+        "firstName": "ธนกฤต",
+        "lastName": "ทองดี"
+      },
+      "4": {
+        "no": 2017,
+        "score": 2581,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "ชำนาญ",
+        "lastName": "เกิดโสภา"
+      }
+    },
+    "25": {
+      "1": {
+        "no": 5649,
+        "score": 2666,
+        "partyId": 3,
+        "title": "นาย",
+        "firstName": "วันชัย",
+        "lastName": "พานิชย์"
+      },
+      "2": {
+        "no": 5670,
+        "score": 2388,
+        "partyId": 24,
+        "title": "นางสาว",
+        "firstName": "นงนุช",
+        "lastName": "โชติช่วง"
+      },
+      "3": {
+        "no": 5695,
+        "score": 3055,
+        "partyId": 64,
+        "title": "นาย",
+        "firstName": "ปัญญา",
+        "lastName": "กองชุมพล"
+      }
+    },
+    "26": {
+      "1": {
+        "no": 3406,
+        "score": 3703,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "เกียรติภัช",
+        "lastName": "เกิดรี"
+      }
+    },
+    "27": {
+      "1": {
+        "no": 9291,
+        "score": 3799,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "ประสิทธิ์",
+        "lastName": "ดวงแก้ว"
+      },
+      "2": {
+        "no": 9330,
+        "score": 1559,
+        "partyId": 81,
+        "title": "นางสาว",
+        "firstName": "วิภาพร",
+        "lastName": "อุทก"
+      },
+      "3": {
+        "no": 9358,
+        "score": 2358,
+        "partyId": 64,
+        "title": "นาย",
+        "firstName": "สมัย",
+        "lastName": "ศรีสมาน"
+      }
+    },
+    "30": {
+      "1": {
+        "no": 3673,
+        "score": 2310,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "วราวุฒิ",
+        "lastName": "แท่นแก้ว"
+      },
+      "2": {
+        "no": 3731,
+        "score": 2131,
+        "partyId": 93,
+        "title": "นาย",
+        "firstName": "เสนอ",
+        "lastName": "จอมเกาะ"
+      },
+      "3": {
+        "no": 3759,
+        "score": 2519,
+        "partyId": 97,
+        "title": "นาง",
+        "firstName": "จิรพัฒน์",
+        "lastName": "สืบเพ็ง"
+      },
+      "4": {
+        "no": 3781,
+        "score": 2695,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "สมเกียรติ",
+        "lastName": "ตันดิลกตระกูล"
+      },
+      "5": {
+        "no": 3842,
+        "score": 2771,
+        "partyId": 97,
+        "title": "นาง",
+        "firstName": "มะลิ",
+        "lastName": "พบขุนทด"
+      },
+      "6": {
+        "no": 3860,
+        "score": 2678,
+        "partyId": 42,
+        "title": "นาย",
+        "firstName": "ทักษิณ",
+        "lastName": "จันทรวิจิตร"
+      },
+      "7": {
+        "no": 3895,
+        "score": 4708,
+        "partyId": 83,
+        "title": "นาง",
+        "firstName": "ทัศนียา",
+        "lastName": "รัตนเศรษฐ"
+      },
+      "8": {
+        "no": 3949,
+        "score": 2071,
+        "partyId": 92,
+        "title": "นาย",
+        "firstName": "สันติ",
+        "lastName": "สีโมรส"
+      },
+      "9": {
+        "no": 3970,
+        "score": 2354,
+        "partyId": 9,
+        "title": "นาง",
+        "firstName": "อรอนงค์",
+        "lastName": "วงศ์แสง"
+      },
+      "10": {
+        "no": 4013,
+        "score": 1710,
+        "partyId": 61,
+        "title": "ร้อยตรี",
+        "firstName": "บรรหาร",
+        "lastName": "การนอก"
+      },
+      "11": {
+        "no": 4056,
+        "score": 2315,
+        "partyId": 79,
+        "title": "นาย",
+        "firstName": "เวียงชัย",
+        "lastName": "ปะติเส"
+      },
+      "12": {
+        "no": 4098,
+        "score": 1661,
+        "partyId": 12,
+        "title": "น.ท.",
+        "firstName": "ปริญญา",
+        "lastName": "ไอยรารัตน์"
+      },
+      "13": {
+        "no": 4130,
+        "score": 4940,
+        "partyId": 91,
+        "title": "นาย",
+        "firstName": "ภูมิพัฒน์",
+        "lastName": "ธรรมเหนือเกล้า"
+      },
+      "14": {
+        "no": 4164,
+        "score": 1302,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "ภัทรพล",
+        "lastName": "ถนอมดำรงศักดิ์"
+      }
+    },
+    "31": {
+      "1": {
+        "no": 5149,
+        "score": 1402,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "สุพจน์",
+        "lastName": "เขียมรัมย์"
+      },
+      "2": {
+        "no": 5181,
+        "score": 3478,
+        "partyId": 42,
+        "title": "นาย",
+        "firstName": "ชูศักดิ์",
+        "lastName": "พงษ์สวัสดิ์"
+      },
+      "3": {
+        "no": 5210,
+        "score": 2775,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "สมคิด",
+        "lastName": "สินไธสง"
+      },
+      "4": {
+        "no": 5252,
+        "score": 4627,
+        "partyId": 83,
+        "title": "นาย",
+        "firstName": "ยุทธนา",
+        "lastName": "ตีระมาศวณิช"
+      },
+      "5": {
+        "no": 5285,
+        "score": 1984,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "สมชาย",
+        "lastName": "พรมวัง"
+      },
+      "6": {
+        "no": 5327,
+        "score": 2332,
+        "partyId": 3,
+        "title": "นาง",
+        "firstName": "มวน",
+        "lastName": "เข็มทิศ"
+      },
+      "7": {
+        "no": 5354,
+        "score": 1857,
+        "partyId": 97,
+        "title": "พันโท",
+        "firstName": "ณรงค์",
+        "lastName": "ชัยเชิดชู"
+      },
+      "8": {
+        "no": 5375,
+        "score": 3123,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "จำลอง",
+        "lastName": "วิชัยรัมย์"
+      }
+    },
+    "32": {
+      "1": {
+        "no": 9877,
+        "score": 2352,
+        "partyId": 70,
+        "title": "นางสาว",
+        "firstName": "วริศชญาณ์",
+        "lastName": "สัตยาภูริพัฒน์"
+      },
+      "2": {
+        "no": 9918,
+        "score": 2922,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "พงศธร",
+        "lastName": "ลักขษร"
+      },
+      "3": {
+        "no": 9949,
+        "score": 3852,
+        "partyId": 61,
+        "title": "นางสาว",
+        "firstName": "บุญราญ",
+        "lastName": "สร้อยจิตร"
+      },
+      "4": {
+        "no": 9974,
+        "score": 1957,
+        "partyId": 68,
+        "title": "นาย",
+        "firstName": "อนุกูล",
+        "lastName": "ทรายเพชร"
+      },
+      "5": {
+        "no": 10010,
+        "score": 3840,
+        "partyId": 70,
+        "title": "นาย",
+        "firstName": "วีรพงศ์",
+        "lastName": "จึงธนสมบูรณ์"
+      },
+      "6": {
+        "no": 10036,
+        "score": 3257,
+        "partyId": 83,
+        "title": "นาย",
+        "firstName": "ธีระทัศน์",
+        "lastName": "เตียวเจริญโสภา"
+      },
+      "7": {
+        "no": 10073,
+        "score": 1874,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "คง",
+        "lastName": "มีชัย"
+      }
+    },
+    "33": {
+      "1": {
+        "no": 8199,
+        "score": 1530,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "ปราชญ์",
+        "lastName": "ชาวสวน"
+      },
+      "2": {
+        "no": 8260,
+        "score": 2185,
+        "partyId": 76,
+        "title": "นาย",
+        "firstName": "อนุวัฒน์",
+        "lastName": "รัตนนท์"
+      },
+      "3": {
+        "no": 8300,
+        "score": 2380,
+        "partyId": 38,
+        "title": "นางสาว",
+        "firstName": "ชมัยพร",
+        "lastName": "พันธุวงศ์"
+      },
+      "4": {
+        "no": 8307,
+        "score": 3031,
+        "partyId": 63,
+        "title": "นาย",
+        "firstName": "กิตติชัย",
+        "lastName": "เหลาสิงห์"
+      },
+      "5": {
+        "no": 8363,
+        "score": 2160,
+        "partyId": 89,
+        "title": "นาย",
+        "firstName": "อุทัย",
+        "lastName": "เคารพ"
+      },
+      "6": {
+        "no": 8381,
+        "score": 2677,
+        "partyId": 70,
+        "title": "นาย",
+        "firstName": "วิเชียร",
+        "lastName": "บุญสมศรี"
+      },
+      "7": {
+        "no": 8424,
+        "score": 2665,
+        "partyId": 9,
+        "title": "นาย",
+        "firstName": "ประกอบ",
+        "lastName": "ผักไหม"
+      },
+      "8": {
+        "no": 8428,
+        "score": 3146,
+        "partyId": 10,
+        "title": "นาย",
+        "firstName": "ไพทูรย์",
+        "lastName": "เครือแสง"
+      }
+    },
+    "34": {
+      "1": {
+        "no": 10837,
+        "score": 2836,
+        "partyId": 94,
+        "title": "สิบโท",
+        "firstName": "กุศล",
+        "lastName": "เลิศวิบูลย์กิจ"
+      },
+      "2": {
+        "no": 10869,
+        "score": 2477,
+        "partyId": 70,
+        "title": "นาย",
+        "firstName": "สมพงษ์",
+        "lastName": "อนุวรรณ"
+      },
+      "3": {
+        "no": 10922,
+        "score": 3196,
+        "partyId": 2,
+        "title": "นาย",
+        "firstName": "วรรณะ",
+        "lastName": "ศรีวิไล"
+      },
+      "4": {
+        "no": 10949,
+        "score": 1961,
+        "partyId": 101,
+        "title": "นาย",
+        "firstName": "ชาญพัฒน์",
+        "lastName": "จันทุมา"
+      },
+      "5": {
+        "no": 10987,
+        "score": 2313,
+        "partyId": 47,
+        "title": "นาง",
+        "firstName": "คำปุ่น",
+        "lastName": "สาระภาพ"
+      },
+      "6": {
+        "no": 11020,
+        "score": 2976,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "สมควรโชค",
+        "lastName": "แก่นแก้ว"
+      },
+      "7": {
+        "no": 11057,
+        "score": 2878,
+        "partyId": 81,
+        "title": "นาย",
+        "firstName": "ทัศนพงษ์",
+        "lastName": "กิ่งจันทร์"
+      },
+      "8": {
+        "no": 11099,
+        "score": 2889,
+        "partyId": 3,
+        "title": "นาง",
+        "firstName": "จำนงค์",
+        "lastName": "หล้าบุดดา"
+      },
+      "9": {
+        "no": 11132,
+        "score": 2170,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "นิรวัตร",
+        "lastName": "ไชยสัจ"
+      },
+      "10": {
+        "no": 11177,
+        "score": 3001,
+        "partyId": 102,
+        "title": "นาย",
+        "firstName": "บุญมี",
+        "lastName": "ทองมาก"
+      }
+    },
+    "35": {
+      "1": {
+        "no": 7088,
+        "score": 1671,
+        "partyId": 102,
+        "title": "นางสาว",
+        "firstName": "นงลักษณ์",
+        "lastName": "ชายทวีป"
+      },
+      "2": {
+        "no": 7098,
+        "score": 1851,
+        "partyId": 70,
+        "title": "นาย",
+        "firstName": "สันติ",
+        "lastName": "เก่งหล้า"
+      },
+      "3": {
+        "no": 7146,
+        "score": 1729,
+        "partyId": 81,
+        "title": "นาย",
+        "firstName": "สนิท",
+        "lastName": "ศรีพรหม"
+      }
+    },
+    "36": {
+      "1": {
+        "no": 2335,
+        "score": 3227,
+        "partyId": 18,
+        "title": "นาย",
+        "firstName": "วีรศักดิ์",
+        "lastName": "วงษ์บุตร"
+      },
+      "2": {
+        "no": 2379,
+        "score": 1779,
+        "partyId": 38,
+        "title": "นาย",
+        "firstName": "สุขสันต์",
+        "lastName": "เนื่องชุมพล"
+      },
+      "3": {
+        "no": 2397,
+        "score": 2199,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "คำผัส",
+        "lastName": "ศรีเสริมวงค์"
+      },
+      "4": {
+        "no": 2436,
+        "score": 4035,
+        "partyId": 9,
+        "title": "นาย",
+        "firstName": "สุพิน",
+        "lastName": "เวฬุวัน"
+      },
+      "5": {
+        "no": 2454,
+        "score": 2673,
+        "partyId": 76,
+        "title": "นาย",
+        "firstName": "รฐนนท์",
+        "lastName": "เชื้อสามารถ"
+      },
+      "6": {
+        "no": 2497,
+        "score": 2465,
+        "partyId": 61,
+        "title": "นาย",
+        "firstName": "ณรงฤทธิ์",
+        "lastName": "มอบสันเทียะ"
+      }
+    },
+    "37": {
+      "1": {
+        "no": 10368,
+        "score": 1493,
+        "partyId": 102,
+        "title": "นาย",
+        "firstName": "สุทัศน์",
+        "lastName": "พันธ์พิบูลย์"
+      },
+      "2": {
+        "no": 10394,
+        "score": 1995,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "พิสิษฐ์",
+        "lastName": "พัฒนาศุภสิทธิ์"
+      }
+    },
+    "38": {
+      "1": {
+        "no": 5105,
+        "score": 7012,
+        "partyId": 84,
+        "title": "นาย",
+        "firstName": "โยธิน",
+        "lastName": "บุญแก้ว"
+      },
+      "2": {
+        "no": 5112,
+        "score": 2188,
+        "partyId": 68,
+        "title": "นาย",
+        "firstName": "สำรวย",
+        "lastName": "ศรีทิน"
+      }
+    },
+    "39": {
+      "1": {
+        "no": 10217,
+        "score": 1548,
+        "partyId": 68,
+        "title": "นาย",
+        "firstName": "ยิ่งยศ",
+        "lastName": "ปอวิจิตกุล"
+      },
+      "2": {
+        "no": 10274,
+        "score": 2049,
+        "partyId": 71,
+        "title": "นาย",
+        "firstName": "นิรันด์ขจร",
+        "lastName": "บุญประเสริฐ"
+      },
+      "3": {
+        "no": 10302,
+        "score": 3061,
+        "partyId": 84,
+        "title": "นาย",
+        "firstName": "ชัยธวัช",
+        "lastName": "สามิตร"
+      }
+    },
+    "40": {
+      "1": {
+        "no": 1463,
+        "score": 2419,
+        "partyId": 76,
+        "title": "นาง",
+        "firstName": "พัชรา",
+        "lastName": "เคนไชยวงศ์"
+      },
+      "2": {
+        "no": 1497,
+        "score": 2372,
+        "partyId": 67,
+        "title": "นาง",
+        "firstName": "ปดิวรัดดา",
+        "lastName": "ปะกังพะลัง"
+      },
+      "3": {
+        "no": 1539,
+        "score": 1767,
+        "partyId": 63,
+        "title": "นาย",
+        "firstName": "สถาพร",
+        "lastName": "ระวิสิทธิ์"
+      },
+      "4": {
+        "no": 1570,
+        "score": 1743,
+        "partyId": 24,
+        "title": "นาย",
+        "firstName": "ประยุทธ",
+        "lastName": "ไชยชาติ"
+      },
+      "5": {
+        "no": 1630,
+        "score": 2418,
+        "partyId": 9,
+        "title": "นางสาว",
+        "firstName": "รติรัตน์",
+        "lastName": "ไชยหาญ"
+      },
+      "6": {
+        "no": 1651,
+        "score": 1473,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "ปณิธาน",
+        "lastName": "แต่งสุวรรณ"
+      },
+      "7": {
+        "no": 1702,
+        "score": 3071,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "โกมล",
+        "lastName": "สำแดง"
+      },
+      "8": {
+        "no": 1741,
+        "score": 2719,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "ธรรมชาติ",
+        "lastName": "บรรเทา"
+      },
+      "9": {
+        "no": 1783,
+        "score": 1740,
+        "partyId": 63,
+        "title": "นาง",
+        "firstName": "วันเพ็ญ",
+        "lastName": "ชินรินทร์"
+      },
+      "10": {
+        "no": 1831,
+        "score": 2003,
+        "partyId": 24,
+        "title": "นาง",
+        "firstName": "ปราณี",
+        "lastName": "พงศ์ศิริวัฒนกุล"
+      }
+    },
+    "41": {
+      "1": {
+        "no": 10422,
+        "score": 2399,
+        "partyId": 76,
+        "title": "นาย",
+        "firstName": "ทวีศักดิ์",
+        "lastName": "จันทะวงศ์"
+      },
+      "2": {
+        "no": 10471,
+        "score": 3292,
+        "partyId": 61,
+        "title": "นาย",
+        "firstName": "สมหมาย",
+        "lastName": "ประเสริฐกุล"
+      },
+      "3": {
+        "no": 10505,
+        "score": 2241,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "สมศักดิ์",
+        "lastName": "ดอนมายา"
+      },
+      "4": {
+        "no": 10535,
+        "score": 2062,
+        "partyId": 83,
+        "title": "นาย",
+        "firstName": "สาคร",
+        "lastName": "รอดขันเมือง"
+      },
+      "5": {
+        "no": 10586,
+        "score": 3289,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "ศุภณัฐ",
+        "lastName": "นุริตานนท์"
+      },
+      "6": {
+        "no": 10598,
+        "score": 2262,
+        "partyId": 63,
+        "title": "นาย",
+        "firstName": "อำนวย",
+        "lastName": "เครือน้ำคำ"
+      },
+      "7": {
+        "no": 10649,
+        "score": 1630,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "นีรพันธ์",
+        "lastName": "พรรณารักษ์"
+      },
+      "8": {
+        "no": 10693,
+        "score": 2015,
+        "partyId": 9,
+        "title": "นางสาว",
+        "firstName": "นิภา",
+        "lastName": "สื่อสุวรรณ"
+      }
+    },
+    "42": {
+      "1": {
+        "no": 8103,
+        "score": 2922,
+        "partyId": 68,
+        "title": "ด.ต.",
+        "firstName": "ไมตรี",
+        "lastName": "วาที"
+      },
+      "2": {
+        "no": 8159,
+        "score": 2706,
+        "partyId": 30,
+        "title": "นาย",
+        "firstName": "ธรรมพล",
+        "lastName": "หงษ์คำ"
+      },
+      "3": {
+        "no": 8197,
+        "score": 4158,
+        "partyId": 54,
+        "title": "นางสาว",
+        "firstName": "บุษบา",
+        "lastName": "ไขมีเพ็ชร"
+      }
+    },
+    "43": {
+      "1": {
+        "no": 10115,
+        "score": 1956,
+        "partyId": 8,
+        "title": "นาย",
+        "firstName": "กฤษฎา",
+        "lastName": "ตันเทอดทิตย์"
+      },
+      "2": {
+        "no": 10159,
+        "score": 1978,
+        "partyId": 64,
+        "title": "นาย",
+        "firstName": "ศักดิ์",
+        "lastName": "บึงลี"
+      },
+      "3": {
+        "no": 10207,
+        "score": 2256,
+        "partyId": 18,
+        "title": "นาย",
+        "firstName": "ธนาคช",
+        "lastName": "มาป้อง"
+      }
+    },
+    "44": {
+      "1": {
+        "no": 6785,
+        "score": 2877,
+        "partyId": 31,
+        "title": "นางสาว",
+        "firstName": "พลอยไพลิน",
+        "lastName": "รัตนเสถียร"
+      },
+      "2": {
+        "no": 6835,
+        "score": 1755,
+        "partyId": 64,
+        "title": "นาย",
+        "firstName": "สมเพชร",
+        "lastName": "ปาปะโข"
+      },
+      "3": {
+        "no": 6854,
+        "score": 2915,
+        "partyId": 63,
+        "title": "ร้อยตำรวจโท",
+        "firstName": "สุทัศน์",
+        "lastName": "รักสกุล"
+      },
+      "4": {
+        "no": 6907,
+        "score": 3028,
+        "partyId": 3,
+        "title": "นาง",
+        "firstName": "สุภาพร",
+        "lastName": "แสนโสภา"
+      },
+      "5": {
+        "no": 6943,
+        "score": 1606,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "สำเริง",
+        "lastName": "ปุรัมภะเว"
+      }
+    },
+    "45": {
+      "1": {
+        "no": 7284,
+        "score": 2386,
+        "partyId": 77,
+        "title": "นางสาว",
+        "firstName": "เอมอร",
+        "lastName": "พิมูลมี"
+      },
+      "2": {
+        "no": 7308,
+        "score": 2249,
+        "partyId": 9,
+        "title": "นาย",
+        "firstName": "อาภา",
+        "lastName": "จันทร์มณฑล"
+      },
+      "3": {
+        "no": 7338,
+        "score": 1457,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "นิติกร",
+        "lastName": "ขัติยนนท์"
+      },
+      "4": {
+        "no": 7377,
+        "score": 2463,
+        "partyId": 15,
+        "title": "นาง",
+        "firstName": "ศศิธร",
+        "lastName": "พรหมชัยนันท์"
+      },
+      "5": {
+        "no": 7435,
+        "score": 1693,
+        "partyId": 71,
+        "title": "นาย",
+        "firstName": "สุขสันต์",
+        "lastName": "เปรี่ยมนอง"
+      },
+      "6": {
+        "no": 7455,
+        "score": 2067,
+        "partyId": 73,
+        "title": "นาย",
+        "firstName": "ไพโรจน์",
+        "lastName": "สระคูพันธุ์"
+      },
+      "7": {
+        "no": 7521,
+        "score": 2030,
+        "partyId": 89,
+        "title": "นาย",
+        "firstName": "อดุลย์",
+        "lastName": "แก้วแสงใส"
+      }
+    },
+    "46": {
+      "1": {
+        "no": 1136,
+        "score": 2713,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "วิษณุ",
+        "lastName": "เยาวนิจ"
+      },
+      "2": {
+        "no": 1170,
+        "score": 1990,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "พลเชฏฐ์",
+        "lastName": "นรพิตรพิบูล"
+      },
+      "3": {
+        "no": 1231,
+        "score": 3838,
+        "partyId": 81,
+        "title": "นาย",
+        "firstName": "อนันต์",
+        "lastName": "จันทะรัตน์"
+      },
+      "4": {
+        "no": 1252,
+        "score": 2934,
+        "partyId": 75,
+        "title": "นาย",
+        "firstName": "อนุชา",
+        "lastName": "สิงหะดี"
+      },
+      "5": {
+        "no": 1288,
+        "score": 3238,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "เติมศักดิ์",
+        "lastName": "ชิณโสม"
+      }
+    },
+    "47": {
+      "1": {
+        "no": 8495,
+        "score": 2291,
+        "partyId": 92,
+        "title": "นาย",
+        "firstName": "ณรงค์ฤทธิ์",
+        "lastName": "โสมเกษตรินทร์"
+      },
+      "2": {
+        "no": 8501,
+        "score": 2072,
+        "partyId": 75,
+        "title": "นาง",
+        "firstName": "ชลิดา",
+        "lastName": "วัฒนะ"
+      },
+      "3": {
+        "no": 8557,
+        "score": 2538,
+        "partyId": 89,
+        "title": "นางสาว",
+        "firstName": "ศรีประไพ",
+        "lastName": "แสงศรีลา"
+      },
+      "4": {
+        "no": 8567,
+        "score": 3032,
+        "partyId": 24,
+        "title": "นาย",
+        "firstName": "บุญกาญจน์",
+        "lastName": "ร่มวาปี"
+      },
+      "5": {
+        "no": 8629,
+        "score": 1845,
+        "partyId": 54,
+        "title": "นาย",
+        "firstName": "ธีระยุทธ",
+        "lastName": "เวยสาร"
+      },
+      "6": {
+        "no": 8648,
+        "score": 2634,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "ธัชชัย",
+        "lastName": "บรรลือหาญ"
+      }
+    },
+    "48": {
+      "1": {
+        "no": 3538,
+        "score": 2061,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "รัชพล",
+        "lastName": "วงก์วรโชติ"
+      },
+      "2": {
+        "no": 3569,
+        "score": 2450,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "อารมณ์",
+        "lastName": "เวียงด้าน"
+      },
+      "3": {
+        "no": 3592,
+        "score": 1802,
+        "partyId": 82,
+        "title": "นาง",
+        "firstName": "ธนิสากุศลิน",
+        "lastName": "ศรีธนเดชณินธร"
+      },
+      "4": {
+        "no": 3640,
+        "score": 1927,
+        "partyId": 68,
+        "title": "นาย",
+        "firstName": "พิศาล",
+        "lastName": "บุพศิริ"
+      }
+    },
+    "49": {
+      "1": {
+        "no": 6984,
+        "score": 4055,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "แก่นเพชร",
+        "lastName": "ดีดวงพันธ์"
+      },
+      "2": {
+        "no": 7007,
+        "score": 2695,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "ฉลอง",
+        "lastName": "บุตรกาล"
+      }
+    },
+    "50": {
+      "1": {
+        "no": 2892,
+        "score": 3845,
+        "partyId": 3,
+        "title": "นาย",
+        "firstName": "ณัฑพร",
+        "lastName": "มโนใจ"
+      },
+      "2": {
+        "no": 2915,
+        "score": 2794,
+        "partyId": 71,
+        "title": "นางสาว",
+        "firstName": "จิราภรณ์",
+        "lastName": "แสนธิยะ"
+      },
+      "3": {
+        "no": 2941,
+        "score": 2969,
+        "partyId": 10,
+        "title": "นาย",
+        "firstName": "อารีย์",
+        "lastName": "นาคสุข"
+      },
+      "4": {
+        "no": 2990,
+        "score": 1635,
+        "partyId": 87,
+        "title": "นาย",
+        "firstName": "อรรถพล",
+        "lastName": "ไชยพล"
+      },
+      "5": {
+        "no": 3036,
+        "score": 2951,
+        "partyId": 81,
+        "title": "นาย",
+        "firstName": "อนุรักษ์",
+        "lastName": "แสนคำ"
+      },
+      "6": {
+        "no": 3072,
+        "score": 1462,
+        "partyId": 76,
+        "title": "นาย",
+        "firstName": "วิชัย",
+        "lastName": "ธิโวนา"
+      },
+      "7": {
+        "no": 3103,
+        "score": 2024,
+        "partyId": 38,
+        "title": "นาย",
+        "firstName": "รัฐพล",
+        "lastName": "คงแคล้ว"
+      },
+      "8": {
+        "no": 3126,
+        "score": 2393,
+        "partyId": 65,
+        "title": "นาย",
+        "firstName": "อนิวรรต",
+        "lastName": "ไชยวิลาศ"
+      },
+      "9": {
+        "no": 3170,
+        "score": 4850,
+        "partyId": 38,
+        "title": "นาย",
+        "firstName": "วิลาส",
+        "lastName": "สุขะวงศ์นันท์"
+      }
+    },
+    "51": {
+      "1": {
+        "no": 8054,
+        "score": 2987,
+        "partyId": 7,
+        "title": "นาย",
+        "firstName": "นพลกฤต",
+        "lastName": "พรหมโชติกาญ"
+      },
+      "2": {
+        "no": 8091,
+        "score": 1866,
+        "partyId": 96,
+        "title": "นางสาว",
+        "firstName": "กฤศณา",
+        "lastName": "สุทธิกุล"
+      }
+    },
+    "52": {
+      "1": {
+        "no": 7937,
+        "score": 5265,
+        "partyId": 77,
+        "title": "พ.อ.",
+        "firstName": "วิรัตน์",
+        "lastName": "จันทร์มล"
+      },
+      "2": {
+        "no": 7966,
+        "score": 2452,
+        "partyId": 100,
+        "title": "นางสาว",
+        "firstName": "ชุทิมา",
+        "lastName": "ชื่นหัวใจ"
+      },
+      "3": {
+        "no": 7989,
+        "score": 2348,
+        "partyId": 9,
+        "title": "นาย",
+        "firstName": "จักรกฤษณ์",
+        "lastName": "สายคำทอน"
+      },
+      "4": {
+        "no": 8015,
+        "score": 3575,
+        "partyId": 63,
+        "title": "นาง",
+        "firstName": "บุญธรรม",
+        "lastName": "จันทะเหลา"
+      }
+    },
+    "53": {
+      "1": {
+        "no": 10739,
+        "score": 2766,
+        "partyId": 46,
+        "title": "นาย",
+        "firstName": "สิทธิพงษ์",
+        "lastName": "มั่นคง"
+      },
+      "2": {
+        "no": 10748,
+        "score": 2775,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "วิษนุ",
+        "lastName": "เกิดศิลป์"
+      }
+    },
+    "54": {
+      "1": {
+        "no": 6660,
+        "score": 3618,
+        "partyId": 63,
+        "title": "นาง",
+        "firstName": "นฤมล",
+        "lastName": "บุญคง"
+      },
+      "2": {
+        "no": 6705,
+        "score": 4464,
+        "partyId": 76,
+        "title": "นาย",
+        "firstName": "พงศ์พันธ์",
+        "lastName": "สุวรรณพงศ์"
+      }
+    },
+    "55": {
+      "1": {
+        "no": 5002,
+        "score": 2430,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "ณัฏฐกิตติ์",
+        "lastName": "อินต๊ะจักร์"
+      },
+      "2": {
+        "no": 5029,
+        "score": 3786,
+        "partyId": 31,
+        "title": "นาง",
+        "firstName": "วราภรณ์",
+        "lastName": "บุญศัพย์"
+      },
+      "3": {
+        "no": 5058,
+        "score": 1703,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "ยก",
+        "lastName": "บุญอินทร์"
+      }
+    },
+    "56": {
+      "1": {
+        "no": 5969,
+        "score": 2115,
+        "partyId": 67,
+        "title": "ด.ต.",
+        "firstName": "เจริญ",
+        "lastName": "เทพมา"
+      },
+      "2": {
+        "no": 5976,
+        "score": 1887,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "ภาณุพล",
+        "lastName": "จอมศรี"
+      },
+      "3": {
+        "no": 6022,
+        "score": 2736,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "บุญฝาง",
+        "lastName": "ทาจีนะ"
+      }
+    },
+    "57": {
+      "1": {
+        "no": 2649,
+        "score": 1831,
+        "partyId": 101,
+        "title": "นาย",
+        "firstName": "สมบัติ",
+        "lastName": "นุชนิยม"
+      },
+      "2": {
+        "no": 2665,
+        "score": 2297,
+        "partyId": 77,
+        "title": "นางสาว",
+        "firstName": "ชนกพร",
+        "lastName": "อุยี่"
+      },
+      "3": {
+        "no": 2710,
+        "score": 2111,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "มนต์ชัย",
+        "lastName": "มาลัย"
+      },
+      "4": {
+        "no": 2744,
+        "score": 2015,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "วิวัฒน์",
+        "lastName": "สิงห์ใจ"
+      },
+      "5": {
+        "no": 2771,
+        "score": 1337,
+        "partyId": 64,
+        "title": "นาย",
+        "firstName": "นพดล",
+        "lastName": "รักมนุษย์"
+      },
+      "6": {
+        "no": 2823,
+        "score": 1706,
+        "partyId": 101,
+        "title": "นาย",
+        "firstName": "ดำรงค์",
+        "lastName": "ตอบุญธง"
+      },
+      "7": {
+        "no": 2843,
+        "score": 2662,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "นำชัย",
+        "lastName": "อนันท์เดชา"
+      }
+    },
+    "58": {
+      "1": {
+        "no": 7041,
+        "score": 3057,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "ธนนท์",
+        "lastName": "สารวาท"
+      }
+    },
+    "60": {
+      "1": {
+        "no": 4492,
+        "score": 2472,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "สงกรานต์",
+        "lastName": "จิตสุทธิภากร"
+      },
+      "2": {
+        "no": 4526,
+        "score": 2772,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "ศราวุธ",
+        "lastName": "โพธิ์ภาค"
+      },
+      "3": {
+        "no": 4565,
+        "score": 1777,
+        "partyId": 84,
+        "title": "นาง",
+        "firstName": "สุวรรณ์",
+        "lastName": "เขม่นเขตการ"
+      },
+      "4": {
+        "no": 4576,
+        "score": 3246,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "มานพ",
+        "lastName": "ศรีผึ้ง"
+      },
+      "5": {
+        "no": 4634,
+        "score": 2931,
+        "partyId": 56,
+        "title": "นางสาว",
+        "firstName": "วิกาณดา",
+        "lastName": "วิธีพันธุ์"
+      },
+      "6": {
+        "no": 4657,
+        "score": 3138,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "บ่าวอุบล",
+        "lastName": "ศิลาบุตร"
+      }
+    },
+    "61": {
+      "1": {
+        "no": 10769,
+        "score": 2962,
+        "partyId": 31,
+        "title": "นาย",
+        "firstName": "วีระ",
+        "lastName": "ประสาท"
+      },
+      "2": {
+        "no": 10803,
+        "score": 2576,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "ธวัช",
+        "lastName": "จีระดิษฐ์"
+      }
+    },
+    "62": {
+      "1": {
+        "no": 1335,
+        "score": 2736,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "ธิติ",
+        "lastName": "มหบุญพาชัย"
+      },
+      "2": {
+        "no": 1360,
+        "score": 2292,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "สุวิทย์",
+        "lastName": "บุศศรีเจริญ"
+      },
+      "3": {
+        "no": 1404,
+        "score": 1669,
+        "partyId": 2,
+        "title": "นาย",
+        "firstName": "วุฒิพงษ์",
+        "lastName": "โพธิจันทจินดา"
+      },
+      "4": {
+        "no": 1438,
+        "score": 2791,
+        "partyId": 46,
+        "title": "นาย",
+        "firstName": "อุดม",
+        "lastName": "เจริญขวัญ"
+      }
+    },
+    "63": {
+      "1": {
+        "no": 3328,
+        "score": 2164,
+        "partyId": 11,
+        "title": "ว่าที่ร้อยตรี",
+        "firstName": "สมศักดิ์",
+        "lastName": "วนกรกุล"
+      },
+      "2": {
+        "no": 3351,
+        "score": 1974,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "ภาคภูมิ",
+        "lastName": "เจริญชัยสกุลคีรี"
+      },
+      "3": {
+        "no": 3377,
+        "score": 2140,
+        "partyId": 75,
+        "title": "นาง",
+        "firstName": "จิดาภา",
+        "lastName": "เพ็ญธิยะ"
+      }
+    },
+    "64": {
+      "1": {
+        "no": 9483,
+        "score": 4867,
+        "partyId": 75,
+        "title": "นาย",
+        "firstName": "เฉลิมรัตน์",
+        "lastName": "เกษรสกุล"
+      },
+      "2": {
+        "no": 9494,
+        "score": 2292,
+        "partyId": 34,
+        "title": "นางสาว",
+        "firstName": "อาภรณ์",
+        "lastName": "ธิกรณ์"
+      },
+      "3": {
+        "no": 9538,
+        "score": 3224,
+        "partyId": 79,
+        "title": "นาย",
+        "firstName": "ปณณวิทย์",
+        "lastName": "สุขเกษม"
+      }
+    },
+    "65": {
+      "1": {
+        "no": 6271,
+        "score": 1828,
+        "partyId": 29,
+        "title": "นาง",
+        "firstName": "อารีรัตน์",
+        "lastName": "ดีอินทร์"
+      },
+      "2": {
+        "no": 6311,
+        "score": 2228,
+        "partyId": 71,
+        "title": "นาย",
+        "firstName": "สมาน",
+        "lastName": "อินเปล่ง"
+      },
+      "3": {
+        "no": 6354,
+        "score": 2857,
+        "partyId": 11,
+        "title": "นาง",
+        "firstName": "ยุภาวดี",
+        "lastName": "เมืองมา"
+      },
+      "4": {
+        "no": 6384,
+        "score": 2059,
+        "partyId": 3,
+        "title": "นาง",
+        "firstName": "นุชรี",
+        "lastName": "ชูลี"
+      },
+      "5": {
+        "no": 6423,
+        "score": 3275,
+        "partyId": 93,
+        "title": "นาย",
+        "firstName": "สำเนียง",
+        "lastName": "แสงบุดดี"
+      }
+    },
+    "66": {
+      "1": {
+        "no": 6179,
+        "score": 2455,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "วิบูลย์",
+        "lastName": "เพ็ชรรัตน์"
+      },
+      "2": {
+        "no": 6211,
+        "score": 2576,
+        "partyId": 72,
+        "title": "นาง",
+        "firstName": "เกศกมล",
+        "lastName": "ทองดอนน้อย"
+      },
+      "3": {
+        "no": 6241,
+        "score": 2038,
+        "partyId": 72,
+        "title": "นาย",
+        "firstName": "สาทิพ",
+        "lastName": "ดิษทับ"
+      }
+    },
+    "67": {
+      "1": {
+        "no": 6533,
+        "score": 2130,
+        "partyId": 46,
+        "title": "นาย",
+        "firstName": "กฤษณะ",
+        "lastName": "อินทโฉม"
+      },
+      "2": {
+        "no": 6551,
+        "score": 2917,
+        "partyId": 99,
+        "title": "นาย",
+        "firstName": "ธวัช",
+        "lastName": "ชุมหิน"
+      },
+      "3": {
+        "no": 6565,
+        "score": 2048,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "ณัฐพล",
+        "lastName": "ภาคกุล"
+      },
+      "4": {
+        "no": 6613,
+        "score": 2263,
+        "partyId": 61,
+        "title": "นางสาว",
+        "firstName": "นะรินวัลย์",
+        "lastName": "คล้ายเดชนิลินัน"
+      },
+      "5": {
+        "no": 6637,
+        "score": 2838,
+        "partyId": 18,
+        "title": "นาย",
+        "firstName": "กฤษฎา",
+        "lastName": "บัวสุวรรณ์"
+      }
+    },
+    "70": {
+      "1": {
+        "no": 7670,
+        "score": 2345,
+        "partyId": 82,
+        "title": "นาย",
+        "firstName": "สมพงค์",
+        "lastName": "โซเซ็ง"
+      },
+      "2": {
+        "no": 7693,
+        "score": 2893,
+        "partyId": 10,
+        "title": "นาย",
+        "firstName": "นิธิภัทร์",
+        "lastName": "ชิณโชติวรสิทธิ์"
+      },
+      "3": {
+        "no": 7731,
+        "score": 1729,
+        "partyId": 33,
+        "title": "นาย",
+        "firstName": "พงศภัค",
+        "lastName": "อุปถัมภ์ชาติ"
+      },
+      "4": {
+        "no": 7750,
+        "score": 3401,
+        "partyId": 83,
+        "title": "นางสาว",
+        "firstName": "ชะวรลัทธิ์",
+        "lastName": "ชินธรรมมิตร"
+      },
+      "5": {
+        "no": 7768,
+        "score": 2417,
+        "partyId": 18,
+        "title": "นาย",
+        "firstName": "ธวัชชัย",
+        "lastName": "จตุรนต์รัศมี"
+      }
+    },
+    "71": {
+      "1": {
+        "no": 1024,
+        "score": 2860,
+        "partyId": 92,
+        "title": "นางสาว",
+        "firstName": "ศยาธิป",
+        "lastName": "เชื้อวงศ์พรหม"
+      },
+      "2": {
+        "no": 1050,
+        "score": 2587,
+        "partyId": 38,
+        "title": "นาง",
+        "firstName": "ฐิติณัฐ",
+        "lastName": "เพิ่มพิริยะพันธ์"
+      },
+      "3": {
+        "no": 1068,
+        "score": 2276,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "พงศ์จักรพรรดิ์",
+        "lastName": "สกุลณกาญจน์"
+      },
+      "4": {
+        "no": 1085,
+        "score": 1800,
+        "partyId": 68,
+        "title": "นาย",
+        "firstName": "ยศพัทธ์",
+        "lastName": "เหลืองสดใส"
+      },
+      "5": {
+        "no": 1121,
+        "score": 1710,
+        "partyId": 82,
+        "title": "พันตำรวจเอก",
+        "firstName": "ฐานันดร์",
+        "lastName": "นาคขำพันธ์"
+      }
+    },
+    "72": {
+      "1": {
+        "no": 9566,
+        "score": 2784,
+        "partyId": 77,
+        "title": "นางสาว",
+        "firstName": "ณัฐวรินทร",
+        "lastName": "คิรินทร์ณิชกุล"
+      },
+      "2": {
+        "no": 9596,
+        "score": 2922,
+        "partyId": 96,
+        "title": "นาย",
+        "firstName": "ชูเกียรติ",
+        "lastName": "อุระวัฒน์"
+      },
+      "3": {
+        "no": 9623,
+        "score": 1935,
+        "partyId": 97,
+        "title": "นาย",
+        "firstName": "สมาน",
+        "lastName": "วงษ์กัณหา"
+      },
+      "4": {
+        "no": 9628,
+        "score": 4400,
+        "partyId": 18,
+        "title": "นาย",
+        "firstName": "ไพโรจน์",
+        "lastName": "ลีรัตนนุรัตน์"
+      }
+    },
+    "73": {
+      "1": {
+        "no": 3414,
+        "score": 2797,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "พงศ์ธวัช",
+        "lastName": "เศรษฐพินิจ"
+      },
+      "2": {
+        "no": 3451,
+        "score": 2887,
+        "partyId": 7,
+        "title": "นาย",
+        "firstName": "ทองสุข",
+        "lastName": "หมื่นณรงค์"
+      },
+      "3": {
+        "no": 3458,
+        "score": 2012,
+        "partyId": 82,
+        "title": "ร.ต.ท.",
+        "firstName": "ธาดา",
+        "lastName": "ชาญปรีชา"
+      },
+      "4": {
+        "no": 3494,
+        "score": 2061,
+        "partyId": 72,
+        "title": "นางสาว",
+        "firstName": "วิภาดา",
+        "lastName": "คชศิลา"
+      },
+      "5": {
+        "no": 3508,
+        "score": 2273,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "สุรชัย",
+        "lastName": "อนุตธโต"
+      }
+    },
+    "74": {
+      "1": {
+        "no": 9230,
+        "score": 3201,
+        "partyId": 82,
+        "title": "ว่าที่ ร.ต.อ.",
+        "firstName": "ธานี",
+        "lastName": "ฤาชัย"
+      },
+      "2": {
+        "no": 9260,
+        "score": 2712,
+        "partyId": 89,
+        "title": "นาย",
+        "firstName": "ภูมินทร์",
+        "lastName": "ศรีศักดา"
+      },
+      "3": {
+        "no": 9264,
+        "score": 2160,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "เอนก",
+        "lastName": "กุลกรรณ์"
+      }
+    },
+    "75": {
+      "1": {
+        "no": 9204,
+        "score": 4446,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "สุวรรณ",
+        "lastName": "จิตอนงค์"
+      }
+    },
+    "76": {
+      "1": {
+        "no": 6435,
+        "score": 2536,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "อรรถพร",
+        "lastName": "พลบุตร"
+      },
+      "2": {
+        "no": 6475,
+        "score": 2026,
+        "partyId": 102,
+        "title": "นาย",
+        "firstName": "จิรพันธุ์",
+        "lastName": "ภิรมย์ธีรโชติ"
+      },
+      "3": {
+        "no": 6491,
+        "score": 2780,
+        "partyId": 64,
+        "title": "นาง",
+        "firstName": "สุชีลา",
+        "lastName": "วิริยะภิญโญชีพ"
+      }
+    },
+    "77": {
+      "1": {
+        "no": 5557,
+        "score": 3680,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "เสน่ห์",
+        "lastName": "เจียรวนานนท์"
+      },
+      "2": {
+        "no": 5587,
+        "score": 1998,
+        "partyId": 9,
+        "title": "นาย",
+        "firstName": "สมบูรณ์",
+        "lastName": "สุดแสง"
+      },
+      "3": {
+        "no": 5620,
+        "score": 2179,
+        "partyId": 75,
+        "title": "นาย",
+        "firstName": "ธีรศักดิ์",
+        "lastName": "ฑีฆายุวัฒนา"
+      }
+    },
+    "80": {
+      "1": {
+        "no": 4196,
+        "score": 2651,
+        "partyId": 76,
+        "title": "นาง",
+        "firstName": "ฐิติรัตน์",
+        "lastName": "ภูชงค์"
+      },
+      "2": {
+        "no": 4226,
+        "score": 4050,
+        "partyId": 78,
+        "title": "นาย",
+        "firstName": "ดุสิต",
+        "lastName": "ไทรทอง"
+      },
+      "3": {
+        "no": 4255,
+        "score": 2985,
+        "partyId": 68,
+        "title": "นาย",
+        "firstName": "นรินทร์",
+        "lastName": "เหลือสม"
+      },
+      "4": {
+        "no": 4290,
+        "score": 2412,
+        "partyId": 63,
+        "title": "นาง",
+        "firstName": "สมถวิล",
+        "lastName": "เต็มภาชนะ"
+      },
+      "5": {
+        "no": 4355,
+        "score": 3238,
+        "partyId": 29,
+        "title": "นาย",
+        "firstName": "บันเทิง",
+        "lastName": "มาสเสมอ"
+      },
+      "6": {
+        "no": 4387,
+        "score": 2324,
+        "partyId": 24,
+        "title": "นาย",
+        "firstName": "กฤษณา",
+        "lastName": "ศิริผล"
+      },
+      "7": {
+        "no": 4437,
+        "score": 2536,
+        "partyId": 77,
+        "title": "นาย",
+        "firstName": "ชัชพิสิฐ",
+        "lastName": "สายชล"
+      },
+      "8": {
+        "no": 4447,
+        "score": 2092,
+        "partyId": 10,
+        "title": "นางสาว",
+        "firstName": "วาสนา",
+        "lastName": "ธงรอด"
+      }
+    },
+    "81": {
+      "1": {
+        "no": 21,
+        "score": 2765,
+        "partyId": 33,
+        "title": "นาย",
+        "firstName": "พิทักษ์",
+        "lastName": "ภารา"
+      },
+      "2": {
+        "no": 54,
+        "score": 2403,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "ภควัฒน์",
+        "lastName": "บุผ่อง"
+      }
+    },
+    "82": {
+      "1": {
+        "no": 6064,
+        "score": 1683,
+        "partyId": 38,
+        "title": "นางสาว",
+        "firstName": "ปรารถนา",
+        "lastName": "หนูด้วง"
+      }
+    },
+    "83": {
+      "1": {
+        "no": 6712,
+        "score": 1966,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "อนุชา",
+        "lastName": "ชัชยานุกร"
+      },
+      "2": {
+        "no": 6747,
+        "score": 3627,
+        "partyId": 80,
+        "title": "นาย",
+        "firstName": "จักรพงษ์",
+        "lastName": "หัสชัย"
+      }
+    },
+    "84": {
+      "1": {
+        "no": 9657,
+        "score": 2937,
+        "partyId": 15,
+        "title": "นาย",
+        "firstName": "สมบูรณ์",
+        "lastName": "ทองพัฒน์"
+      },
+      "2": {
+        "no": 9691,
+        "score": 2274,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "เจริญ",
+        "lastName": "จันทรา"
+      },
+      "3": {
+        "no": 9760,
+        "score": 2383,
+        "partyId": 38,
+        "title": "นาย",
+        "firstName": "มานิตย์",
+        "lastName": "เมืองครุฑ"
+      },
+      "4": {
+        "no": 9791,
+        "score": 1758,
+        "partyId": 79,
+        "title": "นาย",
+        "firstName": "ณรงค์ฤทธิ์",
+        "lastName": "ราชฉวาง"
+      },
+      "5": {
+        "no": 9804,
+        "score": 2052,
+        "partyId": 10,
+        "title": "นาย",
+        "firstName": "สุมล",
+        "lastName": "พัฒนราช"
+      },
+      "6": {
+        "no": 9841,
+        "score": 1918,
+        "partyId": 78,
+        "title": "นาย",
+        "firstName": "อรุณพงษ์",
+        "lastName": "เพ็ชรสวัสดิ์"
+      }
+    },
+    "85": {
+      "1": {
+        "no": 7528,
+        "score": 3135,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "ยืนยง",
+        "lastName": "นุ่นลอย"
+      }
+    },
+    "86": {
+      "1": {
+        "no": 2538,
+        "score": 2640,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "เกรียงศักดิ์",
+        "lastName": "จังคสุต"
+      },
+      "2": {
+        "no": 2590,
+        "score": 1887,
+        "partyId": 102,
+        "title": "นางสาว",
+        "firstName": "เสริญ",
+        "lastName": "ปานชัน"
+      },
+      "3": {
+        "no": 2620,
+        "score": 3319,
+        "partyId": 92,
+        "title": "นางสาว",
+        "firstName": "วราพร",
+        "lastName": "ช่วยเพชร"
+      }
+    },
+    "90": {
+      "1": {
+        "no": 8695,
+        "score": 2121,
+        "partyId": 33,
+        "title": "นาง",
+        "firstName": "หย๊ะ",
+        "lastName": "มะหะหมัด"
+      },
+      "2": {
+        "no": 8710,
+        "score": 2521,
+        "partyId": 80,
+        "title": "นางสาว",
+        "firstName": "เบญญาภรณ์",
+        "lastName": "บุญโรจน์พงศ์"
+      },
+      "3": {
+        "no": 8763,
+        "score": 1777,
+        "partyId": 1,
+        "title": "นาย",
+        "firstName": "วิรัตน์",
+        "lastName": "กัลยาศิริ"
+      },
+      "4": {
+        "no": 8780,
+        "score": 3235,
+        "partyId": 82,
+        "title": "นางสาว",
+        "firstName": "ชุติกาญจน์",
+        "lastName": "แขวงขาว"
+      },
+      "5": {
+        "no": 8823,
+        "score": 2725,
+        "partyId": 47,
+        "title": "นาง",
+        "firstName": "สมใจ",
+        "lastName": "ภู่ภิรมย์"
+      },
+      "6": {
+        "no": 8863,
+        "score": 1369,
+        "partyId": 81,
+        "title": "นาย",
+        "firstName": "มาโนชญ์",
+        "lastName": "มโนวงศ์สกุล"
+      },
+      "7": {
+        "no": 8872,
+        "score": 1940,
+        "partyId": 23,
+        "title": "นาง",
+        "firstName": "อรพินท์",
+        "lastName": "แก้วศรี"
+      },
+      "8": {
+        "no": 8911,
+        "score": 1654,
+        "partyId": 83,
+        "title": "นาย",
+        "firstName": "วสันต์",
+        "lastName": "ชั่งหมาน"
+      }
+    },
+    "91": {
+      "1": {
+        "no": 8954,
+        "score": 2492,
+        "partyId": 63,
+        "title": "นาย",
+        "firstName": "หวันอาบีดีน",
+        "lastName": "ปะดุกา"
+      },
+      "2": {
+        "no": 8972,
+        "score": 2372,
+        "partyId": 12,
+        "title": "นาย",
+        "firstName": "จรัล",
+        "lastName": "สุวรรณรัตน์"
+      }
+    },
+    "92": {
+      "1": {
+        "no": 3173,
+        "score": 1507,
+        "partyId": 67,
+        "title": "นาย",
+        "firstName": "จิราเจตณ์",
+        "lastName": "อ่อนมาก"
+      },
+      "2": {
+        "no": 3234,
+        "score": 2450,
+        "partyId": 77,
+        "title": "นาย",
+        "firstName": "จักรกฤต",
+        "lastName": "แก้วทอง"
+      },
+      "3": {
+        "no": 3273,
+        "score": 3301,
+        "partyId": 91,
+        "title": "นางสาว",
+        "firstName": "ขนิษฐา",
+        "lastName": "ภักดีภัทรพงศ์"
+      }
+    },
+    "93": {
+      "1": {
+        "no": 6078,
+        "score": 1695,
+        "partyId": 80,
+        "title": "นาย",
+        "firstName": "เสริม",
+        "lastName": "ทวีตา"
+      },
+      "2": {
+        "no": 6117,
+        "score": 3388,
+        "partyId": 34,
+        "title": "นาย",
+        "firstName": "จ้อง",
+        "lastName": "ชูทอง"
+      },
+      "3": {
+        "no": 6155,
+        "score": 1692,
+        "partyId": 34,
+        "title": "นาง",
+        "firstName": "วราภรณ์",
+        "lastName": "แก้วจันทร์"
+      }
+    },
+    "94": {
+      "1": {
+        "no": 5714,
+        "score": 3421,
+        "partyId": 39,
+        "title": "นาย",
+        "firstName": "เฟาซี",
+        "lastName": "ดอเล๊าะ"
+      },
+      "2": {
+        "no": 5756,
+        "score": 2486,
+        "partyId": 77,
+        "title": "นาย",
+        "firstName": "สมมาตร",
+        "lastName": "พรหมดำเนิน"
+      },
+      "3": {
+        "no": 5775,
+        "score": 1783,
+        "partyId": 8,
+        "title": "นาย",
+        "firstName": "นาเซร์",
+        "lastName": "พงค์ประเสริฐ"
+      },
+      "4": {
+        "no": 5807,
+        "score": 1616,
+        "partyId": 10,
+        "title": "นาย",
+        "firstName": "เจ๊ะโมฮำหมัดอิสฟิตรี",
+        "lastName": "เจ๊ะโมง"
+      }
+    },
+    "95": {
+      "1": {
+        "no": 7192,
+        "score": 1435,
+        "partyId": 38,
+        "title": "นาย",
+        "firstName": "เจตนิพิฐ",
+        "lastName": "สกุลทอง"
+      },
+      "2": {
+        "no": 7206,
+        "score": 1437,
+        "partyId": 23,
+        "title": "นาย",
+        "firstName": "นิมะตอเฮ",
+        "lastName": "วิชา"
+      },
+      "3": {
+        "no": 7258,
+        "score": 2330,
+        "partyId": 76,
+        "title": "นาย",
+        "firstName": "มาหามะ",
+        "lastName": "โต๊ะมะ"
+      }
+    },
+    "96": {
+      "1": {
+        "no": 4861,
+        "score": 2369,
+        "partyId": 80,
+        "title": "นาย",
+        "firstName": "ฮาซัน",
+        "lastName": "หะแว"
+      },
+      "2": {
+        "no": 4916,
+        "score": 1544,
+        "partyId": 91,
+        "title": "นาย",
+        "firstName": "ดือเล๊าะ",
+        "lastName": "บินหามะ"
+      },
+      "3": {
+        "no": 4936,
+        "score": 2619,
+        "partyId": 61,
+        "title": "นาง",
+        "firstName": "มาลีดา",
+        "lastName": "มะทา"
+      },
+      "4": {
+        "no": 4958,
+        "score": 2392,
+        "partyId": 81,
+        "title": "นาง",
+        "firstName": "ใอนี",
+        "lastName": "ระเซีย"
+      }
+    }
+  },
+  "zoneStatsMap": {
+    "10": {
+      "30": {
+        "units": 219,
+        "eligible": 167305,
+        "votesTotal": 34293,
+        "votesM": 15819,
+        "votesF": 18577,
+        "goodVotes": 22658,
+        "badVotes": 11719,
+        "noVotes": 262,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "11": {
+      "7": {
+        "units": 167,
+        "eligible": 128100,
+        "votesTotal": 25442,
+        "votesM": 12061,
+        "votesF": 13484,
+        "goodVotes": 17758,
+        "badVotes": 7768,
+        "noVotes": 1323,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "12": {
+      "6": {
+        "units": 207,
+        "eligible": 159096,
+        "votesTotal": 34468,
+        "votesM": 12837,
+        "votesF": 21734,
+        "goodVotes": 28400,
+        "badVotes": 6152,
+        "noVotes": 1596,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "13": {
+      "6": {
+        "units": 179,
+        "eligible": 141982,
+        "votesTotal": 41861,
+        "votesM": 16585,
+        "votesF": 25379,
+        "goodVotes": 36215,
+        "badVotes": 5730,
+        "noVotes": 3333,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "14": {
+      "4": {
+        "units": 267,
+        "eligible": 161125,
+        "votesTotal": 38757,
+        "votesM": 18553,
+        "votesF": 20307,
+        "goodVotes": 19284,
+        "badVotes": 19557,
+        "noVotes": 2715,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "15": {
+      "1": {
+        "units": 474,
+        "eligible": 226924,
+        "votesTotal": 54043,
+        "votesM": 22533,
+        "votesF": 31613,
+        "goodVotes": 33656,
+        "badVotes": 20471,
+        "noVotes": 4582,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "16": {
+      "4": {
+        "units": 278,
+        "eligible": 151279,
+        "votesTotal": 33888,
+        "votesM": 11844,
+        "votesF": 22147,
+        "goodVotes": 25518,
+        "badVotes": 8454,
+        "noVotes": 968,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "17": {
+      "1": {
+        "units": 209,
+        "eligible": 170539,
+        "votesTotal": 39691,
+        "votesM": 11023,
+        "votesF": 28771,
+        "goodVotes": 25623,
+        "badVotes": 14152,
+        "noVotes": 1364,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "18": {
+      "2": {
+        "units": 257,
+        "eligible": 132616,
+        "votesTotal": 25407,
+        "votesM": 9520,
+        "votesF": 15990,
+        "goodVotes": 21339,
+        "badVotes": 4152,
+        "noVotes": 1572,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "19": {
+      "3": {
+        "units": 258,
+        "eligible": 165787,
+        "votesTotal": 38112,
+        "votesM": 14497,
+        "votesF": 23718,
+        "goodVotes": 26541,
+        "badVotes": 11655,
+        "noVotes": 2748,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "20": {
+      "8": {
+        "units": 142,
+        "eligible": 127763,
+        "votesTotal": 31785,
+        "votesM": 12289,
+        "votesF": 19599,
+        "goodVotes": 26384,
+        "badVotes": 5485,
+        "noVotes": 2247,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "21": {
+      "4": {
+        "units": 166,
+        "eligible": 134514,
+        "votesTotal": 23539,
+        "votesM": 11439,
+        "votesF": 12203,
+        "goodVotes": 15146,
+        "badVotes": 8477,
+        "noVotes": 1870,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "22": {
+      "3": {
+        "units": 303,
+        "eligible": 154871,
+        "votesTotal": 39893,
+        "votesM": 13421,
+        "votesF": 26575,
+        "goodVotes": 26055,
+        "badVotes": 13922,
+        "noVotes": 653,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "23": {
+      "1": {
+        "units": 305,
+        "eligible": 172749,
+        "votesTotal": 35789,
+        "votesM": 12604,
+        "votesF": 23288,
+        "goodVotes": 21866,
+        "badVotes": 14007,
+        "noVotes": 2944,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "24": {
+      "4": {
+        "units": 233,
+        "eligible": 148921,
+        "votesTotal": 37499,
+        "votesM": 18738,
+        "votesF": 18864,
+        "goodVotes": 27464,
+        "badVotes": 10119,
+        "noVotes": 1525,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "25": {
+      "3": {
+        "units": 236,
+        "eligible": 123355,
+        "votesTotal": 30478,
+        "votesM": 11960,
+        "votesF": 18621,
+        "goodVotes": 21817,
+        "badVotes": 8745,
+        "noVotes": 1504,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "26": {
+      "1": {
+        "units": 456,
+        "eligible": 207138,
+        "votesTotal": 48085,
+        "votesM": 17641,
+        "votesF": 30547,
+        "goodVotes": 41490,
+        "badVotes": 6679,
+        "noVotes": 4030,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "27": {
+      "3": {
+        "units": 262,
+        "eligible": 144806,
+        "votesTotal": 28797,
+        "votesM": 10532,
+        "votesF": 18368,
+        "goodVotes": 21131,
+        "badVotes": 7750,
+        "noVotes": 1379,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "30": {
+      "14": {
+        "units": 341,
+        "eligible": 144239,
+        "votesTotal": 32068,
+        "votesM": 10915,
+        "votesF": 21256,
+        "goodVotes": 15965,
+        "badVotes": 16187,
+        "noVotes": 529,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "31": {
+      "8": {
+        "units": 270,
+        "eligible": 154142,
+        "votesTotal": 37095,
+        "votesM": 14194,
+        "votesF": 23004,
+        "goodVotes": 31165,
+        "badVotes": 6014,
+        "noVotes": 2461,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "32": {
+      "7": {
+        "units": 288,
+        "eligible": 147477,
+        "votesTotal": 31740,
+        "votesM": 13294,
+        "votesF": 18549,
+        "goodVotes": 22345,
+        "badVotes": 9479,
+        "noVotes": 2233,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "33": {
+      "8": {
+        "units": 419,
+        "eligible": 139753,
+        "votesTotal": 37258,
+        "votesM": 15748,
+        "votesF": 21613,
+        "goodVotes": 31086,
+        "badVotes": 6256,
+        "noVotes": 1470,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "34": {
+      "10": {
+        "units": 341,
+        "eligible": 149147,
+        "votesTotal": 39111,
+        "votesM": 18627,
+        "votesF": 20587,
+        "goodVotes": 33959,
+        "badVotes": 5236,
+        "noVotes": 3515,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "35": {
+      "3": {
+        "units": 294,
+        "eligible": 144405,
+        "votesTotal": 29012,
+        "votesM": 13236,
+        "votesF": 15879,
+        "goodVotes": 16514,
+        "badVotes": 12582,
+        "noVotes": 837,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "36": {
+      "6": {
+        "units": 336,
+        "eligible": 153954,
+        "votesTotal": 45486,
+        "votesM": 16422,
+        "votesF": 29167,
+        "goodVotes": 34771,
+        "badVotes": 10799,
+        "noVotes": 327,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "37": {
+      "2": {
+        "units": 321,
+        "eligible": 153929,
+        "votesTotal": 37069,
+        "votesM": 17563,
+        "votesF": 19609,
+        "goodVotes": 27498,
+        "badVotes": 9655,
+        "noVotes": 3043,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "38": {
+      "2": {
+        "units": 294,
+        "eligible": 160222,
+        "votesTotal": 40833,
+        "votesM": 13632,
+        "votesF": 27304,
+        "goodVotes": 22179,
+        "badVotes": 18738,
+        "noVotes": 2833,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "39": {
+      "3": {
+        "units": 236,
+        "eligible": 130250,
+        "votesTotal": 39095,
+        "votesM": 13401,
+        "votesF": 25797,
+        "goodVotes": 28504,
+        "badVotes": 10675,
+        "noVotes": 2842,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "40": {
+      "10": {
+        "units": 248,
+        "eligible": 135357,
+        "votesTotal": 30347,
+        "votesM": 10769,
+        "votesF": 19681,
+        "goodVotes": 18450,
+        "badVotes": 11981,
+        "noVotes": 1356,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "41": {
+      "8": {
+        "units": 283,
+        "eligible": 153581,
+        "votesTotal": 39648,
+        "votesM": 15545,
+        "votesF": 24206,
+        "goodVotes": 23643,
+        "badVotes": 16089,
+        "noVotes": 3163,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "42": {
+      "3": {
+        "units": 379,
+        "eligible": 167284,
+        "votesTotal": 48214,
+        "votesM": 18703,
+        "votesF": 29614,
+        "goodVotes": 38369,
+        "badVotes": 9929,
+        "noVotes": 442,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "43": {
+      "3": {
+        "units": 250,
+        "eligible": 135790,
+        "votesTotal": 35634,
+        "votesM": 15476,
+        "votesF": 20261,
+        "goodVotes": 22442,
+        "badVotes": 13276,
+        "noVotes": 1093,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "44": {
+      "5": {
+        "units": 374,
+        "eligible": 157949,
+        "votesTotal": 33400,
+        "votesM": 11862,
+        "votesF": 21641,
+        "goodVotes": 23066,
+        "badVotes": 10418,
+        "noVotes": 2249,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "45": {
+      "7": {
+        "units": 360,
+        "eligible": 153244,
+        "votesTotal": 29737,
+        "votesM": 10850,
+        "votesF": 18990,
+        "goodVotes": 21599,
+        "badVotes": 8222,
+        "noVotes": 778,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "46": {
+      "5": {
+        "units": 320,
+        "eligible": 160076,
+        "votesTotal": 36585,
+        "votesM": 14336,
+        "votesF": 22352,
+        "goodVotes": 29033,
+        "badVotes": 7636,
+        "noVotes": 2166,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "47": {
+      "6": {
+        "units": 294,
+        "eligible": 150403,
+        "votesTotal": 46778,
+        "votesM": 15728,
+        "votesF": 31153,
+        "goodVotes": 32789,
+        "badVotes": 14073,
+        "noVotes": 1795,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "48": {
+      "4": {
+        "units": 289,
+        "eligible": 140328,
+        "votesTotal": 30584,
+        "votesM": 12722,
+        "votesF": 17965,
+        "goodVotes": 20848,
+        "badVotes": 9820,
+        "noVotes": 2013,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "49": {
+      "2": {
+        "units": 319,
+        "eligible": 135540,
+        "votesTotal": 28414,
+        "votesM": 9791,
+        "votesF": 18726,
+        "goodVotes": 20025,
+        "badVotes": 8473,
+        "noVotes": 466,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "50": {
+      "9": {
+        "units": 335,
+        "eligible": 140784,
+        "votesTotal": 30418,
+        "votesM": 13432,
+        "votesF": 17089,
+        "goodVotes": 26680,
+        "badVotes": 3822,
+        "noVotes": 1789,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "51": {
+      "2": {
+        "units": 358,
+        "eligible": 167687,
+        "votesTotal": 31928,
+        "votesM": 11570,
+        "votesF": 20461,
+        "goodVotes": 18989,
+        "badVotes": 13023,
+        "noVotes": 2205,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "52": {
+      "4": {
+        "units": 321,
+        "eligible": 164672,
+        "votesTotal": 43328,
+        "votesM": 17640,
+        "votesF": 25791,
+        "goodVotes": 25528,
+        "badVotes": 17884,
+        "noVotes": 1831,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "53": {
+      "2": {
+        "units": 354,
+        "eligible": 176138,
+        "votesTotal": 36290,
+        "votesM": 13410,
+        "votesF": 22983,
+        "goodVotes": 20178,
+        "badVotes": 16196,
+        "noVotes": 594,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "54": {
+      "2": {
+        "units": 345,
+        "eligible": 177527,
+        "votesTotal": 49964,
+        "votesM": 20740,
+        "votesF": 29327,
+        "goodVotes": 38028,
+        "badVotes": 12020,
+        "noVotes": 4126,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "55": {
+      "3": {
+        "units": 295,
+        "eligible": 118475,
+        "votesTotal": 27483,
+        "votesM": 10592,
+        "votesF": 16994,
+        "goodVotes": 17591,
+        "badVotes": 9976,
+        "noVotes": 723,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "56": {
+      "3": {
+        "units": 294,
+        "eligible": 134298,
+        "votesTotal": 39656,
+        "votesM": 15108,
+        "votesF": 24651,
+        "goodVotes": 26340,
+        "badVotes": 13400,
+        "noVotes": 1646,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "57": {
+      "7": {
+        "units": 227,
+        "eligible": 114957,
+        "votesTotal": 27120,
+        "votesM": 9176,
+        "votesF": 18047,
+        "goodVotes": 21977,
+        "badVotes": 5227,
+        "noVotes": 462,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "58": {
+      "1": {
+        "units": 458,
+        "eligible": 174412,
+        "votesTotal": 43432,
+        "votesM": 14384,
+        "votesF": 29151,
+        "goodVotes": 25234,
+        "badVotes": 18282,
+        "noVotes": 3353,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "60": {
+      "6": {
+        "units": 250,
+        "eligible": 133969,
+        "votesTotal": 34038,
+        "votesM": 14313,
+        "votesF": 19828,
+        "goodVotes": 24912,
+        "badVotes": 9210,
+        "noVotes": 2487,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "61": {
+      "2": {
+        "units": 288,
+        "eligible": 132400,
+        "votesTotal": 37965,
+        "votesM": 14604,
+        "votesF": 23464,
+        "goodVotes": 22495,
+        "badVotes": 15554,
+        "noVotes": 3132,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "62": {
+      "4": {
+        "units": 283,
+        "eligible": 139761,
+        "votesTotal": 39219,
+        "votesM": 14125,
+        "votesF": 25197,
+        "goodVotes": 32796,
+        "badVotes": 6507,
+        "noVotes": 3386,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "63": {
+      "3": {
+        "units": 194,
+        "eligible": 113751,
+        "votesTotal": 28821,
+        "votesM": 12816,
+        "votesF": 16108,
+        "goodVotes": 21932,
+        "badVotes": 6973,
+        "noVotes": 1812,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "64": {
+      "3": {
+        "units": 331,
+        "eligible": 165126,
+        "votesTotal": 44799,
+        "votesM": 16196,
+        "votesF": 28706,
+        "goodVotes": 34234,
+        "badVotes": 10649,
+        "noVotes": 2807,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "65": {
+      "5": {
+        "units": 278,
+        "eligible": 130434,
+        "votesTotal": 33428,
+        "votesM": 12816,
+        "votesF": 20715,
+        "goodVotes": 28011,
+        "badVotes": 5501,
+        "noVotes": 509,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "66": {
+      "3": {
+        "units": 343,
+        "eligible": 143130,
+        "votesTotal": 27992,
+        "votesM": 10615,
+        "votesF": 17480,
+        "goodVotes": 20850,
+        "badVotes": 7226,
+        "noVotes": 1313,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "67": {
+      "5": {
+        "units": 321,
+        "eligible": 155981,
+        "votesTotal": 36147,
+        "votesM": 14577,
+        "votesF": 21673,
+        "goodVotes": 25648,
+        "badVotes": 10583,
+        "noVotes": 2874,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "70": {
+      "5": {
+        "units": 200,
+        "eligible": 133968,
+        "votesTotal": 28247,
+        "votesM": 9278,
+        "votesF": 19072,
+        "goodVotes": 25905,
+        "badVotes": 2426,
+        "noVotes": 2191,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "71": {
+      "5": {
+        "units": 136,
+        "eligible": 83628,
+        "votesTotal": 17112,
+        "votesM": 6197,
+        "votesF": 11018,
+        "goodVotes": 12687,
+        "badVotes": 4509,
+        "noVotes": 681,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "72": {
+      "4": {
+        "units": 327,
+        "eligible": 163929,
+        "votesTotal": 41824,
+        "votesM": 14938,
+        "votesF": 26989,
+        "goodVotes": 24637,
+        "badVotes": 17271,
+        "noVotes": 2271,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "73": {
+      "5": {
+        "units": 187,
+        "eligible": 143444,
+        "votesTotal": 28694,
+        "votesM": 11303,
+        "votesF": 17494,
+        "goodVotes": 23830,
+        "badVotes": 4948,
+        "noVotes": 1083,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "74": {
+      "3": {
+        "units": 238,
+        "eligible": 144883,
+        "votesTotal": 30847,
+        "votesM": 13291,
+        "votesF": 17659,
+        "goodVotes": 22235,
+        "badVotes": 8696,
+        "noVotes": 1058,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "75": {
+      "1": {
+        "units": 260,
+        "eligible": 157769,
+        "votesTotal": 37609,
+        "votesM": 14319,
+        "votesF": 23393,
+        "goodVotes": 28396,
+        "badVotes": 9297,
+        "noVotes": 3047,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "76": {
+      "3": {
+        "units": 241,
+        "eligible": 127715,
+        "votesTotal": 37240,
+        "votesM": 15502,
+        "votesF": 21841,
+        "goodVotes": 27633,
+        "badVotes": 9691,
+        "noVotes": 644,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "77": {
+      "3": {
+        "units": 201,
+        "eligible": 126931,
+        "votesTotal": 36257,
+        "votesM": 13550,
+        "votesF": 22810,
+        "goodVotes": 28290,
+        "badVotes": 8051,
+        "noVotes": 2702,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "80": {
+      "8": {
+        "units": 263,
+        "eligible": 148575,
+        "votesTotal": 43515,
+        "votesM": 19396,
+        "votesF": 24222,
+        "goodVotes": 28915,
+        "badVotes": 14684,
+        "noVotes": 3539,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "81": {
+      "2": {
+        "units": 299,
+        "eligible": 172261,
+        "votesTotal": 38983,
+        "votesM": 12347,
+        "votesF": 26739,
+        "goodVotes": 22106,
+        "badVotes": 16961,
+        "noVotes": 1194,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "82": {
+      "1": {
+        "units": 346,
+        "eligible": 202831,
+        "votesTotal": 36567,
+        "votesM": 16725,
+        "votesF": 19945,
+        "goodVotes": 18034,
+        "badVotes": 18617,
+        "noVotes": 1936,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "83": {
+      "2": {
+        "units": 194,
+        "eligible": 149655,
+        "votesTotal": 43897,
+        "votesM": 18085,
+        "votesF": 25915,
+        "goodVotes": 35731,
+        "badVotes": 8250,
+        "noVotes": 359,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "84": {
+      "6": {
+        "units": 248,
+        "eligible": 132870,
+        "votesTotal": 33754,
+        "votesM": 14814,
+        "votesF": 19043,
+        "goodVotes": 22899,
+        "badVotes": 10939,
+        "noVotes": 2027,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "85": {
+      "1": {
+        "units": 203,
+        "eligible": 135654,
+        "votesTotal": 38502,
+        "votesM": 13902,
+        "votesF": 24703,
+        "goodVotes": 28682,
+        "badVotes": 9904,
+        "noVotes": 2250,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "86": {
+      "3": {
+        "units": 249,
+        "eligible": 131416,
+        "votesTotal": 32159,
+        "votesM": 13396,
+        "votesF": 18866,
+        "goodVotes": 24198,
+        "badVotes": 8045,
+        "noVotes": 842,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "90": {
+      "8": {
+        "units": 242,
+        "eligible": 134809,
+        "votesTotal": 35357,
+        "votesM": 13043,
+        "votesF": 22417,
+        "goodVotes": 20944,
+        "badVotes": 14497,
+        "noVotes": 3062,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "91": {
+      "2": {
+        "units": 196,
+        "eligible": 121009,
+        "votesTotal": 27709,
+        "votesM": 10083,
+        "votesF": 17729,
+        "goodVotes": 20351,
+        "badVotes": 7442,
+        "noVotes": 921,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "92": {
+      "3": {
+        "units": 285,
+        "eligible": 165657,
+        "votesTotal": 35653,
+        "votesM": 14654,
+        "votesF": 21102,
+        "goodVotes": 27414,
+        "badVotes": 8323,
+        "noVotes": 2774,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "93": {
+      "3": {
+        "units": 262,
+        "eligible": 147267,
+        "votesTotal": 27550,
+        "votesM": 11666,
+        "votesF": 15987,
+        "goodVotes": 19811,
+        "badVotes": 7823,
+        "noVotes": 232,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "94": {
+      "4": {
+        "units": 189,
+        "eligible": 119267,
+        "votesTotal": 29772,
+        "votesM": 11540,
+        "votesF": 18335,
+        "goodVotes": 17935,
+        "badVotes": 11921,
+        "noVotes": 1760,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "95": {
+      "3": {
+        "units": 212,
+        "eligible": 121575,
+        "votesTotal": 34375,
+        "votesM": 16470,
+        "votesF": 18008,
+        "goodVotes": 21083,
+        "badVotes": 13376,
+        "noVotes": 2859,
+        "progress": null,
+        "finished": false
+      }
+    },
+    "96": {
+      "4": {
+        "units": 261,
+        "eligible": 145232,
+        "votesTotal": 36530,
+        "votesM": 13532,
+        "votesF": 23101,
+        "goodVotes": 24072,
+        "badVotes": 12542,
+        "noVotes": 3198,
+        "progress": null,
+        "finished": false
+      }
+    }
+  },
+  "partyScoreMap": {
+    "1": 329719,
+    "2": 75356,
+    "3": 188473,
+    "4": 861,
+    "6": 25099,
+    "7": 83542,
+    "8": 227008,
+    "9": 197101,
+    "10": 242115,
+    "11": 86260,
+    "12": 296682,
+    "13": 668,
+    "15": 325110,
+    "17": 22916,
+    "18": 164285,
+    "19": 528,
+    "23": 29983,
+    "24": 189016,
+    "28": 3579,
+    "29": 316518,
+    "30": 14031,
+    "31": 312825,
+    "33": 52961,
+    "34": 330579,
+    "38": 275656,
+    "39": 318703,
+    "40": 438,
+    "42": 315394,
+    "46": 144277,
+    "47": 167997,
+    "48": 43059,
+    "50": 10673,
+    "53": 2509,
+    "54": 25052,
+    "56": 79041,
+    "58": 5077,
+    "60": 5962,
+    "61": 119510,
+    "62": 16921,
+    "63": 336491,
+    "64": 152483,
+    "65": 47596,
+    "66": 126367,
+    "67": 301273,
+    "68": 328673,
+    "69": 31043,
+    "70": 142495,
+    "71": 212622,
+    "72": 347752,
+    "73": 35495,
+    "74": 31945,
+    "75": 260356,
+    "76": 201457,
+    "77": 308999,
+    "78": 197311,
+    "79": 135112,
+    "80": 46979,
+    "81": 235128,
+    "82": 305074,
+    "83": 332761,
+    "84": 294402,
+    "85": 29661,
+    "86": 23220,
+    "87": 35469,
+    "88": 30891,
+    "89": 111904,
+    "90": 15537,
+    "91": 134806,
+    "92": 79403,
+    "93": 18714,
+    "94": 44968,
+    "96": 85547,
+    "97": 100827,
+    "98": 5709,
+    "99": 25365,
+    "100": 15570,
+    "101": 34664,
+    "102": 123053,
+    "103": 16460,
+    "104": 25828,
+    "109": 2365
+  }
+}

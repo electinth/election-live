@@ -31,7 +31,7 @@ function useComputed(fn, inputs) {
 
 onBecomeObserved(summaryStore.dataBox, () => {
   setTimeout(() => {
-    import("./__fixtures__/Summary20190321155702.json").then(result => {
+    import("./__fixtures__/Summary20190322080003.json").then(result => {
       runInAction("Summary data loaded", () => {
         summaryStore.loading = false
         summaryStore.dataBox.set(result)
@@ -50,4 +50,27 @@ export function useSummaryData() {
     }),
     []
   )
+}
+
+/** @return {{ loading: boolean, data?: ElectionDataSource.PerProvinceJSON }} */
+export function usePerProvinceData(provinceId) {
+  // @todo #52 Replace mock data for per-province with real data loading logic.
+  return provinceId === 10
+    ? {
+        loading: false,
+        data: require("./__fixtures__/Bangkok20190322080003.json"),
+      }
+    : { loading: true }
+}
+
+/** @return {{ loading: boolean, data?: ElectionDataSource.PerZoneData }} */
+export function usePerZoneData(provinceId, zoneNo) {
+  const perProvinceData = usePerProvinceData(provinceId)
+  if (perProvinceData.loading) {
+    return { loading: true }
+  }
+  return {
+    loading: false,
+    data: perProvinceData.data.zoneInformationMap[zoneNo],
+  }
 }
