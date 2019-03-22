@@ -28,7 +28,7 @@ import { DISPLAY_FONT, labelColor } from "../styles"
 import Loading from "../components/Loading"
 import Placeholder from "../components/Placeholder"
 
-export default ({ pageContext }) => (
+export default ({ pageContext, navigate, location }) => (
   <MainLayout activeNavBarSection="by-area">
     <InertFilter
       value={pageContext.zoneView ? null : pageContext.filterName || "all"}
@@ -36,6 +36,8 @@ export default ({ pageContext }) => (
       {filterName => (
         <ZoneFilterContext.Provider value={filterName}>
           <ZoneMasterView
+            location={location}
+            navigate={navigate}
             contentHeader={
               <SummaryHeaderContainer
                 key={filterName}
