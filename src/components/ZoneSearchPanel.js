@@ -3,6 +3,7 @@ import React, { useState, useRef, useLayoutEffect } from "react"
 import { zonesForSearch, zonePath } from "../models/information"
 import { labelColor } from "../styles"
 import { Link } from "gatsby"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
   const [state, setState] = useState({
@@ -16,7 +17,7 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
     }
   }, [autoFocus])
   return (
-    <div>
+    <div css={{ position: "relative" }}>
       <input
         ref={inputRef}
         css={{
@@ -36,13 +37,13 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
       />
       <div
         css={{
-          top: 80,
+          top: 30,
           position: "absolute",
-          right: 30,
+          right: 10,
           color: labelColor,
         }}
       >
-        <FontAwesomeIcon icon="search" />
+        <FontAwesomeIcon icon={faSearch} />
       </div>
 
       {state.isSearchOpen && (
