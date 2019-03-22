@@ -56,14 +56,7 @@ declare namespace ElectionDataSource {
     /** Number of "no" votes (also counted as a good vote) */
     noVotes: number
 
-    // @todo #1 How do we determine when vote counting for a certain zone is finished?
-    //  The problem is, we don’t know beforehand how many ballots we received.
-    //  And it also seems like the official API doesn’t provide the information
-    //  on progress of each zone, or whether the counting has finished.
-    //  Need to check with the committee to see if the data will be available,
-    //  and if not, decide the appropriate adjustments to the app.
-    //
-    /** Vote counting progress, between 0-1 */
+    /** Vote counting progress, between 0–100 */
     progress: number
     /** True if counting finished */
     finished: boolean
