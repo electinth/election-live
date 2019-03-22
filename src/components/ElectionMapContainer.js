@@ -120,6 +120,10 @@ export default function ElectionMapContainer() {
             left: mapTip.mouseEvent.clientX + 10,
           }}
         >
+          {
+            // @todo #1 [UI] ElectionMapContainer: Replace placeholder text
+            //  in tooltip with actual content.
+          }
           <div>เขต {mapTip.zone.data.id}</div>
           <div>พรรคผ่อน</div>
           <div>
