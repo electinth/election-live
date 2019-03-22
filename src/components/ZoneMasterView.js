@@ -75,7 +75,6 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               zIndex: 1,
               margin: "0 auto",
               [media(DESKTOP_MIN_WIDTH)]: {
-                display: "block",
                 order: 3,
                 width: 320,
                 margin: 0,

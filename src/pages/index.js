@@ -238,7 +238,7 @@ function ZoneView({ provinceId, zoneNo }) {
 
 function ZoneCandidateList({ provinceId, zoneNo, goodVotes }) {
   const dataState = usePerZoneData(provinceId, zoneNo)
-  if (dataState.loading) {
+  if (!dataState.completed) {
     return <Loading />
   }
   const data = dataState.data

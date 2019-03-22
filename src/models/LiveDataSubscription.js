@@ -176,16 +176,17 @@ export function usePerProvinceData(provinceId) {
   return useInertState(state)
 }
 
-/** @return {{ loading: boolean, data?: ElectionDataSource.PerZoneData }} */
+/** @return {DataState<ElectionDataSource.PerZoneData>} */
 export function usePerZoneData(provinceId, zoneNo) {
   const perProvinceData = usePerProvinceData(provinceId)
-  if (perProvinceData.loading) {
-    return { loading: true }
-  }
-  return {
-    loading: false,
-    data: perProvinceData.data.zoneInformationMap[zoneNo],
-  }
+  return useMemo(
+    () => ({
+      ...perProvinceData,
+      data:
+        perProvinceData.data && perProvinceData.data.zoneInformationMap[zoneNo],
+    }),
+    [perProvinceData]
+  )
 }
 
 /**
