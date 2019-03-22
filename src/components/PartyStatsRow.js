@@ -8,7 +8,7 @@ import { partyColor, partyLogo } from "../models/information"
  */
 const PartyStatsRow = props => {
   const totalSeats = props.constituencySeats + props.partyListSeats
-  const barWidth = `${((totalSeats / props.maxSeats) * 100).toFixed(2)}%`
+  const barWidth = `${(totalSeats / props.maxSeats).toFixed(4)}%`
 
   return (
     <article
@@ -19,6 +19,7 @@ const PartyStatsRow = props => {
         display: "grid",
         gridTemplateColumns: "28px auto 32px",
         gridGap: "6px",
+        background: "white",
       }}
     >
       <div>
@@ -46,10 +47,13 @@ const PartyStatsRow = props => {
         <div
           css={{
             height: 5,
-            background: partyColor(props.party),
             marginTop: "5px",
+            transformOrigin: "left",
           }}
-          style={{ width: barWidth }}
+          style={{
+            transform: `scaleX(${barWidth})`,
+            background: partyColor(props.party),
+          }}
         />
       </div>
       <div>
