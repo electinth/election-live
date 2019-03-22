@@ -64,9 +64,14 @@ function getMapData(summaryState, filter) {
     }
     return [
       ...zones.map((zone, i) => {
-        const candidate = (summary.zoneWinningCandidateMap[zone.provinceId] ||
-          {})[zone.no]
+        const winningCandidate = (summary.zoneWinningCandidateMap[
+          zone.provinceId
+        ] || {})[zone.no]
         const stats = (summary.zoneStatsMap[zone.provinceId] || {})[zone.no]
+        const candidate =
+          winningCandidate && winningCandidate.score > stats.noVotes
+            ? winningCandidate
+            : null
         return {
           id: `${zone.provinceId}-${zone.no}`,
           partyId: candidate ? candidate.partyId : "nope",
