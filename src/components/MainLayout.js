@@ -21,13 +21,6 @@ import moment from "moment"
 export default function MainLayout({ children, activeNavBarSection }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
 
-  const summaryState = useSummaryData()
-  if (summaryState.loading) return null
-
-  const updatedAt = moment(summaryState.data.updatedAt).format(
-    "YYYY/DD/MM hh:mm"
-  )
-
   return (
     <div>
       <ContentWrapper background="black">
@@ -74,18 +67,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
           breakpoint={WIDE_NAV_MIN_WIDTH}
           narrow={
             <ContentWrapper background="#212121">
-              <div
-                css={{
-                  float: "left",
-                  color: "white",
-                  fontSize: "0.7rem",
-                  marginTop: 5,
-                  opacity: 0.8,
-                }}
-              >
-                ข้อมูลล่าสุด <br />
-                {updatedAt}
-              </div>
+              <LatestDataIndicator />
               <div css={{ height: 40, color: "white", paddingTop: 10 }}>
                 <div css={{ float: "right" }}>
                   <Hamburger onClick={toggleNavBar} active={navBarActive} />
@@ -123,6 +105,29 @@ export default function MainLayout({ children, activeNavBarSection }) {
         )}
       </Location>
       <Footer />
+    </div>
+  )
+}
+
+function LatestDataIndicator() {
+  const summaryState = useSummaryData()
+  if (summaryState.loading) return null
+  const updatedAt = moment(summaryState.data.updatedAt).format(
+    "YYYY/DD/MM hh:mm"
+  )
+
+  return (
+    <div
+      css={{
+        float: "left",
+        color: "white",
+        fontSize: "0.7rem",
+        marginTop: 5,
+        opacity: 0.8,
+      }}
+    >
+      ข้อมูลล่าสุด <br />
+      {updatedAt}
     </div>
   )
 }
