@@ -1,28 +1,28 @@
-import React, { useState, useLayoutEffect, useContext } from "react"
+import { navigate } from "gatsby"
 import _ from "lodash"
-import MainLayout from "../components/MainLayout"
-import ZoneMasterView from "../components/ZoneMasterView"
-import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
-import TotalVoterSummary from "../components/TotalVoterSummary"
-import NationwideSubSummaryHeader from "../components/NationwideSubSummaryBox"
-import PartyStatsList from "../components/PartyStatsList"
+import React, { useContext, useLayoutEffect, useState } from "react"
 import CandidateStatsRow from "../components/CandidateStatsRow"
+import CloseButton from "../components/CloseButton"
+import MainLayout from "../components/MainLayout"
+import NationwideSubSummaryHeader from "../components/NationwideSubSummaryBox"
+import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
+import PartyStatsList from "../components/PartyStatsList"
+import TotalVoterSummary from "../components/TotalVoterSummary"
+import { ZoneFilterContext } from "../components/ZoneFilterPanel"
+import ZoneMasterView from "../components/ZoneMasterView"
+import {
+  checkFilter,
+  filterPath,
+  filters,
+  getProvinceById,
+  getZoneByProvinceIdAndZoneNo,
+  zones,
+} from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
   partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
 } from "../models/PartyStats"
-import {
-  zones,
-  filters,
-  checkFilter,
-  getZoneByProvinceIdAndZoneNo,
-  getProvinceById,
-  filterPath,
-} from "../models/information"
-import { ZoneFilterContext } from "../components/ZoneFilterPanel"
-import CloseButton from "../components/CloseButton"
-import { navigate } from "gatsby"
 import { DISPLAY_FONT, labelColor } from "../styles"
 
 export default ({ pageContext }) => (
@@ -156,7 +156,7 @@ function ZoneView({ provinceId, zoneNo }) {
       >
         <h1 css={{ fontFamily: DISPLAY_FONT }}>{province.name}</h1>
         <h2 css={{ fontFamily: DISPLAY_FONT, color: labelColor }}>
-          เขตเลือกตั้งที่ {zoneNo}
+          เขตเลือกตั้งที่ {zone.no}
         </h2>
         <div>
           <span>นับแล้ว</span>

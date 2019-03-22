@@ -170,6 +170,7 @@ class DesktopScoreBar extends SvgChart {
       .attr("font-size", "10px")
       .attr("x", d => x(d.start))
       .attr("y", d => height + 10)
+      .style("fill", "white")
 
     text
       .merge(tEnter)

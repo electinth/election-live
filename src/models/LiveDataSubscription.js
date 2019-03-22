@@ -17,7 +17,7 @@ const summaryStore = observable({
  */
 function useComputed(fn, inputs) {
   const box = useMemo(() => computed(fn), inputs)
-  const [_rerenderCount, setRerenderCount] = useState(0)
+  const [, setRerenderCount] = useState(0)
   useEffect(
     () =>
       autorun(() => {

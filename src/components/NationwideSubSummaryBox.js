@@ -2,7 +2,6 @@ import React from "react"
 import { LABEL_FONT } from "../styles"
 import { numberWithCommas } from "../util/format"
 import AnimatedNumber from "./AnimatedNumber"
-import TotalVoterSummary from "./TotalVoterSummary"
 
 export default function NationWideSubSummaryBox(props) {
   const { label, stat, idx } = props

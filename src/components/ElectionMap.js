@@ -5,11 +5,10 @@ import {
   event as d3Event,
   mouse as d3Mouse,
 } from "d3"
-import { transition as d3Transition } from "d3" /*  */
+import { transition as d3Transition } from "d3"
 import { SvgChart, helper } from "d3kit"
 import { createComponent } from "react-d3kit"
 import { parties } from "../models/information"
-// import thMap from "../../public/th-grid-map.png"
 const maps = require("../models/information/_map.json")
 
 const partyLookup = keyBy(parties, p => p.id)

@@ -1,9 +1,7 @@
 import React from "react"
 import { LABEL_FONT } from "../styles"
-import { numberWithCommas } from "../util/format"
-import AnimatedNumber from "./AnimatedNumber"
-import TotalVoterSummary from "./TotalVoterSummary"
 import NationwideSubSummaryBox from "./NationwideSubSummaryBox"
+import TotalVoterSummary from "./TotalVoterSummary"
 
 // @ts-check
 
