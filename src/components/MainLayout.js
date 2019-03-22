@@ -4,17 +4,11 @@ import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
 import NavBar, { menuMapping } from "./NavBar"
 import Footer from "./Footer"
 import { Link } from "gatsby"
-import {
-  Responsive,
-  media,
-  WIDE_NAV_MIN_WIDTH,
-  DISPLAY_FONT,
-  labelColor,
-} from "../styles"
+import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
 import { Location } from "@reach/router"
-import { useSummaryData, usePerZoneData } from "../models/LiveDataSubscription"
+import { useSummaryData } from "../models/LiveDataSubscription"
 
 // @todo #1 Change the style to match the design
 //  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
