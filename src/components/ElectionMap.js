@@ -1,12 +1,11 @@
 import { keyBy } from "lodash"
 import {
   quadtree,
-  select as d3Select,
   event as d3Event,
   mouse as d3Mouse,
+  transition as d3Transition,
   zoom as d3Zoom,
 } from "d3"
-import { transition as d3Transition } from "d3"
 import { SvgChart, helper } from "d3kit"
 import { createComponent } from "react-d3kit"
 import { parties } from "../models/information"
@@ -134,7 +133,7 @@ class ElectionMap extends SvgChart {
         this.prevZone = zone
       })
       .on("click", () => {
-        // clear previous seletion
+        // clear previous selection
         const allZones = this.selection.selectAll("g.zone")
         allZones
           .select("rect")
@@ -222,7 +221,7 @@ class ElectionMap extends SvgChart {
       data: z,
     }))
 
-    // Add center of the cell to quadtree
+    // Add center of the cells to quadtree
     this.quadTree = quadtree()
       .x(d => d.x)
       .y(d => d.y)
