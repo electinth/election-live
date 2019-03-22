@@ -1,16 +1,12 @@
-// import React from "react"
 import _ from "lodash"
-// import { transition as d3Transition } from "d3"
 import { select as d3Select, event as d3Event, mouse as d3Mouse } from "d3"
 import { transition as d3Transition } from "d3"
 import { SvgChart, helper } from "d3kit"
 import { createComponent } from "react-d3kit"
 import { parties } from "../models/information"
-// import thMap from "../../public/th-grid-map.png"
 
 const maps = require("../models/information/_map.json")
 
-// @todo #30 Declare the required props for Election Map.
 /**
  * @param {Object} props
  * @param {IProvince[]} props.data - List of all map zone state
