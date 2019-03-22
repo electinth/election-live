@@ -2,6 +2,8 @@ import React from "react"
 import { LABEL_FONT } from "../styles"
 import { numberWithCommas } from "../util/format"
 import AnimatedNumber from "./AnimatedNumber"
+import TotalVoterSummary from "./TotalVoterSummary"
+import NationwideSubSummaryBox from "./NationwideSubSummaryBox"
 
 // @ts-check
 
@@ -51,92 +53,22 @@ export default function NationwideSummaryHeader(props) {
           {title}
         </h1>
         <div css={{ borderBottom: "1px solid", paddingTop: 5 }}>
-          {buildNationwideSubSummaryHeader("เขตทั้งหมด", totalZoneCount, 0)}
-          {buildNationwideSubSummaryHeader(
-            "นับเสร็จแล้ว",
-            completedZoneCount,
-            1
-          )}
+          <NationwideSubSummaryBox
+            label="เขตทั้งหมด"
+            stat={totalZoneCount}
+            idx={0}
+          />
+          <NationwideSubSummaryBox
+            label="นับเสร็จแล้ว"
+            stat={totalZoneCount}
+            idx={1}
+          />
         </div>
-        <div
-          css={{
-            textAlign: "left",
-            color: "black",
-            fontSize: "1.1em",
-            borderBottom: "1px solid black",
-            paddingBottom: 5,
-            paddingTop: 5,
-          }}
-        >
-          มีผู้มาใช้สิทธิ์
-          <span
-            css={{
-              fontSize: "1.5rem",
-              fontFamily: LABEL_FONT,
-              marginLeft: 30,
-              marginRight: 10,
-              color: "black",
-            }}
-          >
-            <AnimatedNumber value={totalVoteCount} initialValue={0}>
-              {count => numberWithCommas(count)}
-            </AnimatedNumber>
-          </span>
-          คน
-          <span
-            css={{
-              fontSize: "1.5rem",
-              fontFamily: LABEL_FONT,
-              position: "absolute",
-              right: 0,
-              color: "black",
-            }}
-          >
-            <AnimatedNumber value={percentage} initialValue={0} />%
-          </span>
-        </div>
+        <TotalVoterSummary
+          totalVoteCount={totalVoteCount}
+          totalVotePercentage={percentage}
+        />
       </div>
-    )
-  }
-
-  function buildNationwideSubSummaryHeader(label, stat, idx) {
-    return (
-      <span
-        css={{
-          width: "49%",
-          display: "inline-block",
-        }}
-      >
-        <div
-          css={{
-            paddingRight: idx === 0 ? "0.5rem" : 0,
-            paddingLeft: idx === 1 ? "0.5rem" : 0,
-            borderRight: idx === 0 ? "1px solid black" : "none",
-          }}
-        >
-          <span
-            css={{
-              fontSize: "1.1em",
-              color: "black",
-              float: "left",
-              marginTop: ".5em",
-            }}
-          >
-            {" "}
-            {label}
-          </span>
-          <span
-            css={{
-              fontFamily: LABEL_FONT,
-              fontSize: "1.5rem",
-              float: "right",
-            }}
-          >
-            {stat}
-          </span>
-          <div css={{ clear: "both" }} />
-        </div>
-      </span>
     )
   }
 }
