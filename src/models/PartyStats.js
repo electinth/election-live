@@ -21,6 +21,18 @@ import { calculatePartyList } from "thailand-party-list-calculator"
  */
 
 /**
+ * @param {ElectionDataSource.ZoneStats} zoneStats
+ */
+export const isZoneFinished = zoneStats =>
+  zoneStats.finished || zoneStats.progress >= 95
+
+/**
+ * @param {ElectionDataSource.ZoneStats} zoneStats
+ */
+export const shouldDisplayZoneData = zoneStats =>
+  zoneStats.finished || zoneStats.progress >= 10
+
+/**
  * @param {ElectionDataSource.SummaryJSON} summary
  * @param {IZoneFilter} filter
  * @return {PartyStats}
@@ -29,24 +41,20 @@ export function partyStatsFromSummaryJSON(
   summary,
   {
     filter = filters.all,
-    includeIncomplete = true,
+    fillAllSeats = false,
     expectedVotersCount = 30000000,
   } = {}
 ) {
   // Calculate the constituency seat count for each party.
   const constituencySeatCount = {}
   const filteredConstituencySeatCount = {}
-  /**
-   * @param {ElectionDataSource.ZoneStats} zoneStats
-   */
-  const isZoneFinished = zoneStats => zoneStats.finished
   let fakeVotes = expectedVotersCount
 
   for (const provinceIdStr of Object.keys(summary.zoneStatsMap)) {
     const zoneNoStatsMap = summary.zoneStatsMap[provinceIdStr]
     for (const zoneNoStr of Object.keys(zoneNoStatsMap)) {
       const stats = zoneNoStatsMap[zoneNoStr]
-      if (!isZoneFinished(stats) && !includeIncomplete) continue
+      if (!shouldDisplayZoneData(stats) && !fillAllSeats) continue
       fakeVotes -= stats.goodVotes
     }
   }
@@ -61,7 +69,7 @@ export function partyStatsFromSummaryJSON(
 
       // Only counting those with stats
       if (!stats) continue
-      if (!isZoneFinished(stats) && !includeIncomplete) continue
+      if (!shouldDisplayZoneData(stats) && !fillAllSeats) continue
 
       // No one wins: § 126
       if (stats.noVotes >= candidate.score) continue

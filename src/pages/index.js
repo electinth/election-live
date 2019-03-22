@@ -23,6 +23,7 @@ import { useSummaryData, usePerZoneData } from "../models/LiveDataSubscription"
 import {
   partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
+  isZoneFinished,
 } from "../models/PartyStats"
 import { DISPLAY_FONT, labelColor } from "../styles"
 import Loading from "../components/Loading"
@@ -112,7 +113,7 @@ function SummaryHeaderContainer({ filterName }) {
 
   const mockData = {
     totalZoneCount,
-    completedZoneCount: _.sumBy(allZoneStats, s => (s.finished ? 1 : 0)),
+    completedZoneCount: _.sumBy(allZoneStats, s => (isZoneFinished(s) ? 1 : 0)),
     totalVoteCount: _.sumBy(allZoneStats, s => s.votesTotal),
     eligibleVoterCount: _.sumBy(allZoneStats, s => s.eligible),
   }
