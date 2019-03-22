@@ -74,3 +74,18 @@ type ZoneFilterName =
   | "rural"
   | "gerrymandering"
   | "swing"
+
+
+/**
+ * An election map state for each zone.
+ */
+interface IMapZone {
+  /** @example "10-1" for Bangkok zone 1 */
+  id: number
+  /** @example "1" for democrat party */
+  partyId: number
+  /** is counting completed */
+  complete: boolean
+  /** set to false if this zone is filtered out */
+  show: boolean
+}
