@@ -190,7 +190,7 @@ export function usePerZoneData(provinceId, zoneNo) {
       data:
         perProvinceData.data && perProvinceData.data.zoneInformationMap[zoneNo],
     }),
-    [perProvinceData]
+    [perProvinceData, zoneNo]
   )
 }
 
