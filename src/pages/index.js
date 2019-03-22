@@ -246,6 +246,7 @@ function ZoneView({ provinceId, zoneNo }) {
             </div>
           </div>
           <ZoneCandidateList
+            key={`${provinceId}:${zoneNo}`}
             provinceId={provinceId}
             zoneNo={zoneNo}
             zoneStats={ifSummaryLoaded(data => data.zoneStats, () => null)}
