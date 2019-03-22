@@ -75,14 +75,24 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Hack .htaccess
+          name: Update .htaccess Cache-Control max-age to 30 seconds instead of 0
           command: |
             sed -i -e 's/max-age=0/max-age=30/g' public/.htaccess
       - deploy:
-          name: Deploy
+          name: Prepare files for uploading
           command: |
             sudo apt update && sudo apt install rsync
             echo '206.189.85.88 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOOlv2IqgK2lE+esErYHNO9tDXjTd8/AUcYZlmFeM0awGcLkTPv0Eg308QoZVmaIWXaYfynGjOEAv4u9NsP275g=' >> ~/.ssh/known_hosts
+
+      # Perform a 2-step deployment to make sure that all assets
+      # a HTML file may need is already there by the time we sync HTML files.
+      - deploy:
+          name: Deploy non-HTML files
+          command: |
+            rsync -rvz --exclude="*.html" public/ "$DEPLOYMENT_TARGET_HOST:$DEPLOYMENT_TARGET_PATH/"
+      - deploy:
+          name: Deploy HTML files
+          command: |
             rsync -rvz public/ "$DEPLOYMENT_TARGET_HOST:$DEPLOYMENT_TARGET_PATH/"
 workflows:
   version: 2
