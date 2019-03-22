@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from "react"
 
 import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
-import NavBar from "./NavBar"
+import NavBar, { menuMapping } from "./NavBar"
 import Footer from "./Footer"
 import { Link } from "gatsby"
 import {
@@ -14,6 +14,7 @@ import {
 import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
 import { Location } from "@reach/router"
+import { useSummaryData, usePerZoneData } from "../models/LiveDataSubscription"
 
 // @todo #1 Change the style to match the design
 //  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
@@ -24,6 +25,12 @@ import { Location } from "@reach/router"
  */
 export default function MainLayout({ children, activeNavBarSection }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
+
+  const summaryState = useSummaryData()
+  if (summaryState.loading) return null
+
+  const updatedAt = summaryState.data.updatedAt
+
   return (
     <div>
       <ContentWrapper background="black">
@@ -80,7 +87,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
                 }}
               >
                 ข้อมูลล่าสุด <br />
-                24/03/2019 22:22
+                {updatedAt}
               </div>
               <div css={{ height: 40, color: "white", paddingTop: 10 }}>
                 <div css={{ float: "right" }}>
@@ -94,7 +101,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
                     marginRight: 10,
                   }}
                 >
-                  {"ดูผลตามพื้นที่"}
+                  {menuMapping[activeNavBarSection].label}
                 </div>
               </div>
             </ContentWrapper>

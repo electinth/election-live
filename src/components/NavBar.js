@@ -1,6 +1,34 @@
 import React from "react"
 import { Link } from "gatsby"
 import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
+import _ from "lodash"
+
+const menues = [
+  {
+    name: "by-area",
+    route: "/",
+    label: "ดูผลตามพื้นที่",
+  },
+  {
+    name: "by-party",
+    route: "/party",
+    label: "ดูผลตามพรรค",
+  },
+  {
+    name: "overview",
+    route: "/overview",
+    label: "ภาพรวมผลลัพธ์",
+  },
+  {
+    name: "source",
+    route: "/source",
+    label: "ข้อมูลเรามาจากไหน",
+  },
+]
+
+export const menuMapping = _(menues)
+  .keyBy("name")
+  .value()
 
 /**
  * @typedef {'by-area' | 'by-party' | 'overview' | 'source'} NavBarSectionName
@@ -53,10 +81,7 @@ export default function Navbar(props) {
         backgroundColor: "#212121;",
       }}
     >
-      {linkTo("by-area", "/", "ดูผลตามพื้นที่")}
-      {linkTo("by-party", "/party/", "ดูผลตามพรรค")}
-      {linkTo("overview", "/overview/", "ภาพรวมผลลัพธ์")}
-      {linkTo("source", "/source/", "ข้อมูลเรามาจากไหน")}
+      {menues.map(m => linkTo(m["name"], m["route"], m["label"]))}
     </nav>
   )
 }
