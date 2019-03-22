@@ -1,13 +1,14 @@
 import React, { useReducer, useEffect } from "react"
 
 import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
-import NavBar from "./NavBar"
+import NavBar, { menuMapping } from "./NavBar"
 import Footer from "./Footer"
 import { Link } from "gatsby"
 import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
 import { Location } from "@reach/router"
+import { useSummaryData } from "../models/LiveDataSubscription"
 
 // @todo #1 Change the style to match the design
 //  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
@@ -18,6 +19,12 @@ import { Location } from "@reach/router"
  */
 export default function MainLayout({ children, activeNavBarSection }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
+
+  const summaryState = useSummaryData()
+  if (summaryState.loading) return null
+
+  const updatedAt = summaryState.data.updatedAt
+
   return (
     <div>
       <ContentWrapper background="black">
@@ -47,12 +54,54 @@ export default function MainLayout({ children, activeNavBarSection }) {
             }
             narrow={
               <div css={{ marginLeft: "auto" }}>
-                <Hamburger onClick={toggleNavBar} active={navBarActive} />
+                <CompactScoreBar />
               </div>
             }
           />
         </div>
       </ContentWrapper>
+      <div
+        css={{
+          height: 50,
+          overflow: "hidden",
+          [media(WIDE_NAV_MIN_WIDTH)]: { display: "none" },
+        }}
+      >
+        <Responsive
+          breakpoint={WIDE_NAV_MIN_WIDTH}
+          narrow={
+            <ContentWrapper background="#212121">
+              <div
+                css={{
+                  float: "left",
+                  color: "white",
+                  fontSize: "0.7rem",
+                  marginTop: 5,
+                  opacity: 0.8,
+                }}
+              >
+                ข้อมูลล่าสุด <br />
+                {updatedAt}
+              </div>
+              <div css={{ height: 40, color: "white", paddingTop: 10 }}>
+                <div css={{ float: "right" }}>
+                  <Hamburger onClick={toggleNavBar} active={navBarActive} />
+                </div>
+                <div
+                  css={{
+                    float: "right",
+                    fontFamily: DISPLAY_FONT,
+                    fontSize: "1.2rem",
+                    marginRight: 10,
+                  }}
+                >
+                  {menuMapping[activeNavBarSection].label}
+                </div>
+              </div>
+            </ContentWrapper>
+          }
+        />
+      </div>
       <div
         data-active={navBarActive ? true : undefined}
         css={{
@@ -62,23 +111,6 @@ export default function MainLayout({ children, activeNavBarSection }) {
         }}
       >
         <NavBar activeNavBarSection={activeNavBarSection} />
-      </div>
-      <div
-        css={{
-          height: 50,
-          overflow: "hidden",
-          borderBottom: "1px solid #eee",
-          [media(WIDE_NAV_MIN_WIDTH)]: { display: "none" },
-        }}
-      >
-        <Responsive
-          breakpoint={WIDE_NAV_MIN_WIDTH}
-          narrow={
-            <ContentWrapper>
-              <CompactScoreBar />
-            </ContentWrapper>
-          }
-        />
       </div>
       <Location>
         {({ location }) => (
@@ -121,14 +153,24 @@ function Logo() {
       css={{
         display: "block",
         overflow: "hidden",
-        width: 26,
+        width: 35,
         [media(WIDE_NAV_MIN_WIDTH)]: { width: "auto" },
       }}
     >
-      <img
-        src={require("../styles/images/site-logo.png")}
+      <div
         alt="ELECT"
-        css={{ width: 150, display: "block" }}
+        css={{
+          width: 35,
+          height: 24,
+          display: "block",
+          backgroundSize: "cover",
+          backgroundImage: `url(${require("../styles/images/site-logo-square.png")})`,
+          [media(WIDE_NAV_MIN_WIDTH)]: {
+            backgroundImage: `url(${require("../styles/images/site-logo.png")})`,
+            width: 140,
+            height: 32,
+          },
+        }}
       />
     </Link>
   )
@@ -169,7 +211,7 @@ function Hamburger({ onClick, active }) {
     },
   }
   return (
-    <button onClick={onClick}>
+    <div onClick={onClick}>
       {
         <div style={styles.container}>
           <div style={{ ...styles.line, ...styles.lineTop }} />
@@ -177,6 +219,6 @@ function Hamburger({ onClick, active }) {
           <div style={{ ...styles.line, ...styles.lineBottom }} />
         </div>
       }
-    </button>
+    </div>
   )
 }
