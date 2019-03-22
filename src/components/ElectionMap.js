@@ -100,8 +100,25 @@ class ElectionMap extends SvgChart {
       .get("center/zoom/map/glass")
       .append("rect")
       .attr("fill", "rgba(0,0,0,0)")
+      .on("mouseleave", () => {
+        const zone = this.findNearbyZone()
+        this.selection
+          .selectAll("g.zone")
+          .transition()
+          .style("stroke", d => (d === zone ? "#222" : "none"))
+
+        if (this.prevZone) {
+          this.dispatchAs("zoneMouseleave")(this.prevZone, d3Event)
+        }
+        this.prevZone = null
+      })
       .on("mousemove", () => {
         const zone = this.findNearbyZone()
+        this.selection
+          .selectAll("g.zone")
+          .transition()
+          .style("stroke", d => (d === zone ? "#222" : "none"))
+
         if (zone) {
           if (zone !== this.prevZone) {
             this.dispatchAs("zoneMouseenter")(zone, d3Event)
@@ -118,24 +135,19 @@ class ElectionMap extends SvgChart {
       })
       .on("click", () => {
         // clear previous seletion
-        const allZones = this.selection.selectAll("rect.zone")
+        const allZones = this.selection.selectAll("g.zone")
         allZones
+          .select("rect")
           .transition()
-          .style("transform", "translate(0, 0)scale(1)")
-          .style("opacity", 1)
+          .attr("transform", "scale(1)")
         const zone = this.findNearbyZone()
         if (zone) {
-          const { size, padding } = this.options()
           allZones
             .filter(d => d === zone)
             .raise()
+            .select("rect")
             .transition()
-            .style("opacity", 0.6)
-            .style(
-              "transform",
-              `translate(${-zone.x - (size - padding) / 2}px, ${-zone.y -
-                (size - padding) / 2}px)scale(2)`
-            )
+            .attr("transform", `scale(2)`)
           this.dispatchAs("zoneClick")(zone, d3Event)
         }
       })
@@ -202,37 +214,41 @@ class ElectionMap extends SvgChart {
     const { size, padding } = this.options()
     const t = d3Transition().duration(1000)
 
+    const rectSide = size - padding
+
     const zones = maps.zones.map(z => ({
-      x: z.x * size,
-      y: z.y * size,
+      x: z.x * size + rectSide / 2,
+      y: z.y * size + rectSide / 2,
       data: z,
     }))
 
-    const rectSide = size - padding
-
     // Add center of the cell to quadtree
     this.quadTree = quadtree()
-      .x(d => d.x + rectSide / 2)
-      .y(d => d.y + rectSide / 2)
+      .x(d => d.x)
+      .y(d => d.y)
       .addAll(zones)
 
     const zoneSelection = this.selection
-      .selectAll("rect.zone")
+      .selectAll("g.zone")
       .data(zones, d => d.data.id)
+
     const zoneEnter = zoneSelection
       .enter()
-      .append("rect")
+      .append("g")
       .classed("zone", true)
+      .attr("transform", d => `translate(${d.x},${d.y})`)
+      .append("rect")
       .attr("data-p", d => this.party(d.data))
-      .attr("x", d => d.x)
-      .attr("y", d => d.y)
+      .attr("x", -rectSide / 2)
+      .attr("y", -rectSide / 2)
       .attr("width", rectSide)
       .attr("height", rectSide)
       .style("transition", "all .2s ease-out")
-      .style("transform", "translate(0, 0)scale(1)")
+      .attr("transform", "scale(1)")
 
     zoneSelection
       .merge(zoneEnter)
+      .select("rect")
       .transition(t)
       .attr("fill", d => this.color(d.data))
       .attr("rx", d => this.radius(d.data))
