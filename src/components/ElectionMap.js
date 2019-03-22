@@ -121,10 +121,10 @@ class ElectionMap extends SvgChart {
 
         if (zone) {
           if (zone !== this.prevZone) {
-            this.dispatchAs("zoneMouseenter")(zone, d3Event)
             if (this.prevZone) {
               this.dispatchAs("zoneMouseleave")(this.prevZone, d3Event)
             }
+            this.dispatchAs("zoneMouseenter")(zone, d3Event)
           } else {
             this.dispatchAs("zoneMousemove")(zone, d3Event)
           }
