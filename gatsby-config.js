@@ -63,5 +63,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-htaccess",
     },
+    {
+      resolve: "gatsby-plugin-netlify",
+    },
   ],
 }
