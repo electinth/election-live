@@ -161,52 +161,6 @@ function ZoneView({ provinceId, zoneNo }) {
         padding: 10,
       }}
     >
-      <CloseButton onClick={() => navigate(filterPath(activeFilter))} />
-      <div
-        css={{
-          textAlign: "center",
-          flex: "none",
-        }}
-      >
-        <h1 css={{ fontFamily: DISPLAY_FONT }}>{province.name}</h1>
-        <h2 css={{ fontFamily: DISPLAY_FONT, color: labelColor }}>
-          เขตเลือกตั้งที่ {zone.no}
-        </h2>
-        <div>
-          <span>นับแล้ว</span>
-          <span
-            css={{ marginLeft: 10, fontSize: "2rem", fontFamily: DISPLAY_FONT }}
-          >
-            {zoneStats.progress}%
-          </span>
-        </div>
-
-        <div
-          css={{
-            borderTop: "1px solid",
-            // borderBottom: "1px solid",
-            marginBottom: 10,
-          }}
-        >
-          <TotalVoterSummary
-            totalVoteCount={zoneStats.votesTotal}
-            totalVotePercentage={votePercentage}
-          />
-        </div>
-
-        <div css={{ borderBottom: "1px solid" }}>
-          <NationwideSubSummaryHeader
-            label="บัตรดี"
-            stat={zoneStats.goodVotes}
-            idx={0}
-          />
-          <NationwideSubSummaryHeader
-            label="บัตรเสีย"
-            stat={zoneStats.badVotes}
-            idx={1}
-          />
-        </div>
-      </div>
       <div css={{ flex: "auto", position: "relative" }}>
         <div
           css={{
@@ -220,6 +174,56 @@ function ZoneView({ provinceId, zoneNo }) {
             WebkitOverflowScrolling: "touch",
           }}
         >
+          <CloseButton onClick={() => navigate(filterPath(activeFilter))} />
+          <div
+            css={{
+              textAlign: "center",
+              flex: "none",
+            }}
+          >
+            <h1 css={{ fontFamily: DISPLAY_FONT }}>{province.name}</h1>
+            <h2 css={{ fontFamily: DISPLAY_FONT, color: labelColor }}>
+              เขตเลือกตั้งที่ {zone.no}
+            </h2>
+            <div>
+              <span>นับแล้ว</span>
+              <span
+                css={{
+                  marginLeft: 10,
+                  fontSize: "2rem",
+                  fontFamily: DISPLAY_FONT,
+                }}
+              >
+                {zoneStats.progress}%
+              </span>
+            </div>
+
+            <div
+              css={{
+                borderTop: "1px solid",
+                // borderBottom: "1px solid",
+                marginBottom: 10,
+              }}
+            >
+              <TotalVoterSummary
+                totalVoteCount={zoneStats.votesTotal}
+                totalVotePercentage={votePercentage}
+              />
+            </div>
+
+            <div css={{ borderBottom: "1px solid" }}>
+              <NationwideSubSummaryHeader
+                label="บัตรดี"
+                stat={zoneStats.goodVotes}
+                idx={0}
+              />
+              <NationwideSubSummaryHeader
+                label="บัตรเสีย"
+                stat={zoneStats.badVotes}
+                idx={1}
+              />
+            </div>
+          </div>
           <ZoneCandidateList
             provinceId={provinceId}
             zoneNo={zoneNo}
@@ -249,6 +253,7 @@ function ZoneCandidateList({ provinceId, zoneNo, goodVotes }) {
       {data.candidates.map((candidate, index) => {
         const party = getPartyById(candidate.partyId)
         const percentage = Math.round((candidate.score / goodVotes) * 100)
+
         return (
           <li key={candidate.no}>
             <CandidateStatsRow
