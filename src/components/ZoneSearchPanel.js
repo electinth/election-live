@@ -4,15 +4,13 @@ import { zonesForSearch, zonePath } from "../models/information"
 import { labelColor } from "../styles"
 import { Link } from "gatsby"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import Fuse from 'fuse.js'
-
+import Fuse from "fuse.js"
 
 const fuse = new Fuse(zonesForSearch, {
-  keys: ['inclusionAreas', 'province.name']
+  keys: ["inclusionAreas", "province.name"],
 })
 
 export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
-  // @todo #1 [UI polish] Polish the spacing in ZoneSearchPanel to match the design.
   const [state, setState] = useState({
     isSearchOpen: false,
     zoneQuery: null,
@@ -55,56 +53,55 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
 
       {state.isSearchOpen && (
         <ul css={{ listStyle: "none", padding: 0 }}>
-          { // @todo #1 Update zone filtering logic to allow searching by postal code
-            fuse.search(state.zoneQuery)
-            .map(z => {
-              return (
-                <li
-                  key={`${z.zone.provinceId}-${z.zone.no}`}
+          {// @todo #1 Update zone filtering logic to allow searching by postal code
+          fuse.search(state.zoneQuery).map(z => {
+            return (
+              <li
+                key={`${z.zone.provinceId}-${z.zone.no}`}
+                css={{
+                  padding: "12px 0px",
+                  borderBottom: "1px solid gray",
+                  position: "relative",
+                }}
+              >
+                <Link
+                  to={zonePath(z.zone)}
+                  onClick={onSearchCompleted}
                   css={{
-                    padding: "12px 0px",
-                    borderBottom: "1px solid gray",
-                    position: "relative",
+                    width: "calc(100% - 24px)",
+                    display: "block",
+                    color: "inherit",
+                    textDecoration: "none",
                   }}
                 >
-                  <Link
-                    to={zonePath(z.zone)}
-                    onClick={onSearchCompleted}
-                    css={{
-                      width: "calc(100% - 24px)",
-                      display: "block",
-                      color: "inherit",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <div css={{ fontSize: 16 }}>
-                      <b>
-                        {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
-                      </b>
-                    </div>
-                    <div
-                      css={{
-                        color: "gray",
-                      }}
-                    >
-                      {z.zone.details}
-                    </div>
-                  </Link>
+                  <div css={{ fontSize: 16 }}>
+                    <b>
+                      {z.province.name} เขตเลือกตั้งที่ {z.zone.no}
+                    </b>
+                  </div>
                   <div
                     css={{
-                      position: "absolute",
-                      right: "4px",
-                      top: "calc(50% - 3px)",
-                      border: "solid #212121",
-                      borderWidth: "0 2px 2px 0",
-                      // display: 'inline-block',
-                      padding: "4px",
-                      transform: "rotate(-45deg)",
+                      color: "gray",
                     }}
-                  />
-                </li>
-              )
-            })}
+                  >
+                    {z.zone.details}
+                  </div>
+                </Link>
+                <div
+                  css={{
+                    position: "absolute",
+                    right: "4px",
+                    top: "calc(50% - 3px)",
+                    border: "solid #212121",
+                    borderWidth: "0 2px 2px 0",
+                    // display: 'inline-block',
+                    padding: "4px",
+                    transform: "rotate(-45deg)",
+                  }}
+                />
+              </li>
+            )
+          })}
         </ul>
       )}
     </div>
