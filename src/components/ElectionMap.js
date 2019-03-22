@@ -133,6 +133,11 @@ class ElectionMap extends SvgChart {
         this.prevZone = zone
       })
       .on("click", () => {
+        // @todo #1 ElectionMap: Selection does not update on route change.
+        //  This is because ElectionMap manages its own "selected" state.
+        //  To fix this, make ElectionMap take in the ID of current selection
+        //  via props rather than managing the state inside ElectionMap.
+
         // clear previous selection
         const allZones = this.selection.selectAll("g.zone")
         allZones
