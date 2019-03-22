@@ -17,10 +17,9 @@ const partyLookup = keyBy(parties, p => p.id)
 const NO_PARTY = "#aaaaaa"
 const HIDDEN_ZONE = "#dddddd"
 
-// @todo #30 Declare the required props for Election Map.
 /**
  * @param {Object} props
- * @param {IProvince[]} props.data - List of all map zone state
+ * @param {IMapZone[]} props.data - List of all map zone state
  * @param {function} [props.options.onClick] - Fire when a zone is clicked
  */
 class ElectionMap extends SvgChart {
