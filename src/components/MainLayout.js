@@ -4,7 +4,13 @@ import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import { Link } from "gatsby"
-import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
+import {
+  Responsive,
+  media,
+  WIDE_NAV_MIN_WIDTH,
+  DISPLAY_FONT,
+  labelColor,
+} from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import CompactScoreBar from "./CompactScoreBar"
 import { Location } from "@reach/router"
@@ -47,12 +53,54 @@ export default function MainLayout({ children, activeNavBarSection }) {
             }
             narrow={
               <div css={{ marginLeft: "auto" }}>
-                <Hamburger onClick={toggleNavBar} active={navBarActive} />
+                <CompactScoreBar />
               </div>
             }
           />
         </div>
       </ContentWrapper>
+      <div
+        css={{
+          height: 50,
+          overflow: "hidden",
+          [media(WIDE_NAV_MIN_WIDTH)]: { display: "none" },
+        }}
+      >
+        <Responsive
+          breakpoint={WIDE_NAV_MIN_WIDTH}
+          narrow={
+            <ContentWrapper background="#212121">
+              <div
+                css={{
+                  float: "left",
+                  color: "white",
+                  fontSize: "0.7rem",
+                  marginTop: 5,
+                  opacity: 0.8,
+                }}
+              >
+                ข้อมูลล่าสุด <br />
+                24/03/2019 22:22
+              </div>
+              <div css={{ height: 40, color: "white", paddingTop: 10 }}>
+                <div css={{ float: "right" }}>
+                  <Hamburger onClick={toggleNavBar} active={navBarActive} />
+                </div>
+                <div
+                  css={{
+                    float: "right",
+                    fontFamily: DISPLAY_FONT,
+                    fontSize: "1.2rem",
+                    marginRight: 10,
+                  }}
+                >
+                  {"ดูผลตามพื้นที่"}
+                </div>
+              </div>
+            </ContentWrapper>
+          }
+        />
+      </div>
       <div
         data-active={navBarActive ? true : undefined}
         css={{
@@ -62,23 +110,6 @@ export default function MainLayout({ children, activeNavBarSection }) {
         }}
       >
         <NavBar activeNavBarSection={activeNavBarSection} />
-      </div>
-      <div
-        css={{
-          height: 50,
-          overflow: "hidden",
-          borderBottom: "1px solid #eee",
-          [media(WIDE_NAV_MIN_WIDTH)]: { display: "none" },
-        }}
-      >
-        <Responsive
-          breakpoint={WIDE_NAV_MIN_WIDTH}
-          narrow={
-            <ContentWrapper>
-              <CompactScoreBar />
-            </ContentWrapper>
-          }
-        />
       </div>
       <Location>
         {({ location }) => (
@@ -179,7 +210,7 @@ function Hamburger({ onClick, active }) {
     },
   }
   return (
-    <button onClick={onClick}>
+    <div onClick={onClick}>
       {
         <div style={styles.container}>
           <div style={{ ...styles.line, ...styles.lineTop }} />
@@ -187,6 +218,6 @@ function Hamburger({ onClick, active }) {
           <div style={{ ...styles.line, ...styles.lineBottom }} />
         </div>
       }
-    </button>
+    </div>
   )
 }
