@@ -30,6 +30,19 @@ module.exports = {
     //  - Main Guide: https://www.gatsbyjs.org/docs/adding-analytics/
     //  - Google Analytics: https://www.gatsbyjs.org/docs/adding-analytics/#using-gatsby-plugin-google-analytics
     //  - Google Tag Manager: https://www.gatsbyjs.org/packages/gatsby-plugin-google-tagmanager/
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-43653558-20",
+      },
+    },
+    // facebook - pixel
+    {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: "403066120477972",
+      },
+    },
 
     {
       resolve: `gatsby-plugin-manifest`,
