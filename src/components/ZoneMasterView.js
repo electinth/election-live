@@ -62,6 +62,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
       show: true,
     })),
   ])
+  const [mapTip, setMapTip] = useState(null)
   useEffect(() => {
     const interval = setInterval(() => {
       setMapZones(_zones => {
@@ -188,14 +189,49 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               },
             }}
           >
-            <ErrorBoundary name="ElectionMap">
-              <ElectionMap
-                options={{
-                  onclick: (d, i) => console.log("Click zone:", d, i),
-                }}
-                data={mapZones}
-              />
-            </ErrorBoundary>
+          {mapTip && (
+            <div
+              css={{
+                position: "absolute",
+                zIndex: 10,
+                padding: 6,
+                backgroundColor: "#fff",
+                pointerEvents: "none",
+                boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.3)",
+                top: mapTip.mouseEvent.clientY + 10,
+                left: mapTip.mouseEvent.clientX + 10,
+              }}
+            >
+              <div>เขต {mapTip.zone.data.id}</div>
+              <div>พรรคผ่อน</div>
+              <div>
+                <small>นอนบ้างนะ</small>
+              </div>
+            </div>
+          )}
+          <ErrorBoundary name="ElectionMap">
+            <ElectionMap
+              data={mapZones}
+              onInit={map => {
+                // console.log('map', map);
+              }}
+              onZoneMouseenter={(zone, mouseEvent) => {
+                setMapTip({ zone, mouseEvent })
+                // console.log('zone', zone);
+              }}
+              onZoneMousemove={(zone, mouseEvent) => {
+                setMapTip({ zone, mouseEvent })
+                // console.log('zone', zone);
+              }}
+              onZoneMouseleave={(zone, mouseEvent) => {
+                setMapTip(null)
+                // console.log('zone', zone);
+              }}
+              onZoneClick={zone => {
+                // console.log('zoneClick', zone)
+              }}
+            />
+          </ErrorBoundary>
           </div>
         </div>
         <Responsive
