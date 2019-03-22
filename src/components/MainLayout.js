@@ -19,7 +19,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
   return (
     <div>
-      <ContentWrapper>
+      <ContentWrapper background="black">
         <div
           css={{
             display: "flex",
@@ -121,7 +121,7 @@ function Hamburger({ onClick, active }) {
     line: {
       height: "2px",
       width: "20px",
-      background: "#212121",
+      background: "#FFF",
       transition: "all 0.2s ease",
     },
     lineTop: {
