@@ -35,6 +35,13 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
     setActiveSidebar
   )
 
+  // @todo #1 Convert this state to the route.
+  //  To keep the active filter, we can use query string (`location.search`).
+  //  e.g. `/filters/northern?tab=map`.
+  const [currentMobileTab, setCurrentMobileTab] = useState(
+    /** @type {'summary' | 'map'} */ ("summary")
+  )
+
   // @todo #30 Push realtime result to election map instead of mock data
   const mockElectedParties = [1, 8, 10, 12, 15, 39, 68, 72, 83, 84]
   const [mapZones, setMapZones] = useState([
@@ -102,7 +109,9 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               position: "relative",
               zIndex: 1,
               margin: "0 auto",
+              display: currentMobileTab === "summary" ? "block" : "none",
               [media(DESKTOP_MIN_WIDTH)]: {
+                display: "block",
                 order: 3,
                 width: 320,
                 margin: 0,
@@ -170,7 +179,7 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           {/* Election map */}
           <div
             css={{
-              display: "none",
+              display: currentMobileTab === "map" ? "block" : "none",
               [media(DESKTOP_MIN_WIDTH)]: {
                 display: "block",
                 order: 2,
@@ -280,7 +289,20 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
       display: "inline-block",
       verticalAlign: "middle",
       lineHeight: "48px",
+      cursor: "pointer",
     }
+
+    const renderTab = (targetTab, text) => (
+      <span
+        css={{
+          ...menuStyle,
+          borderTop: currentMobileTab === targetTab ? "2px solid black" : "0px",
+        }}
+        onClick={() => setCurrentMobileTab(targetTab)}
+      >
+        {text}
+      </span>
+    )
 
     return (
       <div
@@ -293,16 +315,8 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
           fontWeight: "bold",
         }}
       >
-        <span
-          css={{ ...menuStyle, borderTop: true ? "2px solid black" : "0px" }}
-        >
-          สรุปข้อมูล
-        </span>
-        <span
-          css={{ ...menuStyle, borderTop: false ? "2px solid black" : "0px" }}
-        >
-          แผนที่
-        </span>
+        {renderTab("summary", "สรุปข้อมูล")}
+        {renderTab("map", "แผนที่")}
       </div>
     )
   }
