@@ -35,7 +35,7 @@ export function useRandomElectionMapData() {
               }
         )
       })
-    }, 5000)
+    }, 20000)
     return () => clearInterval(interval)
   }, [])
 

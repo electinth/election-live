@@ -17,11 +17,12 @@ import { createComponent } from "react-d3kit"
  * @prop {string} name Party name.
  * @prop {string} color Color representing the party.
  * @prop {number} count Number of seats.
- * @prop {"district" | "partylist"} type
+ * @prop {"zone" | "partylist" | "all"} type
  *  Type of this row.
  *
- *  - `district`: From election result of each district.
+ *  - `zone`: From election result of each district.
  *  - `partylist`: Derived from election result.
+ *  - `all`: Derived from election result.
  *    See: https://github.com/Cleverse/thailand-party-list-calculator
  *  - `other`: Grouped from other fields.
  */
@@ -47,7 +48,7 @@ class DesktopScoreBar extends SvgChart {
   constructor(element, options) {
     super(element, options)
 
-    this.layers.create(["score", "label"])
+    this.layers.create(["score", "label", "profile"])
 
     this.visualize = this.visualize.bind(this)
     this.on("data", this.visualize)
@@ -64,6 +65,23 @@ class DesktopScoreBar extends SvgChart {
     this.renderScore()
   }
 
+  isParty(party) {
+    return party.id > 0
+  }
+
+  scoreText(party) {
+    if (!this.isParty(party)) {
+      const data = this.data()
+      const theRest = this.options().maxValue - _.sumBy(data, "count")
+      return `เหลือ ${theRest} ที่นั่ง`
+    }
+    return party.count
+  }
+
+  profileByParty(party) {
+    return require(`../styles/images/pmcan/${party.id}-s.png`)
+  }
+
   renderScore() {
     let cumulative = 0
     let parties = [...this.data()]
@@ -72,7 +90,8 @@ class DesktopScoreBar extends SvgChart {
     const patterns = this.svg
       .select("defs")
       .selectAll("pattern")
-      .data(parties.filter(p => p.type === "district"), d => d.id)
+      .data(parties, d => d.id)
+
     patterns
       .enter()
       .append("pattern")
@@ -98,7 +117,7 @@ class DesktopScoreBar extends SvgChart {
     })
     const totalCount = _.sum(_.values(partyCount))
     parties.push({
-      id: "none",
+      id: 0,
       name: "ยังไม่ทราบผล",
       color: "#eeeeee",
       type: "none",
@@ -124,61 +143,103 @@ class DesktopScoreBar extends SvgChart {
     const t = d3Transition().duration(1000)
 
     // update bar
-    const selection = this.layers
+    const barSelection = this.layers
       .get("score")
       .selectAll("rect.score")
       .data(parties, d => d.id)
-
-    const sEnter = selection
+    const bEnter = barSelection
       .enter()
       .append("rect")
       .classed("score", true)
-
       .attr("x", d => x(d.start))
       .attr("y", 0)
       .attr("width", d => x(d.count))
-      .attr("height", y.bandwidth())
-      .attr("fill", d =>
-        d.type === "partylist" ? `url(#hash-${d.name})` : d.color
-      )
+      .attr("height", height)
+      .attr("fill", d => d.color)
       .attr("opacity", 1)
-
-    selection
-      .merge(sEnter)
+    barSelection
+      .merge(bEnter)
       .transition(t)
       .attr("x", d => x(d.start))
       .attr("y", 0)
       .attr("width", d => x(d.count))
-      .attr("height", y.bandwidth())
+      .attr("height", height)
+    barSelection.exit().remove()
 
-    selection.exit().remove()
+    // update score
+    const score = this.layers
+      .get("score")
+      .selectAll("text.score")
+      .data(parties.filter(p => x(p.count) > 60), d => d.id)
+    const sEnter = score
+      .enter()
+      .append("text")
+      .classed("score", true)
+      .text(d => this.scoreText(d))
+      .attr("font-size", "10px")
+      .attr("x", d =>
+        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
+      )
+      .attr("y", d => height - 10)
+      .style("fill", d => (this.isParty(d) ? "#ffffff" : "#999999"))
+      .style("text-anchor", d => (this.isParty(d) ? "start" : "end"))
+    score
+      .merge(sEnter)
+      .transition(t)
+      .attr("x", d =>
+        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
+      )
+      .attr("y", d => height - 10)
+    score.exit().remove()
 
     // update text
     const text = this.layers
       .get("label")
-      .selectAll("text.score")
-      .data(
-        parties.filter(p => p.type === "district" && p.count >= 10),
-        d => d.id
-      )
-
+      .selectAll("text.name")
+      .data(parties.filter(p => this.isParty(p) && p.count >= 10), d => d.id)
     const tEnter = text
       .enter()
       .append("text")
-      .classed("score", true)
+      .classed("name", true)
       .text(d => d.name)
-      .attr("font-size", "10px")
+      .attr("font-size", "12px")
       .attr("x", d => x(d.start))
-      .attr("y", d => height + 10)
+      .attr("y", d => height + 13)
       .style("fill", "white")
-
     text
       .merge(tEnter)
       .transition(t)
       .attr("x", d => x(d.start))
-      .attr("y", d => height + 10)
-
+      .attr("y", d => height + 13)
     text.exit().remove()
+
+    // update image
+    const image = this.layers
+      .get("profile")
+      .selectAll("image.profile")
+      .data(parties.filter(p => this.isParty(p) && p.count >= 10), d => d.id)
+    const iEnter = image
+      .enter()
+      .append("image")
+      .classed("profile", true)
+      .attr("x", d => x(d.start) + 4)
+      .attr("y", d => height - 24)
+      .attr("width", 24)
+      .attr("height", 24)
+      .attr("xlink:href", (d, i) => this.profileByParty(d))
+      .style("display", d => {
+        return x(d.count) > 40
+      })
+    image
+      .merge(iEnter)
+      .transition(t)
+      .attr("x", d => x(d.start) + 4)
+      .attr("y", d => height - 24)
+      .attr("opacity", d => {
+        return x(d.count) > 40 ? 1 : 0
+      })
+
+    image.exit().remove()
 
     // resize to fit window
     this.fit(

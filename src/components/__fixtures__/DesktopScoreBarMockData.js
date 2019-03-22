@@ -27,15 +27,9 @@ export function getMockDesktopScoreBarData(_progress) {
       return /** @type {import('../DesktopScoreBar').Row[]} */ ([
         {
           ...base,
-          id: `${partyId}d`,
-          type: "district",
+          id: `${partyId}`,
+          type: "zone",
           count: calculated.electedMemberCount,
-        },
-        {
-          ...base,
-          id: `${partyId}p`,
-          type: "partylist",
-          count: calculated.partyListMemberCount,
         },
       ])
     })

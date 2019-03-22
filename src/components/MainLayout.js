@@ -6,7 +6,6 @@ import Footer from "./Footer"
 import { Link } from "gatsby"
 import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
-import CompactScoreBar from "./CompactScoreBar"
 import { Location } from "@reach/router"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import moment from "moment"
@@ -27,33 +26,28 @@ export default function MainLayout({ children, activeNavBarSection }) {
         <div
           css={{
             display: "flex",
-            paddingTop: 24,
             alignItems: "top",
           }}
         >
-          <div css={{ flex: "none", paddingBottom: 20 }}>
+          <div
+            css={{
+              flex: "none",
+              paddingTop: 24,
+              paddingBottom: 20,
+            }}
+          >
             <Logo />
           </div>
-          <Responsive
-            breakpoint={WIDE_NAV_MIN_WIDTH}
-            wide={
-              <div
-                css={{
-                  flex: "1",
-                  marginLeft: "24px",
-                  height: 50,
-                  overflow: "hidden",
-                }}
-              >
-                <DesktopScoreBarContainer />
-              </div>
-            }
-            narrow={
-              <div css={{ marginLeft: "auto" }}>
-                <CompactScoreBar />
-              </div>
-            }
-          />
+          <div
+            css={{
+              flex: "1",
+              marginLeft: "24px",
+              height: 76,
+              overflow: "hidden",
+            }}
+          >
+            <DesktopScoreBarContainer />
+          </div>
         </div>
       </ContentWrapper>
       <div

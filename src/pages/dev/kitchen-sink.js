@@ -40,7 +40,11 @@ function kitchenSink(gallery, example) {
 
     function MockDesktopScoreBarWithRandomData() {
       const data = useRandomScoreBarData()
-      return <DesktopScoreBar data={data} />
+      return (
+        <div style={{ background: "#000" }}>
+          <DesktopScoreBar data={data} />
+        </div>
+      )
     }
     example("Random data", { maxWidth: 960 }, () => (
       <MockDesktopScoreBarWithRandomData />
@@ -52,7 +56,7 @@ function kitchenSink(gallery, example) {
         getRandomScoreBarData(0.5)
       )
       return (
-        <div>
+        <div style={{ background: "#000" }}>
           <DesktopScoreBar data={data} />
           <button onClick={randomize}>Randomize!</button>
         </div>
@@ -63,7 +67,9 @@ function kitchenSink(gallery, example) {
     ))
 
     example("Mock data - all seats filled", { maxWidth: 960 }, () => (
-      <DesktopScoreBar data={getMockDesktopScoreBarData(1)} />
+      <div style={{ background: "#000" }}>
+        <DesktopScoreBar data={getMockDesktopScoreBarData(1)} />
+      </div>
     ))
   })
 

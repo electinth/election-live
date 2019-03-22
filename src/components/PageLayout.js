@@ -25,6 +25,7 @@ function DevModeDisclaimer() {
     <div
       data-show-disclaimer={disclaimerHidden ? undefined : true}
       css={{
+        display: "none",
         position: "absolute",
         background: "#F0324B",
         color: "#fff",
