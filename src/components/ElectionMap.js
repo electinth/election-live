@@ -35,14 +35,11 @@ class ElectionMap extends SvgChart {
         left: 20,
         right: 20,
       },
-      onClick: (d, i) => {
-        /* no op */
-      },
     })
   }
 
   static getCustomEventNames() {
-    return ["cellClick"]
+    return ["zoneClick", "zoneMouseenter", "zoneMousemove", "zoneMouseleave"]
   }
 
   constructor(element, options) {
@@ -50,8 +47,6 @@ class ElectionMap extends SvgChart {
     this.layers.create({
       center: { zoom: { map: ["cell", "label", "glass"] } },
     })
-
-    this.zoom = 1
 
     this.visualize = this.visualize.bind(this)
     this.on("data", this.visualize)
@@ -78,23 +73,21 @@ class ElectionMap extends SvgChart {
     // set up svg
     this.svg.style("position", "relative")
 
+    const zoomLayer = this.layers.get("center/zoom")
+
+    this.zoom = d3Zoom()
+      .scaleExtent([1, 4])
+      .on("zoom", function zoomed() {
+        zoomLayer.attr("transform", d3Event.transform)
+      })
+
     this.layers
       .get("center")
       .attr(
         "transform",
         `translate(${this.getInnerWidth() / 2},${this.getInnerHeight() / 2})`
       )
-      .call(
-        d3Zoom()
-          .scaleExtent([1, 4])
-          .on("zoom", zoomed)
-      )
-
-    const zoomLayer = this.layers.get("center/zoom")
-
-    function zoomed() {
-      zoomLayer.attr("transform", d3Event.transform)
-    }
+      .call(this.zoom)
 
     this.layers
       .get("center/zoom/map")
@@ -107,29 +100,43 @@ class ElectionMap extends SvgChart {
       .get("center/zoom/map/glass")
       .append("rect")
       .attr("fill", "rgba(0,0,0,0)")
-      .on("click", () => {
-        const [x, y] = d3Mouse(this.glass.node())
-        if (this.quadTree) {
-          const zone = this.quadTree.find(x, y, 32)
-
-          // clear previous seletion
-          const allZones = this.selection.selectAll("rect.zone")
-
-          allZones.transition().style("transform", "translate(0, 0)scale(1)")
-
-          if (zone) {
-            const { size, padding } = this.options()
-            allZones
-              .filter(d => d === zone)
-              .raise()
-              .transition()
-              .style(
-                "transform",
-                `translate(${-zone.x - (size - padding) / 2}px, ${-zone.y -
-                  (size - padding) / 2}px)scale(2)`
-              )
-            this.options().onClick(zone)
+      .on("mousemove", () => {
+        const zone = this.findNearbyZone()
+        if (zone) {
+          if (zone !== this.prevZone) {
+            this.dispatchAs("zoneMouseenter")(zone, d3Event)
+            if (this.prevZone) {
+              this.dispatchAs("zoneMouseleave")(this.prevZone, d3Event)
+            }
+          } else {
+            this.dispatchAs("zoneMousemove")(zone, d3Event)
           }
+        } else if (this.prevZone) {
+          this.dispatchAs("zoneMouseleave")(this.prevZone, d3Event)
+        }
+        this.prevZone = zone
+      })
+      .on("click", () => {
+        // clear previous seletion
+        const allZones = this.selection.selectAll("rect.zone")
+        allZones
+          .transition()
+          .style("transform", "translate(0, 0)scale(1)")
+          .style("opacity", 1)
+        const zone = this.findNearbyZone()
+        if (zone) {
+          const { size, padding } = this.options()
+          allZones
+            .filter(d => d === zone)
+            .raise()
+            .transition()
+            .style("opacity", 0.6)
+            .style(
+              "transform",
+              `translate(${-zone.x - (size - padding) / 2}px, ${-zone.y -
+                (size - padding) / 2}px)scale(2)`
+            )
+          this.dispatchAs("zoneClick")(zone, d3Event)
         }
       })
 
@@ -152,6 +159,11 @@ class ElectionMap extends SvgChart {
   visualize() {
     if (!this.hasNonZeroArea()) return
     this.render()
+  }
+
+  findNearbyZone() {
+    const [x, y] = d3Mouse(this.glass.node())
+    return this.quadTree && this.quadTree.find(x, y, 32)
   }
 
   color(d) {
@@ -211,7 +223,6 @@ class ElectionMap extends SvgChart {
       .enter()
       .append("rect")
       .classed("zone", true)
-      .attr("id", d => `zone-${d.data.id}`)
       .attr("data-p", d => this.party(d.data))
       .attr("x", d => d.x)
       .attr("y", d => d.y)

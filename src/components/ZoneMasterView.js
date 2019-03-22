@@ -188,14 +188,23 @@ export default function ZoneMasterView({ contentHeader, contentBody, popup }) {
               },
             }}
           >
-            <ErrorBoundary name="ElectionMap">
-              <ElectionMap
-                options={{
-                  onclick: (d, i) => console.log("Click zone:", d, i),
-                }}
-                data={mapZones}
-              />
-            </ErrorBoundary>
+          <ErrorBoundary name="ElectionMap">
+            <ElectionMap
+              data={mapZones}
+              onInit={map => {
+                // console.log('map', map);
+              }}
+              onZoneMouseenter={(zone, mouseEvent) => {
+                // console.log('zone', zone);
+              }}
+              onZoneMouseleave={(zone, mouseEvent) => {
+                // console.log('zone', zone);
+              }}
+              onZoneClick={zone => {
+                // console.log('zoneClick', zone)
+              }}
+            />
+          </ErrorBoundary>
           </div>
         </div>
         <Responsive
