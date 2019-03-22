@@ -1,12 +1,16 @@
-import ElectionMap from "./ElectionMap"
-import { useState, useEffect, useMemo, useCallback } from "react"
-import { zones, parties } from "../models/information"
-import React from "react"
-import _ from "lodash"
+import React, { useCallback, useContext, useMemo, useState } from "react"
+import { checkFilter, filters, zones } from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+import ElectionMap from "./ElectionMap"
+import { ZoneFilterContext } from "./ZoneFilterPanel"
 
-function getMapData(summaryState) {
+/**
+ *
+ * @param {import('../models/LiveDataSubscription').DataState<ElectionDataSource.SummaryJSON>} summaryState
+ * @param {IZoneFilter} filter
+ */
+function getMapData(summaryState, filter) {
   if (!summaryState.completed) {
     return [
       ...zones.map((zone, i) => {
@@ -42,7 +46,7 @@ function getMapData(summaryState) {
           id: `${zone.provinceId}-${zone.no}`,
           partyId: candidate ? candidate.partyId : "nope",
           complete: stats.finished,
-          show: true,
+          show: checkFilter(filter, zone),
         }
       }),
       ...partylist,
@@ -52,8 +56,13 @@ function getMapData(summaryState) {
 
 export default function ElectionMapContainer() {
   const summaryState = useSummaryData()
+  const currentFilterName = useContext(ZoneFilterContext)
+  const currentFilter = filters[currentFilterName]
   const [mapTip, setMapTip] = useState(null)
-  const mapZones = useMemo(() => getMapData(summaryState), [summaryState])
+  const mapZones = useMemo(() => getMapData(summaryState, currentFilter), [
+    summaryState,
+    currentFilter,
+  ])
 
   const onInit = useCallback(map => {}, [])
   const onZoneMouseenter = useCallback((zone, mouseEvent) => {
