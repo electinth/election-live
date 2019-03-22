@@ -138,12 +138,18 @@ function getLatestDataFileState(fileName) {
 function useInertState(state) {
   const ref = useRef(state)
   const combine = (previous, current) => {
-    return {
-      ...previous,
-      ...current,
-      completed: current.completed || previous.completed,
-      data: current.data || previous.data,
+    if (
+      (!current.completed && previous.completed) ||
+      (!current.data && previous.data)
+    ) {
+      return {
+        ...previous,
+        ...current,
+        completed: current.completed || previous.completed,
+        data: current.data || previous.data,
+      }
     }
+    return current
   }
   const result = combine(ref.current, state)
   useEffect(() => {

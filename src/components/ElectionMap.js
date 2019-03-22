@@ -9,6 +9,7 @@ import {
 import { SvgChart, helper } from "d3kit"
 import { createComponent } from "react-d3kit"
 import { parties } from "../models/information"
+import { memo } from "react"
 const maps = require("../models/information/_map.json")
 
 const partyLookup = keyBy(parties, p => p.id)
@@ -293,6 +294,6 @@ class ElectionMap extends SvgChart {
   }
 }
 
-export default /** @type {React.FunctionComponent<Props>} */ (createComponent(
-  ElectionMap
+export default /** @type {React.FunctionComponent<Props>} */ (memo(
+  createComponent(ElectionMap)
 ))

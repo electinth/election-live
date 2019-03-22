@@ -1,5 +1,5 @@
 import ElectionMap from "./ElectionMap"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { zones, parties } from "../models/information"
 import React from "react"
 import _ from "lodash"
@@ -53,8 +53,21 @@ function getMapData(summaryState) {
 export default function ElectionMapContainer() {
   const summaryState = useSummaryData()
   const [mapTip, setMapTip] = useState(null)
-  const mapZones = getMapData(summaryState)
+  const mapZones = useMemo(() => getMapData(summaryState), [summaryState])
 
+  const onInit = useCallback(map => {}, [])
+  const onZoneMouseenter = useCallback((zone, mouseEvent) => {
+    setMapTip({ zone, mouseEvent })
+  }, [])
+  const onZoneMousemove = useCallback((zone, mouseEvent) => {
+    setMapTip({ zone, mouseEvent })
+  }, [])
+  const onZoneMouseleave = useCallback((zone, mouseEvent) => {
+    setMapTip(null)
+  }, [])
+  const onZoneClick = useCallback(zone => {
+    console.log(zone)
+  }, [])
   return (
     <div>
       {mapTip && (
@@ -79,24 +92,11 @@ export default function ElectionMapContainer() {
       )}
       <ElectionMap
         data={mapZones}
-        onInit={map => {
-          // console.log('map', map);
-        }}
-        onZoneMouseenter={(zone, mouseEvent) => {
-          setMapTip({ zone, mouseEvent })
-          // console.log('zone', zone);
-        }}
-        onZoneMousemove={(zone, mouseEvent) => {
-          setMapTip({ zone, mouseEvent })
-          // console.log('zone', zone);
-        }}
-        onZoneMouseleave={(zone, mouseEvent) => {
-          setMapTip(null)
-          // console.log('zone', zone);
-        }}
-        onZoneClick={zone => {
-          // console.log('zoneClick', zone)
-        }}
+        onInit={onInit}
+        onZoneMouseenter={onZoneMouseenter}
+        onZoneMousemove={onZoneMousemove}
+        onZoneMouseleave={onZoneMouseleave}
+        onZoneClick={onZoneClick}
       />
     </div>
   )
