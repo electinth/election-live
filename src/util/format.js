@@ -1,3 +1,5 @@
-export const numberWithCommas = number => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-}
+import { format } from "d3-format"
+
+const formatter = format(",d")
+
+export const numberWithCommas = num => formatter(num)
