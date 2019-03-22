@@ -4,6 +4,7 @@ import {
   select as d3Select,
   event as d3Event,
   mouse as d3Mouse,
+  zoom as d3Zoom,
 } from "d3"
 import { transition as d3Transition } from "d3"
 import { SvgChart, helper } from "d3kit"
@@ -84,8 +85,17 @@ class ElectionMap extends SvgChart {
         "transform",
         `translate(${this.getInnerWidth() / 2},${this.getInnerHeight() / 2})`
       )
+      .call(
+        d3Zoom()
+          .scaleExtent([1, 4])
+          .on("zoom", zoomed)
+      )
 
-    this.layers.get("center/zoom").attr("transform", "scale(1)")
+    const zoomLayer = this.layers.get("center/zoom")
+
+    function zoomed() {
+      zoomLayer.attr("transform", d3Event.transform)
+    }
 
     this.layers
       .get("center/zoom/map")
@@ -136,27 +146,24 @@ class ElectionMap extends SvgChart {
       .append("g")
       .style("transform", "scale(1)translate(0px, 0px)")
       .style("pointer-events", "bounding-box")
-
-    //hack for testing
-    // window.theMap = this;
   }
 
-  zoomIn() {
-    this.zoom = Math.min(this.zoom + 1, 3)
-    this.doZoom()
-  }
+  // zoomIn() {
+  //   this.zoom = Math.min(this.zoom + 1, 3)
+  //   this.doZoom()
+  // }
 
-  zoomOut() {
-    this.zoom = Math.max(this.zoom - 1, 1)
-    this.doZoom()
-  }
+  // zoomOut() {
+  //   this.zoom = Math.max(this.zoom - 1, 1)
+  //   this.doZoom()
+  // }
 
-  doZoom() {
-    this.layers
-      .get("center/zoom")
-      .transition()
-      .attr("transform", `scale(${this.zoom})`)
-  }
+  // doZoom() {
+  //   this.layers
+  //     .get("center/zoom")
+  //     .transition()
+  //     .attr("transform", `scale(${this.zoom})`)
+  // }
 
   visualize() {
     if (!this.hasNonZeroArea()) return
