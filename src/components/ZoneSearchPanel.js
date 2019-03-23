@@ -5,10 +5,13 @@ import { labelColor } from "../styles"
 import { Link } from "gatsby"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import Fuse from "fuse.js"
+import { trackEvent } from "../util/analytics"
 
 const fuse = new Fuse(zonesForSearch, {
   keys: ["inclusionAreas", "province.name"],
 })
+
+let searchUsed = false
 
 export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
   const [state, setState] = useState({
@@ -36,7 +39,12 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
         placeholder="ค้นหาจาก ชื่อ ตำบล อำเภอ หรือ จังหวัด"
         onChange={v => {
           const query = v.target.value
-          setState({ zoneQuery: query, isSearchOpen: query.length > 2 })
+          const isSearchOpen = query.length > 2
+          if (isSearchOpen && !searchUsed) {
+            searchUsed = true
+            trackEvent("Search for zone")
+          }
+          setState({ zoneQuery: query, isSearchOpen })
         }}
         value={state.zoneQuery}
       />
@@ -66,7 +74,10 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
               >
                 <Link
                   to={zonePath(z.zone)}
-                  onClick={onSearchCompleted}
+                  onClick={() => {
+                    trackEvent("View zone", { via: "Search" })
+                    if (onSearchCompleted) onSearchCompleted()
+                  }}
                   css={{
                     width: "calc(100% - 24px)",
                     display: "block",
