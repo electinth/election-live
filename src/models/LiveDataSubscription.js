@@ -164,7 +164,10 @@ export function useStatus() {
   return useComputed(() => {
     const latestState = latestFileResource.state
     if (!latestState.completed) return false
-    return (latestState.data.control || {}).status
+    const status = (latestState.data.control || {}).status
+    if (status === "null") return null
+    if (status === ".") return null
+    return status
   }, [])
 }
 
