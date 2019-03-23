@@ -74,11 +74,6 @@ export default ({ open }) => {
             marginTop: 20,
           }}
           placeholder="ชื่อพรรคการเมือง..."
-          onChange={v => {
-            // const query = v.target.value
-            // setState({ zoneQuery: query, isSearchOpen: query.length > 2 })
-          }}
-          //   value={state.zoneQuery}
         />
         <div
           css={{
