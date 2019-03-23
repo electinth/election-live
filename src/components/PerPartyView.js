@@ -3,11 +3,11 @@ import { parties, partyPath, partyColor } from "../models/information"
 import { DESKTOP_MIN_WIDTH, labelColor, media } from "../styles"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import ErrorBoundary from "../components/ErrorBoundary"
-import ElectionMapContainer from "../components/ElectionMapContainer"
+import ErrorBoundary from "./ErrorBoundary"
+import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
 
-export default function ZonePartyView() {
+export default function PerPartyView() {
   return (
     <div>
       <div
