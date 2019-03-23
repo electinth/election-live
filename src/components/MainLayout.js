@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react"
+import React, { useReducer, useState, useEffect } from "react"
 import _ from "lodash"
 
 import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
@@ -168,13 +168,21 @@ function VoteCounterContainer() {
 }
 
 function Countdown() {
-  const start = new Date()
+  const [date, setDate] = useState(new Date())
   const end = new Date("2019-03-24T18:00:00+07:00")
-  const difference = end.getTime() - start.getTime()
+  const difference = end.getTime() - date.getTime()
 
   if (difference <= 0) {
     return false
   } else {
+    useEffect(() => {
+      const timerID = setInterval(() => setDate(new Date()), 1000)
+
+      return function cleanup() {
+        clearInterval(timerID)
+      }
+    })
+
     let seconds = Math.floor(difference / 1000)
     let minutes = Math.floor(seconds / 60)
     let hours = Math.floor(minutes / 60)
