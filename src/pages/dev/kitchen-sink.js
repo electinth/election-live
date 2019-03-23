@@ -15,25 +15,6 @@ import { getMockPartyStatsNationwide } from "../../components/__fixtures__/Party
 
 function kitchenSink(gallery, example) {
   // @todo #1 Add kitchen sink for CompactScoreBar
-  gallery("Home Page Redirect", () => {
-    function RedirectSettings() {
-      const [, setRenderCount] = useState(0)
-      const redirectFlag =
-        typeof window !== "undefined" &&
-        !window.localStorage.SKIP_ELECT_REDIRECT
-      const toggle = () => {
-        localStorage.SKIP_ELECT_REDIRECT = redirectFlag ? "1" : ""
-        setRenderCount(x => x + 1)
-      }
-      return (
-        <div css={{ padding: 16 }}>
-          Redirect is <strong>{redirectFlag ? "ON" : "OFF"}</strong>{" "}
-          <button onClick={toggle}>Toggle</button>
-        </div>
-      )
-    }
-    example("Settings", { maxWidth: 320 }, () => <RedirectSettings />)
-  })
 
   gallery("DesktopScoreBar", () => {
     example("Blank", { maxWidth: 960 }, () => <DesktopScoreBar data={[]} />)

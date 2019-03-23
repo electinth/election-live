@@ -9,12 +9,10 @@ import {
 } from "mobx"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Debug } from "../util/Debug.js"
+import { overrideDirectory } from "./DeveloperOptions.js"
 
 const LATEST_FILE_URL = "/data/latest.json"
 const DATA_FILE_URL_BASE = "/data"
-
-const overrideDirectory = observable.box(null)
-global.ELECT_overrideDirectory = directory => overrideDirectory.set(directory)
 
 /**
  * @template T

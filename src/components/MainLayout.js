@@ -10,6 +10,8 @@ import VoteCounter from "./VoteCounter"
 import { Location } from "@reach/router"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import moment from "moment"
+import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
+import Placeholder from "./Placeholder"
 
 // @todo #1 Change the style to match the design
 //  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
@@ -113,13 +115,11 @@ export default function MainLayout({ children, activeNavBarSection }) {
       >
         <NavBar activeNavBarSection={activeNavBarSection} />
       </div>
+      {children}
       <Location>
-        {({ location }) => (
-          <HomePageRedirector location={location}>
-            {children}
-          </HomePageRedirector>
-        )}
+        {props => <CountdownCurtain location={props.location} />}
       </Location>
+      <DeveloperPanel />
       <Footer />
     </div>
   )
@@ -148,26 +148,54 @@ function LatestDataIndicator() {
   )
 }
 
-function HomePageRedirector({ location, children }) {
-  const notReady =
-    !/^\/dev/.test(location.pathname) &&
-    location.hostname === "elect.thematter.co" &&
-    (typeof window !== "undefined" && !window.localStorage.SKIP_ELECT_REDIRECT)
-  useEffect(() => {
-    if (notReady) {
-      window.location.replace("https://elect.in.th/")
-    }
-  }, [notReady])
-  if (notReady) {
+function CountdownCurtain({ location }) {
+  const [skip] = useLocalStorageFlag("ELECT_DISABLE_CURTAIN")
+  const ready = /^\/dev/.test(location.pathname) || skip
+  if (!ready) {
     return (
-      <h1
-        css={{ padding: "3rem", textAlign: "center", fontFamily: DISPLAY_FONT }}
+      <div
+        css={{
+          background: "rgba(0,0,0,0.85)",
+          color: "#fff",
+          font: `30px ${DISPLAY_FONT}`,
+          position: "fixed",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          zIndex: 998,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
       >
-        Coming soon!
-      </h1>
+        <div>
+          {
+            // @todo #1 CountdownCurtain: Add image
+          }
+          รอลุ้นผลการเลือกตั้งแบบเรียลไทม์ไปพร้อมกัน
+          <br />
+          พรุ่งนี้นะๆ ^_^
+          {
+            // @todo #1 CountdownCurtain: Replace static text with countdown
+          }
+          {(location.hostname === "localhost" ||
+            location.hostname === "127.0.0.1") && (
+            <div style={{ marginTop: "1em" }}>
+              <Placeholder>
+                <div style={{ padding: 10 }}>
+                  Hey developer! To disable this curtain, go to{" "}
+                  <Link to="/dev">/dev</Link>
+                </div>
+              </Placeholder>
+            </div>
+          )}
+        </div>
+      </div>
     )
   }
-  return children
+  return null
 }
 
 function Logo() {
