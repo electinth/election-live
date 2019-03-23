@@ -40,7 +40,7 @@ export default () => {
           }}
         />
         <div
-          css={{ fontSize: "2em", paddingLeft: 15, fontFamily: DISPLAY_FONT }}
+          css={{ fontSize: "24px", paddingLeft: 15, fontFamily: DISPLAY_FONT }}
         >
           <b>{p.name}</b>
         </div>
