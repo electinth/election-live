@@ -18,6 +18,8 @@ import moment from "moment"
 import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
 import Placeholder from "./Placeholder"
 import { keyframes } from "@emotion/core"
+import logo from "../styles/images/site-logo.png"
+import voteHand from "../styles/images/vote-hand.gif"
 
 /**
  * @param {object} props
@@ -229,9 +231,22 @@ function CountdownCurtain({ location }) {
         }}
       >
         <div>
-          {
-            // @todo #1 CountdownCurtain: Add image
-          }
+          <img
+            src={voteHand}
+            width={250}
+            css={{
+              margin: "0 auto 0 auto",
+              display: "block",
+            }}
+          />
+          <img
+            src={logo}
+            width={250}
+            css={{
+              margin: "0 auto 15px auto",
+              display: "block",
+            }}
+          />
           รอลุ้นผลการเลือกตั้งแบบเรียลไทม์ไปพร้อมกัน
           <br />
           <Countdown />
