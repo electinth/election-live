@@ -12,6 +12,7 @@ const searcher = new Fuse(parties, {
 export default () => {
   const [state, setState] = useState({
     dropdownOpen: true,
+    currentParty: parties[0],
   })
   const [searchKeyword, setSearchKeyword] = useState("")
 
@@ -53,12 +54,11 @@ export default () => {
         css={{
           cursor: "pointer",
         }}
-        // @todo #1 toggle open dropdown
         onClick={() => {
           setState({ dropdownOpen: true })
         }}
       >
-        {partyItem(parties[0])}
+        {partyItem(state.currentParty)}
       </div>
     )
   }
@@ -108,10 +108,7 @@ export default () => {
           </div>
         </div>
 
-        <ul
-          css={{ listStyle: "none", padding: 0 }}
-          onClick={() => setState({ dropdownOpen: false })}
-        >
+        <ul css={{ listStyle: "none", padding: 0 }}>
           {filteredParties.map(p => (
             <li
               key={p.id}
@@ -120,6 +117,7 @@ export default () => {
                 borderBottom: "1px solid gray",
                 position: "relative",
               }}
+              onClick={() => setState({ dropdownOpen: false, currentParty: p })}
             >
               <Link
                 to={partyPath(p)}
