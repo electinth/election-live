@@ -101,13 +101,22 @@ export default ({ open, searchKeyword, setSearchKeyword, filteredParties }) => {
 
         <ul css={{ listStyle: "none", padding: 0 }}>
           {filteredParties.map(p => (
-            <li key={p.id}>
-              <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
+            <li
+              key={p.id}
+              css={{
+                padding: "12px 0px",
+                borderBottom: "1px solid gray",
+                position: "relative",
+              }}
+            >
+              <Link
+                to={partyPath(p)}
+                style={{ color: "black", textDecoration: "none" }}
+              >
                 {partyItem(p)}
               </Link>
             </li>
           ))}
-          ) })}
         </ul>
       </div>
     )
