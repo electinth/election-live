@@ -61,10 +61,6 @@ module.exports = {
         icon: "src/styles/images/site-logo.png",
       },
     },
-
-    // @todo #1 Add `gatsby-plugin-netlify` for Netlify headers.
-    //  (see: https://www.gatsbyjs.org/packages/gatsby-plugin-netlify/)
-
     {
       resolve: "gatsby-plugin-htaccess",
     },

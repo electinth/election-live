@@ -4,6 +4,7 @@ import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import PartyDropdown from "./PartyDropdown"
+import Unimplemented from "./Unimplemented"
 
 export default function PerPartyView({ partyId }) {
   return (
@@ -21,7 +22,25 @@ export default function PerPartyView({ partyId }) {
           },
         }}
       >
-        <ZoneSearchParty partyId={partyId} />
+
+        <div
+          css={{
+            width: "100%",
+            position: "relative",
+            [media(DESKTOP_MIN_WIDTH)]: {
+              marginTop: 10,
+              width: 285,
+            },
+          }}
+        >
+          <div css={{ position: "absolute", width: "100%", top: 0 }}>
+            <ZoneSearchParty partyId={partyId}/>
+          </div>
+          <div css={{ paddingTop: 60 }}>
+            <ZoneStats />
+          </div>
+        </div>
+
         <ZoneMapView />
         <PerPartyMemberVoteResult />
       </div>
@@ -34,6 +53,8 @@ function ZoneSearchParty({ partyId }) {
   return (
     <div
       css={{
+        marginTop: 10,
+        marginBottom: 10,
         [media(DESKTOP_MIN_WIDTH)]: {
           display: "block",
           order: 1,
@@ -42,7 +63,6 @@ function ZoneSearchParty({ partyId }) {
         },
       }}
     >
-      {/* left zone full mobile*/}
       <PartyDropdown partyId={partyId} />
     </div>
   )
@@ -81,4 +101,8 @@ function ZoneMapView() {
       </div>
     </div>
   )
+}
+
+function ZoneStats() {
+  return <Unimplemented componentName="ZoneStats" height={300} />
 }

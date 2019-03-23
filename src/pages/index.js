@@ -10,6 +10,7 @@ import PartyStatsList from "../components/PartyStatsList"
 import TotalVoterSummary from "../components/TotalVoterSummary"
 import { ZoneFilterContext } from "../components/ZoneFilterPanel"
 import ZoneMasterView from "../components/ZoneMasterView"
+import Arrow from "../components/Arrow"
 import {
   checkFilter,
   filterPath,
@@ -135,11 +136,36 @@ function PartyStatsContainer({ filterName }) {
 
   const summary = summaryState.data
   const currentFilter = filters[filterName]
-  const partyStats = partyStatsFromSummaryJSON(summary, {
-    filter: currentFilter,
-  }).filter(row => partyStatsRowTotalSeats(row) > 0)
+  const filtered = filterName !== "all"
+  const filteredPartyStats = _.chain(
+    partyStatsFromSummaryJSON(summary, {
+      filter: currentFilter,
+    })
+  )
+    .map(row => (filtered ? { ...row, partyListSeats: 0 } : row))
+    .filter(row => partyStatsRowTotalSeats(row) > 0)
+    .sortBy(row => row.seatsCeiling)
+    .sortBy(row => partyStatsRowTotalSeats(row))
+    .reverse()
+    .value()
 
-  return <PartyStatsList partyStats={partyStats} />
+  if (filteredPartyStats.length < 1) {
+    return (
+      <UndesirableState
+        heading={
+          <span>
+            ยังไม่มีพรรคไหน
+            <br />
+            ได้ที่นั่ง ส.ส.
+          </span>
+        }
+      >
+        เริ่มแสดงผลเมื่อนับคะแนนแล้ว 10%
+      </UndesirableState>
+    )
+  }
+
+  return <PartyStatsList partyStats={filteredPartyStats} filtered={filtered} />
 }
 
 function ZoneView({ provinceId, zoneNo }) {
@@ -201,10 +227,24 @@ function ZoneView({ provinceId, zoneNo }) {
               css={{
                 fontFamily: DISPLAY_FONT,
                 color: labelColor,
-                margin: "0.3em 0 0.5em 0 ",
+                margin: "0.3em 0 0.5em 0",
+                position: "relative",
               }}
             >
+              <Arrow />
               เขตเลือกตั้งที่ {zone.no}
+              <div
+                css={{
+                  display: "inline-block",
+                  border: "solid #212121",
+                  borderWidth: "0 2px 2px 0",
+                  padding: "4px",
+                  transform: "rotate(-45deg)",
+                  verticalAlign: "middle",
+                  marginLeft: "12px",
+                  cursor: "pointer",
+                }}
+              />
             </h2>
             <div>
               <span>นับแล้ว</span>

@@ -14,7 +14,7 @@ export default ({ pageContext, location }) => {
       <h1 css={{ fontFamily: DISPLAY_FONT }}>
         เลือกพรรคการเมือง เพื่อดูจำนวน ส.ส.
       </h1>
-      <PartyDropdown />
+      <PartyDropdown dropdownOpen={true} />
     </div>
   )
 
