@@ -21,7 +21,7 @@ export default () => {
       <div
         css={{
           display: "grid",
-          gridTemplateColumns: "30px auto",
+          gridTemplateColumns: "32px auto",
         }}
       >
         <img
