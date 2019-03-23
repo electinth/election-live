@@ -24,7 +24,7 @@ export default function ElectionMapTooltip({ positionId, positions }) {
           z => z.provinceId == matchZone[1] && z.no == matchZone[2]
         ),
         province: getProvinceById(matchZone[1]).name,
-        party: party ? `พรรค${party.name}` : null,
+        party,
       }
     } else {
       const matchSeat = positionId.match(/^pl-(\d+)$/)
@@ -32,12 +32,13 @@ export default function ElectionMapTooltip({ positionId, positions }) {
         seat: {
           no: matchSeat[1],
         },
-        party: party ? `พรรค${party.name}` : null,
+        party,
       }
     }
   }, [positionId])
 
   const summaryState = useSummaryData()
+  const { party } = memo
 
   let markColor = "#ccc"
   if (memo.zone && summaryState.completed) {
@@ -47,7 +48,7 @@ export default function ElectionMapTooltip({ positionId, positions }) {
     const candidate = (summary[provinceId] || {})[no]
     markColor = partyColor(getPartyById(candidate.partyId))
   } else if (memo.seat) {
-    // markColor = partyColor(memo.party)
+    markColor = party ? party.color : "#ccc"
   }
 
   return (
@@ -78,8 +79,11 @@ export default function ElectionMapTooltip({ positionId, positions }) {
               )}
               {memo.seat && (
                 <div>
-                  <div>ส.ส. บัญชีรายชื่ออันดับที่ {memo.seat.no}</div>
-                  <div>{memo.party}</div>
+                  <div style={{ fontSize: "1.1rem" }}>
+                    <b>ส.ส. บัญชีรายชื่อ</b>
+                  </div>
+                  <div>อันดับที่ {memo.seat.no}</div>
+                  <div>{party ? `พรรค${party.name}` : null}</div>
                 </div>
               )}
             </div>
