@@ -13,6 +13,7 @@ import { useSummaryData } from "../models/LiveDataSubscription"
 import moment from "moment"
 import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
 import Placeholder from "./Placeholder"
+import { keyframes } from "@emotion/core"
 
 /**
  * @param {object} props
@@ -218,6 +219,7 @@ function CountdownCurtain({ location }) {
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
+          animation: `3s ${curtainAnimation} linear`,
         }}
       >
         <div>
@@ -225,8 +227,6 @@ function CountdownCurtain({ location }) {
             // @todo #1 CountdownCurtain: Add image
           }
           รอลุ้นผลการเลือกตั้งแบบเรียลไทม์ไปพร้อมกัน
-          <br />
-          พรุ่งนี้นะๆ ^_^
           <br />
           <Countdown />
           {(location.hostname === "localhost" ||
@@ -246,6 +246,11 @@ function CountdownCurtain({ location }) {
   }
   return null
 }
+
+const curtainAnimation = keyframes({
+  "0%": { transform: "translateY(-120%)" },
+  "100%": { transform: "translateY(0%)" },
+})
 
 function Logo() {
   return (
