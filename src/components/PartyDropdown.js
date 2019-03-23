@@ -41,6 +41,9 @@ export default ({ open }) => {
         css={{
           cursor: "pointer",
         }}
+        onClick={() => {
+          // open = true
+        }}
       >
         {partyItem(parties[0])}
       </div>
@@ -91,6 +94,9 @@ export default ({ open }) => {
           {parties.map(p => {
             return (
               <li
+                onClick={() => {
+                  // open = false
+                }}
                 key={`${p.name}`}
                 css={{
                   padding: "12px 0px",
@@ -130,7 +136,7 @@ export default ({ open }) => {
       >
         {open ? renderDropdown() : renderDefaultDropdown()}
       </div>
-      {open ? (
+      {open ? null : (
         <div
           css={{
             position: "absolute",
@@ -142,7 +148,7 @@ export default ({ open }) => {
             transform: "rotate(45deg)",
           }}
         />
-      ) : null}
+      )}
     </div>
   )
 }
