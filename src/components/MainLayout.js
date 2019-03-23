@@ -11,6 +11,7 @@ import { Location } from "@reach/router"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import moment from "moment"
 import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
+import Placeholder from "./Placeholder"
 
 // @todo #1 Change the style to match the design
 //  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
@@ -169,15 +170,28 @@ function CountdownCurtain({ location }) {
           textAlign: "center",
         }}
       >
-        {
-          // @todo #1 CountdownCurtain: Add image
-        }
-        รอลุ้นผลการเลือกตั้งแบบเรียลไทม์ไปพร้อมกัน
-        <br />
-        พรุ่งนี้นะๆ ^_^
-        {
-          // @todo #1 CountdownCurtain: Replace static text with countdown
-        }
+        <div>
+          {
+            // @todo #1 CountdownCurtain: Add image
+          }
+          รอลุ้นผลการเลือกตั้งแบบเรียลไทม์ไปพร้อมกัน
+          <br />
+          พรุ่งนี้นะๆ ^_^
+          {
+            // @todo #1 CountdownCurtain: Replace static text with countdown
+          }
+          {(location.hostname === "localhost" ||
+            location.hostname === "127.0.0.1") && (
+            <div style={{ marginTop: "1em" }}>
+              <Placeholder>
+                <div style={{ padding: 10 }}>
+                  Hey developer! To disable this curtain, go to{" "}
+                  <Link to="/dev">/dev</Link>
+                </div>
+              </Placeholder>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
