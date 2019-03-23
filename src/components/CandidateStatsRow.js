@@ -16,7 +16,7 @@ export default function CandidateStatsRow(props) {
     <div css={{ display: "flex", marginBottom: 15 }}>
       <div
         css={{
-          background: "black",
+          background: props.rank == 1 ? "black" : "gray",
           color: "white",
           marginRight: 10,
           width: 30,
@@ -32,8 +32,11 @@ export default function CandidateStatsRow(props) {
       <div css={{ width: "100%" }}>
         <div css={{ position: "relative", fontSize: "1.2rem" }}>
           <b>{props.partyName}</b>
-          <span css={{ position: "absolute", right: 0, top: 0 }}>
-            <b>{numberWithCommas(props.score)}</b> - {props.percentage}%
+          <span
+            css={{ position: "absolute", right: 0, top: 0, color: "#413F3F" }}
+          >
+            <b css={{ color: "black" }}>{numberWithCommas(props.score)}</b> -{" "}
+            {props.percentage}%
           </span>
         </div>
         <div>
