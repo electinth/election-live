@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { keyBy } from "lodash"
 import {
   zones,
   parties,
@@ -10,13 +11,14 @@ import loadingSmall from "../styles/images/loading.gif"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { format } from "d3-format"
 
+const partyLookup = keyBy(parties, d => d.id)
 const formatInt = format(",d")
 const formatPercent = format(".2%")
 
 export default function ElectionMapTooltip({ positionId, positions }) {
   const memo = useMemo(() => {
     const position = positions.find(p => p.id == positionId)
-    const party = parties.find(p => p.id == position.partyId)
+    const party = partyLookup[position.partyId]
     const matchZone = positionId.match(/^(\d+)-(\d+)$/)
     if (matchZone) {
       return {
