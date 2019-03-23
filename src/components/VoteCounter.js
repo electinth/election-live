@@ -6,7 +6,6 @@ import { Responsive } from "../styles"
 
 export default function VoteCounter({ percentage = 60, lastUpdate = "23:59" }) {
   // @todo #1 inject vote count props to this comp for showing total vote %
-  const { percentage, lastUpdate } = props
 
   return (
     <div
