@@ -18,6 +18,8 @@ import { calculatePartyList } from "thailand-party-list-calculator"
  * @prop {IParty} party
  * @prop {number} constituencySeats
  * @prop {number} partyListSeats
+ * @prop {number} score
+ * @prop {number} seatsCeiling
  */
 
 /**
@@ -92,7 +94,7 @@ export function partyStatsFromSummaryJSON(
   }
 
   // Calculate seat counts for ecah party.
-  const partyStats = _(parties)
+  const partyStatsBasis = _(parties)
     .map(party => {
       return {
         id: party.id,
@@ -113,6 +115,9 @@ export function partyStatsFromSummaryJSON(
           ]
         : []
     )
+    .value()
+  const totalVoteCount = _.sumBy(partyStatsBasis, "voteCount")
+  const partyStats = _(partyStatsBasis)
     .thru(calculatePartyList)
     .filter(calculated => calculated.id !== "phantom")
     .map(calculated => {
@@ -122,8 +127,11 @@ export function partyStatsFromSummaryJSON(
         party,
         constituencySeats: filteredConstituencySeatCount[party.id] || 0,
         partyListSeats: calculated.partyListMemberCount,
+        score: calculated.voteCount,
+        seatsCeiling: (calculated.voteCount / totalVoteCount) * 500,
       }
     })
+    .sortBy(row => row.seatsCeiling)
     .sortBy(row => row.constituencySeats + row.partyListSeats)
     .reverse()
     .value()

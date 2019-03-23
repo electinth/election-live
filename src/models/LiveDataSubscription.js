@@ -114,23 +114,32 @@ function createResource(name) {
   })
 }
 
+function getLatestDirectoryState() {
+  if (overrideDirectory.get()) {
+    return {
+      completed: true,
+      data: overrideDirectory.get(),
+    }
+  }
+  const latestState = latestFileResource.state
+  if (!latestState.completed) return latestState
+  const latestPointer = _.maxBy(latestState.data.pointers, "timestamp")
+  if (!latestPointer) {
+    return {
+      error: new Error("No latest pointer found"),
+      failed: true,
+    }
+  }
+  return {
+    completed: true,
+    data: latestPointer.directory,
+  }
+}
+
 function getLatestDataFileState(fileName) {
-  const latestDirectory = (() => {
-    if (overrideDirectory.get()) {
-      return overrideDirectory.get()
-    }
-    const latestState = latestFileResource.state
-    if (!latestState.completed) return latestState
-    const latestPointer = _.maxBy(latestState.data.pointers, "timestamp")
-    if (!latestPointer) {
-      return {
-        loading: false,
-        error: new Error("No latest pointer found"),
-        failed: true,
-      }
-    }
-    return latestPointer.directory
-  })()
+  const latestDirectoryState = getLatestDirectoryState()
+  if (!latestDirectoryState.completed) return latestDirectoryState
+  const latestDirectory = latestDirectoryState.data
   const dataFileState = getDataFileResource(`/${latestDirectory}${fileName}`)
     .state
   return dataFileState
@@ -161,6 +170,11 @@ function useInertState(state) {
     ref.current = result
   })
   return result
+}
+
+/** @return {DataState<string>} */
+export function useLatestDirectoryState() {
+  return useComputed(() => getLatestDirectoryState(), [])
 }
 
 /** @return {DataState<ElectionDataSource.SummaryJSON>} */
