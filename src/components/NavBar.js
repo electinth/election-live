@@ -20,8 +20,8 @@ const menues = [
     label: "ภาพรวมผลลัพธ์",
   },
   {
-    name: "source",
-    route: "/source",
+    name: "about",
+    route: "/about",
     label: "เกี่ยวกับ ELECT Live",
   },
 ]
@@ -31,7 +31,7 @@ export const menuMapping = _(menues)
   .value()
 
 /**
- * @typedef {'by-area' | 'by-party' | 'overview' | 'source'} NavBarSectionName
+ * @typedef {'by-area' | 'by-party' | 'overview' | 'about'} NavBarSectionName
  */
 
 /**
