@@ -3,8 +3,7 @@ import { DESKTOP_MIN_WIDTH, media } from "../styles"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
-import PartyDropdown from "./PartyDropdown"
-import Unimplemented from "./Unimplemented"
+import PerPartySearchPanelContainer from "./PerPartySearchPanelContainer"
 
 export default function PerPartyView({ partyId }) {
   return (
@@ -22,48 +21,10 @@ export default function PerPartyView({ partyId }) {
           },
         }}
       >
-
-        <div
-          css={{
-            width: "100%",
-            position: "relative",
-            [media(DESKTOP_MIN_WIDTH)]: {
-              marginTop: 10,
-              width: 285,
-            },
-          }}
-        >
-          <div css={{ position: "absolute", width: "100%", top: 0 }}>
-            <ZoneSearchParty partyId={partyId}/>
-          </div>
-          <div css={{ paddingTop: 60 }}>
-            <ZoneStats />
-          </div>
-        </div>
-
+        <PerPartySearchPanelContainer partyId={partyId} />
         <ZoneMapView />
-        <PerPartyMemberVoteResult />
+        <ZoneStats />
       </div>
-    </div>
-  )
-}
-
-// @todo #1 implement search and select with visualization of each party
-function ZoneSearchParty({ partyId }) {
-  return (
-    <div
-      css={{
-        marginTop: 10,
-        marginBottom: 10,
-        [media(DESKTOP_MIN_WIDTH)]: {
-          display: "block",
-          order: 1,
-          margin: "0 0 10px",
-          padding: 0,
-        },
-      }}
-    >
-      <PartyDropdown partyId={partyId} />
     </div>
   )
 }
@@ -104,5 +65,5 @@ function ZoneMapView() {
 }
 
 function ZoneStats() {
-  return <Unimplemented componentName="ZoneStats" height={300} />
+  return <PerPartyMemberVoteResult />
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { DESKTOP_MIN_WIDTH, media, DISPLAY_FONT } from "../styles"
-import _ from "lodash"
+import { numberWithCommas } from "../util/format"
 
 const mockData = [
   {
@@ -32,7 +32,11 @@ const mockData = [
 const defaultTab = "EACH_DISTRICT_TAB"
 
 // @todo #1 Party View - binding data to ZonePartyMemberVoteResult
-export default function ZonePartyMemberVoteResult({ data = mockData }) {
+export default function ZonePartyMemberVoteResult({
+  data = mockData,
+  totalDistrictCandidate = 31,
+  totalPartyListCandidate = 13,
+}) {
   const [state, setState] = useState({
     showingTab: defaultTab,
   })
@@ -85,7 +89,7 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
                 setState({ showingTab: defaultTab })
               }}
             >
-              แบ่งเขต(31)
+              แบ่งเขต({totalDistrictCandidate})
             </li>
             <li
               css={{ ...tabHeaderStyle, ...partyListStyling }}
@@ -93,7 +97,7 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
                 setState({ showingTab: "PARTY_LIST_TAB" })
               }}
             >
-              บัญชีรายชื่อ (13)
+              บัญชีรายชื่อ ({totalPartyListCandidate})
             </li>
           </ul>
         </div>
@@ -114,7 +118,7 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
               </div>
               <div css={{ float: "right", position: "absolute", right: 0 }}>
                 <span css={{ fontWeight: "bold" }}>
-                  {item.vote.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                  {numberWithCommas(item.vote)}
                 </span>{" "}
                 - {item.percentage}%
               </div>
