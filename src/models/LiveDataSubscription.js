@@ -128,10 +128,10 @@ function getLatestDirectoryState() {
       failed: true,
     }
   }
-  // @todo #1 getLatestDirectoryState: Disable this conditional if control variable "locked" is true.
-  //  Have to wait for ETL team to update `latest.json`.
-  //  e.g. (latestState.data.control && latestState.data.control.locked)
-  if (!localStorage.ELECT_DISABLE_CURTAIN) {
+  if (
+    !localStorage.ELECT_DISABLE_CURTAIN &&
+    (latestState.data.control || {}).locked === "TRUE"
+  ) {
     return {
       error: new Error("ยังไม่พร้อมแสดงข้อมูล"),
       failed: true,
@@ -150,6 +150,14 @@ function getLatestDataFileState(fileName) {
   const dataFileState = getDataFileResource(`/${latestDirectory}${fileName}`)
     .state
   return dataFileState
+}
+
+export function useLockedState() {
+  return useComputed(() => {
+    const latestState = latestFileResource.state
+    if (!latestState.completed) return false
+    return (latestState.data.control || {}).locked === "TRUE"
+  }, [])
 }
 
 /**
