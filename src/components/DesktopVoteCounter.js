@@ -13,7 +13,7 @@ export default function DesktopVoteCounter(props) {
       }}
     >
       <div css={{ fontSize: "0.8em" }}>นับคะแนนแล้ว</div>
-      <div css={{ fontSize: "2em", fontWeight: "bold", marginTop: "-5px" }}>
+      <div css={{ fontSize: "2.5em", fontWeight: "bold", marginTop: "-5px" }}>
         {totalCount}%
       </div>
       <div css={{ fontSize: "0.8em", marginTop: "-5px" }}>

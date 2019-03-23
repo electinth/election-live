@@ -2,6 +2,7 @@ import React from "react"
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 import DesktopVoteCounter from "./DesktopVoteCounter"
 import MobileVoteCounter from "./MobileVoteCounter"
+import { Responsive } from "../styles"
 
 export default function VoteCounter(props) {
   // @todo #1 inject vote count props to this comp for showing total vote %
@@ -27,35 +28,13 @@ export default function VoteCounter(props) {
         },
       }}
     >
-      <div
-        css={{
-          textAlign: "right",
-          [media(WIDE_NAV_MIN_WIDTH)]: {
-            display: "none",
-          },
-        }}
-      >
-        <MobileVoteCounter totalCount={totalCount} />
-      </div>
-      <div
-        css={{
-          display: "none",
-          [media(WIDE_NAV_MIN_WIDTH)]: {
-            display: "block",
-            textAlign: "right",
-            paddingBottom: "4px",
-            fontSize: "14px",
-          },
-        }}
-      >
-        <DesktopVoteCounter
-          css={{
-            width: "15%",
-          }}
-          totalCount={totalCount}
-          lastUpdate={lastUpdate}
-        />
-      </div>
+      <Responsive
+        breakpoint={WIDE_NAV_MIN_WIDTH}
+        narrow={<MobileVoteCounter totalCount={totalCount} />}
+        wide={
+          <DesktopVoteCounter totalCount={totalCount} lastUpdate={lastUpdate} />
+        }
+      />
     </div>
   )
 }
