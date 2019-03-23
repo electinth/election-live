@@ -1,5 +1,6 @@
 require = require("esm")(module)
 
+const fs = require("fs")
 const path = require("path")
 const {
   provinces,
@@ -48,4 +49,13 @@ exports.createPages = async ({ actions }) => {
       },
     })
   }
+}
+
+exports.onPostBuild = async () => {
+  fs.writeFileSync(
+    "public/version.info.json",
+    JSON.stringify({
+      version: require("./package").version,
+    })
+  )
 }

@@ -63,6 +63,15 @@ module.exports = {
     },
     {
       resolve: "gatsby-plugin-htaccess",
+      options: {
+        custom: `
+<IfModule mod_headers.c>
+    <FilesMatch "\\.info\\.json$">
+        Header set Cache-Control "public, max-age=30, stale-while-revalidate=30, stale-if-error=300, must-revalidate"
+    </FilesMatch>
+</IfModule>
+        `,
+      },
     },
     {
       resolve: "gatsby-plugin-netlify",
