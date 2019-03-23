@@ -26,13 +26,17 @@ import { calculatePartyList } from "thailand-party-list-calculator"
  * @param {ElectionDataSource.ZoneStats} zoneStats
  */
 export const isZoneFinished = zoneStats =>
-  zoneStats.finished || zoneStats.progress >= 80
+  zoneStats.finished ||
+  zoneStats.progress >= 80 ||
+  zoneStats.votesTotal >= zoneStats.eligible * 0.8
 
 /**
  * @param {ElectionDataSource.ZoneStats} zoneStats
  */
 export const shouldDisplayZoneData = zoneStats =>
-  zoneStats.finished || zoneStats.progress >= 10
+  zoneStats.finished ||
+  zoneStats.progress >= 10 ||
+  zoneStats.votesTotal >= zoneStats.eligible * 0.1
 
 /**
  * @param {ElectionDataSource.SummaryJSON} summary
