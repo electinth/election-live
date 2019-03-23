@@ -149,8 +149,7 @@ export default () => {
           border: "2px solid #e4e4e4",
           alignItems: "center",
           position: "relative",
-          boxShadow:
-            "0 2px 4px 0 rgba(0,0,0,0.05),0 2px 10px 0 rgba(0,0,0,0.12)!important",
+          boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
         }}
       >
         {state.dropdownOpen ? renderDropdown() : renderDefaultDropdown()}
