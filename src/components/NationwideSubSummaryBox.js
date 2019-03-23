@@ -23,7 +23,7 @@ export default function NationWideSubSummaryBox(props) {
         <span
           css={{
             fontSize: "1.1em",
-            color: "black",
+            color: "#413F3F",
             float: "left",
             marginTop: ".5em",
           }}

@@ -55,8 +55,25 @@ export function DeveloperPanel() {
         🛠
       </button>
       <div css={{ background: "#333", display: expand ? "block" : "none" }}>
-        <Link to="/dev">Options</Link>{" "}
+        <Link to="/dev">Options</Link>
+        {" | "}
         <Link to="/dev/inspect">Inspect data</Link>
+        <br />
+        <button
+          onClick={() =>
+            overrideDirectory.set(
+              window.prompt("Enter data directory (please check the catalogue)")
+            )
+          }
+        >
+          Time travel
+        </button>{" "}
+        <a
+          href="https://github.com/codeforthailand/election-live/issues/98"
+          target="_blank"
+        >
+          Catalogue
+        </a>
       </div>
     </div>
   )

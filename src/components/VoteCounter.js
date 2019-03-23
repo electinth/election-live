@@ -1,7 +1,7 @@
 import React from "react"
 import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 
-export default function VoteCounter() {
+export default function VoteCounter({ percentage = 60 }) {
   return (
     <div
       css={{
@@ -54,7 +54,7 @@ export default function VoteCounter() {
           },
         }}
       >
-        60%
+        {percentage}%
       </div>
     </div>
   )
