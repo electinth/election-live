@@ -3,7 +3,6 @@ import {
   quadtree,
   event as d3Event,
   mouse as d3Mouse,
-  transition as d3Transition,
   zoom as d3Zoom,
 } from "d3"
 import { SvgChart, helper } from "d3kit"
@@ -104,7 +103,6 @@ class ElectionMap extends SvgChart {
         const zone = this.findNearbyZone()
         this.selection
           .selectAll("g.zone")
-          .transition()
           .style("stroke", d => (d === zone ? "#222" : "none"))
 
         if (this.prevZone) {
@@ -116,7 +114,6 @@ class ElectionMap extends SvgChart {
         const zone = this.findNearbyZone()
         this.selection
           .selectAll("g.zone")
-          .transition()
           .style("stroke", d => (d === zone ? "#222" : "none"))
 
         if (zone) {
@@ -141,17 +138,13 @@ class ElectionMap extends SvgChart {
 
         // clear previous selection
         const allZones = this.selection.selectAll("g.zone")
-        allZones
-          .select("rect")
-          .transition()
-          .attr("transform", "scale(1)")
+        allZones.select("rect").attr("transform", "scale(1)")
         const zone = this.findNearbyZone()
         if (zone) {
           allZones
             .filter(d => d === zone)
             .raise()
             .select("rect")
-            .transition()
             .attr("transform", `scale(2)`)
           this.dispatchAs("zoneClick")(zone, d3Event)
         }
@@ -163,7 +156,6 @@ class ElectionMap extends SvgChart {
       .attr("stroke-width", 1)
       .attr("fill", "none")
       .attr("fill-rule", "evenodd")
-      .style("transition", "all .5s ease-in")
       .style("transform", "scale(1)translate(0px, 0px)")
       .append("g")
       .style("transform", "scale(1)translate(0px, 0px)")
@@ -209,10 +201,7 @@ class ElectionMap extends SvgChart {
   }
 
   resetZoom() {
-    this.layers
-      .get("center/zoom")
-      .transition()
-      .attr("transform", "translate(0,0)scale(1)")
+    this.layers.get("center/zoom")
   }
 
   render() {
@@ -222,7 +211,6 @@ class ElectionMap extends SvgChart {
 
     this.dataLookup = keyBy(this.data(), d => d.id)
     const { size, padding } = this.options()
-    const t = d3Transition().duration(1000)
 
     const rectSide = size - padding
 
@@ -253,13 +241,11 @@ class ElectionMap extends SvgChart {
       .attr("y", -rectSide / 2)
       .attr("width", rectSide)
       .attr("height", rectSide)
-      .style("transition", "all .2s ease-out")
       .attr("transform", "scale(1)")
 
     zoneSelection
       .merge(zoneEnter)
       .select("rect")
-      .transition(t)
       .attr("fill", d => this.color(d.data))
       .attr("opacity", d => this.opacity(d.data))
       .attr("rx", d => this.radius(d.data))
