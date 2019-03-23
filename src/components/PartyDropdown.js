@@ -41,6 +41,7 @@ export default ({ open }) => {
         css={{
           cursor: "pointer",
         }}
+        // @todo #1 toggle dropdown
         onClick={() => {
           // open = true
         }}
@@ -54,17 +55,14 @@ export default ({ open }) => {
     return (
       <div
         css={{
-          //   [media(DESKTOP_MIN_WIDTH)]: {
           height: 440,
           overflowX: "hidden",
           overflowY: "auto",
           WebkitOverflowScrolling: "touch",
-          //   },
           position: "relative",
         }}
       >
         <input
-          //   ref={inputRef}
           css={{
             border: `1px solid ${labelColor}`,
             width: "100%",
