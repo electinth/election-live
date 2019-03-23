@@ -26,12 +26,13 @@ export default function ZonePartyView() {
       >
         <ZoneSearchParty />
         <ZoneMapView />
-        <ZoneVoteResult />
+        <ZonePartyVoteResult />
       </div>
     </div>
   )
 }
 
+// @todo #1 implement search and select with visualization of each party
 function ZoneSearchParty() {
   return (
     <div
@@ -87,6 +88,7 @@ function ZoneSearchParty() {
   )
 }
 
+// @todo #1 visualize data in country map when select a party
 function ZoneMapView() {
   return (
     <div
@@ -121,7 +123,8 @@ function ZoneMapView() {
   )
 }
 
-function ZoneVoteResult() {
+// @todo #1 show each party vote result
+function ZonePartyVoteResult() {
   return (
     <div
       css={{
