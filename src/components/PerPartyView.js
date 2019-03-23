@@ -9,6 +9,18 @@ import { Link } from "gatsby"
 import PartyDropdown from "./PartyDropdown"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 
+export function filterParty(parties, keyword) {
+  return parties.filter(party => {
+    return (
+      // only allow prefix search
+      party.codeEN.indexOf(keyword) === 0 ||
+      party.codeTH.indexOf(keyword) === 0 ||
+      // but can search anywhere
+      party.name.indexOf(keyword) !== -1
+    )
+  })
+}
+
 export default function PerPartyView() {
   return (
     <div>
@@ -18,7 +30,6 @@ export default function PerPartyView() {
           padding: "0 24px",
           maxWidth: "1200px",
           [media(DESKTOP_MIN_WIDTH)]: {
-            display: "block",
             order: 1,
             margin: "0 auto",
             padding: 0,
@@ -36,6 +47,8 @@ export default function PerPartyView() {
 
 // @todo #1 implement search and select with visualization of each party
 function ZoneSearchParty() {
+  const [searchKeyword, setSearchKeyword] = React.useState("")
+
   return (
     <div
       css={{
