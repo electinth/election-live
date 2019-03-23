@@ -58,13 +58,13 @@ export default function ZonePartyMemberVoteResult({
   return (
     <div
       css={{
+        textAlign: "center",
         [media(DESKTOP_MIN_WIDTH)]: {
           display: "block",
           order: 3,
           margin: "0",
           padding: "16px",
           width: "320px",
-          textAlign: "center",
         },
       }}
     >
