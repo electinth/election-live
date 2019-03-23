@@ -167,6 +167,32 @@ function VoteCounterContainer() {
   )
 }
 
+function Countdown() {
+  const start = new Date()
+  const end = new Date("2019-03-24T18:00:00+07:00")
+  const difference = end.getTime() - start.getTime()
+
+  if (difference <= 0) {
+    return false
+  } else {
+    let seconds = Math.floor(difference / 1000)
+    let minutes = Math.floor(seconds / 60)
+    let hours = Math.floor(minutes / 60)
+
+    const countdown = {
+      hours: `${(hours %= 24)}`.padStart(2, "0"),
+      minutes: `${(minutes %= 60)}`.padStart(2, "0"),
+      seconds: `${(seconds %= 60)}`.padStart(2, "0"),
+    }
+
+    return (
+      <div style={{ marginTop: "1em" }}>
+        {countdown.hours} : {countdown.minutes} : {countdown.seconds}
+      </div>
+    )
+  }
+}
+
 function CountdownCurtain({ location }) {
   const [skip] = useLocalStorageFlag("ELECT_DISABLE_CURTAIN")
   const ready = /^\/dev/.test(location.pathname) || skip
@@ -196,9 +222,8 @@ function CountdownCurtain({ location }) {
           รอลุ้นผลการเลือกตั้งแบบเรียลไทม์ไปพร้อมกัน
           <br />
           พรุ่งนี้นะๆ ^_^
-          {
-            // @todo #1 CountdownCurtain: Replace static text with countdown
-          }
+          <br />
+          {Countdown()}
           {(location.hostname === "localhost" ||
             location.hostname === "127.0.0.1") && (
             <div style={{ marginTop: "1em" }}>
