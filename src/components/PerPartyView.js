@@ -10,7 +10,7 @@ import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import Fuse from "fuse.js"
 
 const searcher = new Fuse(parties, {
-  keys: ["codeENM", "codeTH", "name"],
+  keys: ["codeEN", "codeTH", "name"],
 })
 
 export default function PerPartyView() {
