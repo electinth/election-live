@@ -1,11 +1,7 @@
 import React from "react"
-import { parties, partyPath, partyColor } from "../models/information"
-import { DESKTOP_MIN_WIDTH, labelColor, media } from "../styles"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { DESKTOP_MIN_WIDTH, media } from "../styles"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
-import { Link } from "gatsby"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import PartyDropdown from "./PartyDropdown"
 
