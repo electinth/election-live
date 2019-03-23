@@ -2,6 +2,11 @@ import { getProvinceById } from "."
 
 // @ts-check
 
+// Provinces where vote count difference between 1st and 2nd parties
+// is less than 5% (source: Thailand general election 2554)
+// @see https://github.com/codeforthailand/election-live/issues/22
+const SWING_PROVINCES = [37, 26, 70, 25, 20, 10, 62, 64, 74]
+
 /**
  * Available filters.
  *
@@ -70,13 +75,12 @@ export const filters = {
     },
     criterion: (province, zone) => false,
   },
-  // @todo #18 Implement filtering code for Swing District
   swing: {
     name: {
-      th: "Swing District",
+      th: "เขตที่ไม่มีฐานเสียงชัดเจน",
       en: "Swing District",
     },
-    criterion: (province, zone) => false,
+    criterion: (province, zone) => SWING_PROVINCES.includes(province.id),
   },
 }
 
