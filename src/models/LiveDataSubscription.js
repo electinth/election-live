@@ -160,6 +160,14 @@ export function useLockedState() {
   }, [])
 }
 
+export function useStatus() {
+  return useComputed(() => {
+    const latestState = latestFileResource.state
+    if (!latestState.completed) return false
+    return (latestState.data.control || {}).status
+  }, [])
+}
+
 /**
  * @template T
  * @param {DataState<T>} state

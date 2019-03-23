@@ -9,7 +9,11 @@ import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import VoteCounter from "./VoteCounter"
 import { Location } from "@reach/router"
-import { useSummaryData, useLockedState } from "../models/LiveDataSubscription"
+import {
+  useSummaryData,
+  useLockedState,
+  useStatus as useStatusAlertText,
+} from "../models/LiveDataSubscription"
 import moment from "moment"
 import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
 import Placeholder from "./Placeholder"
@@ -119,6 +123,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
         {props => <CountdownCurtain location={props.location} />}
       </Location>
       <DeveloperPanel />
+      <StatusAlert />
       <Footer />
     </div>
   )
@@ -246,6 +251,27 @@ function CountdownCurtain({ location }) {
     )
   }
   return null
+}
+
+function StatusAlert() {
+  const status = useStatusAlertText()
+  if (!status) return null
+  return (
+    <div
+      css={{
+        position: "absolute",
+        top: 0,
+        left: "50%",
+        transform: "translateX(-50%)",
+        padding: "4px 8px",
+        background: "#F0324B",
+        color: "white",
+        fontSize: "20px",
+      }}
+    >
+      {status}
+    </div>
+  )
 }
 
 const curtainAnimation = keyframes({
