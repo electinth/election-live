@@ -6,6 +6,7 @@ import Footer from "./Footer"
 import { Link } from "gatsby"
 import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
+import VoteCounter from "./VoteCounter"
 import { Location } from "@reach/router"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import moment from "moment"
@@ -41,12 +42,31 @@ export default function MainLayout({ children, activeNavBarSection }) {
           <div
             css={{
               flex: "1",
-              marginLeft: "24px",
+              marginLeft: "8px",
               height: 76,
               overflow: "hidden",
+              [media(WIDE_NAV_MIN_WIDTH)]: {
+                marginLeft: "24px",
+              },
             }}
           >
             <DesktopScoreBarContainer />
+          </div>
+          <div
+            css={{
+              position: "absolute",
+              top: 0,
+              right: "16px",
+              width: "70px",
+              [media(WIDE_NAV_MIN_WIDTH)]: {
+                position: "relative",
+                top: 0,
+                right: 0,
+                width: "180px",
+              },
+            }}
+          >
+            <VoteCounter />
           </div>
         </div>
       </ContentWrapper>

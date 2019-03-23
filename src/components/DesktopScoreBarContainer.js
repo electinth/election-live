@@ -5,6 +5,7 @@ import { partyStatsFromSummaryJSON } from "../models/PartyStats"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
+import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 
 const barHeight = 76
 
@@ -84,7 +85,19 @@ export default function DesktopScoreBarContainer() {
       >
         {pageList.map((page, i) => (
           <div css={{ height: barHeight }}>
-            <div css={{ color: "#fff" }}>
+            <div
+              css={{
+                color: "#fff",
+                fontSize: "11px",
+                paddingTop: "2px",
+                paddingBottom: "2px",
+                [media(WIDE_NAV_MIN_WIDTH)]: {
+                  fontSize: "14px",
+                  paddingTop: "1px",
+                  paddingBottom: "0",
+                },
+              }}
+            >
               {page.name}
               &nbsp;
               <FontAwesomeIcon icon={faQuestionCircle} />

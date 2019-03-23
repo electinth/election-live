@@ -170,25 +170,22 @@ class DesktopScoreBar extends SvgChart {
     const score = this.layers
       .get("score")
       .selectAll("text.score")
-      .data(parties.filter(p => x(p.count) > 60), d => d.id)
+      .data(parties.filter(p => this.isParty(p) && x(p.count) > 40), d => d.id)
     const sEnter = score
       .enter()
       .append("text")
       .classed("score", true)
       .text(d => this.scoreText(d))
-      .attr("font-size", "10px")
-      .attr("x", d =>
-        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
-      )
+      .attr("font-size", "14px")
+      .attr("font-weight", "bold")
+      .attr("x", d => x(d.start) + 10)
       .attr("y", d => height - 10)
       .style("fill", d => (this.isParty(d) ? "#ffffff" : "#999999"))
       .style("text-anchor", d => (this.isParty(d) ? "start" : "end"))
     score
       .merge(sEnter)
       .transition(t)
-      .attr("x", d =>
-        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
-      )
+      .attr("x", d => x(d.start) + 10)
       .attr("y", d => height - 10)
     score.exit().remove()
 
@@ -217,15 +214,17 @@ class DesktopScoreBar extends SvgChart {
     const image = this.layers
       .get("profile")
       .selectAll("image.profile")
-      .data(parties.filter(p => this.isParty(p) && p.count >= 10), d => d.id)
+      .data(parties.filter(p => this.isParty(p) && x(p.count) > 70), d => d.id)
     const iEnter = image
       .enter()
       .append("image")
       .classed("profile", true)
-      .attr("x", d => x(d.start) + 4)
-      .attr("y", d => height - 24)
-      .attr("width", 24)
-      .attr("height", 24)
+      .attr("x", d =>
+        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
+      )
+      .attr("y", d => height - 30)
+      .attr("width", 30)
+      .attr("height", 30)
       .attr("xlink:href", (d, i) => this.profileByParty(d))
       .style("display", d => {
         return x(d.count) > 40
@@ -233,8 +232,10 @@ class DesktopScoreBar extends SvgChart {
     image
       .merge(iEnter)
       .transition(t)
-      .attr("x", d => x(d.start) + 4)
-      .attr("y", d => height - 24)
+      .attr("x", d =>
+        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
+      )
+      .attr("y", d => height - 30)
       .attr("opacity", d => {
         return x(d.count) > 40 ? 1 : 0
       })
