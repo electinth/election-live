@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { DESKTOP_MIN_WIDTH, media, DISPLAY_FONT } from "../styles"
 import _ from "lodash"
 
@@ -29,8 +29,13 @@ const mockData = [
   },
 ]
 
+const defaultTab = "EACH_DISTRICT_TAB"
+
 // @todo #1 Party View - binding data to ZonePartyMemberVoteResult
 export default function ZonePartyMemberVoteResult({ data = mockData }) {
+  const [state, setState] = useState({
+    showingTab: defaultTab,
+  })
   const active = { background: "#000", color: "#FFF" }
   const tabHeaderStyle = {
     padding: "15px",
@@ -42,6 +47,10 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
       ...active,
     },
   }
+
+  const eachDistrictStyling =
+    state.showingTab === defaultTab ? { ...active } : {}
+  const partyListStyling = state.showingTab !== defaultTab ? { ...active } : {}
   return (
     <div
       css={{
@@ -58,9 +67,6 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
       <h2 css={{ fontFamily: DISPLAY_FONT }}>ประมาณจำนวน สส. ที่ได้</h2>
       <div>
         {/* tab */}
-        {
-          // @todo #1 Party View - implement interactive tab
-        }
         <div>
           <ul
             css={{
@@ -71,8 +77,24 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
               width: "100%",
             }}
           >
-            <li css={{ ...tabHeaderStyle, ...active }}>แบ่งเขต(31)</li>
-            <li css={{ ...tabHeaderStyle }}>บัญชีรายชื่อ (13)</li>
+            <li
+              css={{ ...tabHeaderStyle, ...eachDistrictStyling }}
+              onClick={() => {
+                // @todo #1 Party View - result panel - implement showing candidate's vote result when select tab
+
+                setState({ showingTab: defaultTab })
+              }}
+            >
+              แบ่งเขต(31)
+            </li>
+            <li
+              css={{ ...tabHeaderStyle, ...partyListStyling }}
+              onClick={() => {
+                setState({ showingTab: "PARTY_LIST_TAB" })
+              }}
+            >
+              บัญชีรายชื่อ (13)
+            </li>
           </ul>
         </div>
 
