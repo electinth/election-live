@@ -9,6 +9,7 @@ import {
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { partyStatsFromSummaryJSON, isZoneFinished } from "../models/PartyStats"
 import ElectionMap from "./ElectionMap"
+import ElectionMapTooltip from "./ElectionMapTooltip"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
 
@@ -125,15 +126,7 @@ export default function ElectionMapContainer() {
             left: mapTip.mouseEvent.clientX + 10,
           }}
         >
-          {
-            // @todo #1 [UI] ElectionMapContainer: Replace placeholder text
-            //  in tooltip with actual content.
-          }
-          <div>เขต {mapTip.zone.data.id}</div>
-          <div>พรรคผ่อน</div>
-          <div>
-            <small>นอนบ้างนะ</small>
-          </div>
+          <ElectionMapTooltip positionId={mapTip.zone.data.id} positions={mapZones}></ElectionMapTooltip>
         </div>
       )}
       <ElectionMap

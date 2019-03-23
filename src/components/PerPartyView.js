@@ -6,6 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
+import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
+import Fuse from "fuse.js"
+
+const searcher = new Fuse(parties, {
+  keys: ["codeEN", "codeTH", "name"],
+})
 
 export default function PerPartyView() {
   return (
@@ -16,7 +22,6 @@ export default function PerPartyView() {
           padding: "0 24px",
           maxWidth: "1200px",
           [media(DESKTOP_MIN_WIDTH)]: {
-            display: "block",
             order: 1,
             margin: "0 auto",
             padding: 0,
@@ -26,7 +31,7 @@ export default function PerPartyView() {
       >
         <ZoneSearchParty />
         <ZoneMapView />
-        <ZonePartyVoteResult />
+        <PerPartyMemberVoteResult />
       </div>
     </div>
   )
@@ -34,6 +39,13 @@ export default function PerPartyView() {
 
 // @todo #1 implement search and select with visualization of each party
 function ZoneSearchParty() {
+  const [searchKeyword, setSearchKeyword] = React.useState("")
+
+  let filteredParties = parties
+  if (searchKeyword.length > 0) {
+    filteredParties = searcher.search(searchKeyword)
+  }
+
   return (
     <div
       css={{
@@ -55,11 +67,12 @@ function ZoneSearchParty() {
             padding: 10,
             fontSize: 16,
             marginTop: 20,
-            ["&:focus"]: { outline: 0 },
+            "&:focus": { outline: 0 },
           }}
+          value={searchKeyword}
           placeholder="ชื่อพรรคการเมือง"
-          onChange={v => {
-            // @todo #1 search party: implement onChange
+          onChange={e => {
+            setSearchKeyword(e.target.value)
           }}
         />
         <div
@@ -75,7 +88,7 @@ function ZoneSearchParty() {
       </div>
       <div>
         <ul>
-          {parties.map(p => (
+          {filteredParties.map(p => (
             <li key={p.id}>
               <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
                 {p.name}
@@ -119,26 +132,6 @@ function ZoneMapView() {
           <ElectionMapContainer />
         </ErrorBoundary>
       </div>
-    </div>
-  )
-}
-
-// @todo #1 show each party vote result
-function ZonePartyVoteResult() {
-  return (
-    <div
-      css={{
-        [media(DESKTOP_MIN_WIDTH)]: {
-          display: "block",
-          order: 3,
-          margin: "0",
-          padding: "16px",
-          width: "320px",
-        },
-      }}
-    >
-      {/* right zone */}
-      <div>ประมาณจำนวน สส. ที่ได้</div>
     </div>
   )
 }

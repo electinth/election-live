@@ -77,7 +77,7 @@ jobs:
       - run:
           name: Update .htaccess Cache-Control max-age to 30 seconds instead of 0
           command: |
-            sed -i -e 's/max-age=0/max-age=30, stale-while-revalidate=30, stale-if-error=300/g' public/.htaccess
+            sed -i -e 's/max-age=0, must-revalidate/max-age=30, stale-while-revalidate=30, stale-if-error=300/g' public/.htaccess
             sed -i -e 's/max-age=31536000/max-age=31536000, stale-while-revalidate=30, stale-if-error=300/g' public/.htaccess
       - deploy:
           name: Prepare files for uploading

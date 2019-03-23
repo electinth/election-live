@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react"
+import React, { useReducer, useState, useEffect } from "react"
 import _ from "lodash"
 
 import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
@@ -9,10 +9,17 @@ import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import VoteCounter from "./VoteCounter"
 import { Location } from "@reach/router"
-import { useSummaryData } from "../models/LiveDataSubscription"
+import {
+  useSummaryData,
+  useLockedState,
+  useStatus as useStatusAlertText,
+} from "../models/LiveDataSubscription"
 import moment from "moment"
 import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
 import Placeholder from "./Placeholder"
+import { keyframes } from "@emotion/core"
+import logo from "../styles/images/site-logo.png"
+import voteHand from "../styles/images/vote-hand.gif"
 
 /**
  * @param {object} props
@@ -118,6 +125,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
         {props => <CountdownCurtain location={props.location} />}
       </Location>
       <DeveloperPanel />
+      <StatusAlert />
       <Footer />
     </div>
   )
@@ -164,9 +172,44 @@ function VoteCounterContainer() {
   )
 }
 
+function Countdown() {
+  const [date, setDate] = useState(new Date())
+  const end = new Date("2019-03-24T18:00:00+07:00")
+  const difference = end.getTime() - date.getTime()
+
+  if (difference <= 0) {
+    return false
+  } else {
+    useEffect(() => {
+      const timerID = setInterval(() => setDate(new Date()), 1000)
+
+      return function cleanup() {
+        clearInterval(timerID)
+      }
+    })
+
+    let seconds = Math.floor(difference / 1000)
+    let minutes = Math.floor(seconds / 60)
+    let hours = Math.floor(minutes / 60)
+
+    const countdown = {
+      hours: `${(hours %= 24)}`.padStart(2, "0"),
+      minutes: `${(minutes %= 60)}`.padStart(2, "0"),
+      seconds: `${(seconds %= 60)}`.padStart(2, "0"),
+    }
+
+    return (
+      <div style={{ marginTop: "1em" }}>
+        {countdown.hours} : {countdown.minutes} : {countdown.seconds}
+      </div>
+    )
+  }
+}
+
 function CountdownCurtain({ location }) {
   const [skip] = useLocalStorageFlag("ELECT_DISABLE_CURTAIN")
-  const ready = /^\/dev/.test(location.pathname) || skip
+  const locked = useLockedState()
+  const ready = /^\/dev/.test(location.pathname) || skip || !locked
   if (!ready) {
     return (
       <div
@@ -184,18 +227,29 @@ function CountdownCurtain({ location }) {
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
+          animation: `3s ${curtainAnimation} linear`,
         }}
       >
         <div>
-          {
-            // @todo #1 CountdownCurtain: Add image
-          }
+          <img
+            src={voteHand}
+            width={250}
+            css={{
+              margin: "0 auto 0 auto",
+              display: "block",
+            }}
+          />
+          <img
+            src={logo}
+            width={250}
+            css={{
+              margin: "0 auto 15px auto",
+              display: "block",
+            }}
+          />
           รอลุ้นผลการเลือกตั้งแบบเรียลไทม์ไปพร้อมกัน
           <br />
-          พรุ่งนี้นะๆ ^_^
-          {
-            // @todo #1 CountdownCurtain: Replace static text with countdown
-          }
+          <Countdown />
           {(location.hostname === "localhost" ||
             location.hostname === "127.0.0.1") && (
             <div style={{ marginTop: "1em" }}>
@@ -213,6 +267,32 @@ function CountdownCurtain({ location }) {
   }
   return null
 }
+
+function StatusAlert() {
+  const status = useStatusAlertText()
+  if (!status) return null
+  return (
+    <div
+      css={{
+        position: "absolute",
+        top: 0,
+        left: "50%",
+        transform: "translateX(-50%)",
+        padding: "4px 8px",
+        background: "#F0324B",
+        color: "white",
+        fontSize: "20px",
+      }}
+    >
+      {status}
+    </div>
+  )
+}
+
+const curtainAnimation = keyframes({
+  "0%": { transform: "translateY(-120%)" },
+  "100%": { transform: "translateY(0%)" },
+})
 
 function Logo() {
   return (
