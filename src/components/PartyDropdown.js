@@ -113,24 +113,24 @@ export default ({ partyId }) => {
         >
           <ul css={{ listStyle: "none", padding: 0 }}>
             {filteredParties.map(p => (
-              <li
+              <Link
                 key={p.id}
-                css={{
-                  padding: "12px 0px",
-                  borderBottom: "1px solid gray",
-                  position: "relative",
-                }}
+                to={partyPath(p)}
+                style={{ color: "black", textDecoration: "none" }}
                 onClick={() =>
                   setState({ dropdownOpen: false, currentParty: p })
                 }
               >
-                <Link
-                  to={partyPath(p)}
-                  style={{ color: "black", textDecoration: "none" }}
+                <li
+                  css={{
+                    padding: "12px 0px",
+                    borderBottom: "1px solid gray",
+                    position: "relative",
+                  }}
                 >
                   {partyItem(p)}
-                </Link>
-              </li>
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
