@@ -87,7 +87,7 @@ export default ({ open }) => {
           {parties.map(p => {
             return (
               <li
-                // @todo #2 toggle close dropdown
+                // @todo #1 toggle close dropdown
                 onClick={() => {
                   // open = false
                 }}
