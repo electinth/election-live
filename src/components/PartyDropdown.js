@@ -62,27 +62,32 @@ export default ({ open }) => {
           position: "relative",
         }}
       >
-        <input
-          css={{
-            border: `1px solid ${labelColor}`,
-            width: "100%",
-            boxSizing: "border-box",
-            padding: 10,
-            fontSize: 16,
-            marginTop: 20,
-          }}
-          // @todo #1 search party
-          placeholder="ชื่อพรรคการเมือง..."
-        />
-        <div
-          css={{
-            top: 30,
-            position: "absolute",
-            right: 10,
-            color: labelColor,
-          }}
-        >
-          <FontAwesomeIcon icon={faSearch} />
+        <div css={{ position: "relative" }}>
+          <input
+            css={{
+              border: `1px solid ${labelColor}`,
+              width: "100%",
+              boxSizing: "border-box",
+              padding: 10,
+              fontSize: 16,
+              marginTop: 20,
+              ["&:focus"]: { outline: 0 },
+            }}
+            placeholder="ชื่อพรรคการเมือง"
+            onChange={v => {
+              // @todo #1 search party: implement onChange
+            }}
+          />
+          <div
+            css={{
+              top: 30,
+              position: "absolute",
+              right: 10,
+              color: labelColor,
+            }}
+          >
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
         </div>
         <ul css={{ listStyle: "none", padding: 0 }}>
           {parties.map(p => {
