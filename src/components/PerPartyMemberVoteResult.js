@@ -31,15 +31,15 @@ const mockData = [
 
 // @todo #1 Party View - binding data to ZonePartyMemberVoteResult
 export default function ZonePartyMemberVoteResult({ data = mockData }) {
+  const active = { background: "#000", color: "#FFF" }
   const tabHeaderStyle = {
     padding: "15px",
     width: "100%",
     cursor: "pointer",
     border: 0,
     borderBottom: "1px solid #000",
-    ["&:active, &:hover"]: {
-      background: "#000",
-      color: "#FFF",
+    ["&:hover"]: {
+      active,
     },
   }
   return (
@@ -71,7 +71,7 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
               width: "100%",
             }}
           >
-            <li css={{ ...tabHeaderStyle }}>แบ่งเขต(31)</li>
+            <li css={{ ...tabHeaderStyle, ...active }}>แบ่งเขต(31)</li>
             <li css={{ ...tabHeaderStyle }}>บัญชีรายชื่อ (13)</li>
           </ul>
         </div>
