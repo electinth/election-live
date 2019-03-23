@@ -71,6 +71,7 @@ export default ({ open }) => {
             fontSize: 16,
             marginTop: 20,
           }}
+          // @todo #1 search party
           placeholder="ชื่อพรรคการเมือง..."
         />
         <div
