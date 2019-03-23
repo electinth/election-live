@@ -277,8 +277,6 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
   if (!dataState.completed || !zoneStats) {
     return <Loading />
   }
-  const goodVotes = zoneStats.goodVotes
-  const noVotes = zoneStats.noVotes
   const data = dataState.data
   if (!data) {
     return (
@@ -287,6 +285,16 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
       </Placeholder>
     )
   }
+
+  // @todo #1 ZoneCandidateList Bug:
+  //  Calculate goodVotes based on `data.candidates` instead of zoneStats.goodVotes.
+  //  Problem: To reproduce, time travel to 20190323040304 and open a zone.
+  //  You can see that I candidate receive **thousand percent** of the votes, which is impossible.
+  //  The problem may be because that zoneStats and candidates fetching are not in sync, causing weird data like this.
+  //  To fix this problem, we can count good votes by summing each candidate’s score + `zoneStats.noVote`.
+  const goodVotes = zoneStats.goodVotes
+  const noVotes = zoneStats.noVotes
+
   return (
     <ul css={{ listStyle: "none", margin: 0, marginTop: 10, padding: 0 }}>
       {
