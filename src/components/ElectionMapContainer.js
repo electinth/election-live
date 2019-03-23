@@ -141,6 +141,24 @@ export default function ElectionMapContainer() {
           />
         </div>
       )}
+      <div style={{ textAlign: "center", marginBottom: 6 }}>
+        <svg
+          width="10"
+          height="10"
+          style={{ display: "inline-block", marginRight: 4 }}
+        >
+          <rect width="10" height="10" fill="#777" />
+        </svg>
+        นับแล้วมากกว่า 95%
+        <svg
+          width="10"
+          height="10"
+          style={{ display: "inline-block", marginLeft: 10, marginRight: 4 }}
+        >
+          <circle cx="5" cy="5" r="5" fill="#777" />
+        </svg>
+        นับแล้วน้อยกว่า 95%
+      </div>
       <ElectionMap
         data={mapZones}
         onInit={onInit}
