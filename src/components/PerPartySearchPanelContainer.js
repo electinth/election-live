@@ -56,7 +56,7 @@ function PartyTotalCouncilorEstimationVisualization() {
   return (
     <div css={{ ...sectionStyling }}>
       <div>
-        จำนวนสส.พึงมี
+        จำนวนส.ส.พึงมี
         <FontAwesomeIcon css={{ marginLeft: "5px" }} icon={faQuestionCircle} />
       </div>
       <div>
@@ -89,13 +89,13 @@ function PartyTotalCouncilorEstimationNumber({
   return (
     <div css={{ ...sectionStyling, display: "flex" }}>
       <div css={{ ...blockStyling, borderRight: "1px solid #000" }}>
-        <div>สส.เขต</div>
+        <div>ส.ส.เขต</div>
         <div css={{ ...numberStyling, paddingRight: "10px" }}>
           {totalDistrictCouncilor}
         </div>
       </div>
       <div css={{ ...blockStyling }}>
-        <div css={{ paddingLeft: "10px" }}>สส.บัญชีรายชื่อ</div>
+        <div css={{ paddingLeft: "10px" }}>ส.ส.บัญชีรายชื่อ</div>
         <div css={{ ...numberStyling }}>{totalPartyListCouncilor}</div>
       </div>
     </div>
