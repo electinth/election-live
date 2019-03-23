@@ -125,7 +125,12 @@ function SummaryHeaderContainer({ filterName }) {
 function PartyStatsContainer({ filterName }) {
   const summaryState = useSummaryData()
   // @todo #1 PartyStatsContainer: Handle case where data failed to load.
-  if (!summaryState.completed) return <Loading />
+  if (!summaryState.completed)
+    return (
+      <div css={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <Loading />
+      </div>
+    )
 
   const summary = summaryState.data
   const currentFilter = filters[filterName]
@@ -275,7 +280,11 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
   const dataState = usePerZoneData(provinceId, zoneNo)
   // @todo #1 ZoneCandidateList: Handle case where data failed to load.
   if (!dataState.completed || !zoneStats) {
-    return <Loading />
+    return (
+      <div css={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <Loading />
+      </div>
+    )
   }
   const data = dataState.data
   if (!data) {
