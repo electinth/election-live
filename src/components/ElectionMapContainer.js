@@ -126,7 +126,7 @@ export default function ElectionMapContainer() {
             left: mapTip.mouseEvent.clientX + 10,
           }}
         >
-          <ElectionMapTooltip zoneId={mapTip.zone.data.id}></ElectionMapTooltip>
+          <ElectionMapTooltip positionId={mapTip.zone.data.id} positions={mapZones}></ElectionMapTooltip>
         </div>
       )}
       <ElectionMap

@@ -1,43 +1,43 @@
-import React, { useState } from "react"
-import { zones } from "../models/information"
-export default function ElectionMapTooltip(props) {
-  const { zoneId } = props
-  const [state, setState] = useState({})
-
-  if (state && zoneId != state.zoneId) {
-    const matchZone = zoneId.match(/^(\d+)-(\d+)$/)
+import React, { useMemo } from "react"
+import { zones, parties } from "../models/information"
+export default function ElectionMapTooltip({ positionId, positions }) {
+  const memo = useMemo(() => {
+    const position = positions.find(p => p.id == positionId)
+    const party = parties.find(p => p.id == position.partyId)
+    const matchZone = positionId.match(/^(\d+)-(\d+)$/)
     if (matchZone) {
-      setState({
-        zoneId,
-        zone: zones.filter(z => `${z.provinceId}-${z.no}` == zoneId)[0],
-      })
+      return {
+        zone: zones.find(
+          z => z.provinceId == matchZone[1] && z.no == matchZone[2]
+        ),
+        party: party ? `พรรค${party.name}` : null,
+      }
     } else {
-      const matchSeat = zoneId.match(/^pl-(\d+)$/)
-      setState({
-        zoneId,
+      const matchSeat = positionId.match(/^pl-(\d+)$/)
+      return {
         seat: {
           no: matchSeat[1],
         },
-      })
+        party: party ? `พรรค${party.name}` : null,
+      }
     }
-  }
+  },[positionId])
 
   return (
     <div>
-      {state.zone && (
+      {memo.zone && (
         <div>
-          <div>เขตเลือกตั้งที่ {state.zone.no}</div>
+          <div>เขตเลือกตั้งที่ {memo.zone.no}</div>
+          <div>{memo.party}</div>
           <div>
-            <small>{state.zone.details}</small>
+            <small>{memo.zone.details}</small>
           </div>
         </div>
       )}
-      {state.seat && (
+      {memo.seat && (
         <div>
-          <div>ส.ส. บัญชีรายชื่ออันดับที่ {state.seat.no}</div>
-          <div>
-            <small />
-          </div>
+          <div>ส.ส. บัญชีรายชื่ออันดับที่ {memo.seat.no}</div>
+          <div>{memo.party}</div>
         </div>
       )}
     </div>
