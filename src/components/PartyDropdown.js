@@ -4,7 +4,7 @@ import { labelColor } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
-export default props => {
+export default ({ open }) => {
   function partyItem(p) {
     return (
       <div
@@ -128,19 +128,21 @@ export default props => {
             "0 2px 4px 0 rgba(0,0,0,0.05),0 2px 10px 0 rgba(0,0,0,0.12)!important",
         }}
       >
-        {renderDefaultDropdown()}
+        {open ? renderDropdown() : renderDefaultDropdown()}
       </div>
-      <div
-        css={{
-          position: "absolute",
-          right: "4px",
-          top: "calc(50% - 3px)",
-          border: "solid #212121",
-          borderWidth: "0 2px 2px 0",
-          padding: "4px",
-          transform: "rotate(45deg)",
-        }}
-      />
+      {open ? (
+        <div
+          css={{
+            position: "absolute",
+            right: "4px",
+            top: "calc(50% - 3px)",
+            border: "solid #212121",
+            borderWidth: "0 2px 2px 0",
+            padding: "4px",
+            transform: "rotate(45deg)",
+          }}
+        />
+      ) : null}
     </div>
   )
 }

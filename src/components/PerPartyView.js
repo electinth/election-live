@@ -47,7 +47,7 @@ function ZoneSearchParty() {
       }}
     >
       {/* left zone full mobile*/}
-      <PartyDropdown />
+      <PartyDropdown open={false} />
     </div>
   )
 }
