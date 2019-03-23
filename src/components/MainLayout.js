@@ -292,7 +292,8 @@ function NewVersionAlert() {
   const debugRef = useRef()
   const debug = debugRef.current || Debug("elect:NewVersionAlert")
   useEffect(() => {
-    let currentVersion = (debugRef.current = debug)
+    let currentVersion = appVersion
+    debugRef.current = debug
     const checkVersion = async () => {
       debug("Checking version...")
       try {
