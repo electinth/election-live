@@ -188,8 +188,16 @@ function ZoneView({ provinceId, zoneNo }) {
               flex: "none",
             }}
           >
-            <h1 css={{ fontFamily: DISPLAY_FONT }}>{province.name}</h1>
-            <h2 css={{ fontFamily: DISPLAY_FONT, color: labelColor }}>
+            <h1 css={{ fontFamily: DISPLAY_FONT, margin: "0.63em 0 0.1em 0" }}>
+              {province.name}
+            </h1>
+            <h2
+              css={{
+                fontFamily: DISPLAY_FONT,
+                color: labelColor,
+                margin: "0.3em 0 0.5em 0 ",
+              }}
+            >
               เขตเลือกตั้งที่ {zone.no}
             </h2>
             <div>
@@ -197,7 +205,7 @@ function ZoneView({ provinceId, zoneNo }) {
               <span
                 css={{
                   marginLeft: 10,
-                  fontSize: "2rem",
+                  fontSize: "1.7em",
                   fontFamily: DISPLAY_FONT,
                 }}
               >

@@ -13,7 +13,7 @@ export default function TotalVoterSummary(props) {
       <div
         css={{
           textAlign: "left",
-          color: "black",
+          color: "#413F3F",
           fontSize: "1.1em",
           borderBottom: "1px solid black",
           paddingBottom: 5,
