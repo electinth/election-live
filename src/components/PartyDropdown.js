@@ -1,8 +1,9 @@
 import React from "react"
-import { parties, partyLogo } from "../models/information"
-import { labelColor } from "../styles"
+import { parties, partyLogo, partyPath } from "../models/information"
+import { labelColor, DISPLAY_FONT } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { Link } from "gatsby"
 
 export default ({ open }) => {
   function partyItem(p) {
@@ -28,7 +29,9 @@ export default ({ open }) => {
             margin: "auto",
           }}
         />
-        <div css={{ fontSize: "2em", paddingLeft: 15 }}>
+        <div
+          css={{ fontSize: "2em", paddingLeft: 15, fontFamily: DISPLAY_FONT }}
+        >
           <b>{p.name}</b>
         </div>
       </div>
@@ -55,11 +58,11 @@ export default ({ open }) => {
     return (
       <div
         css={{
-          height: 440,
           overflowX: "hidden",
           overflowY: "auto",
           WebkitOverflowScrolling: "touch",
           position: "relative",
+          height: "calc(100vh - 200px)",
         }}
       >
         <div css={{ position: "relative" }}>
@@ -92,20 +95,25 @@ export default ({ open }) => {
         <ul css={{ listStyle: "none", padding: 0 }}>
           {parties.map(p => {
             return (
-              <li
-                // @todo #1 toggle close dropdown
-                onClick={() => {
-                  // open = false
-                }}
-                key={`${p.name}`}
-                css={{
-                  padding: "12px 0px",
-                  borderBottom: "1px solid gray",
-                  position: "relative",
-                }}
+              <Link
+                to={partyPath(p)}
+                style={{ textDecoration: "none", color: "black" }}
               >
-                {partyItem(p)}
-              </li>
+                <li
+                  // @todo #1 toggle close dropdown
+                  onClick={() => {
+                    // open = false
+                  }}
+                  key={`${p.name}`}
+                  css={{
+                    padding: "12px 0px",
+                    borderBottom: "1px solid gray",
+                    position: "relative",
+                  }}
+                >
+                  {partyItem(p)}
+                </li>
+              </Link>
             )
           })}
         </ul>
