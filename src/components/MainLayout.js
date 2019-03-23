@@ -22,6 +22,7 @@ import Loading from "./Loading"
 import NavBar, { menuMapping } from "./NavBar"
 import Placeholder from "./Placeholder"
 import VoteCounter from "./VoteCounter"
+import { appVersion } from "../util/appVersion"
 
 /**
  * @param {object} props
