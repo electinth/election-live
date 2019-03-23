@@ -56,7 +56,7 @@ export default props => {
           cursor: "pointer",
         }}
         onClick={() => {
-          setState({ dropdownOpen: true })
+          setState({ dropdownOpen: true, currentParty: state.currentParty })
         }}
       >
         {partyItem(state.currentParty)}
@@ -78,6 +78,7 @@ export default props => {
       >
         <div css={{ position: "relative" }}>
           <input
+            autoFocus
             css={{
               border: `1px solid ${labelColor}`,
               width: "100%",
@@ -90,6 +91,12 @@ export default props => {
             placeholder="ชื่อพรรคการเมือง"
             onChange={e => {
               setSearchKeyword(e.target.value)
+            }}
+            onBlur={() => {
+              setState({
+                dropdownOpen: false,
+                currentParty: state.currentParty,
+              })
             }}
           />
           <div
