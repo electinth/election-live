@@ -40,7 +40,11 @@ export default function CandidateStatsRow(props) {
           </span>
         </div>
         <div>
-          {props.candidateName}, เบอร์ {props.candidateNumber}
+          {
+            // If "no votes", no text.
+            (props.candidateName || props.candidateNumber)?
+              `${props.candidateName}, เบอร์ ${props.candidateNumber}` : <span>&nbsp;</span>
+          }
         </div>
         <div
           css={{

@@ -303,21 +303,26 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
   //  To fix this problem, we can count good votes by summing each candidate’s score + `zoneStats.noVote`.
   const goodVotes = zoneStats.goodVotes
   const noVotes = zoneStats.noVotes
-
+  // Add no votes as one of candidates.
+  const zoneCandidates = [...data.candidates.slice(), {
+    firstName: '',
+    lastName: '',
+    no: '',
+    score: noVotes,
+    partyId: 0,
+  }];
+  zoneCandidates.sort(function(a,b) { return b.score - a.score })
   return (
     <ul css={{ listStyle: "none", margin: 0, marginTop: 10, padding: 0 }}>
-      {
-        // @todo #1 Incorporate NO VOTES into ZoneCandidateList.
-      }
-      <li>NO VOTES — {noVotes}</li>
-      {data.candidates.map((candidate, index) => {
+      {zoneCandidates.map((candidate, index) => {
         const party = getPartyById(candidate.partyId)
         const percentage = Math.round((candidate.score / goodVotes) * 100)
-
+        const fullName = (candidate.firstName || candidate.lastName)?
+          `${candidate.firstName} ${candidate.lastName}`:""
         return (
           <li key={candidate.no}>
             <CandidateStatsRow
-              candidateName={`${candidate.firstName} ${candidate.lastName}`}
+              candidateName={`${fullName}`}
               candidateNumber={candidate.no}
               partyName={party.name}
               partyColor={party.color}
