@@ -41,7 +41,7 @@ export default ({ partyId }) => {
           }}
         />
         <div
-          css={{ fontSize: "1rem", paddingLeft: 15, fontFamily: DISPLAY_FONT }}
+          css={{ fontSize: "1rem", paddingLeft: 8, fontFamily: DISPLAY_FONT }}
         >
           <b>{p.name}</b>
         </div>
