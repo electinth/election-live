@@ -81,32 +81,12 @@ function PartyStatsInspector({ summary }) {
   return (
     <Table>
       <thead>
-        <th>Party</th>
-        <th>
-          Nationwide
-          <br />
-          Score
-        </th>
-        <th>
-          Constituency
-          <br />
-          Seats
-        </th>
-        <th>
-          Partylist
-          <br />
-          Seats
-        </th>
-        <th>
-          Total
-          <br />
-          Seats
-        </th>
-        <th>
-          Deserved
-          <br />
-          Seats
-        </th>
+        <th>พรรค</th>
+        <th>คะแนนทั้งประเทศ</th>
+        <th>เขต</th>
+        <th>บัญชีรายชื่อ</th>
+        <th>รวม</th>
+        <th>พึงมี</th>
       </thead>
       <tbody>
         {partyStats.map(row => (
