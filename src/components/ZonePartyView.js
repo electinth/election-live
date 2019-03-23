@@ -1,15 +1,11 @@
 import React from "react"
-import {
-  parties,
-  partyPath,
-  getPartyById,
-  partyColor,
-} from "../models/information"
+import { parties, partyPath, partyColor } from "../models/information"
 import { DESKTOP_MIN_WIDTH, labelColor, media } from "../styles"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ErrorBoundary from "../components/ErrorBoundary"
 import ElectionMapContainer from "../components/ElectionMapContainer"
+import { Link } from "gatsby"
 
 export default function ZonePartyView() {
   return (
@@ -22,7 +18,7 @@ export default function ZonePartyView() {
           [media(DESKTOP_MIN_WIDTH)]: {
             display: "block",
             order: 1,
-            margin: "0 0 10px",
+            margin: "0 auto",
             padding: 0,
             display: "flex",
           },
@@ -76,7 +72,17 @@ function ZoneSearchParty() {
           <FontAwesomeIcon icon={faSearch} />
         </div>
       </div>
-      <div>{/* zone list of party */}</div>
+      <div>
+        <ul>
+          {parties.map(p => (
+            <li key={p.id}>
+              <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
+                {p.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
