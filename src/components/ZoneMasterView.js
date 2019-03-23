@@ -133,9 +133,6 @@ export default function ZoneMasterView({
             }}
           >
             <div css={{ marginTop: 10 }}>
-              {
-                // @todo #1 Implement and style search button on desktop.
-              }
               <button
                 css={{
                   float: "right",
@@ -306,7 +303,6 @@ function FloatingSidebar({ title, children, active, onClose, width = 200 }) {
   return (
     <div
       data-active={active ? true : undefined}
-      onBlur={onClose}
       css={{
         background: "white",
         boxShadow: "1px 0 1px rgba(0,0,0,0.25)",
