@@ -25,14 +25,19 @@ export default function PerPartyView() {
         <div
           css={{
             width: "100%",
+            position: "relative",
             [media(DESKTOP_MIN_WIDTH)]: {
               marginTop: 10,
               width: 285,
             },
           }}
         >
-          <ZoneSearchParty />
-          {ZoneStats()}
+          <div css={{ position: "absolute", width: "100%", top: 0 }}>
+            <ZoneSearchParty />
+          </div>
+          <div css={{ paddingTop: 60 }}>
+            <ZoneStats />
+          </div>
         </div>
         <ZoneMapView />
         <PerPartyMemberVoteResult />

@@ -143,6 +143,7 @@ export default props => {
       css={{
         position: "relative",
         zIndex: 1,
+        background: "white",
       }}
     >
       <div
