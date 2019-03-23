@@ -22,7 +22,7 @@ const menues = [
   {
     name: "source",
     route: "/source",
-    label: "ข้อมูลเรามาจากไหน",
+    label: "เกี่ยวกับ ELECT Live",
   },
 ]
 
