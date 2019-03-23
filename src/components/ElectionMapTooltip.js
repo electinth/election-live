@@ -39,27 +39,54 @@ export default function ElectionMapTooltip({ positionId, positions }) {
 
   const summaryState = useSummaryData()
 
+  let markColor = "#ccc"
+  if (memo.zone && summaryState.completed) {
+    const { zone } = memo
+    const summary = summaryState.data.zoneWinningCandidateMap
+    const { no, provinceId } = zone
+    const candidate = (summary[provinceId] || {})[no]
+    markColor = partyColor(getPartyById(candidate.partyId))
+  } else if (memo.seat) {
+    // markColor = partyColor(memo.party)
+  }
+
   return (
-    <div>
-      {memo.zone && (
-        <div>
-          <div style={{ fontSize: "1.1rem" }}>
-            <b>{memo.province}</b> เขต {memo.zone.no}
-          </div>
-          {summaryState.completed ? (
-            <WinnerInspector summary={summaryState.data} zone={memo.zone} />
-          ) : (
-            <img src={loadingSmall} alt="Loading" />
-          )}
-        </div>
-      )}
-      {memo.seat && (
-        <div>
-          <div>ส.ส. บัญชีรายชื่ออันดับที่ {memo.seat.no}</div>
-          <div>{memo.party}</div>
-        </div>
-      )}
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td css={{ verticalAlign: "top", paddingTop: 5 }}>
+            <svg width="10" height="10">
+              <rect width="10" height="10" fill={markColor} />
+            </svg>
+          </td>
+          <td>
+            <div>
+              {memo.zone && (
+                <div>
+                  <div style={{ fontSize: "1.1rem" }}>
+                    <b>{memo.province}</b> เขต {memo.zone.no}
+                  </div>
+                  {summaryState.completed ? (
+                    <WinnerInspector
+                      summary={summaryState.data}
+                      zone={memo.zone}
+                    />
+                  ) : (
+                    <img src={loadingSmall} alt="Loading" />
+                  )}
+                </div>
+              )}
+              {memo.seat && (
+                <div>
+                  <div>ส.ส. บัญชีรายชื่ออันดับที่ {memo.seat.no}</div>
+                  <div>{memo.party}</div>
+                </div>
+              )}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
@@ -70,6 +97,7 @@ function WinnerInspector({ summary, zone }) {
     zone.no
   ]
   return <div>{!!winning && renderWinning(winning)}</div>
+
   /**
    * @param {ElectionDataSource.Candidate} candidate
    */
