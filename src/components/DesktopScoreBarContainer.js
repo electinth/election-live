@@ -5,6 +5,7 @@ import { partyStatsFromSummaryJSON } from "../models/PartyStats"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
+import DesktopScoreBarCountingNumber from "./DesktopScoreBarCountingNumber"
 
 const barHeight = 76
 
@@ -74,12 +75,14 @@ export default function DesktopScoreBarContainer() {
       css={{
         height: barHeight,
         overflow: "hidden",
+        display: "flex",
       }}
     >
       <div
         css={{
           ...wrapperCss,
           transform: `translate(0, -${pageIndex * barHeight}px)`,
+          width: "85%",
         }}
       >
         {pageList.map((page, i) => (
@@ -97,6 +100,16 @@ export default function DesktopScoreBarContainer() {
           </div>
         ))}
       </div>
+      {
+        // @todo #1 Inject total count and last update from real data to DesktopScoreBarCountingNumber
+      }
+      <DesktopScoreBarCountingNumber
+        css={{
+          width: "15%",
+        }}
+        totalCount={"90"}
+        lastUpdate={"09:59"}
+      />
     </div>
   )
 }
