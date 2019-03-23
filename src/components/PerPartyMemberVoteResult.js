@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { DESKTOP_MIN_WIDTH, media, DISPLAY_FONT } from "../styles"
-import _ from "lodash"
 
 const mockData = [
   {

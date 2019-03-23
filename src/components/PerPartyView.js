@@ -3,7 +3,7 @@ import { DESKTOP_MIN_WIDTH, media } from "../styles"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
-import PartyDropdown from "./PartyDropdown"
+import PerPartySearchPanelContainer from "./PerPartySearchPanelContainer"
 
 export default function PerPartyView() {
   return (
@@ -21,29 +21,10 @@ export default function PerPartyView() {
           },
         }}
       >
-        <ZoneSearchParty />
+        <PerPartySearchPanelContainer />
         <ZoneMapView />
         <PerPartyMemberVoteResult />
       </div>
-    </div>
-  )
-}
-
-// @todo #1 implement search and select with visualization of each party
-function ZoneSearchParty() {
-  return (
-    <div
-      css={{
-        [media(DESKTOP_MIN_WIDTH)]: {
-          display: "block",
-          order: 1,
-          margin: "0 0 10px",
-          padding: 0,
-        },
-      }}
-    >
-      {/* left zone full mobile*/}
-      <PartyDropdown />
     </div>
   )
 }
