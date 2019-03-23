@@ -1,17 +1,9 @@
 import React from "react"
-import { parties, partyPath, partyColor } from "../models/information"
-import { DESKTOP_MIN_WIDTH, labelColor, media } from "../styles"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { DESKTOP_MIN_WIDTH, media } from "../styles"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
-import { Link } from "gatsby"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
-import Fuse from "fuse.js"
-
-const searcher = new Fuse(parties, {
-  keys: ["codeEN", "codeTH", "name"],
-})
+import PartyDropdown from "./PartyDropdown"
 
 export default function PerPartyView() {
   return (
@@ -39,13 +31,6 @@ export default function PerPartyView() {
 
 // @todo #1 implement search and select with visualization of each party
 function ZoneSearchParty() {
-  const [searchKeyword, setSearchKeyword] = React.useState("")
-
-  let filteredParties = parties
-  if (searchKeyword.length > 0) {
-    filteredParties = searcher.search(searchKeyword)
-  }
-
   return (
     <div
       css={{
@@ -58,45 +43,7 @@ function ZoneSearchParty() {
       }}
     >
       {/* left zone full mobile*/}
-      <div css={{ position: "relative" }}>
-        <input
-          css={{
-            border: `1px solid ${labelColor}`,
-            width: "100%",
-            boxSizing: "border-box",
-            padding: 10,
-            fontSize: 16,
-            marginTop: 20,
-            "&:focus": { outline: 0 },
-          }}
-          value={searchKeyword}
-          placeholder="ชื่อพรรคการเมือง"
-          onChange={e => {
-            setSearchKeyword(e.target.value)
-          }}
-        />
-        <div
-          css={{
-            top: 30,
-            position: "absolute",
-            right: 10,
-            color: labelColor,
-          }}
-        >
-          <FontAwesomeIcon icon={faSearch} />
-        </div>
-      </div>
-      <div>
-        <ul>
-          {filteredParties.map(p => (
-            <li key={p.id}>
-              <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
-                {p.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <PartyDropdown open={true} />
     </div>
   )
 }
