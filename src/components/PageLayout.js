@@ -1,5 +1,4 @@
-import React, { useReducer, useEffect } from "react"
-import { Link } from "gatsby"
+import React from "react"
 
 import DocumentHead from "./DocumentHead"
 import { GlobalStyle } from "../styles"
