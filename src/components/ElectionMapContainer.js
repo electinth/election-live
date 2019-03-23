@@ -7,7 +7,11 @@ import {
   getZoneByProvinceIdAndZoneNo,
 } from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
-import { partyStatsFromSummaryJSON, isZoneFinished } from "../models/PartyStats"
+import {
+  partyStatsFromSummaryJSON,
+  isZoneFinished,
+  shouldDisplayZoneData,
+} from "../models/PartyStats"
 import ElectionMap from "./ElectionMap"
 import ElectionMapTooltip from "./ElectionMapTooltip"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
@@ -70,7 +74,9 @@ function getMapData(summaryState, filter) {
         ] || {})[zone.no]
         const stats = (summary.zoneStatsMap[zone.provinceId] || {})[zone.no]
         const candidate =
-          winningCandidate && winningCandidate.score > stats.noVotes
+          shouldDisplayZoneData(stats) &&
+          winningCandidate &&
+          winningCandidate.score > stats.noVotes
             ? winningCandidate
             : null
         return {
@@ -126,7 +132,10 @@ export default function ElectionMapContainer() {
             left: mapTip.mouseEvent.clientX + 10,
           }}
         >
-          <ElectionMapTooltip positionId={mapTip.zone.data.id} positions={mapZones}></ElectionMapTooltip>
+          <ElectionMapTooltip
+            positionId={mapTip.zone.data.id}
+            positions={mapZones}
+          />
         </div>
       )}
       <ElectionMap
