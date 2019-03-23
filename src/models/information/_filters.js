@@ -2,6 +2,10 @@ import { getProvinceById } from "."
 
 // @ts-check
 
+// Provinces where zone boundaries were manipulated by NCPO
+// @see https://github.com/codeforthailand/election-live/issues/21
+const GERRYMANDERING_PROVINCES = [30, 32, 44, 35, 47, 41, 60, 73, 57, 64, 18]
+
 // Provinces where vote count difference between 1st and 2nd parties
 // is less than 5% (source: Thailand general election 2554)
 // @see https://github.com/codeforthailand/election-live/issues/22
@@ -67,13 +71,13 @@ export const filters = {
     },
     criterion: (province, zone) => false,
   },
-  // @todo #18 Implement filtering code for Gerrymandering
   gerrymandering: {
     name: {
-      th: "Gerrymandering",
+      th: "เขตถูกแบ่งโดย คสช.",
       en: "Gerrymandering",
     },
-    criterion: (province, zone) => false,
+    criterion: (province, zone) =>
+      GERRYMANDERING_PROVINCES.includes(province.id),
   },
   swing: {
     name: {
