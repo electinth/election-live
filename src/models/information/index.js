@@ -93,7 +93,12 @@ export const partyLogo = x =>
  */
 export function getPartyById(id) {
   id = +id
-
+  if (id === 0) {
+    return {
+      name: 'ไม่เลือกใคร',
+      color: '#9e9e9e',
+    }
+  }
   return partiesMap.get(id) || fail(`Party ID ${id} not found`)
 }
 

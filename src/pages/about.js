@@ -6,8 +6,8 @@ import Divider from "../components/Divider"
 const containerSize = 516
 
 export default () => (
-  <MainLayout activeNavBarSection="source">
-    <div css={{ maxWidth: containerSize, margin: "0 auto" }}>
+  <MainLayout activeNavBarSection="about">
+    <div css={{ maxWidth: containerSize, margin: "0 auto", padding: 10 }}>
       <Title mt={16} mb={8}>
         เกี่ยวกับ ELECT Live
       </Title>
@@ -34,19 +34,8 @@ export default () => (
         ที่ผลอาจเปลี่ยนแปลงได้เมื่อมีการนับคะแนนอย่างเป็นทางการ
       </BodyText>
       <Divider mb={32} />
-      <SubTitle mb={8}>ผู้จัดทำ</SubTitle>
-      <BodyText>
-        <b>Developer</b>: Steve Underwood, Daisy Jones, Larry Green
-      </BodyText>
-      <BodyText>
-        <b>Data Scientist</b>: Daisy Jones
-      </BodyText>
-      <BodyText>
-        <b>Designer</b>: Larry Green
-      </BodyText>
-      <BodyText>
-        <b>Business Analyst</b>: Larry Green
-      </BodyText>
+      <SubTitle mb={8}>อาสาสมัครที่ร่วมพัฒนา</SubTitle>
+      <BodyText>Mr. A, Mr. B...</BodyText>
     </div>
   </MainLayout>
 )

@@ -20,6 +20,7 @@ import Placeholder from "./Placeholder"
 import { keyframes } from "@emotion/core"
 import logo from "../styles/images/site-logo.png"
 import voteHand from "../styles/images/vote-hand.gif"
+import Loading from "./Loading"
 
 /**
  * @param {object} props
@@ -231,14 +232,7 @@ function CountdownCurtain({ location }) {
         }}
       >
         <div>
-          <img
-            src={voteHand}
-            width={250}
-            css={{
-              margin: "0 auto 0 auto",
-              display: "block",
-            }}
-          />
+          <Loading size="large" />
           <img
             src={logo}
             width={250}
@@ -282,6 +276,7 @@ function StatusAlert() {
         background: "#F0324B",
         color: "white",
         fontSize: "20px",
+        zIndex: 997,
       }}
     >
       {status}
