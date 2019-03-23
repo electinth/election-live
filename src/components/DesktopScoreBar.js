@@ -7,6 +7,13 @@ import { TOTAL_REPRESENTATIVE } from "../models/rules"
 import { createComponent } from "react-d3kit"
 import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
 
+const partyTable = require("../models/information/_parties.json")
+const partyNameShort = _.zipObject(
+  partyTable.map(p => p.id),
+  partyTable.map(p => p.codeTH)
+)
+
+const BAR_SEAT_THRESHOLD = 30
 /**
  * @typedef {object} Props
  * @prop {Row[]} data
@@ -70,28 +77,44 @@ class DesktopScoreBar extends SvgChart {
     return party.id > 0
   }
 
-  scoreText(party) {
+  nameText(party) {
+    if (party.id === 999) {
+      return party.name
+    }
+    return partyNameShort[party.id]
+  }
+
+  scoreText(party, x) {
     if (!this.isParty(party)) {
       const data = this.data()
       const theRest = this.options().maxValue - _.sumBy(data, "count")
-      return `เหลือ ${theRest} ที่นั่ง`
+      const width = x(party.count)
+      return width > 85 ? `เหลือ ${theRest} ที่นั่ง` : `เหลือ ${theRest}`
     }
     return party.count
   }
 
   profileByParty(party) {
-    return require(`../styles/images/pmcan/${party.id}-s.png`)
+    try {
+      return require(`../styles/images/pmcan/${party.id}-s.png`)
+    } catch (err) {
+      return
+    }
   }
 
   renderScore() {
     let cumulative = 0
-    let parties = [...this.data()]
+    let inputParties = this.data()
+    // prepare dimension and scales
+    const margin = this.options().margin
+    const width = this.getInnerWidth()
+    const height = this.options().height - margin.top - margin.bottom
 
     // create hash patterns for party list rep.
     const patterns = this.svg
       .select("defs")
       .selectAll("pattern")
-      .data(parties, d => d.id)
+      .data(inputParties, d => d.id)
 
     patterns
       .enter()
@@ -108,28 +131,61 @@ class DesktopScoreBar extends SvgChart {
       .attr("fill", d => d.color)
 
     // sort by most aggregated count of each party
-    const partyCount = _.mapValues(_.groupBy(parties, "name"), groups =>
+    const partyCount = _.mapValues(_.groupBy(inputParties, "name"), groups =>
       _.sumBy(groups, "count")
     )
-    parties = _.orderBy(parties, [p => partyCount[p.name]], ["desc"]).map(p => {
+    inputParties = _.orderBy(inputParties, [p => partyCount[p.name]], ["desc"])
+
+    // bundle small parties
+    let bundledParty = null
+    const totalSeatCount = this.options().maxValue
+    // how many pixels width per 1 seat
+    const pixelSeat = width / totalSeatCount
+    const seatThreshold = Math.floor(BAR_SEAT_THRESHOLD / pixelSeat)
+    let bundleIndex = -1
+    inputParties.forEach((party, i) => {
+      if (bundleIndex === -1 && party.count < seatThreshold) {
+        bundleIndex = i
+      }
+    })
+    if (bundleIndex >= 0) {
+      const bundledPartyList = inputParties.slice(bundleIndex)
+      const bundledCount = _.sumBy(bundledPartyList, "count")
+      bundledParty = {
+        color: "#aaaaaa",
+        count: bundledCount,
+        id: 999,
+        name: "อื่นๆ",
+        type: inputParties[0].type,
+        bundle: {
+          data: bundledPartyList,
+          party: bundledPartyList.length,
+          count: bundledCount,
+        },
+      }
+    }
+
+    let parties = _.compact([
+      ...inputParties.slice(0, bundleIndex),
+      bundledParty,
+    ])
+    parties = parties.map(p => {
       const p2 = { ...p, start: cumulative }
       cumulative += p.count
       return p2
     })
+
+    // the rest
     const totalCount = _.sum(_.values(partyCount))
-    parties.push({
+    const theRestParty = {
       id: 0,
       name: "ยังไม่ทราบผล",
       color: "#eeeeee",
       type: "none",
       count: this.options().maxValue - totalCount,
       start: totalCount,
-    })
-
-    // prepare dimension and scales
-    const margin = this.options().margin
-    const width = this.getInnerWidth()
-    const height = this.options().height - margin.top - margin.bottom
+    }
+    parties.push(theRestParty)
 
     const y = scaleBand()
       .rangeRound([0, height])
@@ -171,22 +227,27 @@ class DesktopScoreBar extends SvgChart {
     const score = this.layers
       .get("score")
       .selectAll("text.score")
-      .data(parties.filter(p => this.isParty(p) && x(p.count) > 40), d => d.id)
+      .data(parties.filter(p => x(p.count) > 30), d => d.id)
     const sEnter = score
       .enter()
       .append("text")
       .classed("score", true)
-      .text(d => this.scoreText(d))
+      .text(d => this.scoreText(d, x))
       .attr("font-size", "14px")
       .attr("font-weight", "bold")
-      .attr("x", d => x(d.start) + 10)
+      .attr("x", d =>
+        this.isParty(d) ? x(d.start) + 10 : x(d.start) + x(d.count)
+      )
       .attr("y", d => height - 10)
       .style("fill", d => (this.isParty(d) ? "#ffffff" : "#999999"))
       .style("text-anchor", d => (this.isParty(d) ? "start" : "end"))
     score
       .merge(sEnter)
       .transition(t)
-      .attr("x", d => x(d.start) + 10)
+      .text(d => this.scoreText(d, x))
+      .attr("x", d =>
+        this.isParty(d) ? x(d.start) + 10 : x(d.start) + x(d.count) - 10
+      )
       .attr("y", d => height - 10)
     score.exit().remove()
 
@@ -194,16 +255,17 @@ class DesktopScoreBar extends SvgChart {
     const text = this.layers
       .get("label")
       .selectAll("text.name")
-      .data(parties.filter(p => this.isParty(p) && p.count >= 10), d => d.id)
+      .data(parties.filter(p => this.isParty(p) && x(p.count) >= 30), d => d.id)
     const tEnter = text
       .enter()
       .append("text")
       .classed("name", true)
-      .text(d => d.name)
+      .text(d => this.nameText(d))
       .attr("font-size", "12px")
       .attr("x", d => x(d.start))
       .attr("y", d => height + 13)
       .style("fill", "white")
+
     text
       .merge(tEnter)
       .transition(t)
@@ -221,7 +283,7 @@ class DesktopScoreBar extends SvgChart {
       .append("image")
       .classed("profile", true)
       .attr("x", d =>
-        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
+        this.isParty(d) ? x(d.start) + 32 : x(d.start) + x(d.count) - 10
       )
       .attr("y", d => height - 30)
       .attr("width", 30)
@@ -234,7 +296,7 @@ class DesktopScoreBar extends SvgChart {
       .merge(iEnter)
       .transition(t)
       .attr("x", d =>
-        this.isParty(d) ? x(d.start) + 40 : x(d.start) + x(d.count) - 10
+        this.isParty(d) ? x(d.start) + 32 : x(d.start) + x(d.count) - 10
       )
       .attr("y", d => height - 30)
       .attr("opacity", d => {
