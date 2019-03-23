@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
+import PartyDropdown from "./PartyDropdown"
 
 export default function PerPartyView() {
   return (
@@ -46,44 +47,7 @@ function ZoneSearchParty() {
       }}
     >
       {/* left zone full mobile*/}
-      <div css={{ position: "relative" }}>
-        <input
-          css={{
-            border: `1px solid ${labelColor}`,
-            width: "100%",
-            boxSizing: "border-box",
-            padding: 10,
-            fontSize: 16,
-            marginTop: 20,
-            ["&:focus"]: { outline: 0 },
-          }}
-          placeholder="ชื่อพรรคการเมือง"
-          onChange={v => {
-            // @todo #1 search party: implement onChange
-          }}
-        />
-        <div
-          css={{
-            top: 30,
-            position: "absolute",
-            right: 10,
-            color: labelColor,
-          }}
-        >
-          <FontAwesomeIcon icon={faSearch} />
-        </div>
-      </div>
-      <div>
-        <ul>
-          {parties.map(p => (
-            <li key={p.id}>
-              <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
-                {p.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <PartyDropdown />
     </div>
   )
 }
