@@ -48,16 +48,24 @@ export function partyStatsFromSummaryJSON(
   // Calculate the constituency seat count for each party.
   const constituencySeatCount = {}
   const filteredConstituencySeatCount = {}
-  let fakeVotes = expectedVotersCount
-
+  let countedVotes = 0
+  let allGoodVotes = 0
   for (const provinceIdStr of Object.keys(summary.zoneStatsMap)) {
     const zoneNoStatsMap = summary.zoneStatsMap[provinceIdStr]
     for (const zoneNoStr of Object.keys(zoneNoStatsMap)) {
       const stats = zoneNoStatsMap[zoneNoStr]
+      allGoodVotes += stats.goodVotes
       if (!shouldDisplayZoneData(stats) && !fillAllSeats) continue
-      fakeVotes -= stats.goodVotes
+      countedVotes += stats.goodVotes
     }
   }
+  const targetPhantom =
+    (1 - countedVotes / Math.max(allGoodVotes, expectedVotersCount)) *
+    (150 / 500)
+  const totalPartyScore = _.sum(_.values(summary.partyScoreMap))
+  const phantomVotes = Math.round(
+    totalPartyScore * (targetPhantom / (1 - targetPhantom))
+  )
 
   for (const provinceIdStr of Object.keys(summary.zoneWinningCandidateMap)) {
     const zoneNoWinningCandidateMap =
@@ -94,12 +102,12 @@ export function partyStatsFromSummaryJSON(
       }
     })
     .concat(
-      fakeVotes > 0
+      phantomVotes > 0
         ? [
             {
               id: "phantom",
               electedMemberCount: 0,
-              voteCount: fakeVotes,
+              voteCount: phantomVotes,
               partyListCandidateCount: 999999,
             },
           ]
