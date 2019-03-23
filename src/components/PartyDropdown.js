@@ -162,8 +162,8 @@ export default ({ partyId }) => {
         <div
           css={{
             position: "absolute",
-            right: "10px",
-            top: "calc(50% - 3px)",
+            right: "18px",
+            top: "calc(50% - 8px)",
             border: "solid #212121",
             borderWidth: "0 2px 2px 0",
             padding: "4px",
