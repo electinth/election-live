@@ -17,10 +17,10 @@ export default function PerPartySearchPanelContainer({
     <div
       css={{
         fontFamily: DISPLAY_FONT,
+        margin: "20px 0 0 0",
         [media(DESKTOP_MIN_WIDTH)]: {
           display: "block",
           order: 1,
-          margin: "20px 0 0 0",
           padding: 0,
           width: "275px",
         },
