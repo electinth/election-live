@@ -162,7 +162,6 @@ function VoteCounterContainer() {
     .values()
     .flatMap(x => _.values(x).map(z => z.progress))
     .value()
-  console.log(progressArray)
   const currentDate = new Date()
   const currentTime = `${("0" + currentDate.getHours()).slice(-2)}:${(
     "0" + currentDate.getMinutes()

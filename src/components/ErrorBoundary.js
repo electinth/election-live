@@ -1,5 +1,6 @@
 import React from "react"
 import Placeholder from "./Placeholder"
+import * as Sentry from "@sentry/browser"
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -12,9 +13,16 @@ export default class ErrorBoundary extends React.Component {
     return { hasError: true, errorMessage: String(error) }
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error, errorInfo) {
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, info)
+    Sentry.withScope(scope => {
+      Object.keys(errorInfo).forEach(key => {
+        scope.setExtra(key, errorInfo[key])
+      })
+      scope.setExtra("name", this.props.name)
+      Sentry.captureException(error)
+    })
   }
 
   render() {

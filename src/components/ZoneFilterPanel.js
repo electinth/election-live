@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
 import React, { createContext, useRef, useLayoutEffect } from "react"
 import { filterPath, filters as areaFilters } from "../models/information"
+import { trackEvent } from "../util/analytics"
 
 export const ZoneFilterContext = createContext(
   /** @type {ZoneFilterName} */ ("all")
@@ -49,7 +50,12 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
               <li css={{ paddingTop: 10, paddingBottom: 10 }}>
                 <Link
                   to={filterPath(filterName)}
-                  onClick={onFilterSelect}
+                  onClick={() => {
+                    trackEvent("Select zone filter", {
+                      filter: filterName,
+                    })
+                    if (onFilterSelect) onFilterSelect(filterName)
+                  }}
                   ref={current ? currentLinkRef : undefined}
                   css={{
                     opacity: current ? 1 : 0.62,

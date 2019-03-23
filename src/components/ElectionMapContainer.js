@@ -16,6 +16,7 @@ import ElectionMap from "./ElectionMap"
 import ElectionMapTooltip from "./ElectionMapTooltip"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
+import { trackEvent } from "../util/analytics"
 
 /**
  *
@@ -114,6 +115,7 @@ export default function ElectionMapContainer() {
   const onZoneClick = useCallback(zone => {
     const match = zone.data.id.match(/^(\d+)-(\d+)$/)
     if (match) {
+      trackEvent("View zone", { via: "Map" })
       navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
     }
   }, [])

@@ -26,7 +26,7 @@ export default function PerPartySearchPanelContainer({
         },
       }}
     >
-      <PartyDropdown dropdownOpen={false} />
+      <PartyDropdown partyId={partyId} dropdownOpen={false} />
       <PartyTotalVote totalVote={totalVote} />
       <PartyTotalCouncilorEstimationVisualization />
       <PartyTotalCouncilorEstimationNumber

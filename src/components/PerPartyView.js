@@ -5,7 +5,7 @@ import ElectionMapContainer from "./ElectionMapContainer"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import PerPartySearchPanelContainer from "./PerPartySearchPanelContainer"
 
-export default function PerPartyView() {
+export default function PerPartyView({ partyId }) {
   return (
     <div>
       <div

@@ -10,6 +10,7 @@ import PartyStatsList from "../components/PartyStatsList"
 import TotalVoterSummary from "../components/TotalVoterSummary"
 import { ZoneFilterContext } from "../components/ZoneFilterPanel"
 import ZoneMasterView from "../components/ZoneMasterView"
+import Arrow from "../components/Arrow"
 import {
   checkFilter,
   filterPath,
@@ -226,10 +227,24 @@ function ZoneView({ provinceId, zoneNo }) {
               css={{
                 fontFamily: DISPLAY_FONT,
                 color: labelColor,
-                margin: "0.3em 0 0.5em 0 ",
+                margin: "0.3em 0 0.5em 0",
+                position: "relative",
               }}
             >
+              <Arrow />
               เขตเลือกตั้งที่ {zone.no}
+              <div
+                css={{
+                  display: "inline-block",
+                  border: "solid #212121",
+                  borderWidth: "0 2px 2px 0",
+                  padding: "4px",
+                  transform: "rotate(-45deg)",
+                  verticalAlign: "middle",
+                  marginLeft: "12px",
+                  cursor: "pointer",
+                }}
+              />
             </h2>
             <div>
               <span>นับแล้ว</span>
