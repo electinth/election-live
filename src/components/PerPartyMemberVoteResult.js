@@ -39,7 +39,7 @@ export default function ZonePartyMemberVoteResult({ data = mockData }) {
     border: 0,
     borderBottom: "1px solid #000",
     ["&:hover"]: {
-      active,
+      ...active,
     },
   }
   return (
