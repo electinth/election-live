@@ -9,10 +9,11 @@ import Fuse from "fuse.js"
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
 })
-export default props => {
+
+export default ({ partyId }) => {
   const [state, setState] = useState({
-    dropdownOpen: false || props.dropdownOpen,
-    currentParty: parties[0],
+    dropdownOpen: !partyId ? true : false,
+    currentParty: partyId ? parties.find(p => p.id === partyId) : parties[0],
   })
   const [searchKeyword, setSearchKeyword] = useState("")
 
@@ -41,7 +42,7 @@ export default props => {
           }}
         />
         <div
-          css={{ fontSize: "1rem", paddingLeft: 15, fontFamily: DISPLAY_FONT }}
+          css={{ fontSize: "1rem", paddingLeft: 8, fontFamily: DISPLAY_FONT }}
         >
           <b>{p.name}</b>
         </div>
@@ -120,24 +121,24 @@ export default props => {
         >
           <ul css={{ listStyle: "none", padding: 0 }}>
             {filteredParties.map(p => (
-              <li
+              <Link
                 key={p.id}
-                css={{
-                  padding: "12px 0px",
-                  borderBottom: "1px solid gray",
-                  position: "relative",
-                }}
+                to={partyPath(p)}
+                style={{ color: "black", textDecoration: "none" }}
                 onClick={() =>
                   setState({ dropdownOpen: false, currentParty: p })
                 }
               >
-                <Link
-                  to={partyPath(p)}
-                  style={{ color: "black", textDecoration: "none" }}
+                <li
+                  css={{
+                    padding: "12px 0px",
+                    borderBottom: "1px solid gray",
+                    position: "relative",
+                  }}
                 >
                   {partyItem(p)}
-                </Link>
-              </li>
+                </li>
+              </Link>
             ))}
           </ul>
         </div>

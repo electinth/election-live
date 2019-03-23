@@ -6,7 +6,7 @@ import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import PartyDropdown from "./PartyDropdown"
 import Unimplemented from "./Unimplemented"
 
-export default function PerPartyView() {
+export default function PerPartyView({ partyId }) {
   return (
     <div>
       <div
@@ -22,6 +22,7 @@ export default function PerPartyView() {
           },
         }}
       >
+
         <div
           css={{
             width: "100%",
@@ -33,12 +34,13 @@ export default function PerPartyView() {
           }}
         >
           <div css={{ position: "absolute", width: "100%", top: 0 }}>
-            <ZoneSearchParty />
+            <ZoneSearchParty partyId={partyId}/>
           </div>
           <div css={{ paddingTop: 60 }}>
             <ZoneStats />
           </div>
         </div>
+
         <ZoneMapView />
         <PerPartyMemberVoteResult />
       </div>
@@ -47,7 +49,7 @@ export default function PerPartyView() {
 }
 
 // @todo #1 implement search and select with visualization of each party
-function ZoneSearchParty() {
+function ZoneSearchParty({ partyId }) {
   return (
     <div
       css={{
@@ -61,8 +63,7 @@ function ZoneSearchParty() {
         },
       }}
     >
-      {/* left zone full mobile*/}
-      <PartyDropdown dropdownOpen={false} />
+      <PartyDropdown partyId={partyId} />
     </div>
   )
 }
