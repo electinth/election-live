@@ -1,9 +1,26 @@
 import React from "react"
 import MainLayout from "../components/MainLayout"
-import { Title, SubTitle, BodyText } from "../components/Typo"
+import { Title, SubTitle, SubSubTitle, BodyText } from "../components/Typo"
 import Divider from "../components/Divider"
+import { contributors } from "../models/information"
 
 const containerSize = 516
+
+const renderPerson = a => (
+  <a href={a.url} target="_blank">
+    {a.name}
+  </a>
+)
+const ContributorSection = ({ name, contributors }) => {
+  return (
+    <div css={{ color: "black", textDecoration: "none" }}>
+      <SubSubTitle>{name}</SubSubTitle>
+      {contributors
+        .map(a => renderPerson(a))
+        .reduce((prev, curr) => [prev, ", ", curr])}
+    </div>
+  )
+}
 
 export default () => (
   <MainLayout activeNavBarSection="about">
@@ -38,7 +55,20 @@ export default () => (
       {
         // @todo add contributors
       }
-      <BodyText>Mr. A, Mr. B...</BodyText>
+      <BodyText>
+        <ContributorSection
+          name="เขียนโปรแกรม 💻"
+          contributors={contributors.coders}
+        />
+        <ContributorSection
+          name="ออกแบบ 🎨"
+          contributors={contributors.designers}
+        />
+        <ContributorSection
+          name="ติดต่อประสานงาน และด้านอื่นๆ ☎️"
+          contributors={contributors.others}
+        />
+      </BodyText>
     </div>
   </MainLayout>
 )

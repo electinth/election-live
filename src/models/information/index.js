@@ -16,6 +16,8 @@ export const zones = require("./_zones.json")
 
 export * from "./_filters"
 
+export const contributors = require("./_contributors.json")
+
 /**
  * @param {IParty} party
  */
@@ -95,8 +97,8 @@ export function getPartyById(id) {
   id = +id
   if (id === 0) {
     return {
-      name: 'ไม่เลือกใคร',
-      color: '#9e9e9e',
+      name: "ไม่เลือกใคร",
+      color: "#9e9e9e",
     }
   }
   return partiesMap.get(id) || fail(`Party ID ${id} not found`)

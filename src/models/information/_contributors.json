@@ -1,0 +1,24 @@
+{
+  "coders": [
+    {
+      "name": "Mr. A",
+      "url": "//abc.com"
+    },
+    {
+      "name": "Mr. C",
+      "url": "//abc.com"
+    }
+  ],
+  "designers": [
+    {
+      "name": "Mrs. Anna",
+      "url": "..."
+    }
+  ],
+  "others": [
+    {
+      "name": "Ms. Jane",
+      "url": "..."
+    }
+  ]
+}

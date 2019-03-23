@@ -20,6 +20,17 @@ export const SubTitle = styled.h2`
 
   ${dynamicMargin};
 `
+
+export const SubSubTitle = styled.h2`
+  font-family: ${DISPLAY_FONT};
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+
+  ${dynamicMargin};
+`
+
 export const BodyText = styled.p`
   margin: 0;
 
