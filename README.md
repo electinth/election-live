@@ -10,6 +10,7 @@ Live Scoreboard for Thailand General Election 2562 (2019).
   - [Prerequisites](#prerequisites)
   - [Install dependencies](#install-dependencies)
   - [Running development server](#running-development-server)
+  - [Disable the curtain](#disable-the-curtain)
   - [Resources for developers](#resources-for-developers)
   - [How to add new pages](#how-to-add-new-pages)
   - [Styling](#styling)
@@ -64,6 +65,13 @@ yarn install
 ```
 yarn develop
 ```
+
+### Disable the curtain
+
+When you run the app for the first time, if it’s not yet time to count the election results, the application will be disabled and you will see a curtain with a countdown. To develop this website, you have to disable the curtain first.
+
+1. Go to `/dev`, e.g. http://localhost:8000/dev
+2. Toggle the flag `ELECT_DISABLE_CURTAIN`
 
 ### Resources for developers
 

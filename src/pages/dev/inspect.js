@@ -115,7 +115,18 @@ function PartyStatsInspector({ summary }) {
       <tbody>
         {partyStats.map(row => (
           <tr key={row.party.id}>
-            <td>{row.party.name}</td>
+            <td>
+              <span
+                style={{
+                  background: row.party.color,
+                  width: 40,
+                  display: "inline-block",
+                }}
+              >
+                &nbsp;
+              </span>{" "}
+              {row.party.name}
+            </td>
             <td css={styles.numeral}>{row.score}</td>
             <td css={styles.numeral}>{row.constituencySeats}</td>
             <td css={styles.numeral}>{row.partyListSeats}</td>
