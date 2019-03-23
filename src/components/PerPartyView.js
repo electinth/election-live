@@ -8,6 +8,18 @@ import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 
+function filterParty(parties, keyword) {
+  return parties.filter(party => {
+    return (
+      // only allow prefix search
+      party.codeEN.indexOf(keyword) === 0 ||
+      party.codeTH.indexOf(keyword) === 0 ||
+      // but can search anywhere
+      party.name.indexOf(keyword) !== -1
+    )
+  })
+}
+
 export default function PerPartyView() {
   return (
     <div>
@@ -17,7 +29,6 @@ export default function PerPartyView() {
           padding: "0 24px",
           maxWidth: "1200px",
           [media(DESKTOP_MIN_WIDTH)]: {
-            display: "block",
             order: 1,
             margin: "0 auto",
             padding: 0,
@@ -35,6 +46,8 @@ export default function PerPartyView() {
 
 // @todo #1 implement search and select with visualization of each party
 function ZoneSearchParty() {
+  const [searchKeyword, setSearchKeyword] = React.useState("")
+
   return (
     <div
       css={{
@@ -56,11 +69,12 @@ function ZoneSearchParty() {
             padding: 10,
             fontSize: 16,
             marginTop: 20,
-            ["&:focus"]: { outline: 0 },
+            "&:focus": { outline: 0 },
           }}
+          value={searchKeyword}
           placeholder="ชื่อพรรคการเมือง"
-          onChange={v => {
-            // @todo #1 search party: implement onChange
+          onChange={e => {
+            setSearchKeyword(e.target.value)
           }}
         />
         <div
@@ -76,7 +90,7 @@ function ZoneSearchParty() {
       </div>
       <div>
         <ul>
-          {parties.map(p => (
+          {filterParty(parties, searchKeyword).map(p => (
             <li key={p.id}>
               <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
                 {p.name}
