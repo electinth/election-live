@@ -9,6 +9,12 @@ import {
   partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
 } from "../../models/PartyStats"
+import {
+  zones,
+  getProvinceById,
+  partyColor,
+  getPartyById,
+} from "../../models/information"
 
 export default () => {
   return (
@@ -18,7 +24,19 @@ export default () => {
   )
 }
 
-const Table = ({ children }) => <table>{children}</table>
+const Table = ({ children }) => (
+  <table
+    css={{
+      borderCollapse: "collapse",
+      "td, th": {
+        border: "1px solid #eee",
+        padding: "2px 4px",
+      },
+    }}
+  >
+    {children}
+  </table>
+)
 
 const styles = {
   numeral: {
@@ -47,9 +65,15 @@ function DataInspector() {
           {renderRow("summary", summaryState, data => "Loaded")}
         </tbody>
       </Table>
-      <h2>Summary State</h2>
+      <h2>Party Stats</h2>
       {summaryState.completed ? (
         <PartyStatsInspector summary={summaryState.data} />
+      ) : (
+        "Loading"
+      )}
+      <h2>Summary</h2>
+      {summaryState.completed ? (
+        <SummaryInspector summary={summaryState.data} />
       ) : (
         "Loading"
       )}
@@ -99,6 +123,65 @@ function PartyStatsInspector({ summary }) {
             <td css={styles.numeral}>{row.seatsCeiling.toFixed(4)}</td>
           </tr>
         ))}
+      </tbody>
+    </Table>
+  )
+}
+
+function SummaryInspector({ summary }) {
+  return (
+    <Table>
+      <thead>
+        <th>จังหวัด</th>
+        <th>เขต</th>
+        <th>% completed</th>
+        <th>Good</th>
+        <th>Bad</th>
+        <th>No</th>
+        <th>Total</th>
+        <th>Winning Candidate</th>
+      </thead>
+      <tbody>
+        {zones.map(zone => {
+          /** @type {ElectionDataSource.ZoneStats} */
+          const stats =
+            (summary.zoneStatsMap[zone.provinceId] || {})[zone.no] || {}
+          const winning = (summary.zoneWinningCandidateMap[zone.provinceId] ||
+            {})[zone.no]
+          return (
+            <tr key={zone.provinceId + ":" + zone.no}>
+              <td>
+                {zone.provinceId} - {getProvinceById(zone.provinceId).name}
+              </td>
+              <td>{zone.no}</td>
+              <td css={styles.numeral}>{stats.progress}</td>
+              <td css={styles.numeral}>{stats.goodVotes}</td>
+              <td css={styles.numeral}>{stats.badVotes}</td>
+              <td css={styles.numeral}>{stats.noVotes}</td>
+              <td css={styles.numeral}>{stats.votesTotal}</td>
+              <td>{!!winning && renderWinning(winning)}</td>
+            </tr>
+          )
+          /**
+           * @param {ElectionDataSource.Candidate} candidate
+           */
+          function renderWinning(candidate) {
+            const party = getPartyById(candidate.partyId)
+            return (
+              <span
+                style={{
+                  textDecoration:
+                    candidate.score <= stats.noVotes ? "line-through" : "none",
+                  opacity: candidate.score <= stats.noVotes ? 0.3 : 1,
+                }}
+              >
+                <span style={{ color: partyColor(party) }}>
+                  {party.name}#{candidate.no}
+                </span>
+              </span>
+            )
+          }
+        })}
       </tbody>
     </Table>
   )

@@ -104,7 +104,7 @@ export function partyStatsFromSummaryJSON(
       }
     })
     .concat(
-      phantomVotes > 0
+      phantomVotes > 0 && !fillAllSeats
         ? [
             {
               id: "phantom",
