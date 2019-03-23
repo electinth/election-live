@@ -10,10 +10,20 @@ import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 const barHeight = 76
 
 export default function DesktopScoreBarContainer() {
+  const wrapperCss = {
+    transition: "all .8s cubic-bezier(0.18, 0.89, 0.32, 1.28)",
+  }
+
+  const pageList = [
+    { name: "ประมาณจำนวน ส.ส. เขต (350 ที่)", maxCount: 350 },
+    { name: "ประมาณจำนวน ส.ส. บัญชีรายชื่อ (150 ที่)", maxCount: 150 },
+    { name: "ประมาณจำนวน ส.ส. พึงมี (500 ที่)", maxCount: 500 },
+  ]
+
   const [pageIndex, setPageIndex] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {
-      setPageIndex(page => (page + 1) % 3)
+      setPageIndex(page => (page + 1) % pageList.length)
     }, 10000)
     return () => clearInterval(interval)
   }, [])
@@ -58,16 +68,6 @@ export default function DesktopScoreBarContainer() {
         },
       ]))
       .value(),
-  ]
-
-  const wrapperCss = {
-    transition: "all .8s cubic-bezier(0.18, 0.89, 0.32, 1.28)",
-  }
-
-  const pageList = [
-    { name: "ประมาณจำนวน ส.ส. เขต (350 ที่)", maxCount: 350 },
-    { name: "ประมาณจำนวน ส.ส. บัญชีรายชื่อ (150 ที่)", maxCount: 150 },
-    { name: "ประมาณจำนวน ส.ส. พึงมี (500 ที่)", maxCount: 500 },
   ]
 
   return (

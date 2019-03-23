@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function onlyPassThroughPropsWhilePageIsVisible(BaseComponent) {
-  return class UpdateBlocker extends React.PureComponent {
+  return class UpdateBlocker extends React.Component {
     componentWillUnmount() {
       if (this.listener) {
         const Visibility = require("visibilityjs")
