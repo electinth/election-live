@@ -14,9 +14,6 @@ import moment from "moment"
 import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
 import Placeholder from "./Placeholder"
 
-// @todo #1 Change the style to match the design
-//  check out here! https://projects.invisionapp.com/d/main/default/#/console/17016173/352732955/inspect
-
 /**
  * @param {object} props
  * @param {import('./NavBar').NavBarSectionName} props.activeNavBarSection
