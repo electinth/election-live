@@ -16,6 +16,7 @@ export default ({ open }) => {
         css={{
           display: "grid",
           gridTemplateColumns: "30px auto",
+          textAlign: "left",
         }}
       >
         <img
@@ -34,7 +35,7 @@ export default ({ open }) => {
           }}
         />
         <div
-          css={{ fontSize: "2em", paddingLeft: 15, fontFamily: DISPLAY_FONT }}
+          css={{ fontSize: "1rem", paddingLeft: 15, fontFamily: DISPLAY_FONT }}
         >
           <b>{p.name}</b>
         </div>
@@ -69,11 +70,7 @@ export default ({ open }) => {
     return (
       <div
         css={{
-          overflowX: "hidden",
-          overflowY: "auto",
-          WebkitOverflowScrolling: "touch",
           position: "relative",
-          height: "calc(100vh - 200px)",
         }}
       >
         <div css={{ position: "relative" }}>
@@ -84,7 +81,6 @@ export default ({ open }) => {
               boxSizing: "border-box",
               padding: 10,
               fontSize: 16,
-              marginTop: 20,
               "&:focus": { outline: 0 },
             }}
             value={searchKeyword}
@@ -95,7 +91,7 @@ export default ({ open }) => {
           />
           <div
             css={{
-              top: 30,
+              top: 10,
               position: "absolute",
               right: 10,
               color: labelColor,
@@ -104,26 +100,34 @@ export default ({ open }) => {
             <FontAwesomeIcon icon={faSearch} />
           </div>
         </div>
-
-        <ul css={{ listStyle: "none", padding: 0 }}>
-          {filteredParties.map(p => (
-            <li
-              key={p.id}
-              css={{
-                padding: "12px 0px",
-                borderBottom: "1px solid gray",
-                position: "relative",
-              }}
-            >
-              <Link
-                to={partyPath(p)}
-                style={{ color: "black", textDecoration: "none" }}
+        <div
+          css={{
+            height: "calc(70vh - 200px)",
+            overflowX: "hidden",
+            overflowY: "auto",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          <ul css={{ listStyle: "none", padding: 0 }}>
+            {filteredParties.map(p => (
+              <li
+                key={p.id}
+                css={{
+                  padding: "12px 0px",
+                  borderBottom: "1px solid gray",
+                  position: "relative",
+                }}
               >
-                {partyItem(p)}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                <Link
+                  to={partyPath(p)}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  {partyItem(p)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     )
   }
@@ -141,12 +145,8 @@ export default ({ open }) => {
       <div
         css={{
           padding: "10px",
-          width: "283px",
-          border: "2px solid #e4e4e4",
           alignItems: "center",
           position: "relative",
-          boxShadow:
-            "0 2px 4px 0 rgba(0,0,0,0.05),0 2px 10px 0 rgba(0,0,0,0.12)!important",
         }}
       >
         {open ? renderDropdown() : renderDefaultDropdown()}
