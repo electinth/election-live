@@ -128,6 +128,15 @@ function getLatestDirectoryState() {
       failed: true,
     }
   }
+  // @todo #1 getLatestDirectoryState: Disable this conditional if control variable "locked" is true.
+  //  Have to wait for ETL team to update `latest.json`.
+  //  e.g. (latestState.data.control && latestState.data.control.locked)
+  if (!localStorage.ELECT_DISABLE_CURTAIN) {
+    return {
+      error: new Error("ยังไม่พร้อมแสดงข้อมูล"),
+      failed: true,
+    }
+  }
   return {
     completed: true,
     data: latestPointer.directory,

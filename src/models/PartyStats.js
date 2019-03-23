@@ -26,7 +26,7 @@ import { calculatePartyList } from "thailand-party-list-calculator"
  * @param {ElectionDataSource.ZoneStats} zoneStats
  */
 export const isZoneFinished = zoneStats =>
-  zoneStats.finished || zoneStats.progress >= 95
+  zoneStats.finished || zoneStats.progress >= 80
 
 /**
  * @param {ElectionDataSource.ZoneStats} zoneStats
