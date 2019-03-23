@@ -296,7 +296,7 @@ function NewVersionAlert() {
     const checkVersion = async () => {
       debug("Checking version...")
       try {
-        const response = axios.get("/version.info.json")
+        const response = await axios.get("/version.info.json")
         if (semver.gt(response.data.version, currentVersion)) {
           debug(
             "Latest app version %s > %s",
