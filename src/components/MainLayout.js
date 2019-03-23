@@ -157,9 +157,12 @@ function VoteCounterContainer() {
     .flatMap(x => _.values(x).map(z => z.progress))
     .value()
   console.log(progressArray)
+  const currentDate = new Date()
+  const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`
   return (
     <VoteCounter
       percentage={Math.round(_.sum(progressArray) / progressArray.length)}
+      lastUpdate={currentTime}
     />
   )
 }
