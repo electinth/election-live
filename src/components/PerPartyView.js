@@ -7,12 +7,7 @@ import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
-import Fuse from "fuse.js"
 import PartyDropdown from "./PartyDropdown"
-
-const searcher = new Fuse(parties, {
-  keys: ["codeEN", "codeTH", "name"],
-})
 
 export default function PerPartyView() {
   return (
@@ -40,13 +35,6 @@ export default function PerPartyView() {
 
 // @todo #1 implement search and select with visualization of each party
 function ZoneSearchParty() {
-  const [searchKeyword, setSearchKeyword] = React.useState("")
-
-  let filteredParties = parties
-  if (searchKeyword.length > 0) {
-    filteredParties = searcher.search(searchKeyword)
-  }
-
   return (
     <div
       css={{
@@ -59,12 +47,7 @@ function ZoneSearchParty() {
       }}
     >
       {/* left zone full mobile*/}
-      <PartyDropdown
-        open={true}
-        filteredParties={filteredParties}
-        searchKeyword={searchKeyword}
-        setSearchKeyword={setSearchKeyword}
-      />
+      <PartyDropdown open={true} />
     </div>
   )
 }

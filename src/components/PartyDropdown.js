@@ -9,8 +9,12 @@ import { labelColor, DISPLAY_FONT } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "gatsby"
+import Fuse from "fuse.js"
 
-export default ({ open, searchKeyword, setSearchKeyword, filteredParties }) => {
+const searcher = new Fuse(parties, {
+  keys: ["codeEN", "codeTH", "name"],
+})
+export default ({ open }) => {
   function partyItem(p) {
     return (
       <div
@@ -60,6 +64,13 @@ export default ({ open, searchKeyword, setSearchKeyword, filteredParties }) => {
   }
 
   function renderDropdown() {
+    const [searchKeyword, setSearchKeyword] = React.useState("")
+
+    let filteredParties = parties
+    if (searchKeyword.length > 0) {
+      filteredParties = searcher.search(searchKeyword)
+    }
+
     return (
       <div
         css={{
