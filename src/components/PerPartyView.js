@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
+import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 
 export default function PerPartyView() {
   return (
@@ -26,7 +27,7 @@ export default function PerPartyView() {
       >
         <ZoneSearchParty />
         <ZoneMapView />
-        <ZonePartyVoteResult />
+        <PerPartyMemberVoteResult />
       </div>
     </div>
   )
@@ -119,26 +120,6 @@ function ZoneMapView() {
           <ElectionMapContainer />
         </ErrorBoundary>
       </div>
-    </div>
-  )
-}
-
-// @todo #1 show each party vote result
-function ZonePartyVoteResult() {
-  return (
-    <div
-      css={{
-        [media(DESKTOP_MIN_WIDTH)]: {
-          display: "block",
-          order: 3,
-          margin: "0",
-          padding: "16px",
-          width: "320px",
-        },
-      }}
-    >
-      {/* right zone */}
-      <div>ประมาณจำนวน สส. ที่ได้</div>
     </div>
   )
 }
