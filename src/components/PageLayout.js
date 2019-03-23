@@ -3,10 +3,11 @@ import { Link } from "gatsby"
 
 import DocumentHead from "./DocumentHead"
 import { GlobalStyle } from "../styles"
+import ErrorBoundary from "./ErrorBoundary"
 
 export default function PageLayout({ children }) {
   return (
-    <React.Fragment>
+    <ErrorBoundary name="Web page">
       <DocumentHead />
       <GlobalStyle />
       {children}
@@ -15,6 +16,6 @@ export default function PageLayout({ children }) {
         //  to refresh the browser. Our app may contain bugs and
         //  we might need users to refresh our website to get the new code.
       }
-    </React.Fragment>
+    </ErrorBoundary>
   )
 }
