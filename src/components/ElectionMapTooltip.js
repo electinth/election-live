@@ -7,8 +7,11 @@ import {
   getPartyById,
 } from "../models/information"
 import loadingSmall from "../styles/images/loading.gif"
-import { numberWithCommas } from "../util/format"
 import { useSummaryData } from "../models/LiveDataSubscription"
+import { format } from "d3-format"
+
+const formatInt = format(",d")
+const formatPercent = format(".2%")
 
 export default function ElectionMapTooltip({ positionId, positions }) {
   const memo = useMemo(() => {
@@ -72,9 +75,8 @@ function WinnerInspector({ summary, zone }) {
    */
   function renderWinning(candidate) {
     const party = getPartyById(candidate.partyId)
-    const percentage = Math.round(
-      (candidate.score / (stats.goodVotes + stats.noVotes)) * 100
-    )
+    const percentage = candidate.score / (stats.goodVotes + stats.noVotes)
+
     return (
       <div
         style={{
@@ -93,15 +95,16 @@ function WinnerInspector({ summary, zone }) {
             opacity: 0.5,
           }}
         >
-          {numberWithCommas(candidate.score)} - {percentage}%
+          {formatInt(candidate.score)} ({formatPercent(percentage)})
         </div>
-        <div
-          style={{
-            height: 5,
-            width: `${percentage}%`,
-            background: partyColor(party),
-          }}
-        />
+        <svg width="120" height="5">
+          <rect width={120} height="5" fill="#ccc" />
+          <rect
+            width={Math.round(percentage * 120)}
+            height="5"
+            fill={partyColor(party)}
+          />
+        </svg>
       </div>
     )
   }

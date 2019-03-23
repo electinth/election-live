@@ -129,6 +129,7 @@ export default function ElectionMapContainer() {
             padding: 6,
             backgroundColor: "#fff",
             pointerEvents: "none",
+            maxWidth: 200,
             boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.3)",
             top: mapTip.mouseEvent.clientY + 10,
             left: mapTip.mouseEvent.clientX + 10,
