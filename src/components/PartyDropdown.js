@@ -78,7 +78,6 @@ export default () => {
           position: "relative",
           height: "calc(100vh - 200px)",
         }}
-        onClick={() => setState({ dropdownOpen: false })}
       >
         <div css={{ position: "relative" }}>
           <input
@@ -109,7 +108,10 @@ export default () => {
           </div>
         </div>
 
-        <ul css={{ listStyle: "none", padding: 0 }}>
+        <ul
+          css={{ listStyle: "none", padding: 0 }}
+          onClick={() => setState({ dropdownOpen: false })}
+        >
           {filteredParties.map(p => (
             <li
               key={p.id}
