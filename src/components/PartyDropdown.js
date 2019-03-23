@@ -1,10 +1,5 @@
 import React from "react"
-import {
-  parties,
-  partyLogo,
-  partyPath,
-  partyColor,
-} from "../models/information"
+import { parties, partyLogo, partyPath } from "../models/information"
 import { labelColor, DISPLAY_FONT } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
