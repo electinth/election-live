@@ -228,7 +228,7 @@ function CountdownCurtain({ location }) {
           <br />
           พรุ่งนี้นะๆ ^_^
           <br />
-          {Countdown()}
+          <Countdown />
           {(location.hostname === "localhost" ||
             location.hostname === "127.0.0.1") && (
             <div style={{ marginTop: "1em" }}>
