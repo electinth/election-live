@@ -1,26 +1,27 @@
-import React, { useReducer, useState, useEffect } from "react"
-import _ from "lodash"
-
-import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
-import NavBar, { menuMapping } from "./NavBar"
-import Footer from "./Footer"
-import { Link } from "gatsby"
-import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
-import ContentWrapper from "./ContentWrapper"
-import VoteCounter from "./VoteCounter"
+import { keyframes } from "@emotion/core"
 import { Location } from "@reach/router"
+import axios from "axios"
+import { Link } from "gatsby"
+import _ from "lodash"
+import moment from "moment"
+import React, { useEffect, useReducer, useRef, useState } from "react"
+import semver from "semver"
+import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
 import {
-  useSummaryData,
   useLockedState,
   useStatus as useStatusAlertText,
+  useSummaryData,
 } from "../models/LiveDataSubscription"
-import moment from "moment"
-import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
-import Placeholder from "./Placeholder"
-import { keyframes } from "@emotion/core"
+import { DISPLAY_FONT, media, Responsive, WIDE_NAV_MIN_WIDTH } from "../styles"
 import logo from "../styles/images/site-logo.png"
-import voteHand from "../styles/images/vote-hand.gif"
+import { Debug } from "../util/Debug"
+import ContentWrapper from "./ContentWrapper"
+import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
+import Footer from "./Footer"
 import Loading from "./Loading"
+import NavBar, { menuMapping } from "./NavBar"
+import Placeholder from "./Placeholder"
+import VoteCounter from "./VoteCounter"
 
 /**
  * @param {object} props
@@ -127,6 +128,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
       </Location>
       <DeveloperPanel />
       <StatusAlert />
+      <NewVersionAlert />
       <Footer />
     </div>
   )
@@ -281,6 +283,65 @@ function StatusAlert() {
       }}
     >
       {status}
+    </div>
+  )
+}
+
+function NewVersionAlert() {
+  const [showAlert, setShowAlert] = useState(false)
+  const debugRef = useRef()
+  const debug = debugRef.current || Debug("elect:NewVersionAlert")
+  useEffect(() => {
+    let currentVersion = (debugRef.current = debug)
+    const checkVersion = async () => {
+      debug("Checking version...")
+      try {
+        const response = axios.get("/version.info.json")
+        if (semver.gt(response.data.version, currentVersion)) {
+          debug(
+            "Latest app version %s > %s",
+            response.data.version,
+            currentVersion
+          )
+          setShowAlert(true)
+          currentVersion = response.data.version
+        } else {
+          debug(
+            "Latest app version %s <= %s",
+            response.data.version,
+            currentVersion
+          )
+        }
+      } catch (e) {
+        debug("Failed to check version...", e)
+      }
+    }
+    const timeout = setTimeout(checkVersion, 5000)
+    const interval = setInterval(checkVersion, 90000)
+    return () => {
+      clearTimeout(timeout)
+      clearInterval(interval)
+    }
+  }, [])
+  if (!showAlert) return null
+  return (
+    <div
+      css={{
+        position: "absolute",
+        top: 0,
+        left: "50%",
+        transform: "translateX(-50%)",
+        padding: "4px 8px",
+        background: "#F0324B",
+        color: "white",
+        fontSize: "20px",
+        zIndex: 997,
+      }}
+    >
+      เว็บนี้มีการอัพเดต{" "}
+      <a css={{ color: "inherit" }} href="javascript:void(location.reload())">
+        กรุณารีเฟรช
+      </a>
     </div>
   )
 }
