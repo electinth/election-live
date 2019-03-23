@@ -7,18 +7,11 @@ import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
+import Fuse from "fuse.js"
 
-export function filterParty(parties, keyword) {
-  return parties.filter(party => {
-    return (
-      // only allow prefix search
-      party.codeEN.indexOf(keyword) === 0 ||
-      party.codeTH.indexOf(keyword) === 0 ||
-      // but can search anywhere
-      party.name.indexOf(keyword) !== -1
-    )
-  })
-}
+const searcher = new Fuse(parties, {
+  keys: ["codeEN", "codeTH", "name"],
+})
 
 export default function PerPartyView() {
   return (
@@ -47,6 +40,11 @@ export default function PerPartyView() {
 // @todo #1 implement search and select with visualization of each party
 function ZoneSearchParty() {
   const [searchKeyword, setSearchKeyword] = React.useState("")
+
+  let filteredParties = parties
+  if (searchKeyword.length > 0) {
+    filteredParties = searcher.search(searchKeyword)
+  }
 
   return (
     <div
@@ -90,7 +88,7 @@ function ZoneSearchParty() {
       </div>
       <div>
         <ul>
-          {filterParty(parties, searchKeyword).map(p => (
+          {filteredParties.map(p => (
             <li key={p.id}>
               <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
                 {p.name}
