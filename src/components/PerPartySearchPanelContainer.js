@@ -4,6 +4,7 @@ import PartyDropdown from "./PartyDropdown"
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Unimplemented from "./Unimplemented"
+import { numberWithCommas } from "../util/format"
 
 const sectionStyling = { borderBottom: "1px solid #000", padding: "10px 0" }
 
@@ -46,7 +47,7 @@ function PartyTotalVote({ totalVote }) {
       <div
         css={{ fontWeight: "bold", fontSize: "2.2em", padding: "10px 0 0 0" }}
       >
-        {totalVote.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+        {numberWithCommas(totalVote)}
       </div>
     </div>
   )
