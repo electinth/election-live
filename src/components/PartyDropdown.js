@@ -9,10 +9,10 @@ import Fuse from "fuse.js"
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
 })
-export default () => {
+export default ({ partyId }) => {
   const [state, setState] = useState({
-    dropdownOpen: true,
-    currentParty: parties[0],
+    dropdownOpen: !partyId ? true : false,
+    currentParty: partyId ? parties.find(p => p.id === partyId) : parties[0],
   })
   const [searchKeyword, setSearchKeyword] = useState("")
 
@@ -162,7 +162,7 @@ export default () => {
         <div
           css={{
             position: "absolute",
-            right: "4px",
+            right: "10px",
             top: "calc(50% - 3px)",
             border: "solid #212121",
             borderWidth: "0 2px 2px 0",

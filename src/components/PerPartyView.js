@@ -5,7 +5,7 @@ import ElectionMapContainer from "./ElectionMapContainer"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import PartyDropdown from "./PartyDropdown"
 
-export default function PerPartyView() {
+export default function PerPartyView({ partyId }) {
   return (
     <div>
       <div
@@ -21,7 +21,7 @@ export default function PerPartyView() {
           },
         }}
       >
-        <ZoneSearchParty />
+        <ZoneSearchParty partyId={partyId} />
         <ZoneMapView />
         <PerPartyMemberVoteResult />
       </div>
@@ -30,7 +30,7 @@ export default function PerPartyView() {
 }
 
 // @todo #1 implement search and select with visualization of each party
-function ZoneSearchParty() {
+function ZoneSearchParty({ partyId }) {
   return (
     <div
       css={{
@@ -43,7 +43,7 @@ function ZoneSearchParty() {
       }}
     >
       {/* left zone full mobile*/}
-      <PartyDropdown />
+      <PartyDropdown partyId={partyId} />
     </div>
   )
 }
