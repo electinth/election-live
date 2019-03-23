@@ -28,6 +28,8 @@ import {
 import { DISPLAY_FONT, labelColor } from "../styles"
 import Loading from "../components/Loading"
 import Placeholder from "../components/Placeholder"
+import UndesirableState from "../components/UndesirableState"
+import LoadingError from "../components/LoadingError"
 
 export default ({ pageContext, navigate, location }) => (
   <MainLayout activeNavBarSection="by-area">
@@ -124,13 +126,12 @@ function SummaryHeaderContainer({ filterName }) {
 
 function PartyStatsContainer({ filterName }) {
   const summaryState = useSummaryData()
-  // @todo #1 PartyStatsContainer: Handle case where data failed to load.
-  if (!summaryState.completed)
-    return (
-      <div css={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <Loading />
-      </div>
-    )
+  if (summaryState.failed) {
+    return <LoadingError />
+  }
+  if (!summaryState.completed) {
+    return <Loading size="large" />
+  }
 
   const summary = summaryState.data
   const currentFilter = filters[filterName]
@@ -247,13 +248,20 @@ function ZoneView({ provinceId, zoneNo }) {
                 label="บัตรดี"
                 stat={ifSummaryLoaded(
                   data => data.zoneStats.goodVotes,
-                  () => 0
+                  () => (
+                    <Loading size="small" />
+                  )
                 )}
                 idx={0}
               />
               <NationwideSubSummaryHeader
                 label="บัตรเสีย"
-                stat={ifSummaryLoaded(data => data.zoneStats.badVotes, () => 0)}
+                stat={ifSummaryLoaded(
+                  data => data.zoneStats.badVotes,
+                  () => (
+                    <Loading size="small" />
+                  )
+                )}
                 idx={1}
               />
             </div>
@@ -278,13 +286,11 @@ function ZoneView({ provinceId, zoneNo }) {
  */
 function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
   const dataState = usePerZoneData(provinceId, zoneNo)
-  // @todo #1 ZoneCandidateList: Handle case where data failed to load.
+  if (dataState.failed) {
+    return <LoadingError />
+  }
   if (!dataState.completed || !zoneStats) {
-    return (
-      <div css={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <Loading />
-      </div>
-    )
+    return <Loading size="large" />
   }
   const data = dataState.data
   if (!data) {
@@ -297,22 +303,44 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
 
   const noVotes = zoneStats.noVotes
   // Add no votes as one of candidates.
-  const zoneCandidates = [...data.candidates.slice(), {
-    firstName: '',
-    lastName: '',
-    no: '',
-    score: noVotes,
-    partyId: 0,
-  }];
-  zoneCandidates.sort(function(a,b) { return b.score - a.score })
-  const goodVotes = _.sumBy(zoneCandidates, 'score')
+  const zoneCandidates = [
+    ...data.candidates.slice(),
+    {
+      firstName: "",
+      lastName: "",
+      no: "",
+      score: noVotes,
+      partyId: 0,
+    },
+  ]
+  zoneCandidates.sort(function(a, b) {
+    return b.score - a.score
+  })
+  const goodVotes = _.sumBy(zoneCandidates, "score")
+  if (data.candidates.length < 1) {
+    return (
+      <UndesirableState
+        heading={
+          <span>
+            ยังไม่มีพรรคไหน
+            <br />
+            ได้ที่นั่ง ส.ส.
+          </span>
+        }
+      >
+        เริ่มแสดงผลเมื่อนับคะแนนแล้ว 10%
+      </UndesirableState>
+    )
+  }
   return (
     <ul css={{ listStyle: "none", margin: 0, marginTop: 10, padding: 0 }}>
       {zoneCandidates.map((candidate, index) => {
         const party = getPartyById(candidate.partyId)
         const percentage = Math.round((candidate.score / goodVotes) * 100)
-        const fullName = (candidate.firstName || candidate.lastName)?
-          `${candidate.firstName} ${candidate.lastName}`:""
+        const fullName =
+          candidate.firstName || candidate.lastName
+            ? `${candidate.firstName} ${candidate.lastName}`
+            : ""
         return (
           <li key={candidate.no}>
             <CandidateStatsRow

@@ -38,9 +38,13 @@ export default function NationWideSubSummaryBox(props) {
             float: "right",
           }}
         >
-          <AnimatedNumber value={stat} initialValue={0}>
-            {count => numberWithCommas(count)}
-          </AnimatedNumber>
+          {typeof stat === "number" ? (
+            <AnimatedNumber value={stat} initialValue={0}>
+              {count => numberWithCommas(count)}
+            </AnimatedNumber>
+          ) : (
+            stat
+          )}
         </span>
         <div css={{ clear: "both" }} />
       </div>
