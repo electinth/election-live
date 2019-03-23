@@ -23,7 +23,7 @@ export default function PerPartyView() {
       >
         <PerPartySearchPanelContainer />
         <ZoneMapView />
-        <PerPartyMemberVoteResult />
+        <ZoneStats />
       </div>
     </div>
   )
@@ -62,4 +62,8 @@ function ZoneMapView() {
       </div>
     </div>
   )
+}
+
+function ZoneStats() {
+  return <PerPartyMemberVoteResult />
 }

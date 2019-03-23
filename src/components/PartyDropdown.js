@@ -9,9 +9,9 @@ import Fuse from "fuse.js"
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
 })
-export default () => {
+export default props => {
   const [state, setState] = useState({
-    dropdownOpen: true,
+    dropdownOpen: false || props.dropdownOpen,
     currentParty: parties[0],
   })
   const [searchKeyword, setSearchKeyword] = useState("")
@@ -56,7 +56,7 @@ export default () => {
           cursor: "pointer",
         }}
         onClick={() => {
-          setState({ dropdownOpen: true })
+          setState({ dropdownOpen: true, currentParty: state.currentParty })
         }}
       >
         {partyItem(state.currentParty)}
@@ -78,6 +78,7 @@ export default () => {
       >
         <div css={{ position: "relative" }}>
           <input
+            autoFocus
             css={{
               border: `1px solid ${labelColor}`,
               width: "100%",
@@ -90,6 +91,12 @@ export default () => {
             placeholder="ชื่อพรรคการเมือง"
             onChange={e => {
               setSearchKeyword(e.target.value)
+            }}
+            onBlur={() => {
+              setState({
+                dropdownOpen: false,
+                currentParty: state.currentParty,
+              })
             }}
           />
           <div
@@ -143,14 +150,12 @@ export default () => {
       css={{
         position: "relative",
         zIndex: 1,
-        margin: "0 auto",
-        width: "285px",
-        marginTop: 30,
+        background: "white",
       }}
     >
       <div
         css={{
-          padding: "10px",
+          padding: 10,
           alignItems: "center",
           position: "relative",
           boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
@@ -162,11 +167,11 @@ export default () => {
         <div
           css={{
             position: "absolute",
-            right: "4px",
-            top: "calc(50% - 3px)",
+            right: 20,
+            top: "calc(50% - 10px)",
             border: "solid #212121",
             borderWidth: "0 2px 2px 0",
-            padding: "4px",
+            padding: 4,
             transform: "rotate(45deg)",
           }}
         />

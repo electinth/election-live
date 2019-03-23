@@ -4,7 +4,7 @@ import { DISPLAY_FONT } from "../styles"
 import { partyColor, partyLogo } from "../models/information"
 
 /**
- * @param {{ party: IParty, constituencySeats: number, partyListSeats: number, maxSeats: number }} props
+ * @param {{ party: IParty, constituencySeats: number, partyListSeats: number, maxSeats: number, filtered: boolean }} props
  */
 const PartyStatsRow = props => {
   const totalSeats = props.constituencySeats + props.partyListSeats
@@ -39,10 +39,14 @@ const PartyStatsRow = props => {
           {props.party.name}
         </h3>
         <div css={{ margin: 0 }}>
-          ส.ส. เขต {props.constituencySeats}{" "}
+          ส.ส. เขต: {props.constituencySeats}
           <VisuallyHidden> ที่นั่ง </VisuallyHidden>
-          ส.ส. ปาร์ตี้ลิสต์ {props.partyListSeats}{" "}
-          <VisuallyHidden> ที่นั่ง</VisuallyHidden>
+          {!props.filtered && (
+            <React.Fragment>
+              , ส.ส. ปาร์ตี้ลิสต์: {props.partyListSeats}
+              <VisuallyHidden> ที่นั่ง</VisuallyHidden>
+            </React.Fragment>
+          )}
         </div>
         <div
           css={{
