@@ -201,7 +201,7 @@ class ElectionMap extends SvgChart {
   }
 
   resetZoom() {
-    this.layers.get("center/zoom")
+    this.layers.get("center/zoom").attr("transform", "translate(0,0)scale(1)")
   }
 
   render() {
