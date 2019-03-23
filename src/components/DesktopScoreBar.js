@@ -5,6 +5,7 @@ import { SvgChart, helper } from "d3kit"
 import _ from "lodash"
 import { TOTAL_REPRESENTATIVE } from "../models/rules"
 import { createComponent } from "react-d3kit"
+import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
 
 /**
  * @typedef {object} Props
@@ -254,6 +255,6 @@ class DesktopScoreBar extends SvgChart {
   }
 }
 
-export default /** @type {React.FunctionComponent<Props>} */ (createComponent(
-  DesktopScoreBar
+export default /** @type {React.FunctionComponent<Props>} */ (onlyPassThroughPropsWhilePageIsVisible(
+  createComponent(DesktopScoreBar)
 ))

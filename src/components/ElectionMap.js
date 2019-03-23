@@ -10,6 +10,7 @@ import { SvgChart, helper } from "d3kit"
 import { createComponent } from "react-d3kit"
 import { parties } from "../models/information"
 import { memo } from "react"
+import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
 const maps = require("../models/information/_map.json")
 
 const partyLookup = keyBy(parties, p => p.id)
@@ -301,6 +302,6 @@ class ElectionMap extends SvgChart {
   }
 }
 
-export default /** @type {React.FunctionComponent<Props>} */ (memo(
-  createComponent(ElectionMap)
+export default /** @type {React.FunctionComponent<Props>} */ (onlyPassThroughPropsWhilePageIsVisible(
+  memo(createComponent(ElectionMap))
 ))
