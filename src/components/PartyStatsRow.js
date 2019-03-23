@@ -8,7 +8,7 @@ import { partyColor, partyLogo } from "../models/information"
  */
 const PartyStatsRow = props => {
   const totalSeats = props.constituencySeats + props.partyListSeats
-  const barWidth = `${(totalSeats / props.maxSeats).toFixed(4)}%`
+  const barWidth = `${(totalSeats / props.maxSeats).toFixed(4)}`
 
   return (
     <article

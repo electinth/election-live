@@ -1,6 +1,6 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useCallback, useState, useEffect } from "react"
+import React, { useCallback, useState } from "react"
 import {
   buttonStyle,
   DESKTOP_MIN_WIDTH,
@@ -9,13 +9,11 @@ import {
   Responsive,
 } from "../styles"
 import ContentWrapper from "./ContentWrapper"
-import ElectionMap from "./ElectionMap"
 import { ZoneFilterPanel, ZoneFilterContext } from "./ZoneFilterPanel"
 import { ZoneSearchPanel } from "./ZoneSearchPanel"
 import { filters } from "../models/information"
 import CloseButton from "./CloseButton"
-import { css, keyframes } from "@emotion/core"
-import { zones, parties } from "../models/information"
+import { keyframes } from "@emotion/core"
 import _ from "lodash"
 import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"

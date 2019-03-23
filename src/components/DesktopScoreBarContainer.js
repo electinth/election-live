@@ -5,7 +5,7 @@ import { partyStatsFromSummaryJSON } from "../models/PartyStats"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
-import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
+import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 
 const barHeight = 76
 

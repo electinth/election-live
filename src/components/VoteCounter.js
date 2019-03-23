@@ -1,7 +1,12 @@
 import React from "react"
-import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
+import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
+import DesktopVoteCounter from "./DesktopVoteCounter"
+import MobileVoteCounter from "./MobileVoteCounter"
+import { Responsive } from "../styles"
 
-export default function VoteCounter({ percentage = 60 }) {
+export default function VoteCounter({ percentage = 60, lastUpdate = "23:59" }) {
+  // @todo #1 inject vote count props to this comp for showing total vote %
+
   return (
     <div
       css={{
@@ -19,43 +24,13 @@ export default function VoteCounter({ percentage = 60 }) {
         },
       }}
     >
-      <div
-        css={{
-          textAlign: "right",
-          [media(WIDE_NAV_MIN_WIDTH)]: {
-            display: "none",
-          },
-        }}
-      >
-        นับแล้ว
-      </div>
-      <div
-        css={{
-          display: "none",
-          [media(WIDE_NAV_MIN_WIDTH)]: {
-            display: "block",
-            textAlign: "right",
-            paddingBottom: "4px",
-            fontSize: "14px",
-          },
-        }}
-      >
-        นับคะแนนแล้ว
-      </div>
-      <div
-        css={{
-          textAlign: "right",
-          flexBasis: "30px",
-          [media(WIDE_NAV_MIN_WIDTH)]: {
-            paddingLeft: "10px",
-            paddingBottom: "5px",
-            fontSize: "30px",
-            fontFamily: "The Matter",
-          },
-        }}
-      >
-        {percentage}%
-      </div>
+      <Responsive
+        breakpoint={WIDE_NAV_MIN_WIDTH}
+        narrow={<MobileVoteCounter percentage={percentage} />}
+        wide={
+          <DesktopVoteCounter percentage={percentage} lastUpdate={lastUpdate} />
+        }
+      />
     </div>
   )
 }
