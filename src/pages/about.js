@@ -35,6 +35,9 @@ export default () => (
       </BodyText>
       <Divider mb={32} />
       <SubTitle mb={8}>อาสาสมัครที่ร่วมพัฒนา</SubTitle>
+      {
+        // @todo add contributors
+      }
       <BodyText>Mr. A, Mr. B...</BodyText>
     </div>
   </MainLayout>
