@@ -1,6 +1,6 @@
 import React from "react"
 import { DISPLAY_FONT } from "../styles"
-export default function DesktopScoreBarCountingNumber(props) {
+export default function DesktopVoteCounter(props) {
   const { totalCount, lastUpdate } = props
   return (
     <div
