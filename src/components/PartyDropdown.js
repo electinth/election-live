@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { parties, partyLogo, partyPath } from "../models/information"
 import { labelColor, DISPLAY_FONT } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -9,7 +9,12 @@ import Fuse from "fuse.js"
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
 })
-export default ({ open }) => {
+export default () => {
+  const [state, setState] = useState({
+    dropdownOpen: true,
+  })
+  const [searchKeyword, setSearchKeyword] = useState("")
+
   function partyItem(p) {
     return (
       <div
@@ -50,7 +55,7 @@ export default ({ open }) => {
         }}
         // @todo #1 toggle open dropdown
         onClick={() => {
-          // open = true
+          setState({ dropdownOpen: true })
         }}
       >
         {partyItem(parties[0])}
@@ -59,8 +64,6 @@ export default ({ open }) => {
   }
 
   function renderDropdown() {
-    const [searchKeyword, setSearchKeyword] = React.useState("")
-
     let filteredParties = parties
     if (searchKeyword.length > 0) {
       filteredParties = searcher.search(searchKeyword)
@@ -75,6 +78,7 @@ export default ({ open }) => {
           position: "relative",
           height: "calc(100vh - 200px)",
         }}
+        onClick={() => setState({ dropdownOpen: false })}
       >
         <div css={{ position: "relative" }}>
           <input
@@ -149,9 +153,9 @@ export default ({ open }) => {
             "0 2px 4px 0 rgba(0,0,0,0.05),0 2px 10px 0 rgba(0,0,0,0.12)!important",
         }}
       >
-        {open ? renderDropdown() : renderDefaultDropdown()}
+        {state.dropdownOpen ? renderDropdown() : renderDefaultDropdown()}
       </div>
-      {open ? null : (
+      {state.dropdownOpen ? null : (
         <div
           css={{
             position: "absolute",
