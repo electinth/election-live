@@ -164,7 +164,9 @@ function VoteCounterContainer() {
     .value()
   console.log(progressArray)
   const currentDate = new Date()
-  const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`
+  const currentTime = `${("0" + currentDate.getHours()).slice(-2)}:${(
+    "0" + currentDate.getMinutes()
+  ).slice(-2)}`
   return (
     <VoteCounter
       percentage={Math.round(_.sum(progressArray) / progressArray.length)}
