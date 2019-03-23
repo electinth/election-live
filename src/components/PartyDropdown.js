@@ -41,7 +41,7 @@ export default ({ open }) => {
         css={{
           cursor: "pointer",
         }}
-        // @todo #1 toggle dropdown
+        // @todo #1 toggle open dropdown
         onClick={() => {
           // open = true
         }}
@@ -87,6 +87,7 @@ export default ({ open }) => {
           {parties.map(p => {
             return (
               <li
+                // @todo #2 toggle close dropdown
                 onClick={() => {
                   // open = false
                 }}
