@@ -21,7 +21,7 @@ export default function PerPartyView({ partyId }) {
           },
         }}
       >
-        <PerPartySearchPanelContainer />
+        <PerPartySearchPanelContainer partyId={partyId} />
         <ZoneMapView />
         <ZoneStats />
       </div>

@@ -9,6 +9,7 @@ const sectionStyling = { borderBottom: "1px solid #000", padding: "10px 0" }
 
 // @todo #1 implement search and select with visualization of each party
 export default function PerPartySearchPanelContainer({
+  partyId,
   totalVote = "16123223",
   totalDistrictCouncilor = 10,
   totalPartyListCouncilor = 5,
