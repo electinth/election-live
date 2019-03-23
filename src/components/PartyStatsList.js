@@ -3,7 +3,7 @@ import PartyStatsRow from "./PartyStatsRow"
 import { partyStatsMaxSeats } from "../models/PartyStats"
 
 /**
- * @param {{ partyStats: import('../models/PartyStats').PartyStats }} props
+ * @param {{ partyStats: import('../models/PartyStats').PartyStats, filtered: boolean }} props
  */
 export default function PartyStatsList(props) {
   const totalSeats = partyStatsMaxSeats(props.partyStats)
@@ -16,6 +16,7 @@ export default function PartyStatsList(props) {
           constituencySeats={row.constituencySeats}
           partyListSeats={row.partyListSeats}
           maxSeats={totalSeats}
+          filtered={props.filtered}
         />
       ))}
     </div>
