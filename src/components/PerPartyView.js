@@ -8,6 +8,7 @@ import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import Fuse from "fuse.js"
+import PartyDropdown from "./PartyDropdown"
 
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
@@ -58,7 +59,13 @@ function ZoneSearchParty() {
       }}
     >
       {/* left zone full mobile*/}
-      <div css={{ position: "relative" }}>
+      <PartyDropdown
+        open={true}
+        filteredParties={filteredParties}
+        searchKeyword={searchKeyword}
+        setSearchKeyword={setSearchKeyword}
+      />
+      {/* <div css={{ position: "relative" }}>
         <input
           css={{
             border: `1px solid ${labelColor}`,
@@ -96,7 +103,7 @@ function ZoneSearchParty() {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </div>
   )
 }

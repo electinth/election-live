@@ -1,12 +1,16 @@
 import React from "react"
-import { parties, partyLogo, partyPath } from "../models/information"
+import {
+  parties,
+  partyLogo,
+  partyPath,
+  partyColor,
+} from "../models/information"
 import { labelColor, DISPLAY_FONT } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "gatsby"
-import { filterParty } from "./PerPartyView"
 
-export default ({ open }) => {
+export default ({ open, searchKeyword, setSearchKeyword, filteredParties }) => {
   function partyItem(p) {
     return (
       <div
@@ -94,41 +98,16 @@ export default ({ open }) => {
             <FontAwesomeIcon icon={faSearch} />
           </div>
         </div>
-        <div>
-          <ul>
-            {filterParty(parties, searchKeyword).map(p => (
-              <li key={p.id}>
-                <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
-                  {p.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+
         <ul css={{ listStyle: "none", padding: 0 }}>
-          {filterParty(parties, searchKeyword).map(p => {
-            return (
-              <Link
-                to={partyPath(p)}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <li
-                  // @todo #1 toggle close dropdown
-                  onClick={() => {
-                    // open = false
-                  }}
-                  key={`${p.name}`}
-                  css={{
-                    padding: "12px 0px",
-                    borderBottom: "1px solid gray",
-                    position: "relative",
-                  }}
-                >
-                  {partyItem(p)}
-                </li>
+          {filteredParties.map(p => (
+            <li key={p.id}>
+              <Link to={partyPath(p)} style={{ color: partyColor(p) }}>
+                {partyItem(p)}
               </Link>
-            )
-          })}
+            </li>
+          ))}
+          ) })}
         </ul>
       </div>
     )
