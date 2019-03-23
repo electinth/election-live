@@ -152,6 +152,14 @@ function getLatestDataFileState(fileName) {
   return dataFileState
 }
 
+export function useLockedState() {
+  return useComputed(() => {
+    const latestState = latestFileResource.state
+    if (!latestState.completed) return false
+    return latestState.data.locked === "TRUE"
+  }, [])
+}
+
 /**
  * @template T
  * @param {DataState<T>} state

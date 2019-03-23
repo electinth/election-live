@@ -9,7 +9,7 @@ import { Responsive, media, WIDE_NAV_MIN_WIDTH, DISPLAY_FONT } from "../styles"
 import ContentWrapper from "./ContentWrapper"
 import VoteCounter from "./VoteCounter"
 import { Location } from "@reach/router"
-import { useSummaryData } from "../models/LiveDataSubscription"
+import { useSummaryData, useLockedState } from "../models/LiveDataSubscription"
 import moment from "moment"
 import { DeveloperPanel, useLocalStorageFlag } from "../models/DeveloperOptions"
 import Placeholder from "./Placeholder"
@@ -201,7 +201,8 @@ function Countdown() {
 
 function CountdownCurtain({ location }) {
   const [skip] = useLocalStorageFlag("ELECT_DISABLE_CURTAIN")
-  const ready = /^\/dev/.test(location.pathname) || skip
+  const locked = useLockedState()
+  const ready = /^\/dev/.test(location.pathname) || skip || !locked
   if (!ready) {
     return (
       <div
