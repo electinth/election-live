@@ -276,6 +276,7 @@ function StatusAlert() {
         background: "#F0324B",
         color: "white",
         fontSize: "20px",
+        zIndex: 997,
       }}
     >
       {status}
