@@ -8,7 +8,7 @@ import ElectionMapContainer from "./ElectionMapContainer"
 import { Link } from "gatsby"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 
-function filterParty(parties, keyword) {
+export function filterParty(parties, keyword) {
   return parties.filter(party => {
     return (
       // only allow prefix search
