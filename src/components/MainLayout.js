@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from "react"
+import _ from "lodash"
 
 import DesktopScoreBarContainer from "./DesktopScoreBarContainer"
 import NavBar, { menuMapping } from "./NavBar"
@@ -68,7 +69,7 @@ export default function MainLayout({ children, activeNavBarSection }) {
               },
             }}
           >
-            <VoteCounter />
+            <VoteCounterContainer />
           </div>
         </div>
       </ContentWrapper>
@@ -145,6 +146,21 @@ function LatestDataIndicator() {
       ข้อมูลล่าสุด <br />
       {updatedAt}
     </div>
+  )
+}
+
+function VoteCounterContainer() {
+  const summaryState = useSummaryData()
+  if (!summaryState.completed) return null
+  const progressArray = _(summaryState.data.zoneStatsMap)
+    .values()
+    .flatMap(x => _.values(x).map(z => z.progress))
+    .value()
+  console.log(progressArray)
+  return (
+    <VoteCounter
+      percentage={Math.round(_.sum(progressArray) / progressArray.length)}
+    />
   )
 }
 

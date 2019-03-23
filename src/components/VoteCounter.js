@@ -4,13 +4,10 @@ import DesktopVoteCounter from "./DesktopVoteCounter"
 import MobileVoteCounter from "./MobileVoteCounter"
 import { Responsive } from "../styles"
 
-export default function VoteCounter(props) {
+export default function VoteCounter({ percentage = 60, lastUpdate = "23:59" }) {
   // @todo #1 inject vote count props to this comp for showing total vote %
-  // const { totalCount, lastUpdate } = props
+  const { percentage, lastUpdate } = props
 
-  // mock values
-  const totalCount = "20"
-  const lastUpdate = "23:59"
   return (
     <div
       css={{
@@ -30,9 +27,9 @@ export default function VoteCounter(props) {
     >
       <Responsive
         breakpoint={WIDE_NAV_MIN_WIDTH}
-        narrow={<MobileVoteCounter totalCount={totalCount} />}
+        narrow={<MobileVoteCounter percentage={percentage} />}
         wide={
-          <DesktopVoteCounter totalCount={totalCount} lastUpdate={lastUpdate} />
+          <DesktopVoteCounter percentage={percentage} lastUpdate={lastUpdate} />
         }
       />
     </div>

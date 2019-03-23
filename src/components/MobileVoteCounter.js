@@ -1,7 +1,7 @@
 import React from "react"
 import { DISPLAY_FONT } from "../styles"
 export default function MobileVoteCounter(props) {
-  const { totalCount } = props
+  const { percentage } = props
   return (
     <div
       css={{
@@ -20,7 +20,7 @@ export default function MobileVoteCounter(props) {
           paddingLeft: "5px",
         }}
       >
-        {totalCount}%
+        {percentage}%
       </div>
     </div>
   )
