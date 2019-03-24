@@ -2,6 +2,8 @@
 
 Live Scoreboard for Thailand General Election 2562 (2019).
 
+![Screenshot](docs/images/screenshot.png)
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
