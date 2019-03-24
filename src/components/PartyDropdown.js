@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "gatsby"
 import Fuse from "fuse.js"
+import party from "../pages/party"
 
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
@@ -13,7 +14,7 @@ const searcher = new Fuse(parties, {
 export default ({ partyId }) => {
   const [dropdownOpen, setDropdownOpen] = useState(!partyId ? true : false)
   const [currentParty, setCurrentParty] = useState(
-    partyId ? parties.find(p => p.id === partyId) : null
+    partyId ? parties.find(p => p.id === partyId) : parties[0]
   )
 
   const [searchKeyword, setSearchKeyword] = useState("")
@@ -104,7 +105,7 @@ export default ({ partyId }) => {
     return (
       <div
         css={{
-          position: !!partyId ? "absolute" : "relative",
+          position: "absolute",
           zIndex: 1,
           background: "white",
           width: "inherit",
