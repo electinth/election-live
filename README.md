@@ -17,6 +17,7 @@ Live Scoreboard for Thailand General Election 2562 (2019).
   - [Responsive Design](#responsive-design)
   - [Use JSDoc instead of `propTypes`](#use-jsdoc-instead-of-proptypes)
 - [Build the project into a static web page](#build-the-project-into-a-static-web-page)
+- [Releasing new version](#releasing-new-version)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -221,3 +222,7 @@ export default function MyComponent(props) {
 ```
 yarn build
 ```
+
+## Releasing new version
+
+To release a new version, run `/updateelectliveversion 1.0.0-beta.5` slash command in our development Slack channel (only available to collaborators). This will update `package.json` file and deploy to the live website, and will also cause an update bar to display on user’s screen, asking them to refresh.
