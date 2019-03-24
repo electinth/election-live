@@ -12,6 +12,7 @@ import loadingSmall from "../styles/images/loading.gif"
 import ZoneMark from "./ZoneMark"
 import PercentBarChart from "./PercentBarChart"
 import { useSummaryData } from "../models/LiveDataSubscription"
+import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
 import _ from "lodash"
 
 const partyLookup = keyBy(parties, d => d.id)
@@ -56,6 +57,7 @@ export default function ElectionMapTooltip({ positionId, positions }) {
   let percentage = 0
   let noVotesWin = false
   let noProgress = true
+  let partyStat
   if (zone && completed) {
     const { zoneWinningCandidateMap = {}, zoneStatsMap = {} } = data || {}
     const { no, provinceId } = zone
@@ -75,6 +77,8 @@ export default function ElectionMapTooltip({ positionId, positions }) {
       }
     }
   } else if (seat) {
+    const partyStats = nationwidePartyStatsFromSummaryJSON(data)
+    partyStat = _.find(partyStats, { party: { id: party.id } })
     markColor = party ? party.color : "#ccc"
   }
 
@@ -109,8 +113,8 @@ export default function ElectionMapTooltip({ positionId, positions }) {
                 <div style={LARGE_FONT}>
                   <b>ส.ส. บัญชีรายชื่อ</b>
                 </div>
-                <div>อันดับที่ {seat.no}</div>
                 <div>{party ? `พรรค${party.name}` : null}</div>
+                <div>{partyStat.partyListSeats} ที่นั่ง</div>
               </div>
             )}
           </td>
