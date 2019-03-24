@@ -99,7 +99,7 @@ function CandidatesList({ candidates }) {
       <div
         css={{
           textAlign: "left",
-          padding: "10px",
+          padding: "5px",
           height: "calc(70vh - 200px)",
           overflowX: "hidden",
           overflowY: "auto",
