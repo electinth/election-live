@@ -9,11 +9,11 @@ const menues = [
     route: "/",
     label: "ดูผลตามพื้นที่",
   },
-  // {
-  //   name: "by-party",
-  //   route: "/party",
-  //   label: "ดูผลตามพรรค",
-  // },
+  {
+    name: "by-party",
+    route: "/party",
+    label: "ดูผลตามพรรค",
+  },
   // {
   //   name: "overview",
   //   route: "/overview",
