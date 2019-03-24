@@ -1,5 +1,8 @@
 import { getProvinceById } from "."
 
+/** @type {IProvince[]} */
+const provinces = require("./_provinces.json")
+
 // @ts-check
 
 // Provinces where zone boundaries were manipulated by NCPO
@@ -75,6 +78,24 @@ const URBAN_ZONES = [
   "10-17",
 ]
 
+const provinceFilter = function() {
+  return provinces.reduce(
+    (acc, p) => ({
+      ...acc,
+      [p.name]: {
+        name: {
+          th: p.name,
+          en: p.name,
+        },
+        criterion: function(province, zone) {
+          return province.id === p.id
+        },
+      },
+    }),
+    {}
+  )
+}
+
 /**
  * Available filters.
  *
@@ -83,6 +104,7 @@ const URBAN_ZONES = [
  * @type {{ [filterName in ZoneFilterName]: IZoneFilter }}
  */
 export const filters = {
+  ...provinceFilter(),
   all: {
     name: {
       th: "ทั่วประเทศ",
