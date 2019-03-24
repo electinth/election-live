@@ -40,6 +40,7 @@ export default ({ pageContext, navigate, location }) => (
       {filterName => (
         <ZoneFilterContext.Provider value={filterName}>
           <ZoneMasterView
+            currentZone={pageContext.zoneView}
             location={location}
             navigate={navigate}
             contentHeader={

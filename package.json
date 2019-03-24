@@ -53,6 +53,7 @@
     "react-d3kit": "^2.0.0",
     "react-dom": "^16.8.4",
     "react-helmet": "^5.2.0",
+    "reselect": "^4.0.0",
     "semver": "^5.6.0",
     "thailand-party-list-calculator": "^1.0.2",
     "visibilityjs": "^2.0.2",
