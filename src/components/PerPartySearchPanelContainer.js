@@ -139,7 +139,7 @@ function PartyTotalCouncilorEstimationNumber({
 }
 
 function PartyPresidentCandidateList({ partyId }) {
-  // @todo PartyView - PartyPresidentCandidateList - bind presiddent candidate data by party id
+  // @todo #1 PartyView - PartyPresidentCandidateList - bind presiddent candidate data by party id
   const mockData = [
     {
       firstName: "ชื่อ",
