@@ -107,6 +107,11 @@ export default function DesktopScoreBarContainer({
             name: "สนับสนุน คสช",
             color: "#37833a",
             count: 0,
+            bundle: {
+              data: [],
+              party: 0,
+              count: 0,
+            },
           },
           {
             id: 1001,
@@ -114,6 +119,11 @@ export default function DesktopScoreBarContainer({
             name: "ไม่สนับสนุน คสช",
             color: "#c8991e",
             count: 0,
+            bundle: {
+              data: [],
+              party: 0,
+              count: 0,
+            },
           },
           {
             id: 1002,
@@ -121,20 +131,39 @@ export default function DesktopScoreBarContainer({
             name: "ไม่ชัดเจน",
             color: "#979797",
             count: 0,
+            bundle: {
+              data: [],
+              party: 0,
+              count: 0,
+            },
           },
         ]
 
         for (let row of partyStats) {
+          let group = OTHER
           if (row.party.supportNcpo === true) {
-            out[SUPPORT_NCPO].count +=
-              row.constituencySeats + row.partyListSeats
+            group = SUPPORT_NCPO
           } else if (row.party.supportNcpo === false) {
-            out[NOT_SUPPORT_NCPO].count +=
-              row.constituencySeats + row.partyListSeats
-          } else {
-            out[OTHER].count += row.constituencySeats + row.partyListSeats
+            group = NOT_SUPPORT_NCPO
           }
+          out[group].count += row.constituencySeats + row.partyListSeats
+          out[group].bundle.data.push({
+            id: `${row.party.id}`,
+            type: "all",
+            name: row.party.name,
+            color: row.party.color,
+            count: row.constituencySeats + row.partyListSeats,
+          })
         }
+
+        out[SUPPORT_NCPO].bundle.party = out[SUPPORT_NCPO].bundle.data.length
+        out[NOT_SUPPORT_NCPO].bundle.party =
+          out[NOT_SUPPORT_NCPO].bundle.data.length
+        out[OTHER].bundle.party = out[OTHER].bundle.data.length
+
+        out[SUPPORT_NCPO].bundle.count = out[SUPPORT_NCPO].count
+        out[NOT_SUPPORT_NCPO].bundle.count = out[NOT_SUPPORT_NCPO].count
+        out[OTHER].bundle.count = out[OTHER].count
 
         return out
       },
