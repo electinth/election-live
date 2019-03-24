@@ -6,14 +6,17 @@ import { contributors } from "../models/information"
 
 const containerSize = 516
 
-const renderPerson = a => (
-  <a href={a.url} target="_blank">
-    {a.name}
-  </a>
-)
+const renderPerson = a =>
+  a.url ? (
+    <a href={a.url} target="_blank" css={{ color: "inherit" }}>
+      {a.name}
+    </a>
+  ) : (
+    a.name
+  )
 const ContributorSection = ({ name, contributors }) => {
   return (
-    <div css={{ color: "black", textDecoration: "none" }}>
+    <div css={{ color: "black", textDecoration: "none", marginBottom: 16 }}>
       <SubSubTitle>{name}</SubSubTitle>
       {contributors
         .map(a => renderPerson(a))
