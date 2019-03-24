@@ -2,7 +2,7 @@
   "name": "election-live",
   "private": true,
   "description": "See Election results LIVE!",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
