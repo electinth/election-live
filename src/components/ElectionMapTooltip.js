@@ -64,7 +64,7 @@ export default function ElectionMapTooltip({ positionId, positions }) {
       noVotesWin = candidate.score <= stats.noVotes
       percentage =
         Math.max(candidate.score, stats.noVotes) /
-        (stats.goodVotes + stats.noVotes)
+        (stats.goodVotes + stats.noVotes) || 0
       if (noVotesWin) {
         markColor = "#222"
       } else {
