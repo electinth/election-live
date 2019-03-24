@@ -20,6 +20,7 @@ import { navigate } from "gatsby"
 import { trackEvent } from "../util/analytics"
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 import { getSeatDisplayModel } from "../models/ConstituencySeat"
+import _ from "lodash"
 
 /**
  * @param {import('../models/LiveDataSubscription').DataState<ElectionDataSource.SummaryJSON>} summaryState
@@ -30,7 +31,8 @@ function getMapData(summaryState, partyId) {
   } else {
     /** @type {ElectionDataSource.SummaryJSON} */
     const summary = summaryState.data
-    const row = nationwidePartyStatsFromSummaryJSON(summaryState.data).find(
+    const row = _.find(
+      nationwidePartyStatsFromSummaryJSON(summaryState.data),
       row => row.party.id === +partyId
     )
     if (!row) return electionMapLoadingData

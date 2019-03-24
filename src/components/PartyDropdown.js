@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "gatsby"
 import Fuse from "fuse.js"
+import _ from "lodash"
 
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
@@ -13,7 +14,7 @@ const searcher = new Fuse(parties, {
 export default ({ partyId }) => {
   const [dropdownOpen, setDropdownOpen] = useState(!partyId ? true : false)
   const [currentParty, setCurrentParty] = useState(
-    partyId ? parties.find(p => p.id === partyId) : parties[0]
+    partyId ? _.find(parties, p => p.id === partyId) : parties[0]
   )
 
   const [searchKeyword, setSearchKeyword] = useState("")

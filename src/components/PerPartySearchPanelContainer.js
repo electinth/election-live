@@ -9,6 +9,7 @@ import { useSummaryData } from "../models/LiveDataSubscription"
 import AnimatedNumber from "./AnimatedNumber"
 import Loading from "./Loading"
 import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
+import _ from "lodash"
 
 const sectionStyling = { borderBottom: "1px solid #000", padding: "10px 0" }
 
@@ -23,7 +24,8 @@ export default function PerPartySearchPanelContainer({ partyId }) {
   )
   const partyStatsRow = useMemo(() => {
     if (!summaryState.completed) return null
-    return nationwidePartyStatsFromSummaryJSON(summaryState.data).find(
+    return _.find(
+      nationwidePartyStatsFromSummaryJSON(summaryState.data),
       row => row.party.id === +partyId
     )
   }, [summaryState])

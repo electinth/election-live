@@ -12,6 +12,7 @@ import loadingSmall from "../styles/images/loading.gif"
 import ZoneMark from "./ZoneMark"
 import PercentBarChart from "./PercentBarChart"
 import { useSummaryData } from "../models/LiveDataSubscription"
+import _ from "lodash"
 
 const partyLookup = keyBy(parties, d => d.id)
 const formatInt = format(",d")
@@ -22,7 +23,7 @@ const LARGE_FONT = { fontSize: "1.1rem" }
 
 export default function ElectionMapTooltip({ positionId, positions }) {
   const memo = useMemo(() => {
-    const position = positions.find(p => p.id == positionId)
+    const position = _.find(positions, p => p.id == positionId)
     const party = partyLookup[position.partyId]
     const matchZone = positionId.match(/^(\d+)-(\d+)$/)
     if (matchZone) {
