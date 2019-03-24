@@ -19,21 +19,26 @@ import ErrorBoundary from "./ErrorBoundary"
 import ElectionMapContainer from "./ElectionMapContainer"
 
 /**
+ * @typedef {'summary' | 'map'} MobileTab
+ */
+
+/**
  * @param {object} props
  * @param {React.ReactNode} props.contentHeader
  * @param {React.ReactNode} props.contentBody
  * @param {object} props.currentZone
  * @param {React.ReactNode} props.popup
  * @param {function} props.navigate
- * @param {object} props.location
+ * @param {MobileTab} props.currentMobileTab
+ * @param {(tab: MobileTab) => void} props.switchMobileTab
  */
 export default function ZoneMasterView({
   contentHeader,
   contentBody,
   currentZone,
   popup,
-  navigate,
-  location,
+  currentMobileTab,
+  switchMobileTab,
 }) {
   const hideOnDesktop = { [media(DESKTOP_MIN_WIDTH)]: { display: "none" } }
   const [activeSidebar, setActiveSidebar] = useState(
@@ -43,8 +48,6 @@ export default function ZoneMasterView({
     () => setActiveSidebar(null),
     setActiveSidebar
   )
-
-  const currentMobileTab = getTabFromUrl(location)
 
   return (
     <div>
@@ -272,13 +275,7 @@ export default function ZoneMasterView({
           ...menuStyle,
           borderTop: currentMobileTab === targetTab ? "2px solid black" : "0px",
         }}
-        onClick={() => {
-          if (targetTab === "summary") {
-            navigate(`${location.pathname}`)
-          } else {
-            navigate(`${location.pathname}?tab=${targetTab}`)
-          }
-        }}
+        onClick={() => switchMobileTab(targetTab)}
       >
         {text}
       </span>
@@ -356,11 +353,6 @@ function Popup({ children }) {
       {children}
     </div>
   )
-}
-
-function getTabFromUrl(location) {
-  const matches = location.search.match(/(\?|&)tab=(.+)(&|$)/)
-  return matches ? matches[2] : "summary"
 }
 
 const popup = keyframes({
