@@ -8,11 +8,11 @@ import Fuse from "fuse.js"
 import { trackEvent } from "../util/analytics"
 
 const fuse = new Fuse(zonesForSearch, {
-  keys: ["inclusionAreas", "province.name", "postcode"],
+  keys: ["inclusionAreas", "province.name"],
 })
 const postcodeRegex = /^[0-9]{1,5}$/
 
-function postcodeSearch(postcode) {
+export function postcodeSearch(postcode) {
   return zonesForSearch.filter(zone => {
     for (let code of zone.postcode) {
       if (code.toString().indexOf(postcode) === 0) {
@@ -24,7 +24,7 @@ function postcodeSearch(postcode) {
   })
 }
 
-function search(keyword) {
+export function search(keyword) {
   if (postcodeRegex.test(keyword)) {
     return postcodeSearch(keyword)
   } else {
