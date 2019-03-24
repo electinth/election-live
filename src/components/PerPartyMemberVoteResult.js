@@ -208,7 +208,12 @@ function getWinningPartyListCandidates(summaryState, partyId) {
     )
   }, [summaryState, partyId])
 
-  if (!partyStatsRow || partyStatsRow.partyListSeats <= 0) return []
+  if (
+    !partyStatsRow ||
+    partyStatsRow.partyListSeats <= 0 ||
+    !partyListCandidates[partyId]
+  )
+    return []
 
   return partyListCandidates[partyId].partyList.slice(
     0,
