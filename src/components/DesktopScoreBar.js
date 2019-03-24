@@ -84,6 +84,10 @@ class DesktopScoreBar extends SvgChart {
     return partyNameShort[party.id]
   }
 
+  titleText(party) {
+    return party.name
+  }
+
   scoreText(party, x) {
     if (!this.isParty(party)) {
       const data = this.data()
@@ -265,6 +269,7 @@ class DesktopScoreBar extends SvgChart {
       .attr("x", d => x(d.start))
       .attr("y", d => height + 13)
       .style("fill", "white")
+    tEnter.insert("title", ":first-child").text(d => this.titleText(d))
 
     text
       .merge(tEnter)
