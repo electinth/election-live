@@ -14,6 +14,7 @@ import {
 } from "../models/PartyStats"
 import ElectionMap from "./ElectionMap"
 import ElectionMapTooltip from "./ElectionMapTooltip"
+import ZoneMark from "./ZoneMark"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
 import { trackEvent } from "../util/analytics"
@@ -153,7 +154,7 @@ export default function ElectionMapContainer({ currentZone }) {
             padding: 6,
             backgroundColor: "#fff",
             pointerEvents: "none",
-            maxWidth: 200,
+            maxWidth: 220,
             boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.3)",
             top: mapTip.mouseEvent.clientY + 10,
             left: mapTip.mouseEvent.clientX + 10,
@@ -166,43 +167,9 @@ export default function ElectionMapContainer({ currentZone }) {
         </div>
       )}
       <div style={{ textAlign: "center", marginBottom: 6 }}>
-        <svg
-          width="10"
-          height="10"
-          style={{ display: "inline-block", marginRight: 4 }}
-        >
-          <rect width="10" height="10" fill="#777" stroke="#777" rx="2" />
-        </svg>
-        นับถึง 95%
-        <svg
-          width="10"
-          height="10"
-          style={{ display: "inline-block", marginLeft: 10, marginRight: 4 }}
-        >
-          <defs>
-            <pattern
-              id="dLines-777"
-              width="4"
-              height="4"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 0,4 l 4,-4 M -1,1 l 2,-2 M 3,5 l 2,-2"
-                stroke="#777"
-                stroke-width="1"
-                stroke-linecap="square"
-                shape-rendering="auto"
-              />
-            </pattern>
-          </defs>
-          <rect
-            width="10"
-            height="10"
-            fill="url(#dLines-777)"
-            stroke="#777"
-            rx="2"
-          />
-        </svg>
+        <ZoneMark color="#777" isCompleted />
+        นับถึง 95% &nbsp;
+        <ZoneMark color="#777" />
         นับแล้วน้อยกว่า 95%
       </div>
       <ElectionMap

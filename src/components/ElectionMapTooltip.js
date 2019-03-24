@@ -8,12 +8,16 @@ import {
   getZoneByProvinceIdAndZoneNo,
 } from "../models/information"
 import loadingSmall from "../styles/images/loading.gif"
+import ZoneMark from "./ZoneMark"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { format } from "d3-format"
 
 const partyLookup = keyBy(parties, d => d.id)
 const formatInt = format(",d")
 const formatPercent = format(".2%")
+
+const FIRST_COLUMN_STYLE = { verticalAlign: "top", paddingTop: 5 }
+const LARGE_FONT = { fontSize: "1.1rem" }
 
 export default function ElectionMapTooltip({ positionId, positions }) {
   const memo = useMemo(() => {
@@ -22,7 +26,7 @@ export default function ElectionMapTooltip({ positionId, positions }) {
     const matchZone = positionId.match(/^(\d+)-(\d+)$/)
     if (matchZone) {
       return {
-        zone: getZoneByProvinceIdAndZoneNo(+matchZone[1] ,+matchZone[2]),
+        zone: getZoneByProvinceIdAndZoneNo(+matchZone[1], +matchZone[2]),
         province: getProvinceById(matchZone[1]).name,
         party,
         complete: position.complete,
@@ -58,43 +62,43 @@ export default function ElectionMapTooltip({ positionId, positions }) {
     <table>
       <tbody>
         <tr>
-          <td css={{ verticalAlign: "top", paddingTop: 5 }}>
-            <svg width="10" height="10">
-              <rect width="10" height="10" fill={markColor} rx={memo.complete ? 0 : 5} opacity={memo.complete ? 1 : 0.5} />
-            </svg>
+          <td css={FIRST_COLUMN_STYLE}>
+            <ZoneMark color={markColor} isCompleted={memo.complete} />
           </td>
           <td>
-            <div>
-              {memo.zone && (
-                <div>
-                  <div style={{ fontSize: "1.1rem" }}>
-                    <b>{memo.province}</b> เขต {memo.zone.no}
-                  </div>
-                  {summaryState.completed ? (
-                    <WinnerInspector
-                      summary={summaryState.data}
-                      zone={memo.zone}
-                    />
-                  ) : (
-                    <img src={loadingSmall} alt="Loading" />
-                  )}
+            {memo.zone && (
+              <div>
+                <div style={LARGE_FONT}>
+                  <b>{memo.province}</b> เขต {memo.zone.no}
                 </div>
-              )}
-              {memo.seat && (
-                <div>
-                  <div style={{ fontSize: "1.1rem" }}>
-                    <b>ส.ส. บัญชีรายชื่อ</b>
-                  </div>
-                  <div>อันดับที่ {memo.seat.no}</div>
-                  <div>{party ? `พรรค${party.name}` : null}</div>
+                {summaryState.completed ? (
+                  <WinnerInspector
+                    summary={summaryState.data}
+                    zone={memo.zone}
+                  />
+                ) : (
+                  <img src={loadingSmall} alt="Loading" />
+                )}
+              </div>
+            )}
+            {memo.seat && (
+              <div>
+                <div style={LARGE_FONT}>
+                  <b>ส.ส. บัญชีรายชื่อ</b>
                 </div>
-              )}
-            </div>
+                <div>อันดับที่ {memo.seat.no}</div>
+                <div>{party ? `พรรค${party.name}` : null}</div>
+              </div>
+            )}
           </td>
         </tr>
       </tbody>
     </table>
   )
+}
+
+const PERCENT_STYLE = {
+  opacity: 0.5,
 }
 
 function WinnerInspector({ summary, zone }) {
@@ -110,26 +114,29 @@ function WinnerInspector({ summary, zone }) {
    */
   function renderWinning(candidate) {
     const party = getPartyById(candidate.partyId)
-    const percentage = candidate.score / (stats.goodVotes + stats.noVotes)
+    const noVotesWin = candidate.score <= stats.noVotes
+    const percentage =
+      Math.max(candidate.score, stats.noVotes) /
+      (stats.goodVotes + stats.noVotes)
 
     return (
       <div
         style={{
-          textDecoration:
-            candidate.score <= stats.noVotes ? "line-through" : "none",
-          opacity: candidate.score <= stats.noVotes ? 0.3 : 1,
+          opacity: noVotesWin ? 0.3 : 1,
         }}
       >
-        <div>
-          {candidate.title}
-          {candidate.firstName} {candidate.lastName}
-        </div>
-        <div>พรรค{party.name}</div>
-        <div
-          style={{
-            opacity: 0.5,
-          }}
-        >
+        {noVotesWin ? (
+          <div>NO VOTE</div>
+        ) : (
+          <React.Fragment>
+            <div>
+              {candidate.title}
+              {candidate.firstName} {candidate.lastName}
+            </div>
+            <div>พรรค{party.name}</div>
+          </React.Fragment>
+        )}
+        <div style={PERCENT_STYLE}>
           {formatInt(candidate.score)} ({formatPercent(percentage)})
         </div>
         <svg width="120" height="5">
