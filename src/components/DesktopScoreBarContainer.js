@@ -165,8 +165,6 @@ export default function DesktopScoreBarContainer({
         out[NOT_SUPPORT_NCPO].bundle.count = out[NOT_SUPPORT_NCPO].count
         out[OTHER].bundle.count = out[OTHER].count
 
-        console.log(out)
-
         return out
       },
     },

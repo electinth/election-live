@@ -229,7 +229,6 @@ class DesktopScoreBar extends SvgChart {
           count: bundledCount,
         },
       }
-      console.log(bundledParty)
     }
 
     let parties
