@@ -15,6 +15,10 @@ export default function DesktopScoreBarContainer({
 }) {
   const [pageIndex, setPageIndex] = useState(0)
 
+  const clickPagination = index => () => {
+    setPageIndex(index)
+  }
+
   const _onTooltipClick = data => onTooltipClick(data)
   const _onTooltipOpen = data => {
     onTooltipOpen({
@@ -106,50 +110,91 @@ export default function DesktopScoreBarContainer({
     <div
       css={{
         position: "relative",
-        height: barHeight,
-        overflow: "hidden",
       }}
-      onMouseLeave={onTooltipClose}
     >
       <div
         css={{
-          ...wrapperCss,
-          transform: `translate(0, -${pageIndex * barHeight}px)`,
+          position: "relative",
+          height: barHeight,
+          overflow: "hidden",
         }}
+        onMouseLeave={onTooltipClose}
       >
-        {pageList.map((page, i) => (
-          <div css={{ height: barHeight }}>
-            <div
-              css={{
-                color: "#fff",
-                fontSize: "11px",
-                paddingTop: "2px",
-                paddingBottom: "2px",
-                [media(WIDE_NAV_MIN_WIDTH)]: {
-                  fontSize: "14px",
-                  paddingTop: "1px",
-                  paddingBottom: "0",
-                },
-              }}
-            >
-              <span>{page.name}</span>
-              <HelpTooltip
-                description={page.description}
-                dir="bottom right"
-                tooltipStyle={{ width: "240px" }}
+        <div
+          css={{
+            ...wrapperCss,
+            transform: `translate(0, -${pageIndex * barHeight}px)`,
+          }}
+        >
+          {pageList.map((page, i) => (
+            <div css={{ height: barHeight }}>
+              <div
+                css={{
+                  color: "#fff",
+                  fontSize: "11px",
+                  paddingTop: "2px",
+                  paddingBottom: "2px",
+                  [media(WIDE_NAV_MIN_WIDTH)]: {
+                    fontSize: "14px",
+                    paddingTop: "1px",
+                    paddingBottom: "0",
+                  },
+                }}
+              >
+                <span>{page.name}</span>
+                <HelpTooltip
+                  description={page.description}
+                  dir="bottom right"
+                  tooltipStyle={{ width: "240px" }}
+                />
+              </div>
+              <DesktopScoreBar
+                width="320"
+                data={data[i]}
+                options={{
+                  maxValue: page.maxCount,
+                  onClick: _onTooltipClick,
+                  onTooltipOpen: _onTooltipOpen,
+                }}
               />
             </div>
-            <DesktopScoreBar
-              width="320"
-              data={data[i]}
-              options={{
-                maxValue: page.maxCount,
-                onClick: _onTooltipClick,
-                onTooltipOpen: _onTooltipOpen,
+          ))}
+        </div>
+      </div>
+      <div
+        css={{
+          display: "flex",
+          position: "absolute",
+          top: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+      >
+        {pageList.map((page, i) => {
+          return (
+            <div
+              css={{
+                paddingTop: "8px",
+                paddingBottom: "8px",
+                marginLeft: "6px",
+                cursor: "pointer",
               }}
-            />
-          </div>
-        ))}
+              style={{
+                opacity: pageIndex === i ? 1 : 0.5,
+              }}
+              onClick={clickPagination(i)}
+            >
+              <i
+                css={{
+                  display: "block",
+                  width: "24px",
+                  height: "4px",
+                  background: "#ffffff",
+                }}
+              />
+            </div>
+          )
+        })}
       </div>
     </div>
   )
