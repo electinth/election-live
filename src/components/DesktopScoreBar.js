@@ -78,7 +78,7 @@ class DesktopScoreBar extends SvgChart {
   }
 
   nameText(party) {
-    if (party.id === 999) {
+    if (party.id >= 999) {
       return party.name
     }
     return partyNameShort[party.id]
@@ -100,6 +100,13 @@ class DesktopScoreBar extends SvgChart {
   }
 
   profileByParty(party) {
+    if (party.id === 1000) {
+      // See DesktopScoreBarContainer
+      return require("../styles/images/pmcan/83-s.png")
+    } else if (party.id === 1002) {
+      return require("../styles/images/pmcan/109-s.png")
+    }
+
     try {
       return require(`../styles/images/pmcan/${party.id}-s.png`)
     } catch (err) {
@@ -224,10 +231,12 @@ class DesktopScoreBar extends SvgChart {
       }
     }
 
-    let parties = _.compact([
-      ...inputParties.slice(0, bundleIndex),
-      bundledParty,
-    ])
+    let parties
+    if (bundleIndex >= 0) {
+      parties = _.compact([...inputParties.slice(0, bundleIndex), bundledParty])
+    } else {
+      parties = inputParties
+    }
     parties = parties.map(p => {
       const p2 = { ...p, start: cumulative }
       cumulative += p.count
