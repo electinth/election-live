@@ -21,22 +21,10 @@
   ],
   "coders": [
     {
-      "name": "ภัทรวัต ช่อไม้",
+      "name": "Mishari muqbil",
       "role": "coders",
-      "url": "http://pat.chormai.org/#!",
-      "github": "heytitle\r"
-    },
-    {
-      "name": "ไท ปังสกุลยานนท์",
-      "role": "coders",
-      "url": "https://dt.in.th/",
-      "github": "dtinth\r"
-    },
-    {
-      "name": "วสวัตติ์ สมโน",
-      "role": "coders",
-      "url": "https://medium.com/@bullrish",
-      "github": "dodadoa\r"
+      "url": "http://zymple.biz",
+      "github": "Mishari\r"
     },
     {
       "name": "กฤตวัฒน์ สุพรรณโกมุท",
@@ -45,46 +33,10 @@
       "github": "kratuwu\r"
     },
     {
-      "name": "รพี สุวีรานนท์",
-      "role": "coders",
-      "url": "https://github.com/rapee/",
-      "github": "rapee\r"
-    },
-    {
-      "name": "ปานกมล ศรีแก้ว",
-      "role": "coders",
-      "url": "https://aimetpgm.github.io/",
-      "github": "AimeTPGM\r"
-    },
-    {
       "name": "กฤษฏิ์ วงศ์ศุภสวัสดิ์",
       "role": "coders",
       "url": "http://kristw.yellowpigz.com",
       "github": "kristw\r"
-    },
-    {
-      "name": "วิโรจน์ จิรพัฒนกุล",
-      "role": "coders",
-      "url": "",
-      "github": "\r"
-    },
-    {
-      "name": "มนัสวิน หาญมงคลชัย",
-      "role": "coders",
-      "url": "https://cupco.de",
-      "github": "whs\r"
-    },
-    {
-      "name": "บุษฑิตา วงศ์ธีระวิทย์",
-      "role": "coders",
-      "url": "https://github.com/gminemini",
-      "github": "gminemini\r"
-    },
-    {
-      "name": "ธีระพล วัธนเวคิน",
-      "role": "coders",
-      "url": "https://github.com/parnurzeal",
-      "github": "parnurzeal\r"
     },
     {
       "name": "ชัยพล โอบอ้อม",
@@ -93,10 +45,28 @@
       "github": "NesChaiyapon\r"
     },
     {
-      "name": "Mishari muqbil",
+      "name": "ดลภาค สุวรรณปัญญา",
       "role": "coders",
-      "url": "http://zymple.biz",
-      "github": "Mishari\r"
+      "url": "",
+      "github": "phoneee\r"
+    },
+    {
+      "name": "ธีระพล วัธนเวคิน",
+      "role": "coders",
+      "url": "https://github.com/parnurzeal",
+      "github": "parnurzeal\r"
+    },
+    {
+      "name": "บุษฑิตา วงศ์ธีระวิทย์",
+      "role": "coders",
+      "url": "https://github.com/gminemini",
+      "github": "gminemini\r"
+    },
+    {
+      "name": "ปานกมล ศรีแก้ว",
+      "role": "coders",
+      "url": "https://aimetpgm.github.io/",
+      "github": "AimeTPGM\r"
     },
     {
       "name": "ภวริษฐ์ ฉันทประยูร",
@@ -105,10 +75,34 @@
       "github": "\r"
     },
     {
-      "name": "สกล อัศวะสกูล",
+      "name": "ภัทรวัต ช่อไม้",
       "role": "coders",
-      "url": "https://github.com/koobitor",
-      "github": "koobitor\r"
+      "url": "http://pat.chormai.org/#!",
+      "github": "heytitle\r"
+    },
+    {
+      "name": "มนัสวิน หาญมงคลชัย",
+      "role": "coders",
+      "url": "https://cupco.de",
+      "github": "whs\r"
+    },
+    {
+      "name": "รพี สุวีรานนท์",
+      "role": "coders",
+      "url": "https://github.com/rapee/",
+      "github": "rapee\r"
+    },
+    {
+      "name": "วสวัตติ์ สมโน",
+      "role": "coders",
+      "url": "https://medium.com/@bullrish",
+      "github": "dodadoa\r"
+    },
+    {
+      "name": "วิโรจน์ จิรพัฒนกุล",
+      "role": "coders",
+      "url": "",
+      "github": "\r"
     },
     {
       "name": "ศุภณัฐ โพธิวรากร",
@@ -117,19 +111,31 @@
       "github": "iboss-ptk\r"
     },
     {
+      "name": "สกล อัศวะสกูล",
+      "role": "coders",
+      "url": "https://github.com/koobitor",
+      "github": "koobitor\r"
+    },
+    {
       "name": "อรรณวุฒิ ลีไพศาลสุวรรณา",
       "role": "coders",
       "url": "https://github.com/unnawut",
       "github": "unnawut\r"
     },
     {
-      "name": "ดลภาค สุวรรณปัญญา",
+      "name": "ไท ปังสกุลยานนท์",
       "role": "coders",
-      "url": "",
-      "github": "phoneee\r"
+      "url": "https://dt.in.th/",
+      "github": "dtinth\r"
     }
   ],
   "designers": [
+    {
+      "name": "ธัญญาเรศ ล้อมรัตนพนา",
+      "role": "designers",
+      "url": "",
+      "github": "\r"
+    },
     {
       "name": "ศุภวิชญ์ พิพัฒน์",
       "role": "designers",
@@ -141,25 +147,19 @@
       "role": "designers",
       "url": "",
       "github": "\r"
-    },
-    {
-      "name": "ธัญญาเรศ ล้อมรัตนพนา",
-      "role": "designers",
-      "url": "",
-      "github": "\r"
     }
   ],
   "others": [
     {
-      "name": "Minimore",
-      "role": "others",
-      "url": "https://minimore.com",
-      "github": "\r"
-    },
-    {
       "name": "Boonmee Lab",
       "role": "others",
       "url": "https://www.facebook.com/BoonmeeLab/",
+      "github": "\r"
+    },
+    {
+      "name": "Minimore",
+      "role": "others",
+      "url": "https://minimore.com",
       "github": "\r"
     },
     {

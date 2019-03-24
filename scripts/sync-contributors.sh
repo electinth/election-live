@@ -9,5 +9,5 @@ curl $URL  \
  | jq  -s --raw-input \ 'split("\n") | .[1:-1] 
     | map(split(","))
     | map({ "name": .[1], "role": .[0], "url": .[2], "github": .[3] })
-    | group_by(.role) | map({ (.[0].role): [.[]] }) | add' \
- > $DEST
+    | group_by(.role) | map({ (.[0].role): [.[]] | sort_by(.name) }) | add' \
+    > $DEST
