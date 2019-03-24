@@ -108,6 +108,10 @@ class ElectionMap extends SvgChart {
     // set up svg
     this.svg.style("position", "relative")
 
+    this.defs = this.svg.append("defs")
+    this.defs.node().innerHTML =
+      '<pattern id="area_pattern" width="12" height="12" patternUnits="userSpaceOnUse"><path class="vx-pattern-line" d="M 0,12 l 12,-12 M -3,3 l 6,-6" stroke="#e64980" stroke-width="1" stroke-linecap="square" shape-rendering="auto"></path></pattern>'
+
     const zoomLayer = this.layers.get("center/zoom")
 
     this.zoom = d3Zoom()
@@ -318,7 +322,8 @@ class ElectionMap extends SvgChart {
     zoneSelection
       .merge(zoneEnter)
       .select("rect")
-      .attr("fill", d => this.color(d.data))
+      .attr("fill", "url(#area_pattern)")
+      // .attr("fill", d => this.color(d.data))
       .attr("opacity", d => this.opacity(d.data))
       .attr("rx", d => this.radius(d.data))
 
