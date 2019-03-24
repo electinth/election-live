@@ -8,9 +8,9 @@ import {
 } from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
-  partyStatsFromSummaryJSON,
   isZoneFinished,
   shouldDisplayZoneData,
+  nationwidePartyStatsFromSummaryJSON,
 } from "../models/PartyStats"
 import ElectionMap from "./ElectionMap"
 import ElectionMapTooltip from "./ElectionMapTooltip"
@@ -51,7 +51,7 @@ function getMapData(summaryState, filter) {
   } else {
     /** @type {ElectionDataSource.SummaryJSON} */
     const summary = summaryState.data
-    const partyStats = partyStatsFromSummaryJSON(summary)
+    const partyStats = nationwidePartyStatsFromSummaryJSON(summary)
     const partylist = []
     for (const row of partyStats) {
       for (let i = 0; i < row.partyListSeats; i++) {
