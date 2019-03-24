@@ -156,6 +156,7 @@ function PartyPMCandidateList({ partyId }) {
     return require(`../styles/images/pmcan/${partyId}-s.png`)
   }
 
+  // @todo PartyView - PM Candidate With Picture
   const renderPMCandidateWithPhoto = (firstName, lastName, photoSrc) => {
     return (
       <div css={{ padding: "10px", width: "100%" }}>
