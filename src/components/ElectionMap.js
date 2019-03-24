@@ -79,7 +79,7 @@ class ElectionMap extends SvgChart {
   constructor(element, options) {
     super(element, options)
     this.layers.create({
-      center: { zoom: { map: ["cell", "label", "glass"] } },
+      center: { zoom: { map: ["label", "glass", "cell"] } },
     })
 
     this.visualize = this.visualize.bind(this)
@@ -130,10 +130,16 @@ class ElectionMap extends SvgChart {
         `translate(${-this.getInnerWidth() / 2},${-this.getInnerHeight() / 2})`
       )
 
+    this.layers.get("center/zoom/map/cell")
+    // .style('pointer-events', 'none')
+
     this.glass = this.layers
       .get("center/zoom/map/glass")
       .append("rect")
       .attr("fill", "rgba(0,0,0,0)")
+
+    this.glass = this.layers
+      .get("center/zoom/map")
       .on("mouseleave", () => {
         const zone = this.findNearbyZone()
         this.zoneLayer
@@ -178,10 +184,10 @@ class ElectionMap extends SvgChart {
       .attr("stroke-width", 1)
       .attr("fill", "none")
       .attr("fill-rule", "evenodd")
-      .style("transform", "scale(1)translate(0px, 0px)")
-      .append("g")
-      .style("transform", "scale(1)translate(0px, 0px)")
-      .style("pointer-events", "bounding-box")
+    // .style("transform", "scale(1)translate(0px, 0px)")
+    // .append("g")
+    // .style("transform", "scale(1)translate(0px, 0px)")
+    // .style("pointer-events", "bounding-box")
 
     this.layers
       .get("center/zoom/map/label")
@@ -292,6 +298,7 @@ class ElectionMap extends SvgChart {
       .append("g")
       .classed("zone", true)
       .attr("transform", d => `translate(${d.x},${d.y})`)
+      .style("cursor", "pointer")
       .append("rect")
       // .attr("data-p", d => this.party(d.data))
       .attr("x", -rectSide / 2)
