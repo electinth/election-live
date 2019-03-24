@@ -134,7 +134,6 @@ export default ({ partyId }) => {
                 to={partyPath(p)}
                 style={{ color: "black", textDecoration: "none" }}
                 onClick={() => {
-                  console.log(p)
                   setDropdownOpen(false)
                   setCurrentParty(p)
                 }}
