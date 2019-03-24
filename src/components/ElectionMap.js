@@ -191,7 +191,7 @@ class ElectionMap extends SvgChart {
 
     this.layers
       .get("center/zoom/map/label")
-      .attr("font-family", "BaiJamjuree-Regular, Bai Jamjuree")
+      // .attr("font-family", "BaiJamjuree-Regular, Bai Jamjuree")
       .attr("font-size", "6.4")
       .attr("font-weight", "normal")
       .attr("letter-spacing", "0")
