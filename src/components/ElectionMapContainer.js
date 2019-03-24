@@ -53,6 +53,7 @@ function getMapData(summaryState, filter) {
     }
     return [
       ...zones.map((zone, i) => {
+        // @todo #1 This logic is now available in getSeatDisplayModel. Refactor this component to use it.
         const winningCandidate = (summary.zoneWinningCandidateMap[
           zone.provinceId
         ] || {})[zone.no]
