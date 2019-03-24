@@ -67,7 +67,7 @@ export function partyStatsFromSummaryJSON(
   {
     filter = filters.all,
     fillAllSeats = false,
-    expectedVotersCount = 25000000,
+    expectedVotersCount = 20000000,
   } = {}
 ) {
   // Calculate how many phantom votes to generate.
