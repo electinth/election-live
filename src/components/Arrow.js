@@ -1,38 +1,39 @@
 import React from "react"
 
-const LeftArrow = props =>
-  props.hide ? null : (
-    <div
-      onClick={props.onClick}
+/**
+ * @param {object} props
+ * @param {() => void | undefined} props.onClick
+ * @param {number} props.degree
+ * @param {boolean | undefined } props.hide
+ */
+const ArrowSign = props => (
+  <span
+    onClick={props.onClick}
+    css={{
+      padding: "5px 15px",
+      cursor: props.hide ? undefined : "pointer",
+    }}
+  >
+    <span
       css={{
         display: "inline-block",
-        border: "solid #212121",
+        border: `solid ${props.hide ? "transparent" : "#212121"}`,
         borderWidth: "0 2px 2px 0",
         padding: "4px",
-        transform: "rotate(135deg)",
+        transform: `rotate(${props.degree}deg)`,
         verticalAlign: "middle",
-        marginRight: "12px",
-        cursor: "pointer",
       }}
     />
-  )
+  </span>
+)
 
-const RightArrow = props =>
-  props.hide ? null : (
-    <div
-      onClick={props.onClick}
-      css={{
-        display: "inline-block",
-        border: "solid #212121",
-        borderWidth: "0 2px 2px 0",
-        padding: "4px",
-        transform: "rotate(-45deg)",
-        verticalAlign: "middle",
-        marginLeft: "12px",
-        cursor: "pointer",
-      }}
-    />
-  )
+const LeftArrow = props => (
+  <ArrowSign onClick={props.onClick} hide={props.hide} degree={135} />
+)
+
+const RightArrow = props => (
+  <ArrowSign onClick={props.onClick} hide={props.hide} degree={-45} />
+)
 
 /**
  * @param {object} props
