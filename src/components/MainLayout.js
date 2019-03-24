@@ -25,6 +25,7 @@ import VoteCounter from "./VoteCounter"
 import ZoneMark from "./ZoneMark"
 import { partyColor, getPartyById } from "../models/information"
 import { appVersion } from "../util/appVersion"
+import "moment/locale/th"
 
 /**
  * @param {object} props
@@ -246,9 +247,9 @@ export default function MainLayout({ children, activeNavBarSection }) {
 function LatestDataIndicator() {
   const summaryState = useSummaryData()
   if (!summaryState.completed) return null
-  const updatedAt = moment(summaryState.data.updatedAt).format(
-    "YYYY/DD/MM hh:mm"
-  )
+  const updatedAt = moment(summaryState.data.updatedAt)
+    .locale("th")
+    .format("DD MMMM YYYY HH:mm")
 
   return (
     <div
