@@ -46,7 +46,7 @@ export default function PerPartySearchPanelContainer({
           totalDistrictCouncilor={totalDistrictCouncilor}
           totalPartyListCouncilor={totalPartyListCouncilor}
         />
-        <PartyPresidentCandidateList />
+        <PartyPresidentCandidateList partyId={partyId} />
       </div>
     </div>
   )
@@ -116,11 +116,60 @@ function PartyTotalCouncilorEstimationNumber({
   )
 }
 
-function PartyPresidentCandidateList() {
+function PartyPresidentCandidateList({ partyId }) {
+  // @todo PartyView - PartyPresidentCandidateList - bind presiddent candidate data by party id
+  const mockData = [
+    {
+      firstName: "ชื่อ",
+      lastName: "นามสกุล",
+      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
+    },
+    {
+      firstName: "ชื่อ",
+      lastName: "นามสกุล",
+      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
+    },
+    {
+      firstName: "ชื่อ",
+      lastName: "นามสกุล",
+      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
+    },
+  ]
+  const presidentCandidateList = mockData
   return (
     <div css={{ ...sectionStyling }}>
       <div>แคนดิเดตนายกฯ</div>
-      <div>{/* @todo #1 implement president candidate list */}</div>
+      <div css={{ display: "flex" }}>
+        {presidentCandidateList.map(item => {
+          return (
+            <div css={{ padding: "10px", width: "100%" }}>
+              <div>
+                <img
+                  src={item.photoSrc}
+                  css={{
+                    display: "block",
+                    padding: 0,
+                    margin: "auto",
+                    width: "35px",
+                    height: "35px",
+                    borderRadius: "50%",
+                  }}
+                />
+              </div>
+              <div
+                css={{
+                  fontSize: "0.8em",
+                  marginTop: "5px",
+                  textAlign: "center",
+                }}
+              >
+                <div>{item.firstName}</div>
+                <div css={{ marginTop: "-1px" }}>{item.lastName}</div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
