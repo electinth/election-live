@@ -22,6 +22,13 @@ const partyLookup = keyBy(parties, p => p.id)
 const NO_PARTY = "#aaaaaa"
 const HIDDEN_ZONE = "#dddddd"
 
+const EMPTY_LOOKUP = {}
+
+const createDataLookup = createSelector(
+  zoneData => zoneData,
+  zoneData => (zoneData ? keyBy(zoneData, d => d.id) : EMPTY_LOOKUP)
+)
+
 const createZoneLayout = createSelector(
   ({ size }) => size,
   ({ padding }) => padding,
@@ -52,7 +59,8 @@ const createZoneLayout = createSelector(
 class ElectionMap extends SvgChart {
   static getDefaultOptions() {
     return helper.deepExtend(super.getDefaultOptions(), {
-      height: 560,
+      initialWidth: 375,
+      initialHeight: 560,
       size: 9,
       padding: 1,
       margin: {
@@ -175,6 +183,13 @@ class ElectionMap extends SvgChart {
       .style("transform", "scale(1)translate(0px, 0px)")
       .style("pointer-events", "bounding-box")
 
+    this.layers
+      .get("center/zoom/map/label")
+      .attr("font-family", "BaiJamjuree-Regular, Bai Jamjuree")
+      .attr("font-size", "6.4")
+      .attr("font-weight", "normal")
+      .attr("letter-spacing", "0")
+
     // hack for testing
     // window.theMap = this;
   }
@@ -233,12 +248,9 @@ class ElectionMap extends SvgChart {
   }
 
   render() {
-    console.log("hi")
     this.glass
       .attr("width", this.getInnerWidth())
       .attr("height", this.getInnerHeight())
-
-    this.dataLookup = keyBy(this.data().zones, d => d.id)
 
     this.renderZones()
 
@@ -249,18 +261,26 @@ class ElectionMap extends SvgChart {
       this.clearSelectedZone()
     }
 
-    // resize to fit window
-    this.fit({
-      mode: "basic",
-      width: 375,
-      height: this.options().height,
-    })
+    // // resize to fit window
+    // this.fit({
+    //   mode: "basic",
+    //   width: 375,
+    //   height: this.options().height,
+    // })
   }
 
   renderZones() {
     const { size, padding } = this.options()
     const rectSide = size - padding
     const { zones, quadTree } = createZoneLayout(this.options())
+    const dataLookup = createDataLookup(this.data().zones)
+
+    // If data is truly immutable, this will make it even more optimized
+    // if (this.quadTree === quadTree && this.dataLookup === dataLookup) {
+    //   return;
+    // }
+
+    this.dataLookup = dataLookup
     this.quadTree = quadTree
 
     const zoneSelection = this.zoneLayer
@@ -273,7 +293,7 @@ class ElectionMap extends SvgChart {
       .classed("zone", true)
       .attr("transform", d => `translate(${d.x},${d.y})`)
       .append("rect")
-      .attr("data-p", d => this.party(d.data))
+      // .attr("data-p", d => this.party(d.data))
       .attr("x", -rectSide / 2)
       .attr("y", -rectSide / 2)
       .attr("width", rectSide)
@@ -291,10 +311,6 @@ class ElectionMap extends SvgChart {
 
     const labelSelection = this.layers
       .get("center/zoom/map/label")
-      .attr("font-family", "BaiJamjuree-Regular, Bai Jamjuree")
-      .attr("font-size", "6.4")
-      .attr("font-weight", "normal")
-      .attr("letter-spacing", "0")
       .selectAll("text.label")
       .data(mapLabels, d => d.id)
       .enter()
