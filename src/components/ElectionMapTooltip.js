@@ -47,15 +47,13 @@ export default function ElectionMapTooltip({ positionId, positions }) {
   const summaryState = useSummaryData()
   const { party } = memo
 
-  let markColor = "#ccc"
-  if (memo.zone && summaryState.completed) {
+  let markColor = party ? party.color : "#ccc"
+  if (memo.zone && summaryState.completed && party) {
     const { zone } = memo
     const summary = summaryState.data.zoneWinningCandidateMap
     const { no, provinceId } = zone
     const candidate = (summary[provinceId] || {})[no]
     markColor = partyColor(getPartyById(candidate.partyId))
-  } else if (memo.seat) {
-    markColor = party ? party.color : "#ccc"
   }
 
   return (
@@ -116,8 +114,8 @@ function WinnerInspector({ summary, zone }) {
     const party = getPartyById(candidate.partyId)
     const noVotesWin = candidate.score <= stats.noVotes
     const percentage =
-      Math.max(candidate.score, stats.noVotes) /
-      (stats.goodVotes + stats.noVotes)
+      (Math.max(candidate.score, stats.noVotes) /
+      (stats.goodVotes + stats.noVotes)) || 0
 
     return (
       <div
