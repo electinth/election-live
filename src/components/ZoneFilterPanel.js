@@ -5,7 +5,6 @@ import React, { createContext, useRef, useLayoutEffect } from "react"
 import { filterPath, filters as areaFilters } from "../models/information"
 import { trackEvent } from "../util/analytics"
 import HelpTooltip from "./HelpTooltip"
-import ProvinceDropdown from "./ProvinceDropdown"
 
 export const ZoneFilterContext = createContext(
   /** @type {ZoneFilterName} */ ("all")
@@ -29,7 +28,6 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
         {renderFilter("central")}
         {renderFilter("southern")}
       </ul>
-      <ProvinceDropdown onProvinceSelect={onFilterSelect} />
       <div css={{ fontSize: 20, fontWeight: "bold" }}>ตัวเลือกพิเศษ</div>
       <ul css={{ padding: 0, listStyle: "none" }}>
         {renderFilter("urban")}
