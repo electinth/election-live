@@ -110,23 +110,43 @@ class ElectionMap extends SvgChart {
     // set up svg
     this.svg.style("position", "relative")
 
-    this.defs = this.svg.append("defs")
-
-    this.defs
-      .selectAll("pattern")
-      .data(uniqueColors, c => c)
-      .enter()
-      .append("pattern")
-      .attr("id", c => `dLines-${c.replace("#", "")}`)
-      .attr("width", 4)
-      .attr("height", 4)
-      .attr("patternUnits", "userSpaceOnUse")
-      .append("path")
-      .attr("d", "M 0,4 l 4,-4 M -1,1 l 2,-2 M 3,5 l 2,-2")
-      .attr("stroke", c => c)
-      .attr("stroke-width", 1)
-      .attr("stroke-linecap", "square")
-      .attr("shape-rendering", "auto")
+    const pixelRatio = window.devicePixelRatio || 1
+    if (pixelRatio >= 2) {
+      this.svg
+        .append("defs")
+        .selectAll("pattern")
+        .data(uniqueColors, c => c)
+        .enter()
+        .append("pattern")
+        .attr("id", c => `dLines-${c.replace("#", "")}`)
+        .attr("width", 3)
+        .attr("height", 3)
+        .attr("patternUnits", "userSpaceOnUse")
+        .append("path")
+        .attr("transform", "scale(0.75)")
+        .attr("d", "M 0,4 l 4,-4 M -1,1 l 2,-2 M 3,5 l 2,-2")
+        .attr("stroke", c => c)
+        .attr("stroke-width", 1)
+        .attr("stroke-linecap", "square")
+        .attr("shape-rendering", "auto")
+    } else {
+      this.svg
+        .append("defs")
+        .selectAll("pattern")
+        .data(uniqueColors, c => c)
+        .enter()
+        .append("pattern")
+        .attr("id", c => `dLines-${c.replace("#", "")}`)
+        .attr("width", 4)
+        .attr("height", 4)
+        .attr("patternUnits", "userSpaceOnUse")
+        .append("path")
+        .attr("d", "M 0,4 l 4,-4 M -1,1 l 2,-2 M 3,5 l 2,-2")
+        .attr("stroke", c => c)
+        .attr("stroke-width", 1)
+        .attr("stroke-linecap", "square")
+        .attr("shape-rendering", "auto")
+    }
 
     const zoomLayer = this.layers.get("center/zoom")
 
@@ -348,7 +368,7 @@ class ElectionMap extends SvgChart {
       .attr("width", rectSide)
       .attr("height", rectSide)
       .attr("rx", 2)
-      .attr("vector-effect", "non-scaling-stroke")
+    // .attr("vector-effect", "non-scaling-stroke")
 
     zoneSelection
       .merge(zoneEnter)
