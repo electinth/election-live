@@ -27,6 +27,7 @@ export default ({ partyId }) => {
   }
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside)
+    return () => document.addEventListener("mousedown", handleClickOutside)
   })
 
   function partyItem(p) {
