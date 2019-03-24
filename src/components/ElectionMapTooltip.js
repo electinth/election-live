@@ -55,17 +55,20 @@ export default function ElectionMapTooltip({ positionId, positions }) {
   let candidate
   let percentage = 0
   let noVotesWin = false
+  let noProgress = true
   if (zone && completed) {
     const { zoneWinningCandidateMap = {}, zoneStatsMap = {} } = data || {}
     const { no, provinceId } = zone
     candidate = (zoneWinningCandidateMap[provinceId] || {})[no]
+
     if (candidate) {
       const stats = (zoneStatsMap[provinceId] || {})[no] || {}
       noVotesWin = candidate.score <= stats.noVotes
+      noProgress = stats.progress === 0
       percentage =
         Math.max(candidate.score, stats.noVotes) /
-        (stats.goodVotes + stats.noVotes) || 0
-      if (noVotesWin) {
+          (stats.goodVotes + stats.noVotes) || 0
+      if (noVotesWin || noProgress) {
         markColor = "#222"
       } else {
         markColor = partyColor(getPartyById(candidate.partyId))
@@ -94,6 +97,7 @@ export default function ElectionMapTooltip({ positionId, positions }) {
                     candidate={candidate}
                     markColor={markColor}
                     percentage={percentage}
+                    noProgress={noProgress}
                   />
                 ) : (
                   <img src={loadingSmall} alt="Loading" />
@@ -120,34 +124,52 @@ const PERCENT_STYLE = {
   opacity: 0.5,
 }
 
-function WinnerInspector({ noVotesWin, markColor, candidate, percentage }) {
+function WinnerInspector({
+  noVotesWin,
+  markColor,
+  candidate,
+  percentage,
+  noProgress,
+}) {
   if (!candidate) {
     return null
   }
 
   const party = getPartyById(candidate.partyId)
 
-  return (
-    <div
-      style={{
-        opacity: noVotesWin ? 0.3 : 1,
-      }}
-    >
-      {noVotesWin ? (
-        <div>NO VOTE</div>
-      ) : (
-        <React.Fragment>
-          <div>
-            {candidate.title}
-            {candidate.firstName} {candidate.lastName}
-          </div>
-          <div>พรรค{party.name}</div>
-        </React.Fragment>
-      )}
-      <div style={PERCENT_STYLE}>
-        {formatInt(candidate.score)} ({formatPercent(percentage)})
+  if (noProgress) {
+    return (
+      <div
+        style={{
+          opacity: 0.3,
+        }}
+      >
+        ยังไม่ได้รับผลการนับคะแนน
       </div>
-      <PercentBarChart width="120" color={markColor} percent={percentage} />
-    </div>
-  )
+    )
+  } else {
+    return (
+      <div
+        style={{
+          opacity: noVotesWin ? 0.3 : 1,
+        }}
+      >
+        {noVotesWin ? (
+          <div>NO VOTE</div>
+        ) : (
+          <React.Fragment>
+            <div>
+              {candidate.title}
+              {candidate.firstName} {candidate.lastName}
+            </div>
+            <div>พรรค{party.name}</div>
+          </React.Fragment>
+        )}
+        <div style={PERCENT_STYLE}>
+          {formatInt(candidate.score)} ({formatPercent(percentage)})
+        </div>
+        <PercentBarChart width="120" color={markColor} percent={percentage} />
+      </div>
+    )
+  }
 }
