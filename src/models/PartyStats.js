@@ -38,6 +38,24 @@ export const shouldDisplayZoneData = zoneStats =>
   zoneStats.progress >= 10 ||
   zoneStats.votesTotal >= zoneStats.eligible * 0.1
 
+const cache = global.WeakMap && new WeakMap()
+
+/**
+ * Like `partyStatsFromSummaryJSON`, but no filter and with caching.
+ *
+ * @param {ElectionDataSource.SummaryJSON} summary
+ */
+export function nationwidePartyStatsFromSummaryJSON(summary) {
+  if (cache && cache.has(summary)) {
+    return cache.get(summary)
+  }
+  const result = partyStatsFromSummaryJSON(summary)
+  if (cache) {
+    cache.set(summary, result)
+  }
+  return result
+}
+
 /**
  * @param {ElectionDataSource.SummaryJSON} summary
  * @param {IZoneFilter} filter
@@ -133,7 +151,7 @@ export function partyStatsFromSummaryJSON(
       return {
         party,
         constituencySeats: filteredConstituencySeatCount[party.id] || 0,
-        partyListSeats: calculated.partyListMemberCount,
+        partyListSeats: calculated.partyListMemberCount || 0,
         score: calculated.voteCount,
         seatsCeiling: (calculated.voteCount / totalVoteCount) * 500,
       }
