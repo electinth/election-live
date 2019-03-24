@@ -156,6 +156,52 @@ export default function DesktopScoreBarContainer({
 
   const data = pageList.map(page => page.data())
 
+  function renderScoreBarBullet() {
+    return (
+      <div
+        css={{
+          display: "flex",
+          position: "absolute",
+          top: 0,
+          right: "70px",
+          zIndex: 10,
+          [media(WIDE_NAV_MIN_WIDTH)]: {
+            right: 0,
+          },
+        }}
+      >
+        {pageList.map((page, i) => {
+          return (
+            <div
+              css={{
+                paddingTop: "8px",
+                paddingBottom: "8px",
+                marginLeft: "6px",
+                cursor: "pointer",
+              }}
+              style={{
+                opacity: pageIndex === i ? 1 : 0.5,
+              }}
+              onClick={clickPagination(i)}
+            >
+              <i
+                css={{
+                  display: "block",
+                  width: "8px",
+                  height: "4px",
+                  background: "#ffffff",
+                  [media(WIDE_NAV_MIN_WIDTH)]: {
+                    width: "24px",
+                  },
+                }}
+              />
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
   return (
     <div
       css={{
@@ -211,41 +257,7 @@ export default function DesktopScoreBarContainer({
           ))}
         </div>
       </div>
-      <div
-        css={{
-          display: "flex",
-          position: "absolute",
-          top: 0,
-          right: 0,
-          zIndex: 10,
-        }}
-      >
-        {pageList.map((page, i) => {
-          return (
-            <div
-              css={{
-                paddingTop: "8px",
-                paddingBottom: "8px",
-                marginLeft: "6px",
-                cursor: "pointer",
-              }}
-              style={{
-                opacity: pageIndex === i ? 1 : 0.5,
-              }}
-              onClick={clickPagination(i)}
-            >
-              <i
-                css={{
-                  display: "block",
-                  width: "24px",
-                  height: "4px",
-                  background: "#ffffff",
-                }}
-              />
-            </div>
-          )
-        })}
-      </div>
+      {renderScoreBarBullet()}
     </div>
   )
 }
