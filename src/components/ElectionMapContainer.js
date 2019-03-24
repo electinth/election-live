@@ -124,10 +124,15 @@ export default function ElectionMapContainer({ currentZone }) {
     setMapTip(null)
   }, [])
   const onZoneClick = useCallback(zone => {
-    const match = zone.data.id.match(/^(\d+)-(\d+)$/)
-    if (match) {
-      trackEvent("View zone", { via: "Map" })
-      navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
+    if (zone) {
+      const match = zone.data.id.match(/^(\d+)-(\d+)$/)
+      if (match) {
+        trackEvent("View zone", { via: "Map" })
+        navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
+      }
+    } else {
+      trackEvent("Clear zone", { via: "Map" })
+      navigate("")
     }
   }, [])
 

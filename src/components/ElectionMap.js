@@ -137,8 +137,10 @@ class ElectionMap extends SvgChart {
       .get("center/zoom/map/glass")
       .append("rect")
       .attr("fill", "rgba(0,0,0,0)")
+      .attr("width", this.getInnerWidth())
+      .attr("height", this.getInnerHeight())
 
-    this.glass = this.layers
+    this.layers
       .get("center/zoom/map")
       .on("mouseleave", () => {
         const zone = this.findNearbyZone()
@@ -175,6 +177,8 @@ class ElectionMap extends SvgChart {
         const zone = this.findNearbyZone()
         if (zone) {
           this.dispatchAs("zoneClick")(zone, d3Event)
+        } else {
+          this.dispatchAs("zoneClick")(null, d3Event)
         }
       })
 
