@@ -244,6 +244,8 @@ function ZoneView({ provinceId, zoneNo }) {
                     })
                   )
                 }
+                hideLeftArrow={zoneNo === 1}
+                hideRightArrow={zoneNo === province.zone}
               >
                 เขตเลือกตั้งที่ {zone.no}
               </Arrow>
