@@ -17,11 +17,8 @@ import ElectionMapTooltip from "./ElectionMapTooltip"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
 import { trackEvent } from "../util/analytics"
-<<<<<<< HEAD
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
-=======
 import { createSelector } from "reselect"
->>>>>>> use reselect to improve performance
 
 /**
  *
