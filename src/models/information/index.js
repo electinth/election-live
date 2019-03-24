@@ -51,6 +51,18 @@ export function getProvinceById(id) {
   return provincesMap.get(id) || fail(`Province ID ${id} not found`)
 }
 
+const provincesNameMap = new Map(
+  provinces.map(province => [province.name, province])
+)
+
+/**
+ * @param {string} name
+ * @returns {IProvince}
+ */
+export function getProvinceByName(name) {
+  return provincesNameMap.get(name) || fail(`Province name ${name} not found`)
+}
+
 const zoneMap = new Map(
   zones.map(zone => [zoneKey(zone.provinceId, zone.no), zone])
 )
