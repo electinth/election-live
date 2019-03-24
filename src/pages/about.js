@@ -55,23 +55,22 @@ export default () => (
       </BodyText>
       <Divider mb={32} />
       <SubTitle mb={8}>อาสาสมัครที่ร่วมพัฒนา</SubTitle>
-      {
-        // @todo #1 add contributors
-      }
-      <BodyText>
-        <ContributorSection
-          name="เขียนโปรแกรม 💻"
-          contributors={contributors.coders}
-        />
-        <ContributorSection
-          name="ออกแบบ 🎨"
-          contributors={contributors.designers}
-        />
-        <ContributorSection
-          name="ติดต่อประสานงาน และด้านอื่นๆ ☎️"
-          contributors={contributors.others}
-        />
-      </BodyText>
+      <div id="contributors">
+        <BodyText>
+          <ContributorSection
+            name="เขียนโปรแกรม 💻"
+            contributors={contributors.coders}
+          />
+          <ContributorSection
+            name="ออกแบบ 🎨"
+            contributors={contributors.designers}
+          />
+          <ContributorSection
+            name="ติดต่อประสานงาน และด้านอื่นๆ ☎️"
+            contributors={contributors.others}
+          />
+        </BodyText>
+      </div>
     </div>
   </MainLayout>
 )
