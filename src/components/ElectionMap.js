@@ -11,6 +11,7 @@ import { parties } from "../models/information"
 import { memo } from "react"
 import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
 import { createSelector } from "reselect"
+import { isMobileOrTablet } from "../util/device"
 const maps = require("../models/information/_map.json")
 
 const mapLabels = uniqBy(
@@ -121,7 +122,10 @@ class ElectionMap extends SvgChart {
         "transform",
         `translate(${this.getInnerWidth() / 2},${this.getInnerHeight() / 2})`
       )
-      .call(this.zoom)
+
+    if (isMobileOrTablet()) {
+      this.layers.get("center").call(this.zoom)
+    }
 
     this.layers
       .get("center/zoom/map")
