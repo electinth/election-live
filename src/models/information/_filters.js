@@ -1,4 +1,4 @@
-import { getProvinceById, getProvinceByName } from "."
+import { getProvinceById } from "."
 
 /** @type {IProvince[]} */
 const provinces = require("./_provinces.json")
@@ -80,15 +80,15 @@ const URBAN_ZONES = [
 
 const provinceFilter = function() {
   return provinces.reduce(
-    (acc, province) => ({
+    (acc, p) => ({
       ...acc,
-      [province.name]: {
+      [p.name]: {
         name: {
-          th: province.name,
-          en: province.name,
+          th: p.name,
+          en: p.name,
         },
         criterion: function(province, zone) {
-          return province.id === getProvinceByName(this.name.th).id
+          return province.id === p.id
         },
       },
     }),
