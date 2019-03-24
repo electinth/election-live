@@ -1,11 +1,11 @@
 import React, { useMemo } from "react"
 import { keyBy } from "lodash"
 import {
-  zones,
   parties,
   getProvinceById,
   partyColor,
   getPartyById,
+  getZoneByProvinceIdAndZoneNo,
 } from "../models/information"
 import loadingSmall from "../styles/images/loading.gif"
 import { useSummaryData } from "../models/LiveDataSubscription"
@@ -22,19 +22,20 @@ export default function ElectionMapTooltip({ positionId, positions }) {
     const matchZone = positionId.match(/^(\d+)-(\d+)$/)
     if (matchZone) {
       return {
-        zone: zones.find(
-          z => z.provinceId == matchZone[1] && z.no == matchZone[2]
-        ),
+        zone: getZoneByProvinceIdAndZoneNo(+matchZone[1] ,+matchZone[2]),
         province: getProvinceById(matchZone[1]).name,
         party,
+        complete: position.complete,
       }
-    } else {
-      const matchSeat = positionId.match(/^pl-(\d+)$/)
+    }
+    const matchSeat = positionId.match(/^pl-(\d+)$/)
+    if (matchSeat) {
       return {
         seat: {
           no: matchSeat[1],
         },
         party,
+        complete: position.complete,
       }
     }
   }, [positionId])
@@ -59,7 +60,7 @@ export default function ElectionMapTooltip({ positionId, positions }) {
         <tr>
           <td css={{ verticalAlign: "top", paddingTop: 5 }}>
             <svg width="10" height="10">
-              <rect width="10" height="10" fill={markColor} />
+              <rect width="10" height="10" fill={markColor} rx={memo.complete ? 0 : 5} opacity={memo.complete ? 1 : 0.5} />
             </svg>
           </td>
           <td>
