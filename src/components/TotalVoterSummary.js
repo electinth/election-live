@@ -47,6 +47,13 @@ export default function TotalVoterSummary(props) {
         >
           <AnimatedNumber value={totalVotePercentage} initialValue={0} />%
         </span>
+        {totalVotePercentage > 100 ? (
+          <div
+            css={{ textAlign: "center", color: "#F0324B", fontStyle: "italic" }}
+          >
+            พบความผิดปกติ รอการตรวจสอบอีกครั้ง
+          </div>
+        ) : null}
       </div>
     )
   }
