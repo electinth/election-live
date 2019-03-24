@@ -128,10 +128,11 @@ function getLatestDirectoryState() {
       failed: true,
     }
   }
-  if (
-    !localStorage.ELECT_DISABLE_CURTAIN &&
-    (latestState.data.control || {}).locked === "TRUE"
-  ) {
+  const curtainDisabled =
+    typeof localStorage === "object" &&
+    localStorage &&
+    !!localStorage.ELECT_DISABLE_CURTAIN
+  if (!curtainDisabled && (latestState.data.control || {}).locked === "TRUE") {
     return {
       error: new Error("ยังไม่พร้อมแสดงข้อมูล"),
       failed: true,
