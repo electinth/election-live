@@ -24,6 +24,8 @@ const LARGE_FONT = { fontSize: "1.1rem" }
 export default function ElectionMapTooltip({ positionId, positions }) {
   const memo = useMemo(() => {
     const position = _.find(positions, p => p.id == positionId)
+    if (!position) return {}
+
     const party = partyLookup[position.partyId]
     const matchZone = positionId.match(/^(\d+)-(\d+)$/)
     if (matchZone) {
