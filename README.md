@@ -277,6 +277,10 @@ The website runs on a single DigitalOcean machine which costs \$10/mo, with Clou
 
 1. We generated a static site (using Gatsby), so, there’s no need to run server-side code, as everything is pre-built by the CI.
 
+   We follow [Gatsby’s caching guide](https://www.gatsbyjs.org/docs/caching/) (they have it documented and so we didn’t have to figure it out on our own. In fact, we didn’t even have to implement it as [gatsby-plugin-htaccess](https://www.gatsbyjs.org/packages/gatsby-plugin-htaccess/) will automatically generate an `.htaccess` file that follows this best practice already.)
+
+   One deviation we made is that instead of setting `max-age=0`, we set it to 30 seconds in order to better utilize CloudFlare’s caching.
+
 2. For live data, there’s no API either. We use an ETL process to put data files on the web server.
 
    1. `/data/latest.json` is a very small file (< 1kb) that has references to larger “data files”. This file is updated in-place and has a very short cache time.
