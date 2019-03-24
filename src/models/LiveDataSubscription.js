@@ -128,10 +128,17 @@ function getLatestDirectoryState() {
       failed: true,
     }
   }
-  const curtainDisabled =
-    typeof localStorage === "object" &&
-    localStorage &&
-    !!localStorage.ELECT_DISABLE_CURTAIN
+  const curtainDisabled = () => {
+    try {
+      return (
+        typeof localStorage === "object" &&
+        localStorage &&
+        !!localStorage.ELECT_DISABLE_CURTAIN
+      )
+    } catch (e) {
+      return false
+    }
+  }
   if (!curtainDisabled && (latestState.data.control || {}).locked === "TRUE") {
     return {
       error: new Error("ยังไม่พร้อมแสดงข้อมูล"),
