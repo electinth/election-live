@@ -333,7 +333,7 @@ function ZoneView({ provinceId, zoneNo }) {
               />
             </div>
 
-            <div css={{ borderBottom: "1px solid" }}>
+            <div css={{ borderBottom: "1px solid", display: "none" }}>
               <NationwideSubSummaryHeader
                 label="บัตรดี"
                 stat={ifSummaryLoaded(

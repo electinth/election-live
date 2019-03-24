@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 import _ from "lodash"
+import LinkToSimulator from "./LinkToSimulator"
 
 const menues = [
   {
@@ -88,7 +89,13 @@ export default function Navbar(props) {
         },
       }}
     >
-      {menues.map(m => linkTo(m["name"], m["route"], m["label"]))}
+      {menues
+        .slice(0, menues.length - 1)
+        .map(m => linkTo(m["name"], m["route"], m["label"]))}
+      <LinkToSimulator />
+      {menues
+        .slice(menues.length - 1)
+        .map(m => linkTo(m["name"], m["route"], m["label"]))}
     </nav>
   )
 }

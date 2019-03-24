@@ -1,30 +1,34 @@
 {
-  "": [
+  "coders": [
     {
-      "name": "",
-      "role": "",
+      "name": "@Woracheth",
+      "role": "coders",
       "url": "",
       "github": "Woracheth\r"
     },
-    {
-      "name": "",
-      "role": "",
-      "url": "",
-      "github": "koobitor\r"
-    },
-    {
-      "name": "",
-      "role": "",
-      "url": "",
-      "github": "iboss-ptk\r"
-    }
-  ],
-  "coders": [
     {
       "name": "Mishari muqbil",
       "role": "coders",
       "url": "http://zymple.biz",
       "github": "Mishari\r"
+    },
+    {
+      "name": "Pallop Chaoputhipuchong",
+      "role": "coders",
+      "url": "https://github.com/hamcompe",
+      "github": "hamcompe\r"
+    },
+    {
+      "name": "Pavarit Chandhaprayoon",
+      "role": "coders",
+      "url": "",
+      "github": "\r"
+    },
+    {
+      "name": "Pongpipat Kawlerk",
+      "role": "coders",
+      "url": "",
+      "github": "\r"
     },
     {
       "name": "กฤตวัฒน์ สุพรรณโกมุท",
@@ -49,6 +53,12 @@
       "role": "coders",
       "url": "",
       "github": "phoneee\r"
+    },
+    {
+      "name": "ธนนันท์ ตั้งธนาชัยกุล",
+      "role": "coders",
+      "url": "https://microbenz.in.th/",
+      "github": "MicroBenz\r"
     },
     {
       "name": "ธีระพล วัธนเวคิน",
@@ -137,6 +147,12 @@
       "github": "\r"
     },
     {
+      "name": "น้ำใส ศุภวงศ์",
+      "role": "designers",
+      "url": "",
+      "github": "\r"
+    },
+    {
       "name": "ศุภวิชญ์ พิพัฒน์",
       "role": "designers",
       "url": "",
@@ -150,6 +166,12 @@
     }
   ],
   "others": [
+    {
+      "name": "Boonjira Angsumalee",
+      "role": "others",
+      "url": "",
+      "github": "\r"
+    },
     {
       "name": "Boonmee Lab",
       "role": "others",
