@@ -2,7 +2,7 @@
   {
     "codeEN": "DP",
     "codeTH": "ปชป",
-    "color": "#437fba",
+    "color": "#06aff3",
     "id": 1,
     "name": "ประชาธิปัตย์",
     "partylist": 150
@@ -50,7 +50,7 @@
   {
     "codeEN": "PT",
     "codeTH": "พท",
-    "color": "#cf1e38",
+    "color": "#da3731",
     "id": 8,
     "name": "เพื่อไทย",
     "partylist": 97
@@ -66,7 +66,7 @@
   {
     "codeEN": "CPN",
     "codeTH": "ชพน",
-    "color": "#223c88",
+    "color": "#ffaf41",
     "id": 10,
     "name": "ชาติพัฒนา",
     "partylist": 56
@@ -82,7 +82,7 @@
   {
     "codeEN": "CP",
     "codeTH": "ชทพ",
-    "color": "#231c72",
+    "color": "#ff72a8",
     "id": 12,
     "name": "ชาติไทยพัฒนา",
     "partylist": 67
@@ -98,7 +98,7 @@
   {
     "codeEN": "BJT",
     "codeTH": "ภท",
-    "color": "#102986",
+    "color": "#209fa0",
     "id": 15,
     "name": "ภูมิใจไทย",
     "partylist": 150
@@ -202,7 +202,7 @@
   {
     "codeEN": "TLP",
     "codeTH": "สร",
-    "color": "#edd63f",
+    "color": "#b49e31",
     "id": 39,
     "name": "เสรีรวมไทย",
     "partylist": 100
@@ -354,7 +354,7 @@
   {
     "codeEN": "FWP",
     "codeTH": "อนค",
-    "color": "#f4792e",
+    "color": "#ef7824",
     "id": 68,
     "name": "อนาคตใหม่",
     "partylist": 124
@@ -474,7 +474,7 @@
   {
     "codeEN": "PPRP",
     "codeTH": "พปชร",
-    "color": "#3e61a8",
+    "color": "#1f68dd",
     "id": 83,
     "name": "พลังประชารัฐ",
     "partylist": 120
@@ -482,7 +482,7 @@
   {
     "codeEN": "NEP",
     "codeTH": "ศม",
-    "color": "#184474",
+    "color": "#6e2fff",
     "id": 84,
     "name": "เศรษฐกิจใหม่",
     "partylist": 81
