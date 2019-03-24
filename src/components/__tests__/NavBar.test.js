@@ -11,9 +11,9 @@ describe("Navbar", () => {
     renderer = TestRenderer.create(<NavBar />)
   })
 
-  test("should have 4 Links, but 2 for now", () => {
+  test("should have 4 Links, but 3 for now", () => {
     const root = renderer.root
     const links = root.findAll(el => el.type === Link)
-    expect(links).toHaveLength(2)
+    expect(links).toHaveLength(3)
   })
 })
