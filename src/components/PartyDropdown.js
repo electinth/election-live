@@ -148,10 +148,10 @@ export default ({ partyId }) => {
             overflowX: "hidden",
             overflowY: "auto",
             WebkitOverflowScrolling: "touch",
-            padding: 10,
+            padding: "0px 10px 10px 10px",
           }}
         >
-          <ul css={{ listStyle: "none", padding: 0 }}>
+          <ul css={{ listStyle: "none", padding: 0, margin: 0 }}>
             {filteredParties.map(p => (
               <Link
                 key={p.id}
