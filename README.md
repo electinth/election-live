@@ -13,9 +13,13 @@ Live Scoreboard for Thailand General Election 2562 (2019).
   - [Disable the curtain](#disable-the-curtain)
   - [Resources for developers](#resources-for-developers)
   - [How to add new pages](#how-to-add-new-pages)
+  - [Client-side data architecture](#client-side-data-architecture)
+  - [Folder structure](#folder-structure)
+  - [Component naming](#component-naming)
   - [Styling](#styling)
   - [Responsive Design](#responsive-design)
   - [Use JSDoc instead of `propTypes`](#use-jsdoc-instead-of-proptypes)
+  - [How we handled 100,000 active users on a single \$10/mo server](#how-we-handled-100000-active-users-on-a-single-%5C10mo-server)
 - [Build the project into a static web page](#build-the-project-into-a-static-web-page)
 - [Releasing new version](#releasing-new-version)
 - [Contributors](#contributors)
@@ -30,6 +34,7 @@ This web application is built using [Gatsby](https://www.gatsbyjs.org). We chose
 - We can add new pages by adding a file in `src/pages`. No need to fiddle with router.
 - It has a comprehensive [documentation](https://www.gatsbyjs.org/docs/), including a lot of [recipes](https://www.gatsbyjs.org/docs/recipes/).
 - A lot of things can be done just by installing [Gatsby plugins](https://www.gatsbyjs.org/plugins/), such as adding [Google Fonts](https://www.gatsbyjs.org/packages/gatsby-plugin-web-font-loader/), [Google Analytics](https://www.gatsbyjs.org/packages/gatsby-plugin-google-analytics/).
+- Though plugins, it can also generate web server config files (like `.htaccess`) to set up caching best practices.
 
 ### @todo comments [![PDD status](http://www.0pdd.com/svg?name=codeforthailand/election-live)](http://www.0pdd.com/p?name=codeforthailand/election-live)
 
@@ -83,6 +88,52 @@ When you run the app for the first time, if it’s not yet time to count the ele
 ### How to add new pages
 
 Just add a new file in `src/pages` — each `.js` file becomes a new page automatically.
+
+### Client-side data architecture
+
+The goals to achieve:
+
+- Strike a good trade-off between loading things upfront and loading things on-demand (reducing time-to-interactive and reducing time it takes to switch between page).
+
+  For example, while our app displays information in a per-zone basis, we download the data per province.
+
+  - Downloading everything at once means that users have to wait longer, and most of the data will be unused.
+  - On the contrary, having a separate file to download for every zone means that user have to wait for data to load while switching between zones in the same province, something we expect users will do often.
+  - Sometimes data structure must be designed with user experience in mind!
+
+- Allows UI components and data model to be developed in parallel and tested on its own.
+
+![Data architecture](docs/images/data-architecture.png)
+
+- We use two approaches to allow the data motel and the UI components to be developed in parallel:
+
+  1. **Separated approach.** Develop the UI and data model separately, then integrate them together.
+
+  2. **Pre-integrated approach.** Create an integrated skeleton first (e.g. UI that simply displays data without styling, or even a placeholder; and a data model that returns a mocked data) and have people work separately from there.
+
+  The separated approach allows parts to be developed right away (especially useful when interaction between components isn’t clear yet and needs more experimentation), and integrated later but may result in integration problems.
+
+  On the other hand, the pre-integrated approach takes more time upfront, but eliminates integration problem, and allows more complex problems to be tackled with less hacky code.
+
+  For example:
+
+  - The ElectionMap used the Separated approach. First, the map is created and the developer can experiment with what to show on the map. Meanwhile, the data model is built separately (using Pre-integrated approach, but with other components). Finally, an ElectionMapContainer is built to bridge the two parts.
+
+  - The ZoneMasterView used the Pre-integrated approach. First, responsibilities are assigned (displays 5 things: map, contents, filters, search, and popup; must work on mobile and desktop and must be able to pre-render the important contents). The ZoneMasterView is developed, with placeholder elements in place of 5 things. One done, 5 things can be separately developed.
+
+### Folder structure
+
+While the React Community these days tends to recommend structuring your project around features (`map`, `search`, `filter`, `chart`) rather than types (`components`, `pages`, `models`), this project uses types-based folder structure.
+
+Since some developers may not be too familiar with React, it is therefore more useful to break the apps into logical parts (`components`, `models`, `pages`, `styles`, `utils`) to make them more obvious to new developers, rather than functional parts, which is easier to grasp if there are not too many.
+
+### Component naming
+
+When we set up a skeleton and implement a design, before we start coding, it’s useful to step back a bit, and look at the design and try to name each component in a consistent way first.
+
+![Component naming sketch](docs/images/component-naming.png)
+
+After we have made the conscious effort to have the core components named in a consistent manner, most components created after that are named ad-hoc.
 
 ### Styling
 
@@ -217,6 +268,30 @@ export default function Unimplemented(props) {
  */
 export default function MyComponent(props) {
 ```
+
+### How we handled 100,000 active users on a single \$10/mo server
+
+After the election, we have more than 100,000 simultaneous active users watching the counting progress live (updated every 1 minute). In total, 1.5 million users visited the website on the election day.
+
+The website runs on a single DigitalOcean machine which costs \$10/mo, with CloudFlare in front.
+
+1. We generated a static site (using Gatsby), so, there’s no need to run server-side code, as everything is pre-built by the CI.
+
+2. For live data, there’s no API either. We use an ETL process to put data files on the web server.
+
+   1. `/data/latest.json` is a very small file (< 1kb) that has references to larger “data files”. This file is updated in-place and has a very short cache time.
+
+      ```
+      Cache-Control: public, max-age=30, stale-while-revalidate=30, stale-if-error=300, must-revalidate
+      ```
+
+   2. The actual data files. These files are immutable. Each time a data file is generated, it is written to a new location. So, there’s no need to do cache invalidation.
+
+      ```
+      Cache-Control: public, max-age=31536000, stale-while-revalidate=30, stale-if-error=300, immutable
+      ```
+
+      Due to immutability and keeping old data files around, this also allows us to [time travel](https://github.com/codeforthailand/election-live/issues/98) and see what our webpage would look like using data at different point in time, simply by loading up a past data file.
 
 ## Build the project into a static web page
 
