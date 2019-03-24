@@ -11,6 +11,8 @@ const searcher = new Fuse(parties, {
 })
 
 export default ({ partyId }) => {
+  console.log(partyId)
+  console.log(parties.find(p => p.id === partyId))
   const [dropdownOpen, setDropdownOpen] = useState(!partyId ? true : false)
   const [currentParty, setCurrentParty] = useState(
     partyId ? parties.find(p => p.id === partyId) : parties[0]
@@ -27,7 +29,7 @@ export default ({ partyId }) => {
   }
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside)
-    return () => document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
   })
 
   function partyItem(p) {
@@ -132,6 +134,7 @@ export default ({ partyId }) => {
                 to={partyPath(p)}
                 style={{ color: "black", textDecoration: "none" }}
                 onClick={() => {
+                  console.log(p)
                   setDropdownOpen(false)
                   setCurrentParty(p)
                 }}
