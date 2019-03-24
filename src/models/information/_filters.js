@@ -1,4 +1,7 @@
-import { getProvinceById } from "."
+import { getProvinceById, getProvinceByName } from "."
+
+/** @type {IProvince[]} */
+const provinces = require("./_provinces.json")
 
 // @ts-check
 
@@ -75,6 +78,24 @@ const URBAN_ZONES = [
   "10-17",
 ]
 
+const provinceFilter = function() {
+  return provinces.reduce(
+    (acc, province) => ({
+      ...acc,
+      [province.name]: {
+        name: {
+          th: province.name,
+          en: province.name,
+        },
+        criterion: function(province, zone) {
+          return province.id === getProvinceByName(this.name.th).id
+        },
+      },
+    }),
+    {}
+  )
+}
+
 /**
  * Available filters.
  *
@@ -83,6 +104,7 @@ const URBAN_ZONES = [
  * @type {{ [filterName in ZoneFilterName]: IZoneFilter }}
  */
 export const filters = {
+  ...provinceFilter(),
   all: {
     name: {
       th: "ทั่วประเทศ",
