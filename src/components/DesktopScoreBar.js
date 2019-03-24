@@ -269,7 +269,7 @@ class DesktopScoreBar extends SvgChart {
       .attr("x", d => x(d.start))
       .attr("y", d => height + 13)
       .style("fill", "white")
-    tEnter.insert("title", ":first-child").text(d => this.titleText(d))
+    tEnter.append("title").text(d => this.titleText(d))
 
     text
       .merge(tEnter)
