@@ -1,8 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
 import { DESKTOP_MIN_WIDTH, media, DISPLAY_FONT } from "../styles"
 import { numberWithCommas } from "../util/format"
 import { useSummaryData } from "../models/LiveDataSubscription"
-import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
+import { partyListCandidates } from "../models/information"
+import _ from "lodash"
 
 const defaultTab = "DISTRICT_TAB"
 
@@ -37,10 +39,12 @@ export default function ZonePartyMemberVoteResult({ partyId }) {
     partyId
   )
 
-  const visibleCandidatesList =
-    state.showingTab === defaultTab
-      ? winningConstituencyCandidates
-      : winningPartyListCandidates
+  const candidatesList =
+    state.showingTab === defaultTab ? (
+      <ConstitudencyCandidatesList candidates={winningConstituencyCandidates} />
+    ) : (
+      <PartyListCandidatesList candidates={winningPartyListCandidates} />
+    )
 
   return (
     <div
@@ -76,24 +80,24 @@ export default function ZonePartyMemberVoteResult({ partyId }) {
             >
               แบ่งเขต({winningConstituencyCandidates.length})
             </li>
-            {/* <li
+            <li
               css={{ ...tabHeaderStyle, ...partyListStyling }}
               onClick={() => {
                 setState({ showingTab: "PARTY_LIST_TAB" })
               }}
             >
               บัญชีรายชื่อ ({winningPartyListCandidates.length})
-            </li> */}
+            </li>
           </ul>
         </div>
 
-        <CandidatesList candidates={visibleCandidatesList} />
+        {candidatesList}
       </div>
     </div>
   )
 }
 
-function CandidatesList({ candidates }) {
+function ConstitudencyCandidatesList({ candidates }) {
   if (candidates.length > 0) {
     return (
       <div
@@ -121,6 +125,41 @@ function CandidatesList({ candidates }) {
                 {numberWithCommas(item.score)}
               </span>{" "}
               - {Math.round(item.percentage * 100)}%
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  } else {
+    return <p>ไม่พบข้อมูล</p>
+  }
+}
+
+function PartyListCandidatesList({ candidates }) {
+  if (candidates.length > 0) {
+    return (
+      <div
+        css={{
+          textAlign: "left",
+          padding: "5px",
+          height: "calc(70vh - 200px)",
+          overflowX: "hidden",
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        {candidates.map(item => (
+          <div
+            css={{ display: "flex", position: "relative", marginTop: "15px" }}
+          >
+            <div css={{ marginLeft: "5px", fontFamily: DISPLAY_FONT }}>
+              <div css={{ fontWeight: "bold" }}>
+                {item.firstName} {item.lastName}
+              </div>
+              <div css={{ fontSize: "0.8em" }}>{item.zone}</div>
+            </div>
+            <div css={{ float: "right", position: "absolute", right: 0 }}>
+              อันดับที่ <span css={{ fontWeight: "bold" }}>{item.no}</span>
             </div>
           </div>
         ))}
@@ -160,15 +199,24 @@ function getWinningConstituencyCandidates(summaryState, partyId) {
   }
 }
 
-function getWinningPartyListCandidates(summaryState) {
-  if (!summaryState.completed) {
-    return []
-  } else {
-    const summary = summaryState.data
-    const partyStats = partyStatsFromSummaryJSON(summary)
+function getWinningPartyListCandidates(summaryState, partyId) {
+  const partyStatsRow = useMemo(() => {
+    if (!summaryState.completed) return []
+    return _.find(
+      nationwidePartyStatsFromSummaryJSON(summaryState.data),
+      row => row.party.id === +partyId
+    )
+  }, [summaryState, partyId])
 
-    // @todo #1 Party View - display winning party-list candidates
-
+  if (
+    !partyStatsRow ||
+    partyStatsRow.partyListSeats <= 0 ||
+    !partyListCandidates[partyId]
+  )
     return []
-  }
+
+  return partyListCandidates[partyId].partyList.slice(
+    0,
+    partyStatsRow.partyListSeats
+  )
 }

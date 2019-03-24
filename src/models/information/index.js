@@ -17,6 +17,9 @@ export const provinces = require("./_provinces.json")
 /** @type {IZone[]} */
 export const zones = require("./_zones.json")
 
+/** @type {IPartyListCandidate[]} */
+export const partyListCandidates = require("./_party-list-candidates.json")
+
 export * from "./_filters"
 
 export const contributors = require("./_contributors.json")
