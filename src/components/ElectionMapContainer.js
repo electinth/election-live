@@ -153,17 +153,19 @@ export default function ElectionMapContainer({ currentZone }) {
         <ZoneMark color="#777" />
         นับแล้วน้อยกว่า 95%
       </div>
-      <ElectionMap
-        data={createMapData({
-          zones: mapZones,
-          selectedZone: currentZone,
-        })}
-        onInit={onInit}
-        onZoneMouseenter={onZoneMouseenter}
-        onZoneMousemove={onZoneMousemove}
-        onZoneMouseleave={onZoneMouseleave}
-        onZoneClick={onZoneClick}
-      />
+      <div style={{ textAlign: "center" }}>
+        <ElectionMap
+          data={createMapData({
+            zones: mapZones,
+            selectedZone: currentZone,
+          })}
+          onInit={onInit}
+          onZoneMouseenter={onZoneMouseenter}
+          onZoneMousemove={onZoneMousemove}
+          onZoneMouseleave={onZoneMouseleave}
+          onZoneClick={onZoneClick}
+        />
+      </div>
     </div>
   )
 }
