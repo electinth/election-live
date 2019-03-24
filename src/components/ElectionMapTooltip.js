@@ -44,17 +44,30 @@ export default function ElectionMapTooltip({ positionId, positions }) {
     }
   }, [positionId])
 
-  const summaryState = useSummaryData()
-  const { party } = memo
+  const { completed, data } = useSummaryData()
+  const { party, zone, seat } = memo
+  const { zoneWinningCandidateMap, zoneStatsMap } = data
 
   let markColor = "#ccc"
-  if (memo.zone && summaryState.completed) {
-    const { zone } = memo
-    const summary = summaryState.data.zoneWinningCandidateMap
+  let candidate
+  let percentage = 0
+  let noVotesWin = false
+  if (zone && completed) {
     const { no, provinceId } = zone
-    const candidate = (summary[provinceId] || {})[no]
-    markColor = partyColor(getPartyById(candidate.partyId))
-  } else if (memo.seat) {
+    candidate = (zoneWinningCandidateMap[provinceId] || {})[no]
+    if (candidate) {
+      const stats = (zoneStatsMap[provinceId] || {})[no] || {}
+      noVotesWin = candidate.score <= stats.noVotes
+      percentage =
+        Math.max(candidate.score, stats.noVotes) /
+        (stats.goodVotes + stats.noVotes)
+      if (noVotesWin) {
+        markColor = "#222"
+      } else {
+        markColor = partyColor(getPartyById(candidate.partyId))
+      }
+    }
+  } else if (seat) {
     markColor = party ? party.color : "#ccc"
   }
 
@@ -66,27 +79,29 @@ export default function ElectionMapTooltip({ positionId, positions }) {
             <ZoneMark color={markColor} isCompleted={memo.complete} />
           </td>
           <td>
-            {memo.zone && (
+            {zone && (
               <div>
                 <div style={LARGE_FONT}>
-                  <b>{memo.province}</b> เขต {memo.zone.no}
+                  <b>{memo.province}</b> เขต {zone.no}
                 </div>
-                {summaryState.completed ? (
+                {completed ? (
                   <WinnerInspector
-                    summary={summaryState.data}
-                    zone={memo.zone}
+                    noVotesWin={noVotesWin}
+                    candidate={candidate}
+                    markColor={markColor}
+                    percentage={percentage}
                   />
                 ) : (
                   <img src={loadingSmall} alt="Loading" />
                 )}
               </div>
             )}
-            {memo.seat && (
+            {seat && (
               <div>
                 <div style={LARGE_FONT}>
                   <b>ส.ส. บัญชีรายชื่อ</b>
                 </div>
-                <div>อันดับที่ {memo.seat.no}</div>
+                <div>อันดับที่ {seat.no}</div>
                 <div>{party ? `พรรค${party.name}` : null}</div>
               </div>
             )}
@@ -101,53 +116,41 @@ const PERCENT_STYLE = {
   opacity: 0.5,
 }
 
-function WinnerInspector({ summary, zone }) {
-  /** @type {ElectionDataSource.ZoneStats} */
-  const stats = (summary.zoneStatsMap[zone.provinceId] || {})[zone.no] || {}
-  const winning = (summary.zoneWinningCandidateMap[zone.provinceId] || {})[
-    zone.no
-  ]
-  return <div>{!!winning && renderWinning(winning)}</div>
-
-  /**
-   * @param {ElectionDataSource.Candidate} candidate
-   */
-  function renderWinning(candidate) {
-    const party = getPartyById(candidate.partyId)
-    const noVotesWin = candidate.score <= stats.noVotes
-    const percentage =
-      Math.max(candidate.score, stats.noVotes) /
-      (stats.goodVotes + stats.noVotes)
-
-    return (
-      <div
-        style={{
-          opacity: noVotesWin ? 0.3 : 1,
-        }}
-      >
-        {noVotesWin ? (
-          <div>NO VOTE</div>
-        ) : (
-          <React.Fragment>
-            <div>
-              {candidate.title}
-              {candidate.firstName} {candidate.lastName}
-            </div>
-            <div>พรรค{party.name}</div>
-          </React.Fragment>
-        )}
-        <div style={PERCENT_STYLE}>
-          {formatInt(candidate.score)} ({formatPercent(percentage)})
-        </div>
-        <svg width="120" height="5">
-          <rect width={120} height="5" fill="#ccc" />
-          <rect
-            width={Math.round(percentage * 120)}
-            height="5"
-            fill={partyColor(party)}
-          />
-        </svg>
-      </div>
-    )
+function WinnerInspector({ noVotesWin, markColor, candidate, percentage }) {
+  if (!candidate) {
+    return null
   }
+
+  const party = getPartyById(candidate.partyId)
+
+  return (
+    <div
+      style={{
+        opacity: noVotesWin ? 0.3 : 1,
+      }}
+    >
+      {noVotesWin ? (
+        <div>NO VOTE</div>
+      ) : (
+        <React.Fragment>
+          <div>
+            {candidate.title}
+            {candidate.firstName} {candidate.lastName}
+          </div>
+          <div>พรรค{party.name}</div>
+        </React.Fragment>
+      )}
+      <div style={PERCENT_STYLE}>
+        {formatInt(candidate.score)} ({formatPercent(percentage)})
+      </div>
+      <svg width="120" height="5">
+        <rect width="120" height="5" fill="#ccc" />
+        <rect
+          width={Math.round(percentage * 120)}
+          height="5"
+          fill={markColor}
+        />
+      </svg>
+    </div>
+  )
 }
