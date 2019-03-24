@@ -35,7 +35,7 @@ export const isZoneFinished = zoneStats =>
  */
 export const shouldDisplayZoneData = zoneStats =>
   zoneStats.finished ||
-  zoneStats.progress >= 10 ||
+  zoneStats.progress >= 1 ||
   zoneStats.votesTotal >= zoneStats.eligible * 0.01
 
 const cache = global.WeakMap && new WeakMap()
