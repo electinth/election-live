@@ -198,7 +198,7 @@ function PartyPMCandidateList({ partyId }) {
   const pmCandidateList = getPMCandidates()
   const photoSrc = getPhotoSrc()
 
-  if (pmCandidateList.length === 0) return <p>ไม่พบข้อมูล</p>
+  if (pmCandidateList.length === 0) return <p>ไม่พบข้อมูลแคนดิเดตนายกฯ</p>
 
   return (
     <div css={{ ...sectionStyling }}>
