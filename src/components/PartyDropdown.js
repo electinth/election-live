@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { parties, partyLogo, partyPath } from "../models/information"
-import { labelColor, DISPLAY_FONT } from "../styles"
+import { labelColor, DISPLAY_FONT, media, DESKTOP_MIN_WIDTH } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "gatsby"
@@ -109,7 +109,10 @@ export default ({ partyId }) => {
           position: "absolute",
           zIndex: 1,
           background: "white",
-          width: "inherit",
+          width: "100%",
+          [media(DESKTOP_MIN_WIDTH)]: {
+            width: "inherit",
+          },
           boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
         }}
         ref={dropdownRef}
