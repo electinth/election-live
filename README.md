@@ -18,6 +18,7 @@ Live Scoreboard for Thailand General Election 2562 (2019).
   - [Use JSDoc instead of `propTypes`](#use-jsdoc-instead-of-proptypes)
 - [Build the project into a static web page](#build-the-project-into-a-static-web-page)
 - [Releasing new version](#releasing-new-version)
+- [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -226,3 +227,11 @@ yarn build
 ## Releasing new version
 
 To release a new version, run `/updateelectliveversion 1.0.0-beta.5` slash command in our development Slack channel (only available to collaborators). This will update `package.json` file and deploy to the live website, and will also cause an update bar to display on user’s screen, asking them to refresh.
+
+## Contributors
+
+We developed this website just 8 days before the election date. It wouldn’t be possible without a lot of help from our volunteer contributors!
+
+- &rarr; [**View the contributor list**](https://elect.thematter.co/about#contributors)
+
+Also, thanks to Cleverse for [Thailand party list calculation algorithm implementation in JavaScript](https://github.com/Cleverse/thailand-party-list-calculator). It saved us a lot of time.
