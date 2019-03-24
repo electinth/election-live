@@ -6,7 +6,7 @@ export default function LoadingError() {
     <UndesirableState
       heading={
         <span>
-          มีข้อผิดผลาด
+          มีข้อผิดพลาด
           <br />
           ในการโหลดข้อมูล
         </span>
