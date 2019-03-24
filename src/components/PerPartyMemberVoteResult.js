@@ -55,7 +55,7 @@ export default function ZonePartyMemberVoteResult({ partyId }) {
         },
       }}
     >
-      <h2 css={{ fontFamily: DISPLAY_FONT }}>ประมาณจำนวน สส. ที่ได้</h2>
+      <h2 css={{ fontFamily: DISPLAY_FONT }}>ประมาณจำนวน ส.ส. ที่ได้</h2>
       <div>
         {/* tab */}
         <div>
@@ -76,14 +76,14 @@ export default function ZonePartyMemberVoteResult({ partyId }) {
             >
               แบ่งเขต({winningConstituencyCandidates.length})
             </li>
-            <li
+            {/* <li
               css={{ ...tabHeaderStyle, ...partyListStyling }}
               onClick={() => {
                 setState({ showingTab: "PARTY_LIST_TAB" })
               }}
             >
               บัญชีรายชื่อ ({winningPartyListCandidates.length})
-            </li>
+            </li> */}
           </ul>
         </div>
 

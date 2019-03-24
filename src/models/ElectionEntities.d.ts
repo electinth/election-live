@@ -14,6 +14,43 @@ interface IParty {
 }
 
 /**
+ * An information of political party
+ */
+interface IPartyInformation {
+  id: number
+  id_dga: number
+  name_th: string
+  name_en: string
+  logo: string
+  leader: string
+  secretary: string
+  board_list: string
+  address: string
+  phone: string
+  fax: string
+  website: string
+  policy: string
+  donate_code: string
+  value: number
+  label: string
+  pm_candicates: IPMCandidate[]
+  slug: string
+  terminated: boolean
+}
+
+/**
+ * A priminister candidate
+ */
+interface IPMCandidate {
+  Sequence: number
+  Title: string
+  FirstName: string
+  LastName: string
+  PartyNumber: number
+  PartyName: string
+}
+
+/**
  * A province
  */
 interface IProvince {
