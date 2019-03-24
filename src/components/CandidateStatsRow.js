@@ -1,5 +1,6 @@
 import React from "react"
 import { numberWithCommas } from "../util/format"
+import PercentBarChart from "./PercentBarChart"
 
 /**
  * @param {object} props
@@ -40,18 +41,16 @@ export default function CandidateStatsRow(props) {
           </span>
         </div>
         <div>
-          {
-            // If "no votes", no text.
-            (props.candidateName || props.candidateNumber)?
-              `${props.candidateName}, เบอร์ ${props.candidateNumber}` : <span>&nbsp;</span>
-          }
+          {// If "no votes", no text.
+          props.candidateName || props.candidateNumber ? (
+            `${props.candidateName}, เบอร์ ${props.candidateNumber}`
+          ) : (
+            <span>&nbsp;</span>
+          )}
         </div>
-        <div
-          css={{
-            height: 5,
-            width: `${props.percentage}%`,
-            background: props.partyColor,
-          }}
+        <PercentBarChart
+          percent={props.percentage / 100}
+          color={props.partyColor}
         />
       </div>
     </div>
