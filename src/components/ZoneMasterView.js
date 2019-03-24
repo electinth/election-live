@@ -158,8 +158,9 @@ export default function ZoneMasterView({
             css={{
               display: currentMobileTab === "map" ? "block" : "none",
               margin: "10px auto",
-              width: 375,
+              width: "calc(100vw - 32px)",
               [media(DESKTOP_MIN_WIDTH)]: {
+                width: 375,
                 display: "block",
                 order: 2,
               },

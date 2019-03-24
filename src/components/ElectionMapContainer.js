@@ -17,6 +17,7 @@ import ElectionMapTooltip from "./ElectionMapTooltip"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
 import { trackEvent } from "../util/analytics"
+import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 
 /**
  *
@@ -120,7 +121,14 @@ export default function ElectionMapContainer() {
     }
   }, [])
   return (
-    <div>
+    <div
+      css={{
+        margin: "0 -16px",
+        [media(WIDE_NAV_MIN_WIDTH)]: {
+          marginLeft: "0 0",
+        },
+      }}
+    >
       {mapTip && (
         <div
           css={{

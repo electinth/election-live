@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
 import _ from "lodash"
 import DesktopScoreBar from "./DesktopScoreBar"
+import HelpTooltip from "./HelpTooltip"
 import { partyStatsFromSummaryJSON } from "../models/PartyStats"
 import { useSummaryData } from "../models/LiveDataSubscription"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 
 const barHeight = 76
@@ -15,9 +14,24 @@ export default function DesktopScoreBarContainer() {
   }
 
   const pageList = [
-    { name: "ประมาณจำนวน ส.ส. เขต (350 ที่)", maxCount: 350 },
-    { name: "ประมาณจำนวน ส.ส. บัญชีรายชื่อ (150 ที่)", maxCount: 150 },
-    { name: "ประมาณจำนวน ส.ส. พึงมี (500 ที่)", maxCount: 500 },
+    {
+      name: "ประมาณ ส.ส. เขต (350 ที่)",
+      maxCount: 350,
+      description:
+        "นับจากจำนวน ส.ส. ที่มีคะแนนสูงสุดในแต่ละเขต ณ เวลานั้นๆ โดยที่จะเริ่มแสดงคะแนนหลังจากเขตนั้นได้นับคะแนนไปมากกว่า 10%",
+    },
+    {
+      name: "ประมาณ ส.ส. บัญชีรายชื่อ (150 ที่)",
+      maxCount: 150,
+      description:
+        "คำนวณจาก 'ค่าประมาณจำนวน ส.ส. พึงมี' หักลบกับ 'ค่าประมาณจำนวน ส.ส. เขต'",
+    },
+    {
+      name: "ประมาณ ส.ส. พึงมี (500 ที่)",
+      maxCount: 500,
+      description:
+        "คำนวณโดยใช้ค่าประมาณจำนวนผู้ที่จะมาใช้สิทธิ์การเลือกตั้งอยู่ที่ 38,564,981 คน (คำนวณจากจำนวนผู้มีสิทธิ์เลือกตั้งในปี 2562 ทั้งหมด 51,419,975 คน และตามสถิติปี 2554 มีผู้มาใช้สิทธิ์ 75.03%)",
+    },
   ]
 
   const [pageIndex, setPageIndex] = useState(0)
@@ -98,9 +112,12 @@ export default function DesktopScoreBarContainer() {
                 },
               }}
             >
-              {page.name}
-              &nbsp;
-              <FontAwesomeIcon icon={faQuestionCircle} />
+              <span>{page.name}</span>
+              <HelpTooltip
+                description={page.description}
+                dir="bottom right"
+                tooltipStyle={{ width: "240px" }}
+              />
             </div>
             <DesktopScoreBar
               width="320"
