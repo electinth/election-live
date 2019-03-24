@@ -1,20 +1,42 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { DESKTOP_MIN_WIDTH, media, DISPLAY_FONT } from "../styles"
 import PartyDropdown from "./PartyDropdown"
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Unimplemented from "./Unimplemented"
 import { numberWithCommas } from "../util/format"
+import { useSummaryData } from "../models/LiveDataSubscription"
+import AnimatedNumber from "./AnimatedNumber"
+import Loading from "./Loading"
+import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
 
 const sectionStyling = { borderBottom: "1px solid #000", padding: "10px 0" }
 
-// @todo #1 implement search and select with visualization of each party
-export default function PerPartySearchPanelContainer({
-  partyId,
-  totalVote = "16123223",
-  totalDistrictCouncilor = 10,
-  totalPartyListCouncilor = 5,
-}) {
+export default function PerPartySearchPanelContainer({ partyId }) {
+  const summaryState = useSummaryData()
+  const totalVote = summaryState.completed ? (
+    <AnimatedNumber value={summaryState.data.partyScoreMap[partyId] || 0}>
+      {v => numberWithCommas(v)}
+    </AnimatedNumber>
+  ) : (
+    <Loading />
+  )
+  const partyStatsRow = useMemo(() => {
+    if (!summaryState.completed) return null
+    return nationwidePartyStatsFromSummaryJSON(summaryState.data).find(
+      row => row.party.id === +partyId
+    )
+  }, [summaryState])
+  const totalDistrictCouncilor = partyStatsRow ? (
+    <AnimatedNumber value={partyStatsRow.constituencySeats} />
+  ) : (
+    <Loading />
+  )
+  const totalPartyListCouncilor = partyStatsRow ? (
+    <AnimatedNumber value={partyStatsRow.partyListSeats} />
+  ) : (
+    <Loading />
+  )
   return (
     <div
       css={{
@@ -59,7 +81,7 @@ function PartyTotalVote({ totalVote }) {
       <div
         css={{ fontWeight: "bold", fontSize: "2.2em", padding: "10px 0 0 0" }}
       >
-        {numberWithCommas(totalVote)}
+        {totalVote}
       </div>
     </div>
   )
