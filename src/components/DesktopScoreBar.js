@@ -93,7 +93,8 @@ class DesktopScoreBar extends SvgChart {
       const data = this.data()
       const theRest = this.options().maxValue - _.sumBy(data, "count")
       const width = x(party.count)
-      return width > 85 ? `เหลือ ${theRest} ที่นั่ง` : `เหลือ ${theRest}`
+      if (width > 85) return `เหลือ ${theRest} ที่นั่ง`
+      if (width > 60) return `เหลือ ${theRest}`
     }
     return party.count
   }
@@ -103,6 +104,60 @@ class DesktopScoreBar extends SvgChart {
       return require(`../styles/images/pmcan/${party.id}-s.png`)
     } catch (err) {
       return
+    }
+  }
+
+  onClick(x, height) {
+    return party => {
+      if (typeof this.options().onClick === "function") {
+        const bound = this.svg.node().getBoundingClientRect()
+        const data = {
+          party,
+          width: bound.width,
+          height: bound.height,
+          page: {
+            x: bound.x + x(party.start),
+            y: bound.y + height,
+          },
+          position: {
+            x: x(party.start),
+            y: height,
+          },
+        }
+        this.options().onClick(data)
+      }
+    }
+  }
+
+  onTooltipOpen(x, height) {
+    return party => {
+      // console.log("mouse enter bar :", d)
+      if (typeof this.options().onTooltipOpen === "function") {
+        const bound = this.svg.node().getBoundingClientRect()
+        const data = {
+          party,
+          width: bound.width,
+          height: bound.height,
+          page: {
+            x: bound.x + x(party.start),
+            y: bound.y + height + 13,
+          },
+          position: {
+            x: x(party.start),
+            y: height + 13,
+          },
+        }
+        this.options().onTooltipOpen(data)
+      }
+    }
+  }
+
+  onTooltipClose(x, height) {
+    return party => {
+      // console.log("mouse enter bar :", d)
+      if (typeof this.options().onTooltipClose === "function") {
+        this.options().onTooltipClose()
+      }
     }
   }
 
@@ -218,6 +273,9 @@ class DesktopScoreBar extends SvgChart {
       .attr("height", height)
       .attr("fill", d => d.color)
       .attr("opacity", 1)
+      .on("click", this.onClick(x, height))
+      .on("mouseenter", this.onTooltipOpen(x, height).bind(this))
+      .on("mouseleave", this.onTooltipClose(x, height).bind(this))
     barSelection
       .merge(bEnter)
       .transition(t)
@@ -245,6 +303,9 @@ class DesktopScoreBar extends SvgChart {
       .attr("y", d => height - 10)
       .style("fill", d => (this.isParty(d) ? "#ffffff" : "#999999"))
       .style("text-anchor", d => (this.isParty(d) ? "start" : "end"))
+      .on("click", this.onClick(x, height))
+      .on("mouseenter", this.onTooltipOpen(x, height).bind(this))
+      .on("mouseleave", this.onTooltipClose(x, height).bind(this))
     score
       .merge(sEnter)
       .transition(t)
@@ -297,6 +358,9 @@ class DesktopScoreBar extends SvgChart {
       .style("display", d => {
         return x(d.count) > 40
       })
+      .on("click", this.onClick(x, height))
+      .on("mouseenter", this.onTooltipOpen(x, height).bind(this))
+      .on("mouseleave", this.onTooltipClose(x, height).bind(this))
     image
       .merge(iEnter)
       .transition(t)

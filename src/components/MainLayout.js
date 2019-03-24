@@ -22,6 +22,8 @@ import Loading from "./Loading"
 import NavBar, { menuMapping } from "./NavBar"
 import Placeholder from "./Placeholder"
 import VoteCounter from "./VoteCounter"
+import ZoneMark from "./ZoneMark"
+import { partyColor, getPartyById } from "../models/information"
 import { appVersion } from "../util/appVersion"
 
 /**
@@ -30,6 +32,85 @@ import { appVersion } from "../util/appVersion"
  */
 export default function MainLayout({ children, activeNavBarSection }) {
   const [navBarActive, toggleNavBar] = useReducer(state => !state, false)
+
+  const [active, setActive] = useState(false)
+  const [tooltipPayload, setTooltipPayload] = useState({})
+  const [tooltipStyle, setTooltipStyle] = useState({})
+
+  const onTooltipOpen = data => {
+    const { x, y } = data.page
+    setTooltipPayload(data)
+    setTooltipStyle({ left: x + 20, top: y + 8 })
+    setActive(true)
+  }
+  const onTooltipClose = () => {
+    setActive(false)
+  }
+  const onTooltipClick = data => {
+    active ? onTooltipOpen(data) : onTooltipClose(data)
+  }
+  const renderParty = () => {
+    let detail
+    let partyName
+    if (tooltipPayload.party.id === 0) {
+      partyName = tooltipPayload.party.name
+    } else {
+      partyName = (
+        <div>
+          {tooltipPayload.party.bundle ? null : (
+            <ZoneMark
+              color={partyColor(getPartyById(tooltipPayload.party.id))}
+              isCompleted={true}
+            />
+          )}
+          <span>พรรค{tooltipPayload.party.name}</span>
+        </div>
+      )
+    }
+    if (tooltipPayload.party.bundle) {
+      detail = (
+        <table>
+          <tbody>
+            {tooltipPayload.party.bundle.data
+              .filter(party => party.count > 0)
+              .map(party => (
+                <tr>
+                  <td>
+                    <ZoneMark
+                      color={partyColor(getPartyById(party.id))}
+                      isCompleted={true}
+                    />
+                    <span>พรรค{party.name}</span>
+                  </td>
+                  <td>{party.count} ที่นั่ง</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )
+    } else {
+      detail = (
+        <div css={{ fontSize: "16px" }}>
+          {tooltipPayload.party.count} ที่นั่ง
+        </div>
+      )
+    }
+    return (
+      <div>
+        <div css={{ fontSize: "12px" }}>{tooltipPayload.title}</div>
+        <div css={{ fontWeight: "bold", fontSize: "16px" }}>{partyName}</div>
+        {detail}
+      </div>
+    )
+  }
+
+  useEffect(() => {
+    const closeTooltip = e => setActive(false)
+    document.body.addEventListener("click", closeTooltip, false)
+    return () => {
+      document.body.removeEventListener("click", closeTooltip)
+    }
+  })
 
   return (
     <div>
@@ -59,8 +140,35 @@ export default function MainLayout({ children, activeNavBarSection }) {
                 marginLeft: "24px",
               },
             }}
+            onMouseLeave={onTooltipClose}
           >
-            <DesktopScoreBarContainer />
+            <DesktopScoreBarContainer
+              onClick={onTooltipClick}
+              onTooltipOpen={onTooltipOpen}
+            />
+          </div>
+          <div
+            css={{
+              position: "absolute",
+              width: "160px",
+              zIndex: "1000",
+              padding: "8px",
+              color: "#000000",
+              fontSize: "12px",
+              border: "1px solid #eeeeee",
+              borderRadius: "2px",
+              backgroundColor: "#ffffff",
+              boxShadow: "0 5px 8px rgba(0,0,0,0.12)",
+            }}
+            style={{
+              display: active ? "block" : "none",
+              maxWidth: "70vw",
+              width: "200px",
+              ...tooltipStyle,
+            }}
+            onMouseLeave={onTooltipClose}
+          >
+            {tooltipPayload.party ? renderParty() : "none"}
           </div>
           <div
             css={{

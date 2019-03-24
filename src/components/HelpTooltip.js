@@ -65,8 +65,6 @@ export default function HelpTooltip({
           css={{
             position: "absolute",
             width: "160px",
-            ...dirPosition,
-            ...tooltipStyle,
             zIndex: "1000",
             padding: "8px",
             color: "#000000",
@@ -78,6 +76,8 @@ export default function HelpTooltip({
           }}
           style={{
             display: active ? "block" : "none",
+            ...dirPosition,
+            ...tooltipStyle,
           }}
         >
           <div>{description}</div>
