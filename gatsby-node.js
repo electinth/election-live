@@ -1,7 +1,7 @@
 require = require("esm")(module)
 
 process.env.ELECT_LIVE_SHA = require("child_process")
-  .execFileSync("git rev-parse HEAD")
+  .execSync("git rev-parse HEAD")
   .toString()
   .trim()
 
