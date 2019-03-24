@@ -1,42 +1,12 @@
 import React, { useState } from "react"
 import { DESKTOP_MIN_WIDTH, media, DISPLAY_FONT } from "../styles"
 import { numberWithCommas } from "../util/format"
+import { useSummaryData } from "../models/LiveDataSubscription"
+import { partyStatsFromSummaryJSON } from "../models/PartyStats"
 
-const mockData = [
-  {
-    name: "นายประมูล อึ้งไปเลยสิย้ง",
-    zone: "ราชบุรี, เขต 3",
-    vote: "1234567",
-    percentage: "20",
-  },
-  {
-    name: "นายย้ง อึ้งไปเลยสิประมูล",
-    zone: "ราชบุรี, เขต 3",
-    vote: "672367",
-    percentage: "20",
-  },
-  {
-    name: "นายอึ้ง ย้ง",
-    zone: "ราชบุรี, เขต 3",
-    vote: "345",
-    percentage: "20",
-  },
-  {
-    name: "นายย้ง อึ้ง",
-    zone: "ราชบุรี, เขต 3",
-    vote: "22344",
-    percentage: "20",
-  },
-]
+const defaultTab = "DISTRICT_TAB"
 
-const defaultTab = "EACH_DISTRICT_TAB"
-
-// @todo #1 Party View - binding data to ZonePartyMemberVoteResult
-export default function ZonePartyMemberVoteResult({
-  data = mockData,
-  totalDistrictCandidate = 31,
-  totalPartyListCandidate = 13,
-}) {
+export default function ZonePartyMemberVoteResult({ partyId }) {
   const [state, setState] = useState({
     showingTab: defaultTab,
   })
@@ -55,6 +25,23 @@ export default function ZonePartyMemberVoteResult({
   const eachDistrictStyling =
     state.showingTab === defaultTab ? { ...active } : {}
   const partyListStyling = state.showingTab !== defaultTab ? { ...active } : {}
+
+  /** @type {ElectionDataSource.SummaryJSON} */
+  const summaryState = useSummaryData()
+  const winningConstituencyCandidates = getWinningConstituencyCandidates(
+    summaryState,
+    partyId
+  )
+  const winningPartyListCandidates = getWinningPartyListCandidates(
+    summaryState,
+    partyId
+  )
+
+  const visibleCandidatesList =
+    state.showingTab === defaultTab
+      ? winningConstituencyCandidates
+      : winningPartyListCandidates
+
   return (
     <div
       css={{
@@ -84,12 +71,10 @@ export default function ZonePartyMemberVoteResult({
             <li
               css={{ ...tabHeaderStyle, ...eachDistrictStyling }}
               onClick={() => {
-                // @todo #1 Party View - result panel - implement showing candidate's vote result when select tab
-
                 setState({ showingTab: defaultTab })
               }}
             >
-              แบ่งเขต({totalDistrictCandidate})
+              แบ่งเขต({winningConstituencyCandidates.length})
             </li>
             <li
               css={{ ...tabHeaderStyle, ...partyListStyling }}
@@ -97,35 +82,84 @@ export default function ZonePartyMemberVoteResult({
                 setState({ showingTab: "PARTY_LIST_TAB" })
               }}
             >
-              บัญชีรายชื่อ ({totalPartyListCandidate})
+              บัญชีรายชื่อ ({winningPartyListCandidates.length})
             </li>
           </ul>
         </div>
 
-        {/* list */}
-        <div css={{ textAlign: "left", padding: "5px" }}>
-          {data.map(item => (
-            <div
-              css={{ display: "flex", position: "relative", marginTop: "15px" }}
-            >
-              <img
-                src={require(`../styles/images/pmcan/1-s.png`)}
-                css={{ width: "30px", height: "30px", borderRadius: "50%" }}
-              />
-              <div css={{ marginLeft: "5px", fontFamily: DISPLAY_FONT }}>
-                <div css={{ fontWeight: "bold" }}>{item.name}</div>
-                <div css={{ fontSize: "0.8em" }}>{item.zone}</div>
-              </div>
-              <div css={{ float: "right", position: "absolute", right: 0 }}>
-                <span css={{ fontWeight: "bold" }}>
-                  {numberWithCommas(item.vote)}
-                </span>{" "}
-                - {item.percentage}%
-              </div>
-            </div>
-          ))}
-        </div>
+        <CandidatesList candidates={visibleCandidatesList} />
       </div>
     </div>
   )
+}
+
+function CandidatesList({ candidates }) {
+  if (candidates.length > 0) {
+    return (
+      <div css={{ textAlign: "left", padding: "5px" }}>
+        {candidates.map(item => (
+          <div
+            css={{ display: "flex", position: "relative", marginTop: "15px" }}
+          >
+            <div css={{ marginLeft: "5px", fontFamily: DISPLAY_FONT }}>
+              <div css={{ fontWeight: "bold" }}>
+                {item.firstName} {item.lastName}
+              </div>
+              <div css={{ fontSize: "0.8em" }}>{item.zone}</div>
+            </div>
+            <div css={{ float: "right", position: "absolute", right: 0 }}>
+              <span css={{ fontWeight: "bold" }}>
+                {numberWithCommas(item.score)}
+              </span>{" "}
+              - {Math.round(item.percentage * 100)}%
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  } else {
+    return <p>ไม่พบข้อมูล</p>
+  }
+}
+
+function getWinningConstituencyCandidates(summaryState, partyId) {
+  if (!summaryState.completed) {
+    return []
+  } else {
+    const summary = summaryState.data
+    let winningCandidates = []
+
+    // For each provinceId...
+    for (const provinceId of Object.keys(summary.zoneWinningCandidateMap)) {
+      const zoneNoWinningCandidateMap =
+        summary.zoneWinningCandidateMap[provinceId]
+
+      // For each zone number...
+      for (const zoneNo of Object.keys(zoneNoWinningCandidateMap)) {
+        const candidateData = zoneNoWinningCandidateMap[zoneNo]
+        const votesTotal = summary.zoneStatsMap[provinceId][zoneNo].votesTotal
+
+        // Add to list only if the candidate matches the partyId
+        if (candidateData.partyId == partyId) {
+          candidateData["percentage"] = candidateData.score / votesTotal || 0
+          winningCandidates.push(candidateData)
+        }
+      }
+    }
+
+    return winningCandidates
+  }
+}
+
+function getWinningPartyListCandidates(summaryState) {
+  if (!summaryState.completed) {
+    return []
+  } else {
+    const summary = summaryState.data
+    const partyStats = partyStatsFromSummaryJSON(summary)
+
+    // @todo #1 Party View - display winning party-list candidates
+
+    return []
+  }
 }

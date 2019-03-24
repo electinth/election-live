@@ -9,16 +9,16 @@ const menues = [
     route: "/",
     label: "ดูผลตามพื้นที่",
   },
-  {
-    name: "by-party",
-    route: "/party",
-    label: "ดูผลตามพรรค",
-  },
-  {
-    name: "overview",
-    route: "/overview",
-    label: "ภาพรวมผลลัพธ์",
-  },
+  // {
+  //   name: "by-party",
+  //   route: "/party",
+  //   label: "ดูผลตามพรรค",
+  // },
+  // {
+  //   name: "overview",
+  //   route: "/overview",
+  //   label: "ภาพรวมผลลัพธ์",
+  // },
   {
     name: "about",
     route: "/about",
@@ -54,7 +54,11 @@ export default function Navbar(props) {
     [media(WIDE_NAV_MIN_WIDTH)]: { display: "inline-block" },
     "&[data-active]": {
       opacity: "1",
-      [media(WIDE_NAV_MIN_WIDTH)]: { borderBottom: "3px solid white" },
+      textDecoration: "underline",
+      [media(WIDE_NAV_MIN_WIDTH)]: {
+        borderBottom: "3px solid white",
+        textDecoration: "none",
+      },
     },
   }
 
@@ -77,8 +81,11 @@ export default function Navbar(props) {
     <nav
       css={{
         display: "block",
-        textAlign: "center",
-        backgroundColor: "#212121;",
+        textAlign: "right",
+        backgroundColor: "#212121",
+        [media(WIDE_NAV_MIN_WIDTH)]: {
+          textAlign: "center",
+        },
       }}
     >
       {menues.map(m => linkTo(m["name"], m["route"], m["label"]))}

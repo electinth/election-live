@@ -5,16 +5,15 @@ import { Link } from "gatsby"
 
 // example test. might not need.
 describe("Navbar", () => {
-
   let renderer
 
   beforeEach(() => {
     renderer = TestRenderer.create(<NavBar />)
   })
 
-  test('should have 4 Links', () => {
+  test("should have 4 Links, but 2 for now", () => {
     const root = renderer.root
-    const links = root.findAll((el) => el.type === Link)
-    expect(links).toHaveLength(4)
+    const links = root.findAll(el => el.type === Link)
+    expect(links).toHaveLength(2)
   })
 })

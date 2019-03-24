@@ -22,7 +22,7 @@ export const contributors = require("./_contributors.json")
  * @param {IParty} party
  */
 export function partyPath(party) {
-  return `/party/${party.codeEN.toLowerCase()}`
+  return `/party/${party.name}`
 }
 
 /**
@@ -61,6 +61,7 @@ export const zonesForSearch = zones.map(zone => {
     zone: getZoneByProvinceIdAndZoneNo(zone.provinceId, zone.no),
     province: getProvinceById(zone.provinceId),
     zoneKey: zoneKey(zone.provinceId, zone.no),
+    postcode: zone.postcode,
   }
 })
 

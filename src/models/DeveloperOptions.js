@@ -9,12 +9,17 @@ global.ELECT_overrideDirectory = directory => overrideDirectory.set(directory)
 export function useLocalStorage(name) {
   const [value, setValue] = useState(null)
   useEffect(() => {
-    const listener = () => {
+    try {
+      if (typeof localStorage !== "object" || !localStorage) return
+      const listener = () => {
+        setValue(localStorage[name])
+      }
       setValue(localStorage[name])
+      window.addEventListener("storage", listener)
+      return () => window.removeEventListener("storage", listener)
+    } catch (e) {
+      return
     }
-    setValue(localStorage[name])
-    window.addEventListener("storage", listener)
-    return () => window.removeEventListener("storage", listener)
   }, [])
   const changeValue = useCallback(nextValue => {
     localStorage[name] = String(nextValue)

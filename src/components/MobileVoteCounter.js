@@ -1,15 +1,16 @@
 import React from "react"
-import { DISPLAY_FONT } from "../styles"
+import { BODY_FONT } from "../styles"
 export default function MobileVoteCounter(props) {
   const { percentage } = props
   return (
     <div
       css={{
-        fontFamily: DISPLAY_FONT,
+        fontFamily: BODY_FONT,
         textAlign: "center",
         color: "white",
-        marginTop: "8px",
         margin: "auto",
+        marginTop: "0",
+        marginRight: "0",
         display: "flex",
       }}
     >

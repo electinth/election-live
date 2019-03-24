@@ -6,8 +6,8 @@ import {
   useLatestDirectoryState,
 } from "../../models/LiveDataSubscription"
 import {
-  partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
+  nationwidePartyStatsFromSummaryJSON,
 } from "../../models/PartyStats"
 import {
   zones,
@@ -99,9 +99,10 @@ function DataInspector() {
 }
 
 function PartyStatsInspector({ summary }) {
-  const partyStats = useMemo(() => partyStatsFromSummaryJSON(summary), [
-    summary,
-  ])
+  const partyStats = useMemo(
+    () => nationwidePartyStatsFromSummaryJSON(summary),
+    [summary]
+  )
   return (
     <Table>
       <thead>

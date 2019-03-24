@@ -1,5 +1,8 @@
 import { getProvinceById } from "."
 
+/** @type {IProvince[]} */
+const provinces = require("./_provinces.json")
+
 // @ts-check
 
 // Provinces where zone boundaries were manipulated by NCPO
@@ -75,6 +78,24 @@ const URBAN_ZONES = [
   "10-17",
 ]
 
+const provinceFilter = function() {
+  return provinces.reduce(
+    (acc, p) => ({
+      ...acc,
+      [p.name]: {
+        name: {
+          th: p.name,
+          en: p.name,
+        },
+        criterion: function(province, zone) {
+          return province.id === p.id
+        },
+      },
+    }),
+    {}
+  )
+}
+
 /**
  * Available filters.
  *
@@ -83,6 +104,7 @@ const URBAN_ZONES = [
  * @type {{ [filterName in ZoneFilterName]: IZoneFilter }}
  */
 export const filters = {
+  ...provinceFilter(),
   all: {
     name: {
       th: "ทั่วประเทศ",
@@ -123,6 +145,12 @@ export const filters = {
       th: "เขตพื้นที่ในเมือง",
       en: "Urban",
     },
+    description: {
+      th:
+        "เขตที่มีความหนาแน่นประชากร 800 คน/ตร.กม. ขึ้นไป (≥ เขตที่หนาแน่นน้อยที่สุดของกทม.)",
+      en:
+        "เขตที่มีความหนาแน่นประชากร 800 คน/ตร.กม. ขึ้นไป (≥ เขตที่หนาแน่นน้อยที่สุดของกทม.)",
+    },
     criterion: (province, zone) =>
       URBAN_ZONES.includes(`${zone.provinceId}-${zone.no}`),
   },
@@ -130,6 +158,12 @@ export const filters = {
     name: {
       th: "เขตพื้นที่นอกเมือง",
       en: "Rural",
+    },
+    description: {
+      th:
+        "เขตที่มีความหนาแน่นประชากรน้อยกว่า 800 คน/ตร.กม (< เขตที่หนาแน่นน้อยที่สุดของกรุงเทพฯ)",
+      en:
+        "เขตที่มีความหนาแน่นประชากรน้อยกว่า 800 คน/ตร.กม (< เขตที่หนาแน่นน้อยที่สุดของกรุงเทพฯ)",
     },
     criterion: (province, zone) =>
       !URBAN_ZONES.includes(`${zone.provinceId}-${zone.no}`),
@@ -139,6 +173,12 @@ export const filters = {
       th: "เขตถูกแบ่งโดย คสช.",
       en: "Gerrymandering",
     },
+    description: {
+      th:
+        "จังหวัดที่มีรูปแบบเขตเลือกตั้งไม่ตรงกับที่ กกต.จังหวัดกำหนด เนื่องด้วยคำสั่ง คสช.",
+      en:
+        "จังหวัดที่มีรูปแบบเขตเลือกตั้งไม่ตรงกับที่ กกต.จังหวัดกำหนด เนื่องด้วยคำสั่ง คสช.",
+    },
     criterion: (province, zone) =>
       GERRYMANDERING_PROVINCES.includes(province.id),
   },
@@ -146,6 +186,12 @@ export const filters = {
     name: {
       th: "เขตที่ไม่มีฐานเสียงชัดเจน",
       en: "Swing District",
+    },
+    description: {
+      th:
+        "จังหวัดที่มีผลคะแนนเลือกตั้งปี 54 ของพรรคอันดับ 1 กับอันดับ 2 ห่างกันไม่ถึง 5%",
+      en:
+        "จังหวัดที่มีผลคะแนนเลือกตั้งปี 54 ของพรรคอันดับ 1 กับอันดับ 2 ห่างกันไม่ถึง 5%",
     },
     criterion: (province, zone) => SWING_PROVINCES.includes(province.id),
   },

@@ -8,47 +8,30 @@ import {
 } from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
-  partyStatsFromSummaryJSON,
   isZoneFinished,
   shouldDisplayZoneData,
+  nationwidePartyStatsFromSummaryJSON,
 } from "../models/PartyStats"
-import ElectionMap from "./ElectionMap"
+import ElectionMap, { electionMapLoadingData } from "./ElectionMap"
 import ElectionMapTooltip from "./ElectionMapTooltip"
+import ZoneMark from "./ZoneMark"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
 import { trackEvent } from "../util/analytics"
+import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
+import { createSelector } from "reselect"
 
 /**
- *
  * @param {import('../models/LiveDataSubscription').DataState<ElectionDataSource.SummaryJSON>} summaryState
  * @param {IZoneFilter} filter
  */
 function getMapData(summaryState, filter) {
   if (!summaryState.completed) {
-    const partylist = []
-    while (partylist.length < 150) {
-      partylist.push({
-        id: `pl-${partylist.length + 1}`,
-        partyId: "nope",
-        complete: true,
-        show: false,
-      })
-    }
-    return [
-      ...zones.map((zone, i) => {
-        return {
-          id: `${zone.provinceId}-${zone.no}`,
-          partyId: "nope",
-          complete: false,
-          show: false,
-        }
-      }),
-      ...partylist,
-    ]
+    return electionMapLoadingData
   } else {
     /** @type {ElectionDataSource.SummaryJSON} */
     const summary = summaryState.data
-    const partyStats = partyStatsFromSummaryJSON(summary)
+    const partyStats = nationwidePartyStatsFromSummaryJSON(summary)
     const partylist = []
     for (const row of partyStats) {
       for (let i = 0; i < row.partyListSeats; i++) {
@@ -70,6 +53,7 @@ function getMapData(summaryState, filter) {
     }
     return [
       ...zones.map((zone, i) => {
+        // @todo #1 This logic is now available in getSeatDisplayModel. Refactor this component to use it.
         const winningCandidate = (summary.zoneWinningCandidateMap[
           zone.provinceId
         ] || {})[zone.no]
@@ -92,7 +76,16 @@ function getMapData(summaryState, filter) {
   }
 }
 
-export default function ElectionMapContainer() {
+const createMapData = createSelector(
+  ({ zones }) => zones,
+  ({ selectedZone }) =>
+    selectedZone
+      ? `${selectedZone.provinceId}-${selectedZone.zoneNo}`
+      : selectedZone,
+  (zones, selectedZone) => ({ zones, selectedZone })
+)
+
+export default function ElectionMapContainer({ currentZone }) {
   const summaryState = useSummaryData()
   const currentFilterName = useContext(ZoneFilterContext)
   const currentFilter = filters[currentFilterName]
@@ -113,14 +106,27 @@ export default function ElectionMapContainer() {
     setMapTip(null)
   }, [])
   const onZoneClick = useCallback(zone => {
-    const match = zone.data.id.match(/^(\d+)-(\d+)$/)
-    if (match) {
-      trackEvent("View zone", { via: "Map" })
-      navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
+    if (zone) {
+      const match = zone.data.id.match(/^(\d+)-(\d+)$/)
+      if (match) {
+        trackEvent("View zone", { via: "Map" })
+        navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
+      }
+    } else {
+      trackEvent("Clear zone", { via: "Map" })
+      navigate("")
     }
   }, [])
+
   return (
-    <div>
+    <div
+      css={{
+        margin: "0 -16px",
+        [media(WIDE_NAV_MIN_WIDTH)]: {
+          marginLeft: "0 0",
+        },
+      }}
+    >
       {mapTip && (
         <div
           css={{
@@ -129,6 +135,7 @@ export default function ElectionMapContainer() {
             padding: 6,
             backgroundColor: "#fff",
             pointerEvents: "none",
+            maxWidth: 220,
             boxShadow: "0 0 4px 0 rgba(0, 0, 0, 0.3)",
             top: mapTip.mouseEvent.clientY + 10,
             left: mapTip.mouseEvent.clientX + 10,
@@ -140,8 +147,17 @@ export default function ElectionMapContainer() {
           />
         </div>
       )}
+      <div style={{ textAlign: "center", marginBottom: 6 }}>
+        <ZoneMark color="#777" isCompleted />
+        นับถึง 95% &nbsp;
+        <ZoneMark color="#777" />
+        นับแล้วน้อยกว่า 95%
+      </div>
       <ElectionMap
-        data={mapZones}
+        data={createMapData({
+          zones: mapZones,
+          selectedZone: currentZone,
+        })}
         onInit={onInit}
         onZoneMouseenter={onZoneMouseenter}
         onZoneMousemove={onZoneMousemove}

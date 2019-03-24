@@ -1,6 +1,13 @@
 import { navigate } from "gatsby"
 import _ from "lodash"
-import React, { useContext, useLayoutEffect, useState } from "react"
+import React, {
+  useContext,
+  useLayoutEffect,
+  useState,
+  useRef,
+  useEffect,
+  createContext,
+} from "react"
 import CandidateStatsRow from "../components/CandidateStatsRow"
 import CloseButton from "../components/CloseButton"
 import MainLayout from "../components/MainLayout"
@@ -18,6 +25,7 @@ import {
   getProvinceById,
   getZoneByProvinceIdAndZoneNo,
   zones,
+  zonePath,
   getPartyById,
 } from "../models/information"
 import { useSummaryData, usePerZoneData } from "../models/LiveDataSubscription"
@@ -32,49 +40,73 @@ import Placeholder from "../components/Placeholder"
 import UndesirableState from "../components/UndesirableState"
 import LoadingError from "../components/LoadingError"
 
-export default ({ pageContext, navigate, location }) => (
+const MobileTabContext = createContext(
+  /** @type {import('../components/ZoneMasterView').MobileTab} */ ("summary")
+)
+
+export default ({ pageContext, location }) => (
   <MainLayout activeNavBarSection="by-area">
-    <InertFilter
-      value={pageContext.zoneView ? null : pageContext.filterName || "all"}
-    >
-      {filterName => (
-        <ZoneFilterContext.Provider value={filterName}>
-          <ZoneMasterView
-            location={location}
-            navigate={navigate}
-            contentHeader={
-              <SummaryHeaderContainer
-                key={filterName}
-                filterName={filterName}
-              />
-            }
-            contentBody={
-              <PartyStatsContainer key={filterName} filterName={filterName} />
-            }
-            popup={
-              pageContext.zoneView ? (
-                <ZoneView {...pageContext.zoneView} />
-              ) : null
-            }
-          />
-        </ZoneFilterContext.Provider>
-      )}
-    </InertFilter>
+    <ZonePageContainer pageContext={pageContext} location={location} />
   </MainLayout>
 )
 
-function InertFilter({ value: filterNameFromRoute, children }) {
-  const [filterName, setFilterName] = useState(filterNameFromRoute || "all")
+function ZonePageContainer({ pageContext, location }) {
+  /** @type {ZoneFilterName | null} */
+  const filterNameFromRoute = pageContext.zoneView
+    ? null
+    : pageContext.filterName || "all"
+  const filterNameRef = useRef(filterNameFromRoute || "all")
+  const filterName =
+    filterNameFromRoute != null ? filterNameFromRoute : filterNameRef.current
+  useEffect(() => {
+    filterNameRef.current = filterName
+  })
 
-  useLayoutEffect(() => {
-    if (filterNameFromRoute !== null) {
-      if (filterName !== filterNameFromRoute) {
-        setFilterName(filterNameFromRoute)
-      }
+  /** @type {import('../components/ZoneMasterView').MobileTab | null} */
+  const mobileTabFromRoute = pageContext.zoneView
+    ? null
+    : getTabFromUrl(location)
+  const currentMobileTabRef = useRef(mobileTabFromRoute || "summary")
+  const currentMobileTab =
+    mobileTabFromRoute != null
+      ? mobileTabFromRoute
+      : currentMobileTabRef.current
+  const switchMobileTab = targetTab => {
+    if (targetTab === "summary") {
+      navigate(`${location.pathname}`)
+    } else {
+      navigate(`${location.pathname}?tab=${targetTab}`)
     }
-  }, [filterName, filterNameFromRoute])
+  }
+  useEffect(() => {
+    currentMobileTabRef.current = currentMobileTab
+  })
 
-  return children(filterName)
+  return (
+    <ZoneFilterContext.Provider value={filterName}>
+      <MobileTabContext.Provider value={currentMobileTab}>
+        <ZoneMasterView
+          currentZone={pageContext.zoneView}
+          contentHeader={
+            <SummaryHeaderContainer key={filterName} filterName={filterName} />
+          }
+          contentBody={
+            <PartyStatsContainer key={filterName} filterName={filterName} />
+          }
+          popup={
+            pageContext.zoneView ? <ZoneView {...pageContext.zoneView} /> : null
+          }
+          currentMobileTab={currentMobileTab}
+          switchMobileTab={switchMobileTab}
+        />
+      </MobileTabContext.Provider>
+    </ZoneFilterContext.Provider>
+  )
+}
+
+function getTabFromUrl(location) {
+  const matches = location.search.match(/(\?|&)tab=(.+)(&|$)/)
+  return matches ? matches[2] : "summary"
 }
 
 /**
@@ -173,6 +205,7 @@ function ZoneView({ provinceId, zoneNo }) {
   const province = getProvinceById(provinceId)
   const activeFilter = useContext(ZoneFilterContext)
   const summaryState = useSummaryData()
+  const mobileTab = useContext(MobileTabContext)
 
   /**
    * @template T
@@ -213,7 +246,14 @@ function ZoneView({ provinceId, zoneNo }) {
             WebkitOverflowScrolling: "touch",
           }}
         >
-          <CloseButton onClick={() => navigate(filterPath(activeFilter))} />
+          <CloseButton
+            onClick={() =>
+              navigate(
+                filterPath(activeFilter) +
+                  (mobileTab === "summary" ? "" : `?tab=${mobileTab}`)
+              )
+            }
+          />
           <div
             css={{
               textAlign: "center",
@@ -231,21 +271,31 @@ function ZoneView({ provinceId, zoneNo }) {
                 position: "relative",
               }}
             >
-              <Arrow />
-              เขตเลือกตั้งที่ {zone.no}
-              <div
-                css={{
-                  display: "inline-block",
-                  border: "solid #212121",
-                  borderWidth: "0 2px 2px 0",
-                  padding: "4px",
-                  transform: "rotate(-45deg)",
-                  verticalAlign: "middle",
-                  marginLeft: "12px",
-                  cursor: "pointer",
+              <Arrow
+                onLeftArrowClick={() => {
+                  navigate(zonePath({ provinceId, no: zoneNo - 1 || 1 }))
                 }}
-              />
+                onRightArrowClick={() =>
+                  navigate(
+                    zonePath({
+                      provinceId,
+                      no: zoneNo < province.zone ? zoneNo + 1 : province.zone,
+                    })
+                  )
+                }
+                hideLeftArrow={zoneNo === 1}
+                hideRightArrow={zoneNo === province.zone}
+              >
+                เขตเลือกตั้งที่ {zone.no}
+              </Arrow>
             </h2>
+            <div
+              css={{
+                marginBottom: 10,
+              }}
+            >
+              {zone.details}
+            </div>
             <div>
               <span>นับแล้ว</span>
               <span
@@ -376,7 +426,7 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
     <ul css={{ listStyle: "none", margin: 0, marginTop: 10, padding: 0 }}>
       {zoneCandidates.map((candidate, index) => {
         const party = getPartyById(candidate.partyId)
-        const percentage = Math.round((candidate.score / goodVotes) * 100)
+        const percentage = Math.round((candidate.score / goodVotes) * 100) || 0
         const fullName =
           candidate.firstName || candidate.lastName
             ? `${candidate.firstName} ${candidate.lastName}`

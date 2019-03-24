@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import React, { createContext, useRef, useLayoutEffect } from "react"
 import { filterPath, filters as areaFilters } from "../models/information"
 import { trackEvent } from "../util/analytics"
+import HelpTooltip from "./HelpTooltip"
 
 export const ZoneFilterContext = createContext(
   /** @type {ZoneFilterName} */ ("all")
@@ -58,10 +59,9 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                   }}
                   ref={current ? currentLinkRef : undefined}
                   css={{
-                    opacity: current ? 1 : 0.62,
                     display: "block",
                     textDecoration: "none",
-                    color: "inherit",
+                    color: current ? "#000000" : "#999999",
                   }}
                 >
                   <span css={{ marginRight: 10 }}>
@@ -69,6 +69,11 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                     {!current && <FontAwesomeIcon icon={faCircle} />}
                   </span>
                   <span>{areaFilters[filterName].name.th}</span>
+                  {areaFilters[filterName].description ? (
+                    <HelpTooltip
+                      description={areaFilters[filterName].description.th}
+                    />
+                  ) : null}
                 </Link>
               </li>
             )

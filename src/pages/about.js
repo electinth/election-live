@@ -53,7 +53,7 @@ export default () => (
       <Divider mb={32} />
       <SubTitle mb={8}>อาสาสมัครที่ร่วมพัฒนา</SubTitle>
       {
-        // @todo add contributors
+        // @todo #1 add contributors
       }
       <BodyText>
         <ContributorSection

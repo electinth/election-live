@@ -1,22 +1,58 @@
-import { keyBy } from "lodash"
+import { keyBy, uniq, uniqBy } from "lodash"
 import {
   quadtree,
   event as d3Event,
   mouse as d3Mouse,
-  transition as d3Transition,
   zoom as d3Zoom,
 } from "d3"
 import { SvgChart, helper } from "d3kit"
 import { createComponent } from "react-d3kit"
-import { parties } from "../models/information"
+import { parties, zones } from "../models/information"
 import { memo } from "react"
 import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
+import { createSelector } from "reselect"
+import { isMobileOrTablet } from "../util/device"
 const maps = require("../models/information/_map.json")
 
+const mapLabels = uniqBy(
+  maps.labels.map(l => ({ ...l, id: l.lines.map(l => l.text).join(",") })),
+  d => d.id
+)
 const partyLookup = keyBy(parties, p => p.id)
-
 const NO_PARTY = "#aaaaaa"
 const HIDDEN_ZONE = "#dddddd"
+const uniqueColors = uniq(
+  parties.map(p => p.color).concat([NO_PARTY, HIDDEN_ZONE])
+)
+
+const EMPTY_LOOKUP = {}
+
+const createDataLookup = createSelector(
+  zoneData => zoneData,
+  zoneData => (zoneData ? keyBy(zoneData, d => d.id) : EMPTY_LOOKUP)
+)
+
+const createZoneLayout = createSelector(
+  ({ size }) => size,
+  ({ padding }) => padding,
+  (size, padding) => {
+    const rectSide = size - padding
+
+    const zones = maps.zones.map(z => ({
+      x: z.x * size + rectSide / 2,
+      y: z.y * size + rectSide / 2,
+      data: z,
+    }))
+
+    // Add center of the cells to quadtree
+    const quadTree = quadtree()
+      .x(d => d.x)
+      .y(d => d.y)
+      .addAll(zones)
+
+    return { zones, quadTree }
+  }
+)
 
 /**
  * @param {Object} props
@@ -26,7 +62,8 @@ const HIDDEN_ZONE = "#dddddd"
 class ElectionMap extends SvgChart {
   static getDefaultOptions() {
     return helper.deepExtend(super.getDefaultOptions(), {
-      height: 560,
+      initialWidth: 375,
+      initialHeight: 560,
       size: 9,
       padding: 1,
       margin: {
@@ -45,7 +82,7 @@ class ElectionMap extends SvgChart {
   constructor(element, options) {
     super(element, options)
     this.layers.create({
-      center: { zoom: { map: ["cell", "label", "glass"] } },
+      center: { zoom: { map: ["label", "glass", "cell"] } },
     })
 
     this.visualize = this.visualize.bind(this)
@@ -73,6 +110,24 @@ class ElectionMap extends SvgChart {
     // set up svg
     this.svg.style("position", "relative")
 
+    this.defs = this.svg.append("defs")
+
+    this.defs
+      .selectAll("pattern")
+      .data(uniqueColors, c => c)
+      .enter()
+      .append("pattern")
+      .attr("id", c => `dLines-${c.replace("#", "")}`)
+      .attr("width", 4)
+      .attr("height", 4)
+      .attr("patternUnits", "userSpaceOnUse")
+      .append("path")
+      .attr("d", "M 0,4 l 4,-4 M -1,1 l 2,-2 M 3,5 l 2,-2")
+      .attr("stroke", c => c)
+      .attr("stroke-width", 1)
+      .attr("stroke-linecap", "square")
+      .attr("shape-rendering", "auto")
+
     const zoomLayer = this.layers.get("center/zoom")
 
     this.zoom = d3Zoom()
@@ -87,7 +142,10 @@ class ElectionMap extends SvgChart {
         "transform",
         `translate(${this.getInnerWidth() / 2},${this.getInnerHeight() / 2})`
       )
-      .call(this.zoom)
+
+    if (isMobileOrTablet()) {
+      this.layers.get("center").call(this.zoom)
+    }
 
     this.layers
       .get("center/zoom/map")
@@ -100,11 +158,15 @@ class ElectionMap extends SvgChart {
       .get("center/zoom/map/glass")
       .append("rect")
       .attr("fill", "rgba(0,0,0,0)")
+      .attr("width", this.getInnerWidth())
+      .attr("height", this.getInnerHeight())
+
+    this.layers
+      .get("center/zoom/map")
       .on("mouseleave", () => {
         const zone = this.findNearbyZone()
-        this.selection
+        this.zoneLayer
           .selectAll("g.zone")
-          .transition()
           .style("stroke", d => (d === zone ? "#222" : "none"))
 
         if (this.prevZone) {
@@ -114,10 +176,12 @@ class ElectionMap extends SvgChart {
       })
       .on("mousemove", () => {
         const zone = this.findNearbyZone()
-        this.selection
-          .selectAll("g.zone")
-          .transition()
-          .style("stroke", d => (d === zone ? "#222" : "none"))
+        const { selectedZone } = this.data() || {}
+        this.zoneLayer
+          .selectAll("g.zone rect")
+          .style("stroke", d =>
+            d === zone || d.data.id === selectedZone ? "#222" : "none"
+          )
 
         if (zone) {
           if (zone !== this.prevZone) {
@@ -134,40 +198,30 @@ class ElectionMap extends SvgChart {
         this.prevZone = zone
       })
       .on("click", () => {
-        // @todo #1 ElectionMap: Selection does not update on route change.
-        //  This is because ElectionMap manages its own "selected" state.
-        //  To fix this, make ElectionMap take in the ID of current selection
-        //  via props rather than managing the state inside ElectionMap.
-
-        // clear previous selection
-        const allZones = this.selection.selectAll("g.zone")
-        allZones
-          .select("rect")
-          .transition()
-          .attr("transform", "scale(1)")
         const zone = this.findNearbyZone()
         if (zone) {
-          allZones
-            .filter(d => d === zone)
-            .raise()
-            .select("rect")
-            .transition()
-            .attr("transform", `scale(2)`)
           this.dispatchAs("zoneClick")(zone, d3Event)
+        } else {
+          this.dispatchAs("zoneClick")(null, d3Event)
         }
       })
 
-    this.selection = this.layers
+    this.zoneLayer = this.layers
       .get("center/zoom/map/cell")
       .attr("stroke", "none")
       .attr("stroke-width", 1)
       .attr("fill", "none")
       .attr("fill-rule", "evenodd")
-      .style("transition", "all .5s ease-in")
-      .style("transform", "scale(1)translate(0px, 0px)")
-      .append("g")
-      .style("transform", "scale(1)translate(0px, 0px)")
-      .style("pointer-events", "bounding-box")
+    // .style("transform", "scale(1)translate(0px, 0px)")
+    // .append("g")
+    // .style("transform", "scale(1)translate(0px, 0px)")
+    // .style("pointer-events", "bounding-box")
+
+    this.layers
+      .get("center/zoom/map/label")
+      .attr("font-size", "6.4")
+      .attr("font-weight", "normal")
+      .attr("letter-spacing", "0")
 
     // hack for testing
     // window.theMap = this;
@@ -183,12 +237,37 @@ class ElectionMap extends SvgChart {
     return this.quadTree && this.quadTree.find(x, y, 32)
   }
 
+  clearSelectedZone() {
+    this.zoneLayer
+      .selectAll("g.zone rect")
+      .attr("stroke", "none")
+      .attr("stroke-width", 1)
+  }
+
+  selectZone(zoneId) {
+    this.clearSelectedZone()
+    this.zoneLayer
+      .selectAll("g.zone")
+      .filter(d => d.data.id === zoneId)
+      .raise()
+      .select("rect")
+      .attr("stroke", "#222")
+      .attr("stroke-width", 2)
+  }
+
   color(d) {
+    // for testing
+    // const index = Math.round(Math.random()*3)*2
+    // const full = Math.random() > 0.5
+    // const color = uniqueColors[index];
+    // return full ? color : `url(#dLines-${color.replace('#', '')})`
+
     const match = this.dataLookup[d.id]
     if (match) {
       if (!match.show) return HIDDEN_ZONE
       const party = partyLookup[match.partyId]
-      return (party && party.color) || NO_PARTY
+      const color = (party && party.color) || NO_PARTY
+      return match.complete ? color : `url(#dLines-${color.replace("#", "")})`
     }
     return NO_PARTY
   }
@@ -199,20 +278,19 @@ class ElectionMap extends SvgChart {
   }
 
   radius(d) {
-    const match = this.dataLookup[d.id]
-    return match && match.complete ? 0 : this.options().size
+    return 0
+    // const match = this.dataLookup[d.id]
+    // return match && match.complete ? 0 : this.options().size
   }
 
   opacity(d) {
+    return 1
     const match = this.dataLookup[d.id]
     return match && match.complete ? 1 : 0.5
   }
 
   resetZoom() {
-    this.layers
-      .get("center/zoom")
-      .transition()
-      .attr("transform", "translate(0,0)scale(1)")
+    this.layers.get("center/zoom").attr("transform", "translate(0,0)scale(1)")
   }
 
   render() {
@@ -220,25 +298,38 @@ class ElectionMap extends SvgChart {
       .attr("width", this.getInnerWidth())
       .attr("height", this.getInnerHeight())
 
-    this.dataLookup = keyBy(this.data(), d => d.id)
+    this.renderZones()
+
+    const { selectedZone } = this.data()
+    if (selectedZone) {
+      this.selectZone(selectedZone)
+    } else {
+      this.clearSelectedZone()
+    }
+
+    // // resize to fit window
+    // this.fit({
+    //   mode: "basic",
+    //   width: 375,
+    //   height: this.options().height,
+    // })
+  }
+
+  renderZones() {
     const { size, padding } = this.options()
-    const t = d3Transition().duration(1000)
-
     const rectSide = size - padding
+    const { zones, quadTree } = createZoneLayout(this.options())
+    const dataLookup = createDataLookup(this.data().zones)
 
-    const zones = maps.zones.map(z => ({
-      x: z.x * size + rectSide / 2,
-      y: z.y * size + rectSide / 2,
-      data: z,
-    }))
+    // If data is truly immutable, this will make it even more optimized
+    // if (this.quadTree === quadTree && this.dataLookup === dataLookup) {
+    //   return;
+    // }
 
-    // Add center of the cells to quadtree
-    this.quadTree = quadtree()
-      .x(d => d.x)
-      .y(d => d.y)
-      .addAll(zones)
+    this.dataLookup = dataLookup
+    this.quadTree = quadTree
 
-    const zoneSelection = this.selection
+    const zoneSelection = this.zoneLayer
       .selectAll("g.zone")
       .data(zones, d => d.data.id)
 
@@ -247,37 +338,35 @@ class ElectionMap extends SvgChart {
       .append("g")
       .classed("zone", true)
       .attr("transform", d => `translate(${d.x},${d.y})`)
+      .style("cursor", "pointer")
+
+    zoneEnter
       .append("rect")
-      .attr("data-p", d => this.party(d.data))
+      // .attr("data-p", d => this.party(d.data))
       .attr("x", -rectSide / 2)
       .attr("y", -rectSide / 2)
       .attr("width", rectSide)
       .attr("height", rectSide)
-      .style("transition", "all .2s ease-out")
-      .attr("transform", "scale(1)")
+      .attr("rx", 2)
+      .attr("vector-effect", "non-scaling-stroke")
 
     zoneSelection
       .merge(zoneEnter)
+      .attr("transform", d => `translate(${d.x},${d.y})`)
       .select("rect")
-      .transition(t)
       .attr("fill", d => this.color(d.data))
-      .attr("opacity", d => this.opacity(d.data))
-      .attr("rx", d => this.radius(d.data))
+    // .attr("opacity", d => this.opacity(d.data))
 
     zoneSelection.exit().remove()
 
     const labelSelection = this.layers
       .get("center/zoom/map/label")
-      .attr("font-family", "BaiJamjuree-Regular, Bai Jamjuree")
-      .attr("font-size", "6.4")
-      .attr("font-weight", "normal")
-      .attr("letter-spacing", "0")
       .selectAll("text.label")
-      .data(maps.labels, d => d.id)
+      .data(mapLabels, d => d.id)
       .enter()
       .append("text")
       .classed("label", true)
-      .attr("id", d => d.id)
+      // .attr("id", d => d.id)
       .style("transform", "translate(0, -10px)")
 
     labelSelection.exit().remove()
@@ -292,14 +381,30 @@ class ElectionMap extends SvgChart {
       .text(d => d.text)
 
     spanSelection.exit().remove()
+  }
+}
 
-    // resize to fit window
-    this.fit({
-      mode: "basic",
-      width: 375,
-      height: this.options().height,
+export const electionMapLoadingData = () => {
+  const partylist = []
+  while (partylist.length < 150) {
+    partylist.push({
+      id: `pl-${partylist.length + 1}`,
+      partyId: "nope",
+      complete: true,
+      show: false,
     })
   }
+  return [
+    ...zones.map((zone, i) => {
+      return {
+        id: `${zone.provinceId}-${zone.no}`,
+        partyId: "nope",
+        complete: false,
+        show: false,
+      }
+    }),
+    ...partylist,
+  ]
 }
 
 export default /** @type {React.FunctionComponent<Props>} */ (onlyPassThroughPropsWhilePageIsVisible(

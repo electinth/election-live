@@ -1,25 +1,50 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { DESKTOP_MIN_WIDTH, media, DISPLAY_FONT } from "../styles"
 import PartyDropdown from "./PartyDropdown"
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Unimplemented from "./Unimplemented"
 import { numberWithCommas } from "../util/format"
+import { useSummaryData } from "../models/LiveDataSubscription"
+import AnimatedNumber from "./AnimatedNumber"
+import Loading from "./Loading"
+import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
+import _ from "lodash"
 
 const sectionStyling = { borderBottom: "1px solid #000", padding: "10px 0" }
 
-// @todo #1 implement search and select with visualization of each party
-export default function PerPartySearchPanelContainer({
-  partyId,
-  totalVote = "16123223",
-  totalDistrictCouncilor = 10,
-  totalPartyListCouncilor = 5,
-}) {
+export default function PerPartySearchPanelContainer({ partyId }) {
+  const summaryState = useSummaryData()
+  const totalVote = summaryState.completed ? (
+    <AnimatedNumber value={summaryState.data.partyScoreMap[partyId] || 0}>
+      {v => numberWithCommas(v)}
+    </AnimatedNumber>
+  ) : (
+    <Loading />
+  )
+  const partyStatsRow = useMemo(() => {
+    if (!summaryState.completed) return null
+    return _.find(
+      nationwidePartyStatsFromSummaryJSON(summaryState.data),
+      row => row.party.id === +partyId
+    )
+  }, [summaryState])
+  const totalDistrictCouncilor = partyStatsRow ? (
+    <AnimatedNumber value={partyStatsRow.constituencySeats} />
+  ) : (
+    <Loading />
+  )
+  const totalPartyListCouncilor = partyStatsRow ? (
+    <AnimatedNumber value={partyStatsRow.partyListSeats} />
+  ) : (
+    <Loading />
+  )
   return (
     <div
       css={{
         fontFamily: DISPLAY_FONT,
         margin: "20px 0 0 0",
+        position: "relative",
         [media(DESKTOP_MIN_WIDTH)]: {
           display: "block",
           order: 1,
@@ -28,14 +53,25 @@ export default function PerPartySearchPanelContainer({
         },
       }}
     >
-      <PartyDropdown partyId={partyId} dropdownOpen={false} />
-      <PartyTotalVote totalVote={totalVote} />
-      <PartyTotalCouncilorEstimationVisualization />
-      <PartyTotalCouncilorEstimationNumber
-        totalDistrictCouncilor={totalDistrictCouncilor}
-        totalPartyListCouncilor={totalPartyListCouncilor}
-      />
-      <PartyPresidentCandidateList />
+      <div
+        css={{
+          background: "red",
+          position: "absolute",
+          top: 0,
+          width: "100%",
+        }}
+      >
+        <PartyDropdown partyId={partyId} dropdownOpen={false} />
+      </div>
+      <div css={{ paddingTop: 56 }}>
+        <PartyTotalVote totalVote={totalVote} />
+        <PartyTotalCouncilorEstimationVisualization />
+        <PartyTotalCouncilorEstimationNumber
+          totalDistrictCouncilor={totalDistrictCouncilor}
+          totalPartyListCouncilor={totalPartyListCouncilor}
+        />
+        <PartyPresidentCandidateList partyId={partyId} />
+      </div>
     </div>
   )
 }
@@ -47,7 +83,7 @@ function PartyTotalVote({ totalVote }) {
       <div
         css={{ fontWeight: "bold", fontSize: "2.2em", padding: "10px 0 0 0" }}
       >
-        {numberWithCommas(totalVote)}
+        {totalVote}
       </div>
     </div>
   )
@@ -104,11 +140,60 @@ function PartyTotalCouncilorEstimationNumber({
   )
 }
 
-function PartyPresidentCandidateList() {
+function PartyPresidentCandidateList({ partyId }) {
+  // @todo #1 PartyView - PartyPresidentCandidateList - bind presiddent candidate data by party id
+  const mockData = [
+    {
+      firstName: "ชื่อ",
+      lastName: "นามสกุล",
+      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
+    },
+    {
+      firstName: "ชื่อ",
+      lastName: "นามสกุล",
+      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
+    },
+    {
+      firstName: "ชื่อ",
+      lastName: "นามสกุล",
+      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
+    },
+  ]
+  const presidentCandidateList = mockData
   return (
     <div css={{ ...sectionStyling }}>
       <div>แคนดิเดตนายกฯ</div>
-      <div>{/* @todo #1 implement president candidate list */}</div>
+      <div css={{ display: "flex" }}>
+        {presidentCandidateList.map(item => {
+          return (
+            <div css={{ padding: "10px", width: "100%" }}>
+              <div>
+                <img
+                  src={item.photoSrc}
+                  css={{
+                    display: "block",
+                    padding: 0,
+                    margin: "auto",
+                    width: "35px",
+                    height: "35px",
+                    borderRadius: "50%",
+                  }}
+                />
+              </div>
+              <div
+                css={{
+                  fontSize: "0.8em",
+                  marginTop: "5px",
+                  textAlign: "center",
+                }}
+              >
+                <div>{item.firstName}</div>
+                <div css={{ marginTop: "-1px" }}>{item.lastName}</div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

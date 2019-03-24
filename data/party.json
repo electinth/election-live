@@ -55,13 +55,13 @@
   },
   {
     "name": "ชาติไทยพัฒนา",
-    "color": "#231c72",
+    "color": "#ff72a8",
     "hilightColor": "#b7192d",
     "count": 315
   },
   {
     "name": "ชาติพัฒนา",
-    "color": "#223c88",
+    "color": "#ffaf41",
     "hilightColor": "#e12127",
     "count": 266
   },
@@ -169,7 +169,7 @@
   },
   {
     "name": "ประชาธิปัตย์",
-    "color": "#437fba",
+    "color": "#06aff3",
     "hilightColor": "#ffffff",
     "count": 350
   },
@@ -265,7 +265,7 @@
   },
   {
     "name": "พลังประชารัฐ",
-    "color": "#3e61a8",
+    "color": "#1f68dd",
     "hilightColor": "#dd3239",
     "count": 350
   },
@@ -337,7 +337,7 @@
   },
   {
     "name": "เพื่อไทย",
-    "color": "#cf1e38",
+    "color": "#da3731",
     "hilightColor": "#0c0c80",
     "count": 250
   },
@@ -385,7 +385,7 @@
   },
   {
     "name": "ภูมิใจไทย",
-    "color": "#102986",
+    "color": "#209fa0",
     "hilightColor": "#ce0506",
     "count": 350
   },
@@ -445,7 +445,7 @@
   },
   {
     "name": "เศรษฐกิจใหม่",
-    "color": "#184474",
+    "color": "#6e2fff",
     "hilightColor": "#c83437",
     "count": 331
   },
@@ -469,7 +469,7 @@
   },
   {
     "name": "เสรีรวมไทย",
-    "color": "#edd63f",
+    "color": "#b49e31",
     "hilightColor": "#19198e",
     "count": 350
   },
@@ -481,7 +481,7 @@
   },
   {
     "name": "อนาคตใหม่",
-    "color": "#f4792e",
+    "color": "#ef7824",
     "hilightColor": "#0c3255",
     "count": 350
   }
