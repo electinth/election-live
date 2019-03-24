@@ -46,13 +46,13 @@ export default function ElectionMapTooltip({ positionId, positions }) {
 
   const { completed, data = {} } = useSummaryData()
   const { party, zone, seat } = memo
-  const { zoneWinningCandidateMap = {}, zoneStatsMap = {} } = data
 
   let markColor = "#ccc"
   let candidate
   let percentage = 0
   let noVotesWin = false
   if (zone && completed) {
+    const { zoneWinningCandidateMap = {}, zoneStatsMap = {} } = data || {}
     const { no, provinceId } = zone
     candidate = (zoneWinningCandidateMap[provinceId] || {})[no]
     if (candidate) {
