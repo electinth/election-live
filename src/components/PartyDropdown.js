@@ -13,7 +13,7 @@ const searcher = new Fuse(parties, {
 export default ({ partyId }) => {
   const [dropdownOpen, setDropdownOpen] = useState(!partyId ? true : false)
   const [currentParty, setCurrentParty] = useState(
-    partyId ? parties.find(p => p.id === partyId) : parties[0]
+    partyId ? parties.find(p => p.id === partyId) : null
   )
 
   const [searchKeyword, setSearchKeyword] = useState("")
@@ -21,7 +21,11 @@ export default ({ partyId }) => {
   const dropdownRef = useRef()
 
   const handleClickOutside = e => {
-    if (!!dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    if (
+      !!dropdownRef.current &&
+      !dropdownRef.current.contains(e.target) &&
+      !!currentParty
+    ) {
       setDropdownOpen(false)
     }
   }
