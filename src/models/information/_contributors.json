@@ -1,24 +1,178 @@
 {
-  "coders": [
+  "": [
     {
-      "name": "Mr. A",
-      "url": "//abc.com"
+      "name": "",
+      "role": "",
+      "url": "",
+      "github": "Woracheth\r"
     },
     {
-      "name": "Mr. C",
-      "url": "//abc.com"
+      "name": "",
+      "role": "",
+      "url": "",
+      "github": "koobitor\r"
+    },
+    {
+      "name": "",
+      "role": "",
+      "url": "",
+      "github": "iboss-ptk\r"
+    }
+  ],
+  "coders": [
+    {
+      "name": "ภัทรวัต ช่อไม้",
+      "role": "coders",
+      "url": "http://pat.chormai.org/#!",
+      "github": "heytitle\r"
+    },
+    {
+      "name": "ไท ปังสกุลยานนท์",
+      "role": "coders",
+      "url": "https://dt.in.th/",
+      "github": "dtinth\r"
+    },
+    {
+      "name": "วสวัตติ์ สมโน",
+      "role": "coders",
+      "url": "https://medium.com/@bullrish",
+      "github": "dodadoa\r"
+    },
+    {
+      "name": "กฤตวัฒน์ สุพรรณโกมุท",
+      "role": "coders",
+      "url": "",
+      "github": "kratuwu\r"
+    },
+    {
+      "name": "รพี สุวีรานนท์",
+      "role": "coders",
+      "url": "https://github.com/rapee/",
+      "github": "rapee\r"
+    },
+    {
+      "name": "ปานกมล ศรีแก้ว",
+      "role": "coders",
+      "url": "https://aimetpgm.github.io/",
+      "github": "AimeTPGM\r"
+    },
+    {
+      "name": "กฤษฏิ์ วงศ์ศุภสวัสดิ์",
+      "role": "coders",
+      "url": "http://kristw.yellowpigz.com",
+      "github": "kristw\r"
+    },
+    {
+      "name": "วิโรจน์ จิรพัฒนกุล",
+      "role": "coders",
+      "url": "",
+      "github": "\r"
+    },
+    {
+      "name": "มนัสวิน หาญมงคลชัย",
+      "role": "coders",
+      "url": "https://cupco.de",
+      "github": "whs\r"
+    },
+    {
+      "name": "บุษฑิตา วงศ์ธีระวิทย์",
+      "role": "coders",
+      "url": "https://github.com/gminemini",
+      "github": "gminemini\r"
+    },
+    {
+      "name": "ธีระพล วัธนเวคิน",
+      "role": "coders",
+      "url": "https://github.com/parnurzeal",
+      "github": "parnurzeal\r"
+    },
+    {
+      "name": "ชัยพล โอบอ้อม",
+      "role": "coders",
+      "url": "https://github.com/neschaiyapon",
+      "github": "NesChaiyapon\r"
+    },
+    {
+      "name": "Mishari muqbil",
+      "role": "coders",
+      "url": "http://zymple.biz",
+      "github": "Mishari\r"
+    },
+    {
+      "name": "ภวริษฐ์ ฉันทประยูร",
+      "role": "coders",
+      "url": "",
+      "github": "\r"
+    },
+    {
+      "name": "สกล อัศวะสกูล",
+      "role": "coders",
+      "url": "https://github.com/koobitor",
+      "github": "koobitor\r"
+    },
+    {
+      "name": "ศุภณัฐ โพธิวรากร",
+      "role": "coders",
+      "url": "http://medium.com/@ibosz/",
+      "github": "iboss-ptk\r"
+    },
+    {
+      "name": "อรรณวุฒิ ลีไพศาลสุวรรณา",
+      "role": "coders",
+      "url": "https://github.com/unnawut",
+      "github": "unnawut\r"
+    },
+    {
+      "name": "ดลภาค สุวรรณปัญญา",
+      "role": "coders",
+      "url": "",
+      "github": "phoneee\r"
     }
   ],
   "designers": [
     {
-      "name": "Mrs. Anna",
-      "url": "..."
+      "name": "ศุภวิชญ์ พิพัฒน์",
+      "role": "designers",
+      "url": "",
+      "github": "\r"
+    },
+    {
+      "name": "สปัญญา ศรีสุข",
+      "role": "designers",
+      "url": "",
+      "github": "\r"
+    },
+    {
+      "name": "ธัญญาเรศ ล้อมรัตนพนา",
+      "role": "designers",
+      "url": "",
+      "github": "\r"
     }
   ],
   "others": [
     {
-      "name": "Ms. Jane",
-      "url": "..."
+      "name": "Minimore",
+      "role": "others",
+      "url": "https://minimore.com",
+      "github": "\r"
+    },
+    {
+      "name": "Boonmee Lab",
+      "role": "others",
+      "url": "https://www.facebook.com/BoonmeeLab/",
+      "github": "\r"
+    },
+    {
+      "name": "The Matter",
+      "role": "others",
+      "url": "https://www.facebook.com/thematterco/",
+      "github": "\r"
+    },
+    {
+      "name": "iLaw",
+      "role": "others",
+      "url": "https://www.facebook.com/iLawClub/",
+      "github": "\r"
     }
   ]
 }
