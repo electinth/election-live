@@ -1,4 +1,4 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faSearch, faChevronDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useCallback, useState } from "react"
 import {
@@ -197,14 +197,23 @@ export default function ZoneMasterView({
           }}
           onClick={() => setActiveSidebar("filter")}
         >
-          <div css={{ padding: "0 15px" }}>
-            <div css={{ color: labelColor, fontSize: 12 }}>แสดงผล</div>
-            <ZoneFilterContext.Consumer>
-              {currentFilterName => {
-                const name = filters[currentFilterName].name.th
-                return <div css={{ fontSize: 16, fontWeight: 600 }}>{name}</div>
-              }}
-            </ZoneFilterContext.Consumer>
+          <div
+            css={{ padding: "0 15px", display: "flex", alignItems: "center" }}
+          >
+            <div css={{ flex: 1 }}>
+              <div css={{ color: labelColor, fontSize: 12 }}>แสดงผล</div>
+              <ZoneFilterContext.Consumer>
+                {currentFilterName => {
+                  const name = filters[currentFilterName].name.th
+                  return (
+                    <div css={{ fontSize: 16, fontWeight: 600 }}>{name}</div>
+                  )
+                }}
+              </ZoneFilterContext.Consumer>
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faChevronDown} />
+            </div>
           </div>
         </button>
         <div css={{ flex: "none", marginLeft: 16, width: boxHeight }}>
