@@ -55,7 +55,7 @@ export default function ZonePartyMemberVoteResult({ partyId }) {
         },
       }}
     >
-      <h2 css={{ fontFamily: DISPLAY_FONT }}>ประมาณจำนวน สส. ที่ได้</h2>
+      <h2 css={{ fontFamily: DISPLAY_FONT }}>ประมาณจำนวน ส.ส. ที่ได้</h2>
       <div>
         {/* tab */}
         <div>
