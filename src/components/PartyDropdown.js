@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { parties, partyLogo, partyPath } from "../models/information"
 import { labelColor, DISPLAY_FONT } from "../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -11,11 +11,23 @@ const searcher = new Fuse(parties, {
 })
 
 export default ({ partyId }) => {
-  const [state, setState] = useState({
-    dropdownOpen: !partyId ? true : false,
-    currentParty: partyId ? parties.find(p => p.id === partyId) : parties[0],
-  })
+  const [dropdownOpen, setDropdownOpen] = useState(!partyId ? true : false)
+  const [currentParty, setCurrentParty] = useState(
+    partyId ? parties.find(p => p.id === partyId) : parties[0]
+  )
+
   const [searchKeyword, setSearchKeyword] = useState("")
+
+  const dropdownRef = useRef()
+
+  const handleClickOutside = e => {
+    if (!!dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setDropdownOpen(false)
+    }
+  }
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside)
+  })
 
   function partyItem(p) {
     return (
@@ -56,11 +68,9 @@ export default ({ partyId }) => {
         css={{
           cursor: "pointer",
         }}
-        onClick={() => {
-          setState({ dropdownOpen: true, currentParty: state.currentParty })
-        }}
+        onClick={() => setDropdownOpen(true)}
       >
-        {partyItem(state.currentParty)}
+        {partyItem(currentParty)}
       </div>
     )
   }
@@ -76,6 +86,7 @@ export default ({ partyId }) => {
         css={{
           position: "relative",
         }}
+        ref={dropdownRef}
       >
         <div css={{ position: "relative" }}>
           <input
@@ -92,12 +103,6 @@ export default ({ partyId }) => {
             placeholder="ชื่อพรรคการเมือง"
             onChange={e => {
               setSearchKeyword(e.target.value)
-            }}
-            onBlur={() => {
-              setState({
-                dropdownOpen: false,
-                currentParty: state.currentParty,
-              })
             }}
           />
           <div
@@ -125,9 +130,10 @@ export default ({ partyId }) => {
                 key={p.id}
                 to={partyPath(p)}
                 style={{ color: "black", textDecoration: "none" }}
-                onClick={() =>
-                  setState({ dropdownOpen: false, currentParty: p })
-                }
+                onClick={() => {
+                  setDropdownOpen(false)
+                  setCurrentParty(p)
+                }}
               >
                 <li
                   css={{
@@ -162,9 +168,9 @@ export default ({ partyId }) => {
           boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
         }}
       >
-        {state.dropdownOpen ? renderDropdown() : renderDefaultDropdown()}
+        {dropdownOpen ? renderDropdown() : renderDefaultDropdown()}
       </div>
-      {state.dropdownOpen ? null : (
+      {dropdownOpen ? null : (
         <div
           css={{
             position: "absolute",
