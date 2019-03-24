@@ -7,7 +7,6 @@ import { DISPLAY_FONT } from "../styles"
 
 export default ({ pageContext, location }) => {
   const partyId = pageContext.partyId
-  console.log(partyId)
   const content = partyId ? (
     <PerPartyView partyId={partyId} />
   ) : (
