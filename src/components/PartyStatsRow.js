@@ -2,42 +2,41 @@ import React from "react"
 import VisuallyHidden from "@reach/visually-hidden"
 import { DISPLAY_FONT } from "../styles"
 import { partyColor, partyLogo } from "../models/information"
+import PercentBarChart from "./PercentBarChart"
+
+const ARTICLE_STYLE = {
+  position: "relative",
+  marginBottom: "0.5rem",
+  padding: "0.5rem 0",
+  display: "grid",
+  gridTemplateColumns: "28px auto 32px",
+  gridGap: "6px",
+  background: "white",
+}
+
+const PARTY_NAME_STYLE = {
+  margin: 0,
+  fontSize: "1.5rem",
+  fontFamily: DISPLAY_FONT,
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+}
 
 /**
  * @param {{ party: IParty, constituencySeats: number, partyListSeats: number, maxSeats: number, filtered: boolean }} props
  */
 const PartyStatsRow = props => {
   const totalSeats = props.constituencySeats + props.partyListSeats
-  const barWidth = `${(totalSeats / props.maxSeats).toFixed(4)}`
+  const barWidth = totalSeats / props.maxSeats
 
   return (
-    <article
-      css={{
-        position: "relative",
-        marginBottom: "0.5rem",
-        padding: "0.5rem 0",
-        display: "grid",
-        gridTemplateColumns: "28px auto 32px",
-        gridGap: "6px",
-        background: "white",
-      }}
-    >
+    <article css={ARTICLE_STYLE}>
       <div>
         <img alt="" src={partyLogo(props.party.name)} width="28" />
       </div>
       <div css={{ overflow: "hidden" }}>
-        <h3
-          css={{
-            margin: 0,
-            fontSize: "1.5rem",
-            fontFamily: DISPLAY_FONT,
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-          }}
-        >
-          {props.party.name}
-        </h3>
+        <h3 css={PARTY_NAME_STYLE}>{props.party.name}</h3>
         <div css={{ margin: 0 }}>
           ส.ส. เขต: {props.constituencySeats}
           <VisuallyHidden> ที่นั่ง </VisuallyHidden>
@@ -48,17 +47,7 @@ const PartyStatsRow = props => {
             </React.Fragment>
           )}
         </div>
-        <div
-          css={{
-            height: 5,
-            marginTop: "5px",
-            transformOrigin: "left",
-          }}
-          style={{
-            transform: `scaleX(${barWidth})`,
-            background: partyColor(props.party),
-          }}
-        />
+        <PercentBarChart color={partyColor(props.party)} percent={barWidth} />
       </div>
       <div>
         <VisuallyHidden> ทั้งหมด </VisuallyHidden>

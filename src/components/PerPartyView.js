@@ -1,9 +1,9 @@
 import React from "react"
 import { DESKTOP_MIN_WIDTH, media } from "../styles"
 import ErrorBoundary from "./ErrorBoundary"
-import ElectionMapContainer from "./ElectionMapContainer"
 import PerPartyMemberVoteResult from "./PerPartyMemberVoteResult"
 import PerPartySearchPanelContainer from "./PerPartySearchPanelContainer"
+import PerPartyMapContainer from "./PerPartyMapContainer"
 
 export default function PerPartyView({ partyId }) {
   return (
@@ -22,15 +22,14 @@ export default function PerPartyView({ partyId }) {
         }}
       >
         <PerPartySearchPanelContainer partyId={partyId} />
-        <ZoneMapView />
+        <PerPartyMapView partyId={partyId} />
         <ZoneStats partyId={partyId} />
       </div>
     </div>
   )
 }
 
-// @todo #1 visualize data in country map when select a party
-function ZoneMapView() {
+function PerPartyMapView({ partyId }) {
   return (
     <div
       css={{
@@ -46,7 +45,6 @@ function ZoneMapView() {
       {/* map zone */}
       <div
         css={{
-          // display: currentMobileTab === "map" ? "block" : "none",
           display: "block",
           margin: "10px auto",
           width: 375,
@@ -57,7 +55,7 @@ function ZoneMapView() {
         }}
       >
         <ErrorBoundary name="ElectionMap">
-          <ElectionMapContainer />
+          <PerPartyMapContainer partyId={partyId} />
         </ErrorBoundary>
       </div>
     </div>

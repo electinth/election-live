@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import _ from "lodash"
 import DesktopScoreBar from "./DesktopScoreBar"
 import HelpTooltip from "./HelpTooltip"
-import { partyStatsFromSummaryJSON } from "../models/PartyStats"
+import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 
@@ -46,7 +46,7 @@ export default function DesktopScoreBarContainer() {
   if (!summaryState.completed) return null
 
   const summary = summaryState.data
-  const partyStats = partyStatsFromSummaryJSON(summary)
+  const partyStats = nationwidePartyStatsFromSummaryJSON(summary)
 
   const data = [
     _.chain(partyStats)
