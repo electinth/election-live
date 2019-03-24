@@ -96,7 +96,16 @@ export default function ZonePartyMemberVoteResult({ partyId }) {
 function CandidatesList({ candidates }) {
   if (candidates.length > 0) {
     return (
-      <div css={{ textAlign: "left", padding: "5px" }}>
+      <div
+        css={{
+          textAlign: "left",
+          padding: "10px",
+          height: "calc(70vh - 200px)",
+          overflowX: "hidden",
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
         {candidates.map(item => (
           <div
             css={{ display: "flex", position: "relative", marginTop: "15px" }}
