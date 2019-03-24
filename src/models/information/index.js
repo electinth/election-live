@@ -22,7 +22,7 @@ export const contributors = require("./_contributors.json")
  * @param {IParty} party
  */
 export function partyPath(party) {
-  return `/party/${party.codeEN.toLowerCase()}`
+  return `/party/${party.name}`
 }
 
 /**
