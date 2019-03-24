@@ -18,6 +18,7 @@ import {
   getProvinceById,
   getZoneByProvinceIdAndZoneNo,
   zones,
+  zonePath,
   getPartyById,
 } from "../models/information"
 import { useSummaryData, usePerZoneData } from "../models/LiveDataSubscription"
@@ -231,20 +232,21 @@ function ZoneView({ provinceId, zoneNo }) {
                 position: "relative",
               }}
             >
-              <Arrow />
-              เขตเลือกตั้งที่ {zone.no}
-              <div
-                css={{
-                  display: "inline-block",
-                  border: "solid #212121",
-                  borderWidth: "0 2px 2px 0",
-                  padding: "4px",
-                  transform: "rotate(-45deg)",
-                  verticalAlign: "middle",
-                  marginLeft: "12px",
-                  cursor: "pointer",
+              <Arrow
+                onLeftArrowClick={() => {
+                  navigate(zonePath({ provinceId, no: zoneNo - 1 || 1 }))
                 }}
-              />
+                onRightArrowClick={() =>
+                  navigate(
+                    zonePath({
+                      provinceId,
+                      no: zoneNo < province.zone ? zoneNo + 1 : province.zone,
+                    })
+                  )
+                }
+              >
+                เขตเลือกตั้งที่ {zone.no}
+              </Arrow>
             </h2>
             <div>
               <span>นับแล้ว</span>
