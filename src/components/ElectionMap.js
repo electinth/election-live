@@ -10,6 +10,7 @@ import { createComponent } from "react-d3kit"
 import { parties } from "../models/information"
 import { memo } from "react"
 import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
+import { createSelector } from "reselect"
 const maps = require("../models/information/_map.json")
 
 const mapLabels = uniqBy(
@@ -20,6 +21,28 @@ const partyLookup = keyBy(parties, p => p.id)
 
 const NO_PARTY = "#aaaaaa"
 const HIDDEN_ZONE = "#dddddd"
+
+const createZoneLayout = createSelector(
+  ({ size }) => size,
+  ({ padding }) => padding,
+  (size, padding) => {
+    const rectSide = size - padding
+
+    const zones = maps.zones.map(z => ({
+      x: z.x * size + rectSide / 2,
+      y: z.y * size + rectSide / 2,
+      data: z,
+    }))
+
+    // Add center of the cells to quadtree
+    const quadTree = quadtree()
+      .x(d => d.x)
+      .y(d => d.y)
+      .addAll(zones)
+
+    return { zones, quadTree }
+  }
+)
 
 /**
  * @param {Object} props
@@ -135,11 +158,6 @@ class ElectionMap extends SvgChart {
         this.prevZone = zone
       })
       .on("click", () => {
-        // @todo #1 ElectionMap: Selection does not update on route change.
-        //  This is because ElectionMap manages its own "selected" state.
-        //  To fix this, make ElectionMap take in the ID of current selection
-        //  via props rather than managing the state inside ElectionMap.
-
         const zone = this.findNearbyZone()
         if (zone) {
           this.dispatchAs("zoneClick")(zone, d3Event)
@@ -215,34 +233,35 @@ class ElectionMap extends SvgChart {
   }
 
   render() {
+    console.log("hi")
     this.glass
       .attr("width", this.getInnerWidth())
       .attr("height", this.getInnerHeight())
 
     this.dataLookup = keyBy(this.data().zones, d => d.id)
-    const { size, padding } = this.options()
 
-    const rectSide = size - padding
-
-    const zones = maps.zones.map(z => ({
-      x: z.x * size + rectSide / 2,
-      y: z.y * size + rectSide / 2,
-      data: z,
-    }))
-
-    // Add center of the cells to quadtree
-    this.quadTree = quadtree()
-      .x(d => d.x)
-      .y(d => d.y)
-      .addAll(zones)
+    this.renderZones()
 
     const { selectedZone } = this.data()
     if (selectedZone) {
-      const { provinceId, zoneNo } = selectedZone
-      this.selectZone(`${provinceId}-${zoneNo}`)
+      this.selectZone(selectedZone)
     } else {
       this.clearSelectedZone()
     }
+
+    // resize to fit window
+    this.fit({
+      mode: "basic",
+      width: 375,
+      height: this.options().height,
+    })
+  }
+
+  renderZones() {
+    const { size, padding } = this.options()
+    const rectSide = size - padding
+    const { zones, quadTree } = createZoneLayout(this.options())
+    this.quadTree = quadTree
 
     const zoneSelection = this.zoneLayer
       .selectAll("g.zone")
@@ -296,13 +315,6 @@ class ElectionMap extends SvgChart {
       .text(d => d.text)
 
     spanSelection.exit().remove()
-
-    // resize to fit window
-    this.fit({
-      mode: "basic",
-      width: 375,
-      height: this.options().height,
-    })
   }
 }
 

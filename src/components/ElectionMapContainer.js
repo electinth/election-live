@@ -17,7 +17,11 @@ import ElectionMapTooltip from "./ElectionMapTooltip"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
 import { navigate } from "gatsby"
 import { trackEvent } from "../util/analytics"
+<<<<<<< HEAD
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
+=======
+import { createSelector } from "reselect"
+>>>>>>> use reselect to improve performance
 
 /**
  *
@@ -93,6 +97,15 @@ function getMapData(summaryState, filter) {
   }
 }
 
+const createMapData = createSelector(
+  ({ zones }) => zones,
+  ({ selectedZone }) =>
+    selectedZone
+      ? `${selectedZone.provinceId}-${selectedZone.zoneNo}`
+      : selectedZone,
+  (zones, selectedZone) => ({ zones, selectedZone })
+)
+
 export default function ElectionMapContainer({ currentZone }) {
   const summaryState = useSummaryData()
   const currentFilterName = useContext(ZoneFilterContext)
@@ -120,8 +133,6 @@ export default function ElectionMapContainer({ currentZone }) {
       navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
     }
   }, [])
-
-  console.log("currentZone", currentZone)
 
   return (
     <div
@@ -171,10 +182,10 @@ export default function ElectionMapContainer({ currentZone }) {
         นับแล้วน้อยกว่า 95%
       </div>
       <ElectionMap
-        data={{
+        data={createMapData({
           zones: mapZones,
           selectedZone: currentZone,
-        }}
+        })}
         onInit={onInit}
         onZoneMouseenter={onZoneMouseenter}
         onZoneMousemove={onZoneMousemove}
