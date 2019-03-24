@@ -8,6 +8,9 @@ import { fail } from "assert"
 /** @type {IParty[]} */
 export const parties = require("./_parties.json")
 
+/** @type {IPartyInformation[]} */
+export const partyInfomation = require("./_party-information.json")
+
 /** @type {IProvince[]} */
 export const provinces = require("./_provinces.json")
 
