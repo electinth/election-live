@@ -426,7 +426,7 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
     <ul css={{ listStyle: "none", margin: 0, marginTop: 10, padding: 0 }}>
       {zoneCandidates.map((candidate, index) => {
         const party = getPartyById(candidate.partyId)
-        const percentage = Math.round((candidate.score / goodVotes) * 100)
+        const percentage = Math.round((candidate.score / goodVotes) * 100) || 0
         const fullName =
           candidate.firstName || candidate.lastName
             ? `${candidate.firstName} ${candidate.lastName}`
