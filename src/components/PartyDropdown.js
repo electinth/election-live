@@ -71,6 +71,7 @@ export default ({ partyId }) => {
     return (
       <div
         css={{
+          cursor: "pointer",
           alignItems: "center",
           position: "relative",
           padding: 10,
