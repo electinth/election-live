@@ -247,6 +247,13 @@ function ZoneView({ provinceId, zoneNo }) {
                 }}
               />
             </h2>
+            <div
+              css={{
+                marginBottom: 10,
+              }}
+            >
+              {zone.details}
+            </div>
             <div>
               <span>นับแล้ว</span>
               <span
