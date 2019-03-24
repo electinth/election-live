@@ -105,7 +105,7 @@ class ElectionMap extends SvgChart {
       .attr("fill", "rgba(0,0,0,0)")
       .on("mouseleave", () => {
         const zone = this.findNearbyZone()
-        this.selection
+        this.zoneLayer
           .selectAll("g.zone")
           .style("stroke", d => (d === zone ? "#222" : "none"))
 
@@ -116,7 +116,7 @@ class ElectionMap extends SvgChart {
       })
       .on("mousemove", () => {
         const zone = this.findNearbyZone()
-        this.selection
+        this.zoneLayer
           .selectAll("g.zone")
           .style("stroke", d => (d === zone ? "#222" : "none"))
 
@@ -140,21 +140,13 @@ class ElectionMap extends SvgChart {
         //  To fix this, make ElectionMap take in the ID of current selection
         //  via props rather than managing the state inside ElectionMap.
 
-        // clear previous selection
-        const allZones = this.selection.selectAll("g.zone")
-        allZones.select("rect").attr("transform", "scale(1)")
         const zone = this.findNearbyZone()
         if (zone) {
-          allZones
-            .filter(d => d === zone)
-            .raise()
-            .select("rect")
-            .attr("transform", `scale(2)`)
           this.dispatchAs("zoneClick")(zone, d3Event)
         }
       })
 
-    this.selection = this.layers
+    this.zoneLayer = this.layers
       .get("center/zoom/map/cell")
       .attr("stroke", "none")
       .attr("stroke-width", 1)
@@ -177,6 +169,20 @@ class ElectionMap extends SvgChart {
   findNearbyZone() {
     const [x, y] = d3Mouse(this.glass.node())
     return this.quadTree && this.quadTree.find(x, y, 32)
+  }
+
+  clearSelectedZone() {
+    this.zoneLayer.selectAll("g.zone rect").attr("transform", "scale(1)")
+  }
+
+  selectZone(zoneId) {
+    this.clearSelectedZone()
+    this.zoneLayer
+      .selectAll("g.zone")
+      .filter(d => d.data.id === zoneId)
+      .raise()
+      .select("rect")
+      .attr("transform", `scale(2)`)
   }
 
   color(d) {
@@ -213,7 +219,7 @@ class ElectionMap extends SvgChart {
       .attr("width", this.getInnerWidth())
       .attr("height", this.getInnerHeight())
 
-    this.dataLookup = keyBy(this.data(), d => d.id)
+    this.dataLookup = keyBy(this.data().zones, d => d.id)
     const { size, padding } = this.options()
 
     const rectSide = size - padding
@@ -230,7 +236,15 @@ class ElectionMap extends SvgChart {
       .y(d => d.y)
       .addAll(zones)
 
-    const zoneSelection = this.selection
+    const { selectedZone } = this.data()
+    if (selectedZone) {
+      const { provinceId, zoneNo } = selectedZone
+      this.selectZone(`${provinceId}-${zoneNo}`)
+    } else {
+      this.clearSelectedZone()
+    }
+
+    const zoneSelection = this.zoneLayer
       .selectAll("g.zone")
       .data(zones, d => d.data.id)
 

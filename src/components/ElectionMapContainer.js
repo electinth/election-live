@@ -93,7 +93,7 @@ function getMapData(summaryState, filter) {
   }
 }
 
-export default function ElectionMapContainer() {
+export default function ElectionMapContainer({ currentZone }) {
   const summaryState = useSummaryData()
   const currentFilterName = useContext(ZoneFilterContext)
   const currentFilter = filters[currentFilterName]
@@ -120,6 +120,9 @@ export default function ElectionMapContainer() {
       navigate(zonePath(getZoneByProvinceIdAndZoneNo(+match[1], +match[2])))
     }
   }, [])
+
+  console.log("currentZone", currentZone)
+
   return (
     <div
       css={{
@@ -168,7 +171,10 @@ export default function ElectionMapContainer() {
         นับแล้วน้อยกว่า 95%
       </div>
       <ElectionMap
-        data={mapZones}
+        data={{
+          zones: mapZones,
+          selectedZone: currentZone,
+        }}
         onInit={onInit}
         onZoneMouseenter={onZoneMouseenter}
         onZoneMousemove={onZoneMousemove}

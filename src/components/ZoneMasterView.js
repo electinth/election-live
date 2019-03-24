@@ -22,6 +22,7 @@ import ElectionMapContainer from "./ElectionMapContainer"
  * @param {object} props
  * @param {React.ReactNode} props.contentHeader
  * @param {React.ReactNode} props.contentBody
+ * @param {object} props.currentZone
  * @param {React.ReactNode} props.popup
  * @param {function} props.navigate
  * @param {object} props.location
@@ -29,6 +30,7 @@ import ElectionMapContainer from "./ElectionMapContainer"
 export default function ZoneMasterView({
   contentHeader,
   contentBody,
+  currentZone,
   popup,
   navigate,
   location,
@@ -167,7 +169,7 @@ export default function ZoneMasterView({
             }}
           >
             <ErrorBoundary name="ElectionMap">
-              <ElectionMapContainer />
+              <ElectionMapContainer currentZone={currentZone} />
             </ErrorBoundary>
           </div>
         </div>
