@@ -1,4 +1,4 @@
-import { keyBy } from "lodash"
+import { keyBy, uniqBy } from "lodash"
 import {
   quadtree,
   event as d3Event,
@@ -12,6 +12,10 @@ import { memo } from "react"
 import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
 const maps = require("../models/information/_map.json")
 
+const mapLabels = uniqBy(
+  maps.labels.map(l => ({ ...l, id: l.lines.map(l => l.text).join(",") })),
+  d => d.id
+)
 const partyLookup = keyBy(parties, p => p.id)
 
 const NO_PARTY = "#aaaaaa"
@@ -259,7 +263,7 @@ class ElectionMap extends SvgChart {
       .attr("font-weight", "normal")
       .attr("letter-spacing", "0")
       .selectAll("text.label")
-      .data(maps.labels, d => d.id)
+      .data(mapLabels, d => d.id)
       .enter()
       .append("text")
       .classed("label", true)
