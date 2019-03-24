@@ -107,6 +107,22 @@ export function getPartyById(id) {
       name: "ไม่เลือกใคร",
       color: "#9e9e9e",
     }
+  } else if (id === 1000) {
+    // used in DesktopScoreBarContainer
+    return {
+      name: "สนับสนุน คสช",
+      color: "#37833a",
+    }
+  } else if (id === 1001) {
+    return {
+      name: "ไม่สนับสนุน คสช",
+      color: "#c8991e",
+    }
+  } else if (id === 1002) {
+    return {
+      name: "ไม่ชัดเจน",
+      color: "#979797",
+    }
   }
   return partiesMap.get(id) || fail(`Party ID ${id} not found`)
 }

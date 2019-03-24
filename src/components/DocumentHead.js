@@ -26,7 +26,9 @@ export default function DocumentHead() {
         content="ดูผลการเลือกตั้งแบบเรียลไทม์ได้ที่นี่"
       />
       <meta itemprop="image" content={metaBanner} />
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={metaBanner} />
+      <meta name="twitter:site" content="@electinth" />
       <meta name="twitter:title" content="ELECT LIVE" />
       <meta
         name="twitter:description"

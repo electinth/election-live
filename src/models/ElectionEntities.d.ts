@@ -11,6 +11,7 @@ interface IParty {
   color?: string
   /** Number of party list candidates */
   partylist: number
+  supportNcpo?: boolean
 }
 
 /**

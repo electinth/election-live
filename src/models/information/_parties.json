@@ -53,7 +53,8 @@
     "color": "#da3731",
     "id": 8,
     "name": "เพื่อไทย",
-    "partylist": 97
+    "partylist": 97,
+    "supportNcpo": false
   },
   {
     "codeEN": "PP",
@@ -117,7 +118,8 @@
     "color": "#01019a",
     "id": 18,
     "name": "ไทยรักษาชาติ",
-    "partylist": 108
+    "partylist": 108,
+    "supportNcpo": false
   },
   {
     "codeEN": "SPOT",
@@ -205,7 +207,8 @@
     "color": "#b49e31",
     "id": 39,
     "name": "เสรีรวมไทย",
-    "partylist": 100
+    "partylist": 100,
+    "supportNcpo": false
   },
   {
     "codeEN": "RT",
@@ -229,7 +232,8 @@
     "color": "#c4403a",
     "id": 46,
     "name": "พลังประชาธิปไตย",
-    "partylist": 14
+    "partylist": 14,
+    "supportNcpo": true
   },
   {
     "codeEN": "PDP",
@@ -349,7 +353,8 @@
     "color": "#dfde4a",
     "id": 67,
     "name": "ประชาชนปฏิรูป",
-    "partylist": 40
+    "partylist": 40,
+    "supportNcpo": true
   },
   {
     "codeEN": "FWP",
@@ -357,7 +362,8 @@
     "color": "#ef7824",
     "id": 68,
     "name": "อนาคตใหม่",
-    "partylist": 124
+    "partylist": 124,
+    "supportNcpo": false
   },
   {
     "codeEN": "THMP",
@@ -389,7 +395,8 @@
     "color": "#303d8e",
     "id": 72,
     "name": "รวมพลังประชาชาติไทย",
-    "partylist": 150
+    "partylist": 150,
+    "supportNcpo": true
   },
   {
     "codeEN": "SD",
@@ -477,7 +484,8 @@
     "color": "#1f68dd",
     "id": 83,
     "name": "พลังประชารัฐ",
-    "partylist": 120
+    "partylist": 120,
+    "supportNcpo": true
   },
   {
     "codeEN": "NEP",
@@ -485,7 +493,8 @@
     "color": "#6e2fff",
     "id": 84,
     "name": "เศรษฐกิจใหม่",
-    "partylist": 81
+    "partylist": 81,
+    "supportNcpo": false
   },
   {
     "codeEN": "NRRP",

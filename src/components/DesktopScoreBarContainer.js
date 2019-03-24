@@ -89,6 +89,56 @@ export default function DesktopScoreBarContainer({
           ]))
           .value(),
     },
+    {
+      name: "ประมาณ ส.ส. พึงมี ตามจุดยืนพรรค (500 ที่)",
+      title: "ประมาณจำนวน ส.ส. พึงมี ตามจุดยืนพรรค",
+      maxCount: 500,
+      description: "ข้อมูลแยกตามพรรคที่สนับสนุนพรรคพลังประชารัฐ",
+      data: () => {
+        const SUPPORT_NCPO = 0
+        const NOT_SUPPORT_NCPO = 1
+        const OTHER = 2
+
+        let out = [
+          // index should be following the above value
+          {
+            id: 1000,
+            type: "all",
+            name: "สนับสนุน คสช",
+            color: "#37833a",
+            count: 0,
+          },
+          {
+            id: 1001,
+            type: "all",
+            name: "ไม่สนับสนุน คสช",
+            color: "#c8991e",
+            count: 0,
+          },
+          {
+            id: 1002,
+            type: "all",
+            name: "ไม่ชัดเจน",
+            color: "#979797",
+            count: 0,
+          },
+        ]
+
+        for (let row of partyStats) {
+          if (row.party.supportNcpo === true) {
+            out[SUPPORT_NCPO].count +=
+              row.constituencySeats + row.partyListSeats
+          } else if (row.party.supportNcpo === false) {
+            out[NOT_SUPPORT_NCPO].count +=
+              row.constituencySeats + row.partyListSeats
+          } else {
+            out[OTHER].count += row.constituencySeats + row.partyListSeats
+          }
+        }
+
+        return out
+      },
+    },
   ]
 
   useEffect(() => {

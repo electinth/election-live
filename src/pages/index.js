@@ -159,10 +159,10 @@ function SummaryHeaderContainer({ filterName }) {
 
 function PartyStatsContainer({ filterName }) {
   const summaryState = useSummaryData()
-  if (summaryState.failed) {
-    return <LoadingError />
-  }
   if (!summaryState.completed) {
+    if (summaryState.failed) {
+      return <LoadingError />
+    }
     return <Loading size="large" />
   }
 
@@ -333,7 +333,7 @@ function ZoneView({ provinceId, zoneNo }) {
               />
             </div>
 
-            <div css={{ borderBottom: "1px solid" }}>
+            <div css={{ borderBottom: "1px solid", display: "none" }}>
               <NationwideSubSummaryHeader
                 label="บัตรดี"
                 stat={ifSummaryLoaded(
@@ -376,10 +376,10 @@ function ZoneView({ provinceId, zoneNo }) {
  */
 function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
   const dataState = usePerZoneData(provinceId, zoneNo)
-  if (dataState.failed) {
-    return <LoadingError />
-  }
   if (!dataState.completed || !zoneStats) {
+    if (dataState.failed) {
+      return <LoadingError />
+    }
     return <Loading size="large" />
   }
   const data = dataState.data
