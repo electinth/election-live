@@ -10,6 +10,7 @@ import AnimatedNumber from "./AnimatedNumber"
 import Loading from "./Loading"
 import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
 import _ from "lodash"
+import { partyInfomation, parties } from "../models/information"
 
 const sectionStyling = { borderBottom: "1px solid #000", padding: "10px 0" }
 
@@ -70,7 +71,7 @@ export default function PerPartySearchPanelContainer({ partyId }) {
           totalDistrictCouncilor={totalDistrictCouncilor}
           totalPartyListCouncilor={totalPartyListCouncilor}
         />
-        <PartyPresidentCandidateList partyId={partyId} />
+        <PartyPMCandidateList partyId={partyId} />
       </div>
     </div>
   )
@@ -140,59 +141,73 @@ function PartyTotalCouncilorEstimationNumber({
   )
 }
 
-function PartyPresidentCandidateList({ partyId }) {
-  // @todo #1 PartyView - PartyPresidentCandidateList - bind presiddent candidate data by party id
-  const mockData = [
-    {
-      firstName: "ชื่อ",
-      lastName: "นามสกุล",
-      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
-    },
-    {
-      firstName: "ชื่อ",
-      lastName: "นามสกุล",
-      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
-    },
-    {
-      firstName: "ชื่อ",
-      lastName: "นามสกุล",
-      photoSrc: require(`../styles/images/pmcan/${partyId}-s.png`),
-    },
-  ]
-  const presidentCandidateList = mockData
+function PartyPMCandidateList({ partyId }) {
+  const getPMCandidates = () => {
+    const party = _.find(parties, party => {
+      return party.id === partyId
+    })
+    const partyInfo = _.find(partyInfomation, item => {
+      return party.name === item.slug
+    })
+    return partyInfo.pm_candidates
+  }
+
+  const getPhotoSrc = () => {
+    return require(`../styles/images/pmcan/${partyId}-s.png`)
+  }
+
+  const renderPMCandidateWithPhoto = (firstName, lastName, photoSrc) => {
+    return (
+      <div css={{ padding: "10px", width: "100%" }}>
+        <div>
+          <img
+            src={photoSrc}
+            css={{
+              display: "block",
+              padding: 0,
+              margin: "auto",
+              width: "35px",
+              height: "35px",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
+        <div
+          css={{
+            fontSize: "0.8em",
+            marginTop: "5px",
+            textAlign: "center",
+          }}
+        >
+          <div>{firstName}</div>
+          <div css={{ marginTop: "-1px" }}>{lastName}</div>
+        </div>
+      </div>
+    )
+  }
+
+  const renderPMCandidateWithoutPhoto = (firstName, lastName) => {
+    return (
+      <li>
+        {firstName} {lastName}
+      </li>
+    )
+  }
+
+  const pmCandidateList = getPMCandidates()
+  const photoSrc = getPhotoSrc()
+
+  if (pmCandidateList.length === 0) return <p>ไม่พบข้อมูล</p>
+
   return (
     <div css={{ ...sectionStyling }}>
       <div>แคนดิเดตนายกฯ</div>
-      <div css={{ display: "flex" }}>
-        {presidentCandidateList.map(item => {
-          return (
-            <div css={{ padding: "10px", width: "100%" }}>
-              <div>
-                <img
-                  src={item.photoSrc}
-                  css={{
-                    display: "block",
-                    padding: 0,
-                    margin: "auto",
-                    width: "35px",
-                    height: "35px",
-                    borderRadius: "50%",
-                  }}
-                />
-              </div>
-              <div
-                css={{
-                  fontSize: "0.8em",
-                  marginTop: "5px",
-                  textAlign: "center",
-                }}
-              >
-                <div>{item.firstName}</div>
-                <div css={{ marginTop: "-1px" }}>{item.lastName}</div>
-              </div>
-            </div>
-          )
-        })}
+      <div>
+        <ul>
+          {pmCandidateList.map(item => {
+            return renderPMCandidateWithoutPhoto(item.FirstName, item.LastName)
+          })}
+        </ul>
       </div>
     </div>
   )
