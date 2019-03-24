@@ -135,7 +135,8 @@
     "color": "#000099",
     "id": 23,
     "name": "เพื่อธรรม",
-    "partylist": 22
+    "partylist": 22,
+    "supportNcpo": false
   },
   {
     "codeEN": "NDP",
@@ -224,7 +225,8 @@
     "color": "#c0bcc3",
     "id": 42,
     "name": "เพื่อชาติ",
-    "partylist": 150
+    "partylist": 150,
+    "supportNcpo": false
   },
   {
     "codeEN": "DF",
@@ -265,7 +267,8 @@
     "color": "#d9771c",
     "id": 53,
     "name": "คนธรรมดาแห่งประเทศไทย",
-    "partylist": 2
+    "partylist": 2,
+    "supportNcpo": false
   },
   {
     "codeEN": "RTT",
@@ -345,7 +348,8 @@
     "color": "#e9b54a",
     "id": 66,
     "name": "พลังธรรมใหม่",
-    "partylist": 24
+    "partylist": 24,
+    "supportNcpo": true
   },
   {
     "codeEN": "PPR",
@@ -444,7 +448,8 @@
     "color": "#a35f26",
     "id": 78,
     "name": "ประชาชาติ",
-    "partylist": 58
+    "partylist": 58,
+    "supportNcpo": false
   },
   {
     "codeEN": "LDHP",
@@ -574,7 +579,8 @@
     "color": "#c3067e",
     "id": 94,
     "name": "กลาง",
-    "partylist": 6
+    "partylist": 6,
+    "supportNcpo": false
   },
   {
     "codeEN": "TPPTP",
@@ -590,7 +596,8 @@
     "color": "#69c80a",
     "id": 97,
     "name": "กรีน",
-    "partylist": 15
+    "partylist": 15,
+    "supportNcpo": false
   },
   {
     "codeEN": "TDPT",
@@ -614,7 +621,8 @@
     "color": "#010101",
     "id": 100,
     "name": "สามัญชน",
-    "partylist": 6
+    "partylist": 6,
+    "supportNcpo": false
   },
   {
     "codeEN": "TTP",
