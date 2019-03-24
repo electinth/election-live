@@ -44,6 +44,7 @@ const cache = global.WeakMap && new WeakMap()
  * Like `partyStatsFromSummaryJSON`, but no filter and with caching.
  *
  * @param {ElectionDataSource.SummaryJSON} summary
+ * @return {PartyStats}
  */
 export function nationwidePartyStatsFromSummaryJSON(summary) {
   if (cache && cache.has(summary)) {
