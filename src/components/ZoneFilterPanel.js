@@ -58,31 +58,42 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
     return (
       <div css={{ display: "flex", flexDirection: "row" }}>
         {renderFilter(state.query, "จังหวัด")}
-        <input
-          ref={inputRef}
-          css={{
-            border: `1px solid "#999999"`,
-            width: "200px",
-            boxSizing: "border-box",
-            padding: 10,
-            fontSize: 16,
-            marginLeft: 10,
+        <ZoneFilterContext.Consumer>
+          {currentFilterName => {
+            const current = currentFilterName === state.query
+            return (
+              <input
+                disabled={!current}
+                ref={inputRef}
+                css={{
+                  border: `1px solid "#999999"`,
+                  width: "200px",
+                  boxSizing: "border-box",
+                  padding: 10,
+                  fontSize: 16,
+                  marginLeft: 10,
+                }}
+                onChange={e => {
+                  const { value } = e.target
+                  setState({ ...state, value: value })
+                }}
+                onBlur={e => {
+                  setState({ ...state, value: state.query })
+                }}
+                onKeyPress={e => {
+                  if (e.key == "Enter" && isProvinceExist(state.value)) {
+                    trackEvent("Search for province")
+                    setState(
+                      { ...state, query: state.value },
+                      navigate(filterPath(state.value))
+                    )
+                  }
+                }}
+                value={state.value}
+              />
+            )
           }}
-          onChange={e => {
-            const { value } = e.target
-            setState({ ...state, value: value })
-          }}
-          onKeyPress={e => {
-            if (e.key == "Enter" && isProvinceExist(state.value)) {
-              trackEvent("Search for province")
-              setState(
-                { ...state, query: state.value },
-                navigate(filterPath(state.value))
-              )
-            }
-          }}
-          value={state.value}
-        />
+        </ZoneFilterContext.Consumer>
       </div>
     )
   }
