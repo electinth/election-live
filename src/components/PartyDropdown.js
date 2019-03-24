@@ -67,11 +67,26 @@ export default ({ partyId }) => {
     return (
       <div
         css={{
-          cursor: "pointer",
+          alignItems: "center",
+          position: "relative",
+          padding: 10,
+          alignItems: "center",
+          boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
         }}
         onClick={() => setDropdownOpen(true)}
       >
         {partyItem(currentParty)}
+        <div
+          css={{
+            position: "absolute",
+            right: 20,
+            top: "calc(50% - 10px)",
+            border: "solid #212121",
+            borderWidth: "0 2px 2px 0",
+            padding: 4,
+            transform: "rotate(45deg)",
+          }}
+        />
       </div>
     )
   }
@@ -85,11 +100,15 @@ export default ({ partyId }) => {
     return (
       <div
         css={{
-          position: "relative",
+          position: !!partyId ? "absolute" : "relative",
+          zIndex: 1,
+          background: "white",
+          width: "inherit",
+          boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
         }}
         ref={dropdownRef}
       >
-        <div css={{ position: "relative" }}>
+        <div css={{ position: "relative", padding: 10 }}>
           <input
             autoFocus
             css={{
@@ -108,9 +127,9 @@ export default ({ partyId }) => {
           />
           <div
             css={{
-              top: 10,
+              top: 20,
               position: "absolute",
-              right: 10,
+              right: 20,
               color: labelColor,
             }}
           >
@@ -123,6 +142,7 @@ export default ({ partyId }) => {
             overflowX: "hidden",
             overflowY: "auto",
             WebkitOverflowScrolling: "touch",
+            padding: 10,
           }}
         >
           <ul css={{ listStyle: "none", padding: 0 }}>
@@ -157,33 +177,12 @@ export default ({ partyId }) => {
     <div
       css={{
         position: "relative",
-        zIndex: 1,
         background: "white",
+        width: "inherit",
       }}
     >
-      <div
-        css={{
-          padding: 10,
-          alignItems: "center",
-          position: "relative",
-          boxShadow: "0 2px 4px 0 rgba(0,0,0,0.12)",
-        }}
-      >
-        {dropdownOpen ? renderDropdown() : renderDefaultDropdown()}
-      </div>
-      {dropdownOpen ? null : (
-        <div
-          css={{
-            position: "absolute",
-            right: 20,
-            top: "calc(50% - 10px)",
-            border: "solid #212121",
-            borderWidth: "0 2px 2px 0",
-            padding: 4,
-            transform: "rotate(45deg)",
-          }}
-        />
-      )}
+      {dropdownOpen ? renderDropdown() : null}
+      {renderDefaultDropdown()}
     </div>
   )
 }
