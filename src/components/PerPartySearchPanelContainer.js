@@ -23,13 +23,15 @@ export default function PerPartySearchPanelContainer({ partyId }) {
   ) : (
     <Loading />
   )
+
   const partyStatsRow = useMemo(() => {
     if (!summaryState.completed) return null
     return _.find(
       nationwidePartyStatsFromSummaryJSON(summaryState.data),
       row => row.party.id === +partyId
     )
-  }, [summaryState])
+  }, [summaryState, partyId])
+
   const totalDistrictCouncilor = partyStatsRow ? (
     <AnimatedNumber value={partyStatsRow.constituencySeats} />
   ) : (
@@ -66,7 +68,7 @@ export default function PerPartySearchPanelContainer({ partyId }) {
       </div>
       <div css={{ paddingTop: 56 }}>
         <PartyTotalVote totalVote={totalVote} />
-        <PartyTotalCouncilorEstimationVisualization />
+        {/* <PartyTotalCouncilorEstimationVisualization /> */}
         <PartyTotalCouncilorEstimationNumber
           totalDistrictCouncilor={totalDistrictCouncilor}
           totalPartyListCouncilor={totalPartyListCouncilor}
@@ -134,7 +136,7 @@ function PartyTotalCouncilorEstimationNumber({
         </div>
       </div>
       <div css={{ ...blockStyling }}>
-        <div css={{ paddingLeft: "10px" }}>ส.ส.บัญชีรายชื่อ</div>
+        <div css={{ paddingLeft: "10px" }}>บัญชีรายชื่อ</div>
         <div css={{ ...numberStyling }}>{totalPartyListCouncilor}</div>
       </div>
     </div>

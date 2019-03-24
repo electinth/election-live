@@ -76,14 +76,14 @@ export default function ZonePartyMemberVoteResult({ partyId }) {
             >
               แบ่งเขต({winningConstituencyCandidates.length})
             </li>
-            <li
+            {/* <li
               css={{ ...tabHeaderStyle, ...partyListStyling }}
               onClick={() => {
                 setState({ showingTab: "PARTY_LIST_TAB" })
               }}
             >
               บัญชีรายชื่อ ({winningPartyListCandidates.length})
-            </li>
+            </li> */}
           </ul>
         </div>
 
