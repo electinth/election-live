@@ -141,7 +141,7 @@ function getWinningConstituencyCandidates(summaryState, partyId) {
 
         // Add to list only if the candidate matches the partyId
         if (candidateData.partyId == partyId) {
-          candidateData["percentage"] = candidateData.score / votesTotal
+          candidateData["percentage"] = candidateData.score / votesTotal || 0
           winningCandidates.push(candidateData)
         }
       }
