@@ -1,4 +1,4 @@
-import { keyBy, uniqBy } from "lodash"
+import { keyBy, uniq, uniqBy } from "lodash"
 import {
   quadtree,
   event as d3Event,
@@ -19,9 +19,11 @@ const mapLabels = uniqBy(
   d => d.id
 )
 const partyLookup = keyBy(parties, p => p.id)
-
 const NO_PARTY = "#aaaaaa"
 const HIDDEN_ZONE = "#dddddd"
+const uniqueColors = uniq(
+  parties.map(p => p.color).concat([NO_PARTY, HIDDEN_ZONE])
+)
 
 const EMPTY_LOOKUP = {}
 
@@ -108,6 +110,24 @@ class ElectionMap extends SvgChart {
     // set up svg
     this.svg.style("position", "relative")
 
+    this.defs = this.svg.append("defs")
+
+    this.defs
+      .selectAll("pattern")
+      .data(uniqueColors, c => c)
+      .enter()
+      .append("pattern")
+      .attr("id", c => `dLines-${c.replace("#", "")}`)
+      .attr("width", 4)
+      .attr("height", 4)
+      .attr("patternUnits", "userSpaceOnUse")
+      .append("path")
+      .attr("d", "M 0,4 l 4,-4 M -1,1 l 2,-2 M 3,5 l 2,-2")
+      .attr("stroke", c => c)
+      .attr("stroke-width", 1)
+      .attr("stroke-linecap", "square")
+      .attr("shape-rendering", "auto")
+
     const zoomLayer = this.layers.get("center/zoom")
 
     this.zoom = d3Zoom()
@@ -134,9 +154,6 @@ class ElectionMap extends SvgChart {
         `translate(${-this.getInnerWidth() / 2},${-this.getInnerHeight() / 2})`
       )
 
-    this.layers.get("center/zoom/map/cell")
-    // .style('pointer-events', 'none')
-
     this.glass = this.layers
       .get("center/zoom/map/glass")
       .append("rect")
@@ -159,9 +176,12 @@ class ElectionMap extends SvgChart {
       })
       .on("mousemove", () => {
         const zone = this.findNearbyZone()
+        const { selectedZone } = this.data() || {}
         this.zoneLayer
-          .selectAll("g.zone")
-          .style("stroke", d => (d === zone ? "#222" : "none"))
+          .selectAll("g.zone rect")
+          .style("stroke", d =>
+            d === zone || d.data.id === selectedZone ? "#222" : "none"
+          )
 
         if (zone) {
           if (zone !== this.prevZone) {
@@ -199,7 +219,6 @@ class ElectionMap extends SvgChart {
 
     this.layers
       .get("center/zoom/map/label")
-      // .attr("font-family", "BaiJamjuree-Regular, Bai Jamjuree")
       .attr("font-size", "6.4")
       .attr("font-weight", "normal")
       .attr("letter-spacing", "0")
@@ -219,7 +238,10 @@ class ElectionMap extends SvgChart {
   }
 
   clearSelectedZone() {
-    this.zoneLayer.selectAll("g.zone rect").attr("transform", "scale(1)")
+    this.zoneLayer
+      .selectAll("g.zone rect")
+      .attr("stroke", "none")
+      .attr("stroke-width", 1)
   }
 
   selectZone(zoneId) {
@@ -229,15 +251,23 @@ class ElectionMap extends SvgChart {
       .filter(d => d.data.id === zoneId)
       .raise()
       .select("rect")
-      .attr("transform", `scale(2)`)
+      .attr("stroke", "#222")
+      .attr("stroke-width", 2)
   }
 
   color(d) {
+    // for testing
+    // const index = Math.round(Math.random()*3)*2
+    // const full = Math.random() > 0.5
+    // const color = uniqueColors[index];
+    // return full ? color : `url(#dLines-${color.replace('#', '')})`
+
     const match = this.dataLookup[d.id]
     if (match) {
       if (!match.show) return HIDDEN_ZONE
       const party = partyLookup[match.partyId]
-      return (party && party.color) || NO_PARTY
+      const color = (party && party.color) || NO_PARTY
+      return match.complete ? color : `url(#dLines-${color.replace("#", "")})`
     }
     return NO_PARTY
   }
@@ -248,11 +278,13 @@ class ElectionMap extends SvgChart {
   }
 
   radius(d) {
-    const match = this.dataLookup[d.id]
-    return match && match.complete ? 0 : this.options().size
+    return 0
+    // const match = this.dataLookup[d.id]
+    // return match && match.complete ? 0 : this.options().size
   }
 
   opacity(d) {
+    return 1
     const match = this.dataLookup[d.id]
     return match && match.complete ? 1 : 0.5
   }
@@ -307,20 +339,23 @@ class ElectionMap extends SvgChart {
       .classed("zone", true)
       .attr("transform", d => `translate(${d.x},${d.y})`)
       .style("cursor", "pointer")
+
+    zoneEnter
       .append("rect")
       // .attr("data-p", d => this.party(d.data))
       .attr("x", -rectSide / 2)
       .attr("y", -rectSide / 2)
       .attr("width", rectSide)
       .attr("height", rectSide)
-      .attr("transform", "scale(1)")
+      .attr("rx", 2)
+      .attr("vector-effect", "non-scaling-stroke")
 
     zoneSelection
       .merge(zoneEnter)
+      .attr("transform", d => `translate(${d.x},${d.y})`)
       .select("rect")
       .attr("fill", d => this.color(d.data))
-      .attr("opacity", d => this.opacity(d.data))
-      .attr("rx", d => this.radius(d.data))
+    // .attr("opacity", d => this.opacity(d.data))
 
     zoneSelection.exit().remove()
 
@@ -331,7 +366,7 @@ class ElectionMap extends SvgChart {
       .enter()
       .append("text")
       .classed("label", true)
-      .attr("id", d => d.id)
+      // .attr("id", d => d.id)
       .style("transform", "translate(0, -10px)")
 
     labelSelection.exit().remove()

@@ -20,6 +20,7 @@ export default function PerPartySearchPanelContainer({
       css={{
         fontFamily: DISPLAY_FONT,
         margin: "20px 0 0 0",
+        position: "relative",
         [media(DESKTOP_MIN_WIDTH)]: {
           display: "block",
           order: 1,
@@ -28,14 +29,25 @@ export default function PerPartySearchPanelContainer({
         },
       }}
     >
-      <PartyDropdown partyId={partyId} dropdownOpen={false} />
-      <PartyTotalVote totalVote={totalVote} />
-      <PartyTotalCouncilorEstimationVisualization />
-      <PartyTotalCouncilorEstimationNumber
-        totalDistrictCouncilor={totalDistrictCouncilor}
-        totalPartyListCouncilor={totalPartyListCouncilor}
-      />
-      <PartyPresidentCandidateList />
+      <div
+        css={{
+          background: "red",
+          position: "absolute",
+          top: 0,
+          width: "100%",
+        }}
+      >
+        <PartyDropdown partyId={partyId} dropdownOpen={false} />
+      </div>
+      <div css={{ paddingTop: 56 }}>
+        <PartyTotalVote totalVote={totalVote} />
+        <PartyTotalCouncilorEstimationVisualization />
+        <PartyTotalCouncilorEstimationNumber
+          totalDistrictCouncilor={totalDistrictCouncilor}
+          totalPartyListCouncilor={totalPartyListCouncilor}
+        />
+        <PartyPresidentCandidateList />
+      </div>
     </div>
   )
 }

@@ -171,15 +171,37 @@ export default function ElectionMapContainer({ currentZone }) {
           height="10"
           style={{ display: "inline-block", marginRight: 4 }}
         >
-          <rect width="10" height="10" fill="#777" />
+          <rect width="10" height="10" fill="#777" stroke="#777" rx="2" />
         </svg>
-        นับแล้วมากกว่า 95%
+        นับถึง 95%
         <svg
           width="10"
           height="10"
           style={{ display: "inline-block", marginLeft: 10, marginRight: 4 }}
         >
-          <circle cx="5" cy="5" r="5" fill="#777" />
+          <defs>
+            <pattern
+              id="dLines-777"
+              width="4"
+              height="4"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 0,4 l 4,-4 M -1,1 l 2,-2 M 3,5 l 2,-2"
+                stroke="#777"
+                stroke-width="1"
+                stroke-linecap="square"
+                shape-rendering="auto"
+              />
+            </pattern>
+          </defs>
+          <rect
+            width="10"
+            height="10"
+            fill="url(#dLines-777)"
+            stroke="#777"
+            rx="2"
+          />
         </svg>
         นับแล้วน้อยกว่า 95%
       </div>

@@ -61,6 +61,7 @@ export const zonesForSearch = zones.map(zone => {
     zone: getZoneByProvinceIdAndZoneNo(zone.provinceId, zone.no),
     province: getProvinceById(zone.provinceId),
     zoneKey: zoneKey(zone.provinceId, zone.no),
+    postcode: zone.postcode,
   }
 })
 
