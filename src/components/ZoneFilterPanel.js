@@ -1,8 +1,13 @@
 import { faCheckCircle, faCircle } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
-import React, { createContext, useRef, useLayoutEffect } from "react"
-import { filterPath, filters as areaFilters } from "../models/information"
+import { navigate } from "@reach/router"
+import React, { createContext, useRef, useLayoutEffect, useState } from "react"
+import {
+  filterPath,
+  filters as areaFilters,
+  isProvinceExist,
+} from "../models/information"
 import { trackEvent } from "../util/analytics"
 import HelpTooltip from "./HelpTooltip"
 
@@ -27,6 +32,7 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
         {renderFilter("northeastern")}
         {renderFilter("central")}
         {renderFilter("southern")}
+        {renderFilterSearch()}
       </ul>
       <div css={{ fontSize: 20, fontWeight: "bold" }}>ตัวเลือกพิเศษ</div>
       <ul css={{ padding: 0, listStyle: "none" }}>
@@ -38,10 +44,54 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
     </div>
   )
 
+  function renderFilterSearch() {
+    const [state, setState] = useState({
+      query: "กรุงเทพมหานคร",
+      value: "กรุงเทพมหานคร",
+    })
+    const inputRef = useRef(/** @type {HTMLInputElement} */ (null))
+    useLayoutEffect(() => {
+      if (autoFocus && inputRef.current) {
+        inputRef.current.focus()
+      }
+    }, [autoFocus])
+    return (
+      <div css={{ display: "flex", flexDirection: "row" }}>
+        {renderFilter(state.query, "จังหวัด")}
+        <input
+          ref={inputRef}
+          css={{
+            border: `1px solid "#999999"`,
+            width: "200px",
+            boxSizing: "border-box",
+            padding: 10,
+            fontSize: 16,
+            marginLeft: 10,
+          }}
+          onChange={e => {
+            const { value } = e.target
+            setState({ ...state, value: value })
+          }}
+          onKeyPress={e => {
+            if (e.key == "Enter" && isProvinceExist(state.value)) {
+              trackEvent("Search for province")
+              setState(
+                { ...state, query: state.value },
+                navigate(filterPath(state.value))
+              )
+            }
+          }}
+          value={state.value}
+        />
+      </div>
+    )
+  }
+
   /**
    * @param {ZoneFilterName} filterName
+   * @param {string} label
    */
-  function renderFilter(filterName) {
+  function renderFilter(filterName, label = "") {
     return (
       <div>
         <ZoneFilterContext.Consumer>
@@ -68,7 +118,9 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                     {current && <FontAwesomeIcon icon={faCheckCircle} />}
                     {!current && <FontAwesomeIcon icon={faCircle} />}
                   </span>
-                  <span>{areaFilters[filterName].name.th}</span>
+                  <span>
+                    {label.length > 0 ? label : areaFilters[filterName].name.th}
+                  </span>
                   {areaFilters[filterName].description ? (
                     <HelpTooltip
                       description={areaFilters[filterName].description.th}

@@ -1,4 +1,5 @@
 import { fail } from "assert"
+import { findIndex } from "lodash"
 
 /**
  * This file represents the static information about Thailand General Election 2019
@@ -55,6 +56,18 @@ export function getProvinceById(id) {
   id = +id
 
   return provincesMap.get(id) || fail(`Province ID ${id} not found`)
+}
+
+/**
+ * @param {string} name
+ * @returns {boolean}
+ */
+export function isProvinceExist(provinceName) {
+  return (
+    findIndex(provinces, function(province) {
+      return province.name === provinceName
+    }) !== -1
+  )
 }
 
 const zoneMap = new Map(
