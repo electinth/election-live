@@ -7,7 +7,7 @@ import {
 } from "d3"
 import { SvgChart, helper } from "d3kit"
 import { createComponent } from "react-d3kit"
-import { parties } from "../models/information"
+import { parties, zones } from "../models/information"
 import { memo } from "react"
 import onlyPassThroughPropsWhilePageIsVisible from "./onlyPassThroughPropsWhilePageIsVisible"
 import { createSelector } from "reselect"
@@ -382,6 +382,29 @@ class ElectionMap extends SvgChart {
 
     spanSelection.exit().remove()
   }
+}
+
+export const electionMapLoadingData = () => {
+  const partylist = []
+  while (partylist.length < 150) {
+    partylist.push({
+      id: `pl-${partylist.length + 1}`,
+      partyId: "nope",
+      complete: true,
+      show: false,
+    })
+  }
+  return [
+    ...zones.map((zone, i) => {
+      return {
+        id: `${zone.provinceId}-${zone.no}`,
+        partyId: "nope",
+        complete: false,
+        show: false,
+      }
+    }),
+    ...partylist,
+  ]
 }
 
 export default /** @type {React.FunctionComponent<Props>} */ (onlyPassThroughPropsWhilePageIsVisible(

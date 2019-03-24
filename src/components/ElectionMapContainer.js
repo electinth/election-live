@@ -12,7 +12,7 @@ import {
   shouldDisplayZoneData,
   nationwidePartyStatsFromSummaryJSON,
 } from "../models/PartyStats"
-import ElectionMap from "./ElectionMap"
+import ElectionMap, { electionMapLoadingData } from "./ElectionMap"
 import ElectionMapTooltip from "./ElectionMapTooltip"
 import ZoneMark from "./ZoneMark"
 import { ZoneFilterContext } from "./ZoneFilterPanel"
@@ -22,32 +22,12 @@ import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 import { createSelector } from "reselect"
 
 /**
- *
  * @param {import('../models/LiveDataSubscription').DataState<ElectionDataSource.SummaryJSON>} summaryState
  * @param {IZoneFilter} filter
  */
 function getMapData(summaryState, filter) {
   if (!summaryState.completed) {
-    const partylist = []
-    while (partylist.length < 150) {
-      partylist.push({
-        id: `pl-${partylist.length + 1}`,
-        partyId: "nope",
-        complete: true,
-        show: false,
-      })
-    }
-    return [
-      ...zones.map((zone, i) => {
-        return {
-          id: `${zone.provinceId}-${zone.no}`,
-          partyId: "nope",
-          complete: false,
-          show: false,
-        }
-      }),
-      ...partylist,
-    ]
+    return electionMapLoadingData
   } else {
     /** @type {ElectionDataSource.SummaryJSON} */
     const summary = summaryState.data
@@ -73,6 +53,7 @@ function getMapData(summaryState, filter) {
     }
     return [
       ...zones.map((zone, i) => {
+        // @todo #1 This logic is now available in getSeatDisplayModel. Refactor this component to use it.
         const winningCandidate = (summary.zoneWinningCandidateMap[
           zone.provinceId
         ] || {})[zone.no]

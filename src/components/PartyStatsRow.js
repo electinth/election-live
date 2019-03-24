@@ -1,10 +1,8 @@
 import React from "react"
-import { format } from "d3-format"
 import VisuallyHidden from "@reach/visually-hidden"
 import { DISPLAY_FONT } from "../styles"
 import { partyColor, partyLogo } from "../models/information"
-
-const formatPercent = format(".3%")
+import PercentBarChart from "./PercentBarChart"
 
 const ARTICLE_STYLE = {
   position: "relative",
@@ -49,14 +47,7 @@ const PartyStatsRow = props => {
             </React.Fragment>
           )}
         </div>
-        <svg width="100%" height="5">
-          <rect width="100%" height="5" fill="#ccc" />
-          <rect
-            width={formatPercent(barWidth)}
-            height="5"
-            fill={partyColor(props.party)}
-          />
-        </svg>
+        <PercentBarChart color={partyColor(props.party)} percent={barWidth} />
       </div>
       <div>
         <VisuallyHidden> ทั้งหมด </VisuallyHidden>

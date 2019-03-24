@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { format } from "d3-format"
 import { keyBy } from "lodash"
 import {
   parties,
@@ -9,8 +10,8 @@ import {
 } from "../models/information"
 import loadingSmall from "../styles/images/loading.gif"
 import ZoneMark from "./ZoneMark"
+import PercentBarChart from "./PercentBarChart"
 import { useSummaryData } from "../models/LiveDataSubscription"
-import { format } from "d3-format"
 
 const partyLookup = keyBy(parties, d => d.id)
 const formatInt = format(",d")
@@ -143,14 +144,7 @@ function WinnerInspector({ noVotesWin, markColor, candidate, percentage }) {
       <div style={PERCENT_STYLE}>
         {formatInt(candidate.score)} ({formatPercent(percentage)})
       </div>
-      <svg width="120" height="5">
-        <rect width="120" height="5" fill="#ccc" />
-        <rect
-          width={Math.round(percentage * 120)}
-          height="5"
-          fill={markColor}
-        />
-      </svg>
+      <PercentBarChart width="120" color={markColor} percent={percentage} />
     </div>
   )
 }
