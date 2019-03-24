@@ -155,27 +155,30 @@ export default ({ partyId }) => {
           }}
         >
           <ul css={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {filteredParties.map(p => (
-              <Link
-                key={p.id}
-                to={partyPath(p)}
-                style={{ color: "black", textDecoration: "none" }}
-                onClick={() => {
-                  setDropdownOpen(false)
-                  setCurrentParty(p)
-                }}
-              >
-                <li
-                  css={{
-                    padding: "12px 0px",
-                    borderBottom: "1px solid gray",
-                    position: "relative",
+            {filteredParties
+              .filter(p => p.name !== "ไทยรักษาชาติ")
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map(p => (
+                <Link
+                  key={p.id}
+                  to={partyPath(p)}
+                  style={{ color: "black", textDecoration: "none" }}
+                  onClick={() => {
+                    setDropdownOpen(false)
+                    setCurrentParty(p)
                   }}
                 >
-                  {partyItem(p)}
-                </li>
-              </Link>
-            ))}
+                  <li
+                    css={{
+                      padding: "12px 0px",
+                      borderBottom: "1px solid gray",
+                      position: "relative",
+                    }}
+                  >
+                    {partyItem(p)}
+                  </li>
+                </Link>
+              ))}
           </ul>
         </div>
       </div>
