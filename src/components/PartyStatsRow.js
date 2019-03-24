@@ -1,8 +1,10 @@
 import React from "react"
 import VisuallyHidden from "@reach/visually-hidden"
 import { DISPLAY_FONT } from "../styles"
-import { partyColor, partyLogo } from "../models/information"
+import { partyColor, partyLogo, partyPath } from "../models/information"
 import PercentBarChart from "./PercentBarChart"
+import Arrow, { RightArrow } from "./Arrow"
+import { Link } from "gatsby"
 
 const ARTICLE_STYLE = {
   position: "relative",
@@ -36,7 +38,22 @@ const PartyStatsRow = props => {
         <img alt="" src={partyLogo(props.party.name)} width="28" />
       </div>
       <div css={{ overflow: "hidden" }}>
-        <h3 css={PARTY_NAME_STYLE}>{props.party.name}</h3>
+        <h3 css={PARTY_NAME_STYLE}>
+          <Link
+            to={partyPath(props.party)}
+            css={{ color: "inherit", textDecoration: "none" }}
+          >
+            {props.party.name}
+            <div
+              css={{
+                display: "inline-block",
+                transform: "translate(-5px,-1px) scale(0.8)",
+              }}
+            >
+              <RightArrow />
+            </div>
+          </Link>
+        </h3>
         <div css={{ margin: 0 }}>
           ส.ส. เขต: {props.constituencySeats}
           <VisuallyHidden> ที่นั่ง </VisuallyHidden>

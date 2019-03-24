@@ -27,11 +27,11 @@ const ArrowSign = props => (
   </span>
 )
 
-const LeftArrow = props => (
+export const LeftArrow = props => (
   <ArrowSign onClick={props.onClick} hide={props.hide} degree={135} />
 )
 
-const RightArrow = props => (
+export const RightArrow = props => (
   <ArrowSign onClick={props.onClick} hide={props.hide} degree={-45} />
 )
 
