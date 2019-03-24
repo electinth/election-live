@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "gatsby"
 import Fuse from "fuse.js"
-import party from "../pages/party"
 
 const searcher = new Fuse(parties, {
   keys: ["codeEN", "codeTH", "name"],
