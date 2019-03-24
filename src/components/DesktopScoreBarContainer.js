@@ -244,19 +244,36 @@ export default function DesktopScoreBarContainer({
         css={{
           display: "flex",
           position: "absolute",
-          top: 0,
-          right: 0,
           zIndex: 10,
+          top: "auto",
+          bottom: 0,
+          right: "auto",
+          left: "calc(50% - 24px)",
+          transform: "translate(-50%, 0)",
+          [media(WIDE_NAV_MIN_WIDTH)]: {
+            top: 0,
+            bottom: "auto",
+            right: 0,
+            left: "auto",
+            transform: "none",
+          },
         }}
       >
         {pageList.map((page, i) => {
           return (
             <div
               css={{
-                paddingTop: "8px",
-                paddingBottom: "8px",
-                marginLeft: "6px",
+                paddingTop: "16px",
+                paddingBottom: 0,
+                marginLeft: "3px",
+                marginRight: "3px",
                 cursor: "pointer",
+                [media(WIDE_NAV_MIN_WIDTH)]: {
+                  paddingTop: "8px",
+                  paddingBottom: "8px",
+                  marginLeft: "6px",
+                  marginRight: 0,
+                },
               }}
               style={{
                 opacity: pageIndex === i ? 1 : 0.5,
