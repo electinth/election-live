@@ -8,8 +8,29 @@ import Fuse from "fuse.js"
 import { trackEvent } from "../util/analytics"
 
 const fuse = new Fuse(zonesForSearch, {
-  keys: ["inclusionAreas", "province.name"],
+  keys: ["inclusionAreas", "province.name", "postcode"],
 })
+const postcodeRegex = /^[0-9]{1,5}$/
+
+function postcodeSearch(postcode) {
+  return zonesForSearch.filter(zone => {
+    for (let code of zone.postcode) {
+      if (code.toString().indexOf(postcode) === 0) {
+        return true
+      }
+    }
+
+    return false
+  })
+}
+
+function search(keyword) {
+  if (postcodeRegex.test(keyword)) {
+    return postcodeSearch(keyword)
+  } else {
+    return fuse.search(keyword)
+  }
+}
 
 let searchUsed = false
 
@@ -36,10 +57,10 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
           fontSize: 16,
           marginTop: 20,
         }}
-        placeholder="ค้นหาจาก ชื่อ ตำบล อำเภอ หรือ จังหวัด"
+        placeholder="ค้นหาจาก รหัสไปรษณีย์ ชื่อ ตำบล อำเภอ หรือ จังหวัด"
         onChange={v => {
           const query = v.target.value
-          const isSearchOpen = query.length > 2
+          const isSearchOpen = query.length > 2 || postcodeRegex.test(query)
           if (isSearchOpen && !searchUsed) {
             searchUsed = true
             trackEvent("Search for zone")
@@ -61,8 +82,7 @@ export function ZoneSearchPanel({ autoFocus, onSearchCompleted }) {
 
       {state.isSearchOpen && (
         <ul css={{ listStyle: "none", padding: 0 }}>
-          {// @todo #1 Update zone filtering logic to allow searching by postal code
-          fuse.search(state.zoneQuery).map(z => {
+          {search(state.zoneQuery).map(z => {
             return (
               <li
                 key={`${z.zone.provinceId}-${z.zone.no}`}
