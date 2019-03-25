@@ -1,15 +1,13 @@
 import { navigate } from "gatsby"
 import _ from "lodash"
-import React, {
-  useLayoutEffect,
-  useState,
-  useRef,
-  useEffect,
-  createContext,
-} from "react"
+import React, { createContext, useEffect, useRef } from "react"
+import Loading from "../components/Loading"
+import LoadingError from "../components/LoadingError"
 import MainLayout from "../components/MainLayout"
 import NationwideSummaryHeader from "../components/NationwideSummaryHeader"
 import PartyStatsList from "../components/PartyStatsList"
+import PerZoneView from "../components/PerZoneView"
+import UndesirableState from "../components/UndesirableState"
 import { ZoneFilterContext } from "../components/ZoneFilterPanel"
 import ZoneMasterView from "../components/ZoneMasterView"
 import {
@@ -20,14 +18,10 @@ import {
 } from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
+  isZoneFinished,
   partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
-  isZoneFinished,
 } from "../models/PartyStats"
-import Loading from "../components/Loading"
-import UndesirableState from "../components/UndesirableState"
-import LoadingError from "../components/LoadingError"
-import PerZoneView from "../components/PerZoneView"
 
 export const MobileTabContext = createContext(
   /** @type {import('../components/ZoneMasterView').MobileTab} */ ("summary")
