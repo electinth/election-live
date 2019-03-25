@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGithub } from "@fortawesome/fontawesome-free-brands"
 import { labelColor, DESKTOP_MIN_WIDTH, media } from "../styles"
 import { appVersion } from "../util/appVersion"
-import { TimeMachine } from "../models/TimeTraveling"
+import { TimeMachine } from "./TimeMachine"
+import ContentWrapper from "./ContentWrapper"
 
 export default function Footer() {
   // @todo #1 Polish the footer
@@ -16,7 +17,9 @@ export default function Footer() {
         color: labelColor,
       }}
     >
-      <TimeMachine />
+      <ContentWrapper>
+        <TimeMachine />
+      </ContentWrapper>
       <div
         css={{
           width: 300,
