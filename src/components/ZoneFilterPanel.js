@@ -74,6 +74,7 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                   marginLeft: 10,
                 }}
                 onChange={e => {
+                  // @todo #223 show dropdown or "autocomplete" for province name?
                   const { value } = e.target
                   setState({ ...state, value: value })
                 }}
@@ -81,12 +82,21 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                   setState({ ...state, value: state.query })
                 }}
                 onKeyPress={e => {
-                  if (e.key == "Enter" && isProvinceExist(state.value)) {
-                    trackEvent("Search for province")
-                    setState(
-                      { ...state, query: state.value },
-                      navigate(filterPath(state.value))
-                    )
+                  const { value } = state
+                  if (e.key == "Enter") {
+                    if (isProvinceExist(state.value)) {
+                      trackEvent("Search for province")
+                      setState(
+                        { ...state, query: state.value },
+                        navigate(filterPath(state.value))
+                      )
+                    } else {
+                      // @todo #223 clear input box
+                      alert(
+                        "ไม่พบจังหวัดที่ท่านระบุ กรุณาตรวจสอบชื่อจังหวัดทีท่านกรอกอีกครั้ง"
+                      )
+                      setState({ ...state, value: "" })
+                    }
                   }
                 }}
                 value={state.value}
