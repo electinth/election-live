@@ -2,8 +2,9 @@ import axios from "axios"
 import _ from "lodash"
 import { observable, onBecomeObserved, runInAction } from "mobx"
 import { useEffect, useMemo, useRef } from "react"
-import { Debug } from "../util/Debug.js"
+import { Debug } from "../util/Debug"
 import { overrideDirectory } from "./TimeTraveling"
+import { performOverrideOnSummaryJSON } from "./ResultOverride"
 import { useComputed } from "./MobXHooks"
 
 const LATEST_FILE_URL = "/data/latest.json"
@@ -63,12 +64,15 @@ const getDataFileResource = _.memoize(path => {
  */
 function createResource(name) {
   const debug = Debug("elect:resource:" + name)
-  const state = observable.box({
-    loading: true,
-    failed: false,
-    completed: false,
-    data: null,
-  })
+  const state = observable.box(
+    {
+      loading: true,
+      failed: false,
+      completed: false,
+      data: null,
+    },
+    { deep: false }
+  )
   return observable({
     debug,
     get state() {
@@ -212,7 +216,7 @@ export function useSummaryData() {
     () => getLatestDataFileState("/SummaryJSON.json"),
     []
   )
-  return useInertState(state)
+  return useMappedDataState(useInertState(state), performOverrideOnSummaryJSON)
 }
 
 /** @return {DataState<ElectionDataSource.PerProvinceJSON>} */
@@ -234,5 +238,12 @@ export function usePerZoneData(provinceId, zoneNo) {
         perProvinceData.data && perProvinceData.data.zoneInformationMap[zoneNo],
     }),
     [perProvinceData, zoneNo]
+  )
+}
+
+function useMappedDataState(state, mapper) {
+  return useMemo(
+    () => (state.data ? { ...state, data: mapper(state.data) } : state),
+    [state, mapper]
   )
 }

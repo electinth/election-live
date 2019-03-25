@@ -44,6 +44,7 @@
     "gatsby-plugin-netlify": "^2.0.13",
     "gatsby-plugin-react-helmet": "^3.0.10",
     "gatsby-plugin-web-font-loader": "^1.0.4",
+    "immer": "^2.1.4",
     "lodash": "^4.17.11",
     "lunr": "^2.3.6",
     "mobx": "^5.9.0",
