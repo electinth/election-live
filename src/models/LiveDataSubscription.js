@@ -10,6 +10,7 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Debug } from "../util/Debug.js"
 import { overrideDirectory } from "./DeveloperOptions.js"
+import { performOverrideOnSummaryJSON } from "./ResultOverride.js"
 
 const LATEST_FILE_URL = "/data/latest.json"
 const DATA_FILE_URL_BASE = "/data"
@@ -68,12 +69,15 @@ const getDataFileResource = _.memoize(path => {
  */
 function createResource(name) {
   const debug = Debug("elect:resource:" + name)
-  const state = observable.box({
-    loading: true,
-    failed: false,
-    completed: false,
-    data: null,
-  })
+  const state = observable.box(
+    {
+      loading: true,
+      failed: false,
+      completed: false,
+      data: null,
+    },
+    { deep: false }
+  )
   return observable({
     debug,
     get state() {
@@ -217,7 +221,7 @@ export function useSummaryData() {
     () => getLatestDataFileState("/SummaryJSON.json"),
     []
   )
-  return useInertState(state)
+  return useMappedDataState(useInertState(state), performOverrideOnSummaryJSON)
 }
 
 /** @return {DataState<ElectionDataSource.PerProvinceJSON>} */
@@ -239,6 +243,13 @@ export function usePerZoneData(provinceId, zoneNo) {
         perProvinceData.data && perProvinceData.data.zoneInformationMap[zoneNo],
     }),
     [perProvinceData, zoneNo]
+  )
+}
+
+function useMappedDataState(state, mapper) {
+  return useMemo(
+    () => (state.data ? { ...state, data: mapper(state.data) } : state),
+    [state, mapper]
   )
 }
 
