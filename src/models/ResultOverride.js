@@ -4,7 +4,9 @@ import produce from "immer"
 // Checked with https://www.facebook.com/Pr.Ect.Thailand/posts/1249405225217547
 
 /**
- * Activate data override only total vote count is more than this threshold.
+ * Activate data override only total vote count is more than this threshold,
+ * since the user may be viewing a past data (see TimeTraveling)
+ * and we don’t want override to activate in this case.
  */
 const resultOverrideActivationThreshould = 33353799
 
@@ -12,6 +14,8 @@ const resultOverrideActivationThreshould = 33353799
  * Actual override data.
  *
  * Note that the `score` is the latest score we have.
+ * For an override to be applied, the candidate’s score must match.
+ * This ensures we are looking at latest data and our override is not infering with TimeTraveling.
  */
 const resultOverrideData = {
   // สมุทรสาคร เขต 3 'ชาติไทยพัฒนา' => 'พลังประชารัฐ'
