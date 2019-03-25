@@ -325,13 +325,16 @@ class ElectionMap extends SvgChart {
     } else {
       this.clearSelectedZone()
     }
+
+    this.resetZoom()
     if (regionZoom) {
       const { x, y } = regionZoom.translate
 
-      this.zoom.scaleTo(this.container, regionZoom.scale)
+      this.zoom.translateTo(this.container, 0, 0)
+      this.zoom.scaleTo(this.container, 1)
+
       this.zoom.translateTo(this.container, x, y)
-    } else {
-      this.resetZoom()
+      this.zoom.scaleTo(this.container, regionZoom.scale)
     }
 
     // // resize to fit window
