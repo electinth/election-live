@@ -118,6 +118,13 @@ export const filters = {
       en: "Northern region",
     },
     criterion: (province, zone) => province.regionId === 1,
+    zoom: {
+      scale: 2,
+      translate: {
+        x: 10,
+        y: -50,
+      },
+    },
   },
   northeastern: {
     name: {
@@ -125,6 +132,13 @@ export const filters = {
       en: "Northeastern region",
     },
     criterion: (province, zone) => province.regionId === 2,
+    zoom: {
+      scale: 1.75,
+      translate: {
+        x: 165,
+        y: 50,
+      },
+    },
   },
   central: {
     name: {
@@ -132,6 +146,13 @@ export const filters = {
       en: "Central region",
     },
     criterion: (province, zone) => province.regionId === 3,
+    zoom: {
+      scale: 1.25,
+      translate: {
+        x: 125,
+        y: 225,
+      },
+    },
   },
   southern: {
     name: {
@@ -139,6 +160,13 @@ export const filters = {
       en: "Southern region",
     },
     criterion: (province, zone) => province.regionId === 4,
+    zoom: {
+      scale: 2,
+      translate: {
+        x: 0,
+        y: 275,
+      },
+    },
   },
   urban: {
     name: {
