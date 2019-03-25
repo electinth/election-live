@@ -23,6 +23,7 @@ const resultOverrideData = {
     firstName: "จอมขวัญ",
     lastName: "กลับบ้านเกาะ",
     score: 21506,
+    overridden: true,
   },
   // กรุงเทพมหานคร เขต 5 'พลังประชารัฐ' => 'เพื่อไทย'
   // https://www.facebook.com/Pr.Ect.Thailand/photos/pcb.1249405225217547/1249437881880948/?type=3&theater
@@ -33,6 +34,7 @@ const resultOverrideData = {
     firstName: "ประเดิมชัย",
     lastName: "บุญช่วยเหลือ",
     score: 26416,
+    overridden: true,
   },
   // กรุงเทพมหานคร เขต 28 'พลังประชารัฐ' => 'อนาคตใหม่'
   // https://www.facebook.com/Pr.Ect.Thailand/photos/pcb.1249405225217547/1249437898547613/?type=3&theater
@@ -43,6 +45,7 @@ const resultOverrideData = {
     firstName: "ณัฐพงษ์",
     lastName: "เรืองปัญญาวุฒิ",
     score: 23262,
+    overridden: true,
   },
   // ประจวบคีรีขันธ์ เขต 2 'ประชาธิปัตย์' => 'เพื่อไทย'
   // https://www.facebook.com/Pr.Ect.Thailand/photos/pcb.1249405225217547/1249437965214273/?type=3&theater
@@ -53,6 +56,7 @@ const resultOverrideData = {
     firstName: "พรเทพ",
     lastName: "วิสุทธิ์วัฒนศักดิ์",
     score: 30872,
+    overridden: true,
   },
 }
 
@@ -71,4 +75,8 @@ export function performOverrideOnSummaryJSON(summary) {
       draft.zoneWinningCandidateMap[provinceId][zoneNo] = value
     })
   })
+}
+
+export function getOverridingWinningCandidate(provinceId, zoneNo) {
+  return resultOverrideData[`${provinceId}-${zoneNo}`]
 }

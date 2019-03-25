@@ -21,6 +21,7 @@ import Placeholder from "./Placeholder"
 import UndesirableState from "./UndesirableState"
 import LoadingError from "./LoadingError"
 import { MobileTabContext } from "../pages/index"
+import { getOverridingWinningCandidate } from "../models/ResultOverride"
 
 export default function PerZoneView({ provinceId, zoneNo }) {
   const zone = getZoneByProvinceIdAndZoneNo(provinceId, zoneNo)
@@ -219,20 +220,31 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
     )
   }
   const noVotes = zoneStats.noVotes
+  const overridingWinner = getOverridingWinningCandidate(provinceId, zoneNo)
   // Add no votes as one of candidates.
-  const zoneCandidates = [
-    ...data.candidates.slice(),
-    {
-      firstName: "",
-      lastName: "",
-      no: "",
-      score: noVotes,
-      partyId: 0,
-    },
-  ]
-  zoneCandidates.sort(function(a, b) {
-    return b.score - a.score
-  })
+  const zoneCandidates = _.orderBy(
+    [
+      ...data.candidates
+        .slice()
+        .map(candidate =>
+          overridingWinner &&
+          candidate.partyId === overridingWinner.partyId &&
+          candidate.score === overridingWinner.score
+            ? overridingWinner
+            : candidate
+        ),
+      {
+        firstName: "",
+        lastName: "",
+        no: "",
+        score: noVotes,
+        partyId: 0,
+      },
+    ],
+    [candidate => (candidate.overridden ? 1 : 0), candidate => candidate.score],
+    ["desc", "desc"]
+  )
+  console.log(zoneCandidates)
   const goodVotes = _.sumBy(zoneCandidates, "score")
   if (data.candidates.length < 1) {
     return (
@@ -268,6 +280,7 @@ function ZoneCandidateList({ provinceId, zoneNo, zoneStats }) {
               rank={index + 1}
               score={candidate.score}
               percentage={percentage}
+              overridden={candidate.overridden}
             />
           </li>
         )
