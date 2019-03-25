@@ -2,59 +2,78 @@ import React, { useEffect, useState, useRef } from "react"
 import { useDirectoryOverride } from "../models/TimeTraveling"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHistory } from "@fortawesome/free-solid-svg-icons"
+import _ from "lodash"
 
 const dirNameToReadableTime = n => {
   return n.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})\d+/, "$1-$2-$3 $4:$5")
 }
 
 export function TimeMachine() {
+  const styles = {
+    button: {
+      cursor: "pointer",
+      border: 0,
+      padding: 0,
+      font: "inherit",
+      color: "inherit",
+      background: "none",
+    },
+  }
+
   const [override, setOverride] = useDirectoryOverride()
   const [hover, setHover] = useState("")
-  const [browsingIndex, setBrowsingIndex] = useState(0)
   const timeout = useRef()
 
   const handleKeyDown = e => {
-    if (e.key === "ArrowRight" && browsingIndex < dirs.length - 2) {
-      goBackTo(browsingIndex + 1)
-    } else if (e.key === "ArrowLeft" && browsingIndex > 1) {
-      goBackTo(browsingIndex - 1)
+    if (e.key === "ArrowRight") {
+      moveTimeBy(1)
+    } else if (e.key === "ArrowLeft") {
+      moveTimeBy(-1)
     }
   }
-
-  function goBackTo(index) {
+  const moveTimeBy = dt => {
+    const browsingIndex = _.findIndex(dirs, entry => entry[0] === override)
+    if (browsingIndex === -1) return
+    goBackTo(Math.min(dirs.length - 1, Math.max(0, browsingIndex + dt)))
+  }
+  const goBackTo = index => {
     const directory = dirs[index][0]
     setOverride(directory === override ? null : directory)
-    setBrowsingIndex(index)
   }
-
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
-  })
+  }, [override])
 
   return (
-    <div>
-      <div
-        css={{ textAlign: "left", cursor: "pointer" }}
-        title="เปิดการดูข้อมูลย้อนหลัง"
-        onClick={() => goBackTo(0)}
+    <div css={{ textAlign: "left" }}>
+      <button
+        css={{
+          ...styles.button,
+          margin: "0 8px 0 -8px",
+          padding: 8,
+          flex: "none",
+        }}
+        title={override ? "ปิดการดูข้อมูลย้อนหลัง" : "เปิดการดูข้อมูลย้อนหลัง"}
+        onClick={() => (override ? setOverride(null) : goBackTo(0))}
       >
         <FontAwesomeIcon icon={faHistory} />
-      </div>
+      </button>
+      {!!override && renderControl()}
+    </div>
+  )
+
+  function renderControl() {
+    return (
       <div
-        data-active={override ? true : undefined}
         css={{
+          flex: "auto",
           textAlign: "left",
           color: "#888",
-          "& > .status-text": { display: "none" },
-          "&:focus-within, &:focus, &:hover, &[data-active]": {
-            "& > .status-text": { display: "flex" },
-          },
         }}
       >
         <div
-          className="status-text"
-          css={{ display: "flex", justifyContent: "center" }}
+          css={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
         >
           <div css={{ flexGrow: 1 }}>
             {hover && hover !== override ? (
@@ -74,15 +93,29 @@ export function TimeMachine() {
             )}
           </div>
           <div css={{ flexGrow: 1, textAlign: "right" }}>
-            <div>เลือกช่องด้านล่างเพื่อดูข้อมูลย้อนหลัง หรือ กด ← / →</div>
+            <div>
+              เลือกช่องด้านล่างเพื่อดูข้อมูลย้อนหลัง หรือ กด{" "}
+              <button css={styles.button} onClick={() => moveTimeBy(-1)}>
+                ←
+              </button>{" "}
+              /{" "}
+              <button css={styles.button} onClick={() => moveTimeBy(1)}>
+                →
+              </button>
+            </div>
           </div>
         </div>
         <div css={{ display: override ? "block" : "none" }}>
           <div
-            css={{ display: "flex", height: 20, borderLeft: "1px solid #ddd" }}
+            css={{
+              display: "flex",
+              height: 20,
+              borderLeft: "1px solid #ddd",
+            }}
           >
             {dirs.slice(0, -1).map(([directory, time, voteCount], index) => (
               <a
+                key={index}
                 data-active={override === directory ? true : undefined}
                 href="javascript://"
                 css={{
@@ -107,9 +140,10 @@ export function TimeMachine() {
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
+
 const dirs = [
   ["20190324181931", 1553426371, 775970],
   ["20190324190105", 1553428865, 816440],
