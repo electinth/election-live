@@ -1,16 +1,11 @@
 import axios from "axios"
 import _ from "lodash"
-import {
-  autorun,
-  computed,
-  observable,
-  onBecomeObserved,
-  runInAction,
-} from "mobx"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { observable, onBecomeObserved, runInAction } from "mobx"
+import { useEffect, useMemo, useRef } from "react"
 import { Debug } from "../util/Debug.js"
 import { overrideDirectory } from "./DeveloperOptions.js"
 import { performOverrideOnSummaryJSON } from "./ResultOverride.js"
+import { useComputed } from "./MobXHooks"
 
 const LATEST_FILE_URL = "/data/latest.json"
 const DATA_FILE_URL_BASE = "/data"
@@ -251,21 +246,4 @@ function useMappedDataState(state, mapper) {
     () => (state.data ? { ...state, data: mapper(state.data) } : state),
     [state, mapper]
   )
-}
-
-/**
- * Utility function to subscribe to MobX.
- */
-function useComputed(fn, inputs) {
-  const box = useMemo(() => computed(fn), inputs)
-  const [, setRerenderCount] = useState(0)
-  useEffect(
-    () =>
-      autorun(() => {
-        box.get()
-        setRerenderCount(x => x + 1)
-      }),
-    [box]
-  )
-  return box.get()
 }
