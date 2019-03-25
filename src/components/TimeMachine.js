@@ -1,63 +1,111 @@
-import React, { useState, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useDirectoryOverride } from "../models/TimeTraveling"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHistory } from "@fortawesome/free-solid-svg-icons"
+
+const dirNameToReadableTime = n => {
+  return n.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})\d+/, "$1-$2-$3 $4:$5")
+}
 
 export function TimeMachine() {
   const [override, setOverride] = useDirectoryOverride()
   const [hover, setHover] = useState("")
+  const [browsingIndex, setBrowsingIndex] = useState(0)
   const timeout = useRef()
+
+  const handleKeyDown = e => {
+    if (e.key === "ArrowRight" && browsingIndex < dirs.length - 2) {
+      goBackTo(browsingIndex + 1)
+    } else if (e.key === "ArrowLeft" && browsingIndex > 1) {
+      goBackTo(browsingIndex - 1)
+    }
+  }
+
+  function goBackTo(index) {
+    const directory = dirs[index][0]
+    setOverride(directory === override ? null : directory)
+    setBrowsingIndex(index)
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  })
+
   return (
-    <div
-      data-active={override ? true : undefined}
-      css={{
-        textAlign: "center",
-        color: "#888",
-        "& > .status-text": { opacity: 0 },
-        "&:focus-within, &:focus, &:hover, &[data-active]": {
-          "& > .status-text": { opacity: 1 },
-        },
-      }}
-    >
-      <div className="status-text">
-        {hover && hover !== override ? (
-          <span>
-            <strong>Time machine:</strong> Time travel to {hover}
-          </span>
-        ) : override ? (
-          <span>
-            <strong>Time machine:</strong> Currently viewing {override}
-          </span>
-        ) : (
-          <span>
-            <strong>Time machine is inactive</strong> — viewing latest data
-          </span>
-        )}
+    <div>
+      <div
+        css={{ textAlign: "left", cursor: "pointer" }}
+        title="เปิดการดูข้อมูลย้อนหลัง"
+        onClick={() => goBackTo(0)}
+      >
+        <FontAwesomeIcon icon={faHistory} />
       </div>
-      <div css={{ display: "flex", height: 20, borderLeft: "1px solid #ddd" }}>
-        {dirs.slice(0, -1).map(([directory, time, voteCount], index) => (
-          <a
-            data-active={override === directory ? true : undefined}
-            href="javascript://"
-            css={{
-              background: "#eee",
-              borderRight: "1px solid #ddd",
-              "&:hover": { background: "#ccc" },
-              "&[data-active]": { background: "#888" },
-            }}
-            style={{
-              flex: `${Math.min(dirs[index + 1][1] - time, 1800)} 0 0px`,
-            }}
-            onClick={() =>
-              setOverride(directory === override ? null : directory)
-            }
-            onMouseOver={() => {
-              clearTimeout(timeout.current)
-              setHover(directory)
-            }}
-            onMouseOut={() => {
-              timeout.current = setTimeout(() => setHover(null))
-            }}
-          />
-        ))}
+      <div
+        data-active={override ? true : undefined}
+        css={{
+          textAlign: "left",
+          color: "#888",
+          "& > .status-text": { display: "none" },
+          "&:focus-within, &:focus, &:hover, &[data-active]": {
+            "& > .status-text": { display: "flex" },
+          },
+        }}
+      >
+        <div
+          className="status-text"
+          css={{ display: "flex", justifyContent: "center" }}
+        >
+          <div css={{ flexGrow: 1 }}>
+            {hover && hover !== override ? (
+              <span>
+                <strong>ดูข้อมูลย้อนหลัง</strong> ณ เวลา{" "}
+                {dirNameToReadableTime(hover)}
+              </span>
+            ) : override ? (
+              <span>
+                <strong>ข้อมูลย้อนหลัง</strong> ณ เวลา{" "}
+                {dirNameToReadableTime(override)}
+              </span>
+            ) : (
+              <span>
+                <strong>กำลังดูข้อมูลล่าสุด</strong>
+              </span>
+            )}
+          </div>
+          <div css={{ flexGrow: 1, textAlign: "right" }}>
+            <div>เลือกช่องด้านล่างเพื่อดูข้อมูลย้อนหลัง หรือ กด ← / →</div>
+          </div>
+        </div>
+        <div css={{ display: override ? "block" : "none" }}>
+          <div
+            css={{ display: "flex", height: 20, borderLeft: "1px solid #ddd" }}
+          >
+            {dirs.slice(0, -1).map(([directory, time, voteCount], index) => (
+              <a
+                data-active={override === directory ? true : undefined}
+                href="javascript://"
+                css={{
+                  background: "#eee",
+                  borderRight: "1px solid #ddd",
+                  "&:hover": { background: "#ccc" },
+                  "&[data-active]": { background: "#888" },
+                }}
+                style={{
+                  flex: `${Math.min(dirs[index + 1][1] - time, 1800)} 0 0px`,
+                }}
+                onClick={() => goBackTo(index)}
+                onMouseOver={() => {
+                  clearTimeout(timeout.current)
+                  setHover(directory)
+                }}
+                onMouseOut={() => {
+                  timeout.current = setTimeout(() => setHover(null))
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
