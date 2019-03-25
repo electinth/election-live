@@ -27,7 +27,7 @@ import {
 import Loading from "../components/Loading"
 import UndesirableState from "../components/UndesirableState"
 import LoadingError from "../components/LoadingError"
-import ZoneView from "../components/ZoneView"
+import PerZoneView from "../components/PerZoneView"
 
 export const MobileTabContext = createContext(
   /** @type {import('../components/ZoneMasterView').MobileTab} */ ("summary")
@@ -83,7 +83,9 @@ function ZonePageContainer({ pageContext, location }) {
             <PartyStatsContainer key={filterName} filterName={filterName} />
           }
           popup={
-            pageContext.zoneView ? <ZoneView {...pageContext.zoneView} /> : null
+            pageContext.zoneView ? (
+              <PerZoneView {...pageContext.zoneView} />
+            ) : null
           }
           currentMobileTab={currentMobileTab}
           switchMobileTab={switchMobileTab}

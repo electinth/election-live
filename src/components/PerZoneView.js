@@ -22,7 +22,7 @@ import UndesirableState from "./UndesirableState"
 import LoadingError from "./LoadingError"
 import { MobileTabContext } from "../pages/index"
 
-export default function ZoneView({ provinceId, zoneNo }) {
+export default function PerZoneView({ provinceId, zoneNo }) {
   const zone = getZoneByProvinceIdAndZoneNo(provinceId, zoneNo)
   const province = getProvinceById(provinceId)
   const activeFilter = useContext(ZoneFilterContext)
