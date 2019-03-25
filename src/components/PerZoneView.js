@@ -29,6 +29,19 @@ export default function PerZoneView({ provinceId, zoneNo }) {
   const summaryState = useSummaryData()
   const mobileTab = useContext(MobileTabContext)
 
+  /**
+   * @template T
+   * @param {(data: { summary: ElectionDataSource.SummaryJSON; zoneStats: ElectionDataSource.ZoneStats }) => T} f
+   * @param {() => T} otherwise
+   */
+  const ifSummaryLoaded = (f, otherwise) =>
+    summaryState.completed
+      ? f({
+          summary: summaryState.data,
+          zoneStats: summaryState.data.zoneStatsMap[provinceId][zoneNo],
+        })
+      : otherwise()
+
   return (
     <div
       css={{
@@ -76,19 +89,6 @@ export default function PerZoneView({ provinceId, zoneNo }) {
   )
 
   function renderHeader() {
-    /**
-     * @template T
-     * @param {(data: { summary: ElectionDataSource.SummaryJSON; zoneStats: ElectionDataSource.ZoneStats }) => T} f
-     * @param {() => T} otherwise
-     */
-    const ifSummaryLoaded = (f, otherwise) =>
-      summaryState.completed
-        ? f({
-            summary: summaryState.data,
-            zoneStats: summaryState.data.zoneStatsMap[provinceId][zoneNo],
-          })
-        : otherwise()
-
     return (
       <div
         css={{
