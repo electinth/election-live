@@ -28,18 +28,7 @@ export default function PerZoneView({ provinceId, zoneNo }) {
   const activeFilter = useContext(ZoneFilterContext)
   const summaryState = useSummaryData()
   const mobileTab = useContext(MobileTabContext)
-  /**
-   * @template T
-   * @param {(data: { summary: ElectionDataSource.SummaryJSON; zoneStats: ElectionDataSource.ZoneStats }) => T} f
-   * @param {() => T} otherwise
-   */
-  const ifSummaryLoaded = (f, otherwise) =>
-    summaryState.completed
-      ? f({
-          summary: summaryState.data,
-          zoneStats: summaryState.data.zoneStatsMap[provinceId][zoneNo],
-        })
-      : otherwise()
+
   return (
     <div
       css={{
@@ -74,108 +63,7 @@ export default function PerZoneView({ provinceId, zoneNo }) {
               )
             }
           />
-          <div
-            css={{
-              textAlign: "center",
-              flex: "none",
-            }}
-          >
-            <h1 css={{ fontFamily: DISPLAY_FONT, margin: "0.63em 0 0.1em 0" }}>
-              {province.name}
-            </h1>
-            <h2
-              css={{
-                fontFamily: DISPLAY_FONT,
-                color: labelColor,
-                margin: "0.3em 0 0.5em 0",
-                position: "relative",
-              }}
-            >
-              <Arrow
-                onLeftArrowClick={() => {
-                  navigate(zonePath({ provinceId, no: zoneNo - 1 || 1 }))
-                }}
-                onRightArrowClick={() =>
-                  navigate(
-                    zonePath({
-                      provinceId,
-                      no: zoneNo < province.zone ? zoneNo + 1 : province.zone,
-                    })
-                  )
-                }
-                hideLeftArrow={zoneNo === 1}
-                hideRightArrow={zoneNo === province.zone}
-              >
-                เขตเลือกตั้งที่ {zone.no}
-              </Arrow>
-            </h2>
-            <div
-              css={{
-                marginBottom: 10,
-              }}
-            >
-              {zone.details}
-            </div>
-            <div>
-              <span>นับแล้ว</span>
-              <span
-                css={{
-                  marginLeft: 10,
-                  fontSize: "1.7em",
-                  fontFamily: DISPLAY_FONT,
-                }}
-              >
-                {ifSummaryLoaded(data => data.zoneStats.progress, () => 0)}%
-              </span>
-            </div>
-
-            <div
-              css={{
-                borderTop: "1px solid",
-                // borderBottom: "1px solid",
-                marginBottom: 10,
-              }}
-            >
-              <TotalVoterSummary
-                totalVoteCount={ifSummaryLoaded(
-                  data => data.zoneStats.votesTotal,
-                  () => 0
-                )}
-                totalVotePercentage={ifSummaryLoaded(
-                  data => {
-                    const zoneStats = data.zoneStats
-                    return Math.round(
-                      (zoneStats.votesTotal / zoneStats.eligible) * 100
-                    )
-                  },
-                  () => 0
-                )}
-              />
-            </div>
-
-            <div css={{ borderBottom: "1px solid", display: "none" }}>
-              <NationwideSubSummaryHeader
-                label="บัตรดี"
-                stat={ifSummaryLoaded(
-                  data => data.zoneStats.goodVotes,
-                  () => (
-                    <Loading size="small" />
-                  )
-                )}
-                idx={0}
-              />
-              <NationwideSubSummaryHeader
-                label="บัตรเสีย"
-                stat={ifSummaryLoaded(
-                  data => data.zoneStats.badVotes,
-                  () => (
-                    <Loading size="small" />
-                  )
-                )}
-                idx={1}
-              />
-            </div>
-          </div>
+          {renderHeader()}
           <ZoneCandidateList
             key={`${provinceId}:${zoneNo}`}
             provinceId={provinceId}
@@ -186,6 +74,126 @@ export default function PerZoneView({ provinceId, zoneNo }) {
       </div>
     </div>
   )
+
+  function renderHeader() {
+    /**
+     * @template T
+     * @param {(data: { summary: ElectionDataSource.SummaryJSON; zoneStats: ElectionDataSource.ZoneStats }) => T} f
+     * @param {() => T} otherwise
+     */
+    const ifSummaryLoaded = (f, otherwise) =>
+      summaryState.completed
+        ? f({
+            summary: summaryState.data,
+            zoneStats: summaryState.data.zoneStatsMap[provinceId][zoneNo],
+          })
+        : otherwise()
+
+    return (
+      <div
+        css={{
+          textAlign: "center",
+          flex: "none",
+        }}
+      >
+        <h1 css={{ fontFamily: DISPLAY_FONT, margin: "0.63em 0 0.1em 0" }}>
+          {province.name}
+        </h1>
+        <h2
+          css={{
+            fontFamily: DISPLAY_FONT,
+            color: labelColor,
+            margin: "0.3em 0 0.5em 0",
+            position: "relative",
+          }}
+        >
+          <Arrow
+            onLeftArrowClick={() => {
+              navigate(zonePath({ provinceId, no: zoneNo - 1 || 1 }))
+            }}
+            onRightArrowClick={() =>
+              navigate(
+                zonePath({
+                  provinceId,
+                  no: zoneNo < province.zone ? zoneNo + 1 : province.zone,
+                })
+              )
+            }
+            hideLeftArrow={zoneNo === 1}
+            hideRightArrow={zoneNo === province.zone}
+          >
+            เขตเลือกตั้งที่ {zone.no}
+          </Arrow>
+        </h2>
+        <div
+          css={{
+            marginBottom: 10,
+          }}
+        >
+          {zone.details}
+        </div>
+        <div>
+          <span>นับแล้ว</span>
+          <span
+            css={{
+              marginLeft: 10,
+              fontSize: "1.7em",
+              fontFamily: DISPLAY_FONT,
+            }}
+          >
+            {ifSummaryLoaded(data => data.zoneStats.progress, () => 0)}%
+          </span>
+        </div>
+
+        <div
+          css={{
+            borderTop: "1px solid",
+            // borderBottom: "1px solid",
+            marginBottom: 10,
+          }}
+        >
+          <TotalVoterSummary
+            totalVoteCount={ifSummaryLoaded(
+              data => data.zoneStats.votesTotal,
+              () => 0
+            )}
+            totalVotePercentage={ifSummaryLoaded(
+              data => {
+                const zoneStats = data.zoneStats
+                return Math.round(
+                  (zoneStats.votesTotal / zoneStats.eligible) * 100
+                )
+              },
+              () => 0
+            )}
+          />
+        </div>
+
+        <div css={{ borderBottom: "1px solid", display: "none" }}>
+          <NationwideSubSummaryHeader
+            label="บัตรดี"
+            stat={ifSummaryLoaded(
+              data => data.zoneStats.goodVotes,
+              () => (
+                <Loading size="small" />
+              )
+            )}
+            idx={0}
+          />
+          <NationwideSubSummaryHeader
+            label="บัตรเสีย"
+            stat={ifSummaryLoaded(
+              data => data.zoneStats.badVotes,
+              () => (
+                <Loading size="small" />
+              )
+            )}
+            idx={1}
+          />
+        </div>
+      </div>
+    )
+  }
 }
 
 /**
