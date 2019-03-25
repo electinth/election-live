@@ -95,7 +95,6 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                       alert(
                         "ไม่พบจังหวัดที่ท่านระบุ กรุณาตรวจสอบชื่อจังหวัดทีท่านกรอกอีกครั้ง"
                       )
-                      setState({ ...state, value: "" })
                     }
                   }
                 }}
