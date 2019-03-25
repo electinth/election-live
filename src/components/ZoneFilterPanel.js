@@ -79,7 +79,8 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                   setState({ ...state, value: value })
                 }}
                 onBlur={e => {
-                  setState({ ...state, value: state.query })
+                  if (!state.noOnBlur)
+                    setState({ ...state, value: state.query, noOnBlur: false })
                 }}
                 onKeyPress={e => {
                   const { value } = state
@@ -95,6 +96,7 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                       alert(
                         "ไม่พบจังหวัดที่ท่านระบุ กรุณาตรวจสอบชื่อจังหวัดทีท่านกรอกอีกครั้ง"
                       )
+                      setState({ ...state, value: value, noOnBlur: true })
                     }
                   }
                 }}
