@@ -275,13 +275,15 @@ export default function MyComponent(props) {
 
 After the election, we have more than 100,000 simultaneous active users watching the counting progress live (updated every 1 minute). In total, 1.5 million users visited the website on the election day.
 
-The website runs on a single DigitalOcean machine which costs \$10/mo, with CloudFlare in front.
+The website runs on a single DigitalOcean machine which costs \$10/mo, serving static files on Apache Web Server, with Cloudflare in front. With a good `Cache-Control` setting, we were able to have 99% cache rate.
+
+![Cloudflare stats](docs/images/cloudflare-stats.png)
 
 1. We generated a static site (using Gatsby), so, there’s no need to run server-side code, as everything is pre-built by the CI.
 
    We follow [Gatsby’s caching guide](https://www.gatsbyjs.org/docs/caching/) (they have it documented and so we didn’t have to figure it out on our own. In fact, we didn’t even have to implement it as [gatsby-plugin-htaccess](https://www.gatsbyjs.org/packages/gatsby-plugin-htaccess/) will automatically generate an `.htaccess` file that follows this best practice already.)
 
-   One deviation we made is that instead of setting `max-age=0`, we set it to 30 seconds in order to better utilize CloudFlare’s caching.
+   One deviation we made is that instead of setting `max-age=0`, we set it to 30 seconds in order to better utilize Cloudflare’s caching.
 
 2. For live data, there’s no API either. We use an ETL process to put data files on the web server.
 
