@@ -80,7 +80,8 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                 }}
                 onBlur={e => {
                   if (!state.noOnBlur)
-                    setState({ ...state, value: state.query, noOnBlur: false })
+                    setState({ ...state, value: state.query })
+                  else setState({ ...state, noOnBlur: false })
                 }}
                 onKeyPress={e => {
                   const { value } = state
