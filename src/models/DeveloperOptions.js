@@ -1,10 +1,7 @@
 import { useEffect, useCallback, useState } from "react"
-import { observable } from "mobx"
 import React from "react"
 import { Link } from "gatsby"
-
-export const overrideDirectory = observable.box(null)
-global.ELECT_overrideDirectory = directory => overrideDirectory.set(directory)
+import { overrideDirectory } from "./TimeTraveling"
 
 export function useLocalStorage(name) {
   const [value, setValue] = useState(null)
