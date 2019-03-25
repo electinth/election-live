@@ -275,7 +275,7 @@ export default function MyComponent(props) {
 
 After the election, we have more than 100,000 simultaneous active users watching the counting progress live (updated every 1 minute). In total, 1.5 million users visited the website on the election day.
 
-The website runs on a single DigitalOcean machine which costs \$10/mo, with CloudFlare in front.
+The website runs on a single DigitalOcean machine which costs \$10/mo, serving static files on Apache Web Server, with CloudFlare in front. With a good `Cache-Control` setting, we were able to have 99% cache rate.
 
 1. We generated a static site (using Gatsby), so, there’s no need to run server-side code, as everything is pre-built by the CI.
 
