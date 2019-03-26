@@ -3,6 +3,7 @@ import { useDirectoryOverride } from "../models/TimeTraveling"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHistory } from "@fortawesome/free-solid-svg-icons"
 import _ from "lodash"
+import { trackEvent } from "../util/analytics"
 
 const dirNameToReadableTime = n => {
   return n.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})\d+/, "$1-$2-$3 $4:$5")
@@ -38,6 +39,7 @@ export function TimeMachine() {
   }
   const goBackTo = index => {
     const directory = dirs[index][0]
+    trackEvent("Time Machine", { dir: directory })
     setOverride(directory === override ? null : directory)
   }
   useEffect(() => {
