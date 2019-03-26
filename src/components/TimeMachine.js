@@ -39,8 +39,10 @@ export function TimeMachine() {
   }
   const goBackTo = index => {
     const directory = dirs[index][0]
-    trackEvent("Time Machine", { dir: directory })
-    setOverride(directory)
+    if (directory !== override) {
+      trackEvent("Time Machine", { dir: directory })
+      setOverride(directory)
+    }
   }
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown)
