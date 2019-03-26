@@ -108,5 +108,7 @@ declare namespace ElectionDataSource {
     firstName: string
     /** Candidate’s last name */
     lastName: string
+    /** If result is overridden (see ResultOverride.js) */
+    overridden?: true
   }
 }

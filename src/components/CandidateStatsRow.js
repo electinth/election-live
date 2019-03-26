@@ -11,6 +11,7 @@ import PercentBarChart from "./PercentBarChart"
  * @param {number} props.rank Ranking in list. 1 for highest score, and so on.
  * @param {number} props.score Total number of votes this candidate received.
  * @param {number} props.percentage Proportion of votes as percentage from 0~100
+ * @param {boolean} props.overridden If the announced winner is different
  */
 export default function CandidateStatsRow(props) {
   return (
@@ -34,10 +35,18 @@ export default function CandidateStatsRow(props) {
         <div css={{ position: "relative", fontSize: "1.2rem" }}>
           <b>{props.partyName}</b>
           <span
-            css={{ position: "absolute", right: 0, top: 0, color: "#413F3F" }}
+            css={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              color: props.overridden ? "#D0021B" : "#413F3F",
+            }}
           >
-            <b css={{ color: "black" }}>{numberWithCommas(props.score)}</b> -{" "}
-            {props.percentage}%
+            {!!props.overridden && "*"}
+            <b css={{ color: props.overridden ? "inherit" : "black" }}>
+              {numberWithCommas(props.score)}
+            </b>{" "}
+            - {props.percentage}%
           </span>
         </div>
         <div>
@@ -52,6 +61,26 @@ export default function CandidateStatsRow(props) {
           percent={props.percentage / 100}
           color={props.partyColor}
         />
+        {!!props.overridden && (
+          <div
+            css={{
+              background: "#D0021B",
+              color: "white",
+              fontSize: "0.7rem",
+              padding: 4,
+            }}
+          >
+            *{" "}
+            <a
+              href="https://www.facebook.com/Pr.Ect.Thailand/posts/1249405225217547"
+              target="_blank"
+              css={{ color: "inherit" }}
+            >
+              กกต. ประกาศให้เป็นผู้ได้คะแนนสูงสุดในเขตนี้
+            </a>{" "}
+            แต่ ELECT Live ยังไม่ได้รับคะแนนล่าสุดของเขตนี้จาก กกต.
+          </div>
+        )}
       </div>
     </div>
   )

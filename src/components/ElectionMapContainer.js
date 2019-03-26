@@ -20,6 +20,7 @@ import { navigate } from "gatsby"
 import { trackEvent } from "../util/analytics"
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
 import { createSelector } from "reselect"
+import ErrorBoundary from "./ErrorBoundary"
 
 /**
  * @param {import('../models/LiveDataSubscription').DataState<ElectionDataSource.SummaryJSON>} summaryState
@@ -141,10 +142,12 @@ export default function ElectionMapContainer({ currentZone }) {
             left: mapTip.mouseEvent.clientX + 10,
           }}
         >
-          <ElectionMapTooltip
-            positionId={mapTip.zone.data.id}
-            positions={mapZones}
-          />
+          <ErrorBoundary name="Election map tooltip">
+            <ElectionMapTooltip
+              positionId={mapTip.zone.data.id}
+              positions={mapZones}
+            />
+          </ErrorBoundary>
         </div>
       )}
       <div style={{ textAlign: "center", marginBottom: 6 }}>
