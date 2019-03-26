@@ -56,74 +56,79 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
       }
     }, [autoFocus])
     return (
-      <div css={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+      <div css={{ display: "flex", flexDirection: "row" }}>
         {renderFilter(state.query, "จังหวัด")}
         <ZoneFilterContext.Consumer>
           {currentFilterName => {
             const current = currentFilterName === state.query
             return (
-              <input
-                disabled={!current}
-                ref={inputRef}
+              <div
                 css={{
-                  border: `1px solid`,
-                  borderColor: state.provinceError ? "#FF0000" : "#999999",
-                  width: "200px",
-                  boxSizing: "border-box",
-                  padding: 10,
-                  fontSize: 16,
                   marginLeft: 10,
                 }}
-                onChange={e => {
-                  // @todo #223 show dropdown or "autocomplete" for province name?
-                  const { value } = e.target
-                  setState({ ...state, value: value, provinceError: false })
-                }}
-                onBlur={e => {
-                  if (!state.noOnBlur)
-                    setState({ ...state, value: state.query })
-                  else
-                    setState({
-                      ...state,
-                      noOnBlur: false,
-                      provinceError: false,
-                    })
-                }}
-                onKeyPress={e => {
-                  const { value } = state
-                  if (e.key == "Enter") {
-                    if (isProvinceExist(state.value)) {
-                      trackEvent("Search for province")
-                      setState(
-                        { ...state, query: state.value },
-                        navigate(filterPath(state.value))
-                      )
+              >
+                <input
+                  disabled={!current}
+                  ref={inputRef}
+                  css={{
+                    border: `1px solid`,
+                    borderColor: state.provinceError ? "#FF0000" : "#999999",
+                    width: "200px",
+                    boxSizing: "border-box",
+                    padding: 10,
+                    fontSize: 16,
+                  }}
+                  onChange={e => {
+                    // @todo #223 show dropdown or "autocomplete" for province name?
+                    const { value } = e.target
+                    setState({ ...state, value: value, provinceError: false })
+                  }}
+                  onBlur={e => {
+                    if (!state.noOnBlur) {
+                      setState({ ...state, value: state.query })
                     } else {
                       setState({
                         ...state,
-                        value: value,
-                        noOnBlur: true,
-                        provinceError: true,
+                        noOnBlur: false,
+                        provinceError: false,
                       })
                     }
-                  }
-                }}
-                value={state.value}
-              />
+                  }}
+                  onKeyPress={e => {
+                    const { value } = state
+                    if (e.key == "Enter") {
+                      if (isProvinceExist(state.value)) {
+                        trackEvent("Search for province")
+                        setState(
+                          { ...state, query: state.value },
+                          navigate(filterPath(state.value))
+                        )
+                      } else {
+                        setState({
+                          ...state,
+                          value: value,
+                          noOnBlur: true,
+                          provinceError: true,
+                        })
+                      }
+                    }
+                  }}
+                  value={state.value}
+                />
+                <span
+                  css={{
+                    display: state.provinceError ? "block" : "none",
+                    color: "#FF0000",
+                    width: "100%",
+                  }}
+                >
+                  ไม่พบจังหวัดที่ท่านระบุ <br />{" "}
+                  กรุณาตรวจสอบชื่อจังหวัดที่ท่านกรอกอีกครั้ง
+                </span>
+              </div>
             )
           }}
         </ZoneFilterContext.Consumer>
-        <span
-          css={{
-            display: state.provinceError ? "block" : "none",
-            color: "#FF0000",
-            width: "200px",
-            boxSizing: "border-box",
-            flex: "1 1 100%",
-          }}
-        >
-          ไม่พบจังหวัดที่ท่านระบุ กรุณาตรวจสอบชื่อจังหวัดที่ท่านกรอกอีกครั้ง
-        </span>
       </div>
     )
   }
