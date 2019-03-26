@@ -122,8 +122,7 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                     width: "100%",
                   }}
                 >
-                  ไม่พบจังหวัดที่ท่านระบุ <br />{" "}
-                  กรุณาตรวจสอบชื่อจังหวัดที่ท่านกรอกอีกครั้ง
+                  ไม่พบจังหวัดที่ท่านระบุ
                 </span>
               </div>
             )
