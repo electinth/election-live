@@ -21,7 +21,7 @@ Live Scoreboard for Thailand General Election 2562 (2019).
   - [Styling](#styling)
   - [Responsive Design](#responsive-design)
   - [Use JSDoc instead of `propTypes`](#use-jsdoc-instead-of-proptypes)
-  - [How we handled 100,000 active users on a single \$10/mo server](#how-we-handled-100000-active-users-on-a-single-%5C10mo-server)
+  - [How we handled 100,000 active users on a single \$10/mo server](#how-we-handled-100000-active-users-on-a-single-10mo-server)
 - [Build the project into a static web page](#build-the-project-into-a-static-web-page)
 - [Releasing new version](#releasing-new-version)
 - [Contributors](#contributors)
