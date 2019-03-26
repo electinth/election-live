@@ -1,6 +1,6 @@
 # ELECT LIVE [![CircleCI](https://img.shields.io/circleci/project/github/codeforthailand/election-live/master.svg?logo=circleci)](https://circleci.com/gh/codeforthailand/election-live) [![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/codeforthailand/election-live.svg)](https://codeclimate.com/github/codeforthailand/election-live/maintainability) [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/codeforthailand/election-live.svg)](https://codeclimate.com/github/codeforthailand/election-live/maintainability)
 
-Live Scoreboard for Thailand General Election 2562 (2019).
+Live Scoreboard for Thailand General Election 2562 (2019). Test
 
 ![Screenshot](docs/images/screenshot.png)
 
