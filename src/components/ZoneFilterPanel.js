@@ -56,7 +56,7 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
       }
     }, [autoFocus])
     return (
-      <div css={{ display: "flex", flexDirection: "row" }}>
+      <div css={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         {renderFilter(state.query, "จังหวัด")}
         <ZoneFilterContext.Consumer>
           {currentFilterName => {
@@ -66,7 +66,8 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                 disabled={!current}
                 ref={inputRef}
                 css={{
-                  border: `1px solid "#999999"`,
+                  border: `1px solid`,
+                  borderColor: state.provinceError ? "#FF0000" : "#999999",
                   width: "200px",
                   boxSizing: "border-box",
                   padding: 10,
@@ -76,12 +77,17 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                 onChange={e => {
                   // @todo #223 show dropdown or "autocomplete" for province name?
                   const { value } = e.target
-                  setState({ ...state, value: value })
+                  setState({ ...state, value: value, provinceError: false })
                 }}
                 onBlur={e => {
                   if (!state.noOnBlur)
                     setState({ ...state, value: state.query })
-                  else setState({ ...state, noOnBlur: false })
+                  else
+                    setState({
+                      ...state,
+                      noOnBlur: false,
+                      provinceError: false,
+                    })
                 }}
                 onKeyPress={e => {
                   const { value } = state
@@ -93,11 +99,12 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                         navigate(filterPath(state.value))
                       )
                     } else {
-                      // @todo #223 clear input box
-                      alert(
-                        "ไม่พบจังหวัดที่ท่านระบุ กรุณาตรวจสอบชื่อจังหวัดทีท่านกรอกอีกครั้ง"
-                      )
-                      setState({ ...state, value: value, noOnBlur: true })
+                      setState({
+                        ...state,
+                        value: value,
+                        noOnBlur: true,
+                        provinceError: true,
+                      })
                     }
                   }
                 }}
@@ -106,6 +113,17 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
             )
           }}
         </ZoneFilterContext.Consumer>
+        <span
+          css={{
+            display: state.provinceError ? "block" : "none",
+            color: "#FF0000",
+            width: "200px",
+            boxSizing: "border-box",
+            flex: "1 1 100%",
+          }}
+        >
+          ไม่พบจังหวัดที่ท่านระบุ กรุณาตรวจสอบชื่อจังหวัดที่ท่านกรอกอีกครั้ง
+        </span>
       </div>
     )
   }
