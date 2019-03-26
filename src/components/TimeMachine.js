@@ -1,16 +1,9 @@
 import React, { useEffect, useState, useRef } from "react"
 import { useDirectoryOverride } from "../models/TimeTraveling"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faHistory,
-  faTicketAlt,
-  faPlayCircle,
-  faPauseCircle,
-} from "@fortawesome/free-solid-svg-icons"
+import { faHistory } from "@fortawesome/free-solid-svg-icons"
 import _ from "lodash"
 import { trackEvent } from "../util/analytics"
-
-const autoPlayInterval = 1.5 * 1000
 
 const dirNameToReadableTime = n => {
   return n.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})\d+/, "$1-$2-$3 $4:$5")
@@ -30,19 +23,15 @@ export function TimeMachine() {
 
   const [override, setOverride] = useDirectoryOverride()
   const [hover, setHover] = useState("")
-  const [autoplay, setAutoplay] = useState(false)
   const timeout = useRef()
-  const savedAutoplayCallback = useRef()
 
   const handleKeyDown = e => {
-    if (autoplay) setAutoplay(false)
     if (e.key === "ArrowRight") {
       moveTimeBy(1)
     } else if (e.key === "ArrowLeft") {
       moveTimeBy(-1)
     }
   }
-
   const moveTimeBy = dt => {
     const browsingIndex = _.findIndex(dirs, entry => entry[0] === override)
     if (browsingIndex === -1) return
@@ -53,26 +42,10 @@ export function TimeMachine() {
     trackEvent("Time Machine", { dir: directory })
     setOverride(directory === override ? null : directory)
   }
-
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
   }, [override])
-
-  const autoplayCallback = () => moveTimeBy(1)
-
-  useEffect(() => {
-    savedAutoplayCallback.current = autoplayCallback
-  }, [savedAutoplayCallback, override])
-
-  useEffect(() => {
-    if (autoplay) {
-      const id = setInterval(() => {
-        savedAutoplayCallback.current()
-      }, autoPlayInterval)
-      return () => clearInterval(id)
-    }
-  }, [autoplay])
 
   return (
     <div css={{ textAlign: "left" }}>
@@ -88,9 +61,6 @@ export function TimeMachine() {
       >
         <FontAwesomeIcon icon={faHistory} />
       </button>
-      {!!override && (
-        <AutoplayMenu autoplay={autoplay} setAutoplay={setAutoplay} />
-      )}
       {!!override && renderControl()}
     </div>
   )
@@ -172,26 +142,6 @@ export function TimeMachine() {
           </div>
         </div>
       </div>
-    )
-  }
-
-  function AutoplayMenu({ autoplay, setAutoplay }) {
-    return (
-      <button
-        onClick={() => setAutoplay(!autoplay)}
-        css={{
-          ...styles.button,
-          margin: "0 8px 0 -8px",
-          padding: 8,
-          flex: "none",
-        }}
-      >
-        {autoplay ? (
-          <FontAwesomeIcon icon={faPauseCircle} />
-        ) : (
-          <FontAwesomeIcon icon={faPlayCircle} />
-        )}
-      </button>
     )
   }
 }
