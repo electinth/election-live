@@ -1,38 +1,27 @@
-import React, { useCallback, useContext, useMemo, useState } from "react"
-import {
-  checkFilter,
-  filters,
-  zones,
-  zonePath,
-  getZoneByProvinceIdAndZoneNo,
-} from "../models/information"
-import { useSummaryData } from "../models/LiveDataSubscription"
+import _ from "lodash"
+import React, { useCallback, useMemo } from "react"
+import { getSeatDisplayModel } from "../models/ConstituencySeat"
+import { zones, getPartyById } from "../models/information"
+import { useSummaryData, usePerPartyData } from "../models/LiveDataSubscription"
 import {
   isZoneFinished,
-  shouldDisplayZoneData,
   nationwidePartyStatsFromSummaryJSON,
 } from "../models/PartyStats"
-import ElectionMap, { electionMapLoadingData } from "./ElectionMap"
-import ElectionMapTooltip from "./ElectionMapTooltip"
-import ZoneMark from "./ZoneMark"
-import { ZoneFilterContext } from "./ZoneFilterPanel"
-import { navigate } from "gatsby"
-import { trackEvent } from "../util/analytics"
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
-import { getSeatDisplayModel } from "../models/ConstituencySeat"
-import _ from "lodash"
+import ElectionMap, { electionMapLoadingData } from "./ElectionMap"
+import ZoneMark from "./ZoneMark"
 
 /**
- * @param {import('../models/LiveDataSubscription').DataState<ElectionDataSource.SummaryJSON>} summaryState
+ * @param {ElectionDataSource.SummaryJSON | null} summary
+ * @param {string} partyId
+ * @param {ReturnType<typeof computePartyCandidateModel>} perPartyModel
  */
-function getMapData(summaryState, partyId) {
-  if (!summaryState.completed) {
+function getMapData(summary, partyId, perPartyModel) {
+  if (!summary) {
     return electionMapLoadingData
   } else {
-    /** @type {ElectionDataSource.SummaryJSON} */
-    const summary = summaryState.data
     const row = _.find(
-      nationwidePartyStatsFromSummaryJSON(summaryState.data),
+      nationwidePartyStatsFromSummaryJSON(summary),
       row => row.party.id === +partyId
     )
     if (!row) return electionMapLoadingData
@@ -55,12 +44,40 @@ function getMapData(summaryState, partyId) {
     }
     return [
       ...zones.map((zone, i) => {
-        const { candidate, zoneStats } = getSeatDisplayModel(summary, zone)
-        const onMap = candidate && candidate.partyId === partyId
+        const { candidate: winningCandidate, zoneStats } = getSeatDisplayModel(
+          summary,
+          zone
+        )
+        const win = winningCandidate && +winningCandidate.partyId === +partyId
+        const sentCandidate = perPartyModel.getCandidate(
+          zone.provinceId,
+          zone.no
+        )
+        let opacity = 1
+        let winningPartyId = "nope"
+        let complete = false
+        const interpolate = (value, min = 0, max = 1) =>
+          Math.min(1, Math.max(0, (value - min) / (max - min)))
+        if (win) {
+          complete = true
+          winningPartyId = winningCandidate.partyId
+          opacity =
+            0.5 +
+            0.5 *
+              interpolate(
+                winningCandidate.score / zoneStats.votesTotal,
+                1 / 3,
+                1 / 2
+              )
+        } else if (sentCandidate && winningCandidate) {
+          winningPartyId = sentCandidate.partyId
+          opacity = interpolate(sentCandidate.score / winningCandidate.score)
+        }
         return {
           id: `${zone.provinceId}-${zone.no}`,
-          partyId: onMap ? candidate.partyId : "nope",
-          complete: onMap && isZoneFinished(zoneStats),
+          partyId: winningPartyId,
+          complete: complete,
+          opacity: opacity,
           show: true,
         }
       }),
@@ -69,11 +86,43 @@ function getMapData(summaryState, partyId) {
   }
 }
 
+/**
+ * @param {ElectionDataSource.PerPartyJSON | null} perPartyData
+ */
+function computePartyCandidateModel(perPartyData) {
+  const lookupTable = new Map(
+    perPartyData
+      ? perPartyData.constituencyCandidates.map(candidate => [
+          `${candidate.provinceId}-${candidate.zone}`,
+          candidate,
+        ])
+      : []
+  )
+  return {
+    /**
+     * @param {number} provinceId
+     * @param {number} zoneNo
+     * @return {ElectionDataSource.PerPartyCandidate | undefined}
+     */
+    getCandidate(provinceId, zoneNo) {
+      return lookupTable.get(`${provinceId}-${zoneNo}`)
+    },
+  }
+}
+
 export default function PerPartyMapContainer({ partyId }) {
   const summaryState = useSummaryData()
+  const perPartyState = usePerPartyData(partyId)
+  const party = getPartyById(partyId)
+  const partyCandidateModel = useMemo(
+    () => computePartyCandidateModel(perPartyState.data),
+    [perPartyState.data]
+  )
   const mapData = useMemo(
-    () => ({ zones: getMapData(summaryState, partyId) }),
-    [summaryState, partyId]
+    () => ({
+      zones: getMapData(summaryState.data, partyId, partyCandidateModel),
+    }),
+    [summaryState.data, partyId, partyCandidateModel]
   )
 
   const onInit = useCallback(map => {}, [])
@@ -92,6 +141,12 @@ export default function PerPartyMapContainer({ partyId }) {
         },
       }}
     >
+      <div style={{ textAlign: "center", marginBottom: 6 }}>
+        <ZoneMark color={party.color} />
+        มีผู้สมัครในเขตนั้น &nbsp;
+        <ZoneMark color={party.color} isCompleted />
+        ได้รับคะแนนสูงสุดในเขต
+      </div>
       <ElectionMap
         data={mapData}
         onInit={onInit}

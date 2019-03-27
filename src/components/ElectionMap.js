@@ -303,10 +303,10 @@ class ElectionMap extends SvgChart {
     // return match && match.complete ? 0 : this.options().size
   }
 
-  opacity(d) {
-    return 1
-    const match = this.dataLookup[d.id]
-    return match && match.complete ? 1 : 0.5
+  opacity(data) {
+    const match = this.dataLookup[data.id]
+    return match && match.opacity != null ? match.opacity : 1
+    // return match && match.complete ? 1 : 0.5
   }
 
   resetZoom() {
@@ -375,7 +375,7 @@ class ElectionMap extends SvgChart {
       .attr("transform", d => `translate(${d.x},${d.y})`)
       .select("rect")
       .attr("fill", d => this.color(d.data))
-    // .attr("opacity", d => this.opacity(d.data))
+      .attr("opacity", d => this.opacity(d.data))
 
     zoneSelection.exit().remove()
 
