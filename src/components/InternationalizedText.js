@@ -20,7 +20,7 @@ languageChangeEmitter.setMaxListeners(10000)
 let currentLanguage = /** @type {Language} */ ("th")
 let loaded = false
 
-export function LocalizedText({ thai, english }) {
+export function InternationalizedText({ thai, english }) {
   const [language, setLanguage] = useState(currentLanguage)
   useEffect(() => {
     const listener = () => setLanguage(currentLanguage)
@@ -49,7 +49,7 @@ export function LocalizedText({ thai, english }) {
 
 export function __(thai) {
   const english = strings[thai] || thai
-  return <LocalizedText thai={thai} english={english} />
+  return <InternationalizedText thai={thai} english={english} />
 }
 
 /**

@@ -10,7 +10,7 @@ import {
 } from "../models/information"
 import { trackEvent } from "../util/analytics"
 import HelpTooltip from "./HelpTooltip"
-import { __, LocalizedText } from "./LocalizedText"
+import { __, InternationalizedText } from "./InternationalizedText"
 
 export const ZoneFilterContext = createContext(
   /** @type {ZoneFilterName} */ ("all")
@@ -136,7 +136,7 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                     {label.length > 0 ? (
                       label
                     ) : (
-                      <LocalizedText
+                      <InternationalizedText
                         thai={areaFilters[filterName].name.th}
                         english={areaFilters[filterName].name.en}
                       />

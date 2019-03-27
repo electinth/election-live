@@ -5,7 +5,7 @@ import { labelColor, DESKTOP_MIN_WIDTH, media } from "../styles"
 import { appVersion } from "../util/appVersion"
 import { TimeMachine } from "./TimeMachine"
 import ContentWrapper from "./ContentWrapper"
-import { __, setLanguage } from "./LocalizedText"
+import { __, setLanguage } from "./InternationalizedText"
 
 export default function Footer() {
   // @todo #1 Polish the footer

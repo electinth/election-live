@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 import _ from "lodash"
 import LinkToSimulator from "./LinkToSimulator"
-import { __ } from "./LocalizedText"
+import { __ } from "./InternationalizedText"
 
 const menues = [
   {

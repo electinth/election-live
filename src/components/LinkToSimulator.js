@@ -4,7 +4,7 @@ import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import createSimulatorUrl from "../util/createSimulatorUrl"
-import { __ } from "./LocalizedText"
+import { __ } from "./InternationalizedText"
 
 const stylesLink = {
   color: "#FFFFFF",
