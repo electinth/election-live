@@ -97,6 +97,14 @@ interface IZoneFilter {
   }
 
   help?: string
+
+  transform? {
+    scale: number
+    translate: {
+      x: number
+      y: number
+    }
+  }
 }
 
 /**

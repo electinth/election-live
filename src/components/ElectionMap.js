@@ -244,7 +244,7 @@ class ElectionMap extends SvgChart {
       .attr("letter-spacing", "0")
 
     // hack for testing
-    // window.theMap = this;
+    window.theMap = this
   }
 
   visualize() {
@@ -319,12 +319,22 @@ class ElectionMap extends SvgChart {
       .attr("height", this.getInnerHeight())
 
     this.renderZones()
-
-    const { selectedZone } = this.data()
+    const { selectedZone, regionZoom } = this.data()
     if (selectedZone) {
       this.selectZone(selectedZone)
     } else {
       this.clearSelectedZone()
+    }
+
+    this.resetZoom()
+    if (regionZoom) {
+      const { x, y } = regionZoom.translate
+
+      this.zoom.translateTo(this.container, 0, 0)
+      this.zoom.scaleTo(this.container, 1)
+
+      this.zoom.translateTo(this.container, x, y)
+      this.zoom.scaleTo(this.container, regionZoom.scale)
     }
 
     // // resize to fit window

@@ -83,10 +83,20 @@ const createMapData = createSelector(
     selectedZone
       ? `${selectedZone.provinceId}-${selectedZone.zoneNo}`
       : selectedZone,
-  (zones, selectedZone) => ({ zones, selectedZone })
+  ({ regionZoom }) => regionZoom || undefined,
+  ({ currentMobileTab }) => currentMobileTab,
+  (zones, selectedZone, regionZoom, currentMobileTab) => ({
+    zones,
+    selectedZone,
+    regionZoom,
+    currentMobileTab,
+  })
 )
 
-export default function ElectionMapContainer({ currentZone }) {
+export default function ElectionMapContainer({
+  currentZone,
+  currentMobileTab,
+}) {
   const summaryState = useSummaryData()
   const currentFilterName = useContext(ZoneFilterContext)
   const currentFilter = filters[currentFilterName]
@@ -95,6 +105,7 @@ export default function ElectionMapContainer({ currentZone }) {
     summaryState,
     currentFilter,
   ])
+  const regionZoom = currentFilter.zoom
 
   const onInit = useCallback(map => {}, [])
   const onZoneMouseenter = useCallback((zone, mouseEvent) => {
@@ -161,6 +172,8 @@ export default function ElectionMapContainer({ currentZone }) {
           data={createMapData({
             zones: mapZones,
             selectedZone: currentZone,
+            regionZoom: regionZoom,
+            currentMobileTab: currentMobileTab,
           })}
           onInit={onInit}
           onZoneMouseenter={onZoneMouseenter}

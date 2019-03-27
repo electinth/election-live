@@ -172,7 +172,10 @@ export default function ZoneMasterView({
             }}
           >
             <ErrorBoundary name="ElectionMap">
-              <ElectionMapContainer currentZone={currentZone} />
+              <ElectionMapContainer
+                currentZone={currentZone}
+                currentMobileTab={currentMobileTab}
+              />
             </ErrorBoundary>
           </div>
         </div>
