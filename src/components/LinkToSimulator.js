@@ -4,6 +4,7 @@ import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 import { nationwidePartyStatsFromSummaryJSON } from "../models/PartyStats"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import createSimulatorUrl from "../util/createSimulatorUrl"
+import { __ } from "./InternationalizedText"
 
 const stylesLink = {
   color: "#FFFFFF",
@@ -50,7 +51,7 @@ export default function LinkToSimulator() {
         window.open(url, "_blank")
       }}
     >
-      ลองตั้งรัฐบาล
+      {__("ลองตั้งรัฐบาล")}
     </Link>
   )
 }

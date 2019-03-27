@@ -5,6 +5,7 @@ import { labelColor, DESKTOP_MIN_WIDTH, media } from "../styles"
 import { appVersion } from "../util/appVersion"
 import { TimeMachine } from "./TimeMachine"
 import ContentWrapper from "./ContentWrapper"
+import { __, setLanguage } from "./InternationalizedText"
 
 export default function Footer() {
   // @todo #1 Polish the footer
@@ -15,6 +16,9 @@ export default function Footer() {
         padding: "2rem 0.5rem 4rem",
         marginTop: "1rem",
         color: labelColor,
+        a: {
+          color: "#666",
+        },
       }}
     >
       <ContentWrapper>
@@ -35,9 +39,17 @@ export default function Footer() {
           href="https://github.com/codeforthailand/election-live"
           target="_blank"
         >
-          <FontAwesomeIcon icon={faGithub} /> Github
+          <FontAwesomeIcon icon={faGithub} /> GitHub
         </a>
-        <br />v{appVersion}
+        <br />v{appVersion} - View this page in{" "}
+        {__(
+          <a href="javascript:" onClick={() => setLanguage("en")}>
+            English
+          </a>,
+          <a href="javascript:" onClick={() => setLanguage("th")}>
+            Thai
+          </a>
+        )}
       </div>
     </footer>
   )

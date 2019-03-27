@@ -10,6 +10,7 @@ import {
 } from "../models/information"
 import { trackEvent } from "../util/analytics"
 import HelpTooltip from "./HelpTooltip"
+import { __, InternationalizedText } from "./InternationalizedText"
 
 export const ZoneFilterContext = createContext(
   /** @type {ZoneFilterName} */ ("all")
@@ -25,7 +26,7 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
 
   return (
     <div>
-      <div css={{ fontSize: 20, fontWeight: "bold" }}>เขตพื้นที่</div>
+      <div css={{ fontSize: 20, fontWeight: "bold" }}>{__("เขตพื้นที่")}</div>
       <ul css={{ padding: 0, listStyle: "none" }}>
         {renderFilter("all")}
         {renderFilter("northern")}
@@ -34,7 +35,9 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
         {renderFilter("southern")}
         {renderFilterSearch()}
       </ul>
-      <div css={{ fontSize: 20, fontWeight: "bold" }}>ตัวเลือกพิเศษ</div>
+      <div css={{ fontSize: 20, fontWeight: "bold" }}>
+        {__("ตัวเลือกพิเศษ")}
+      </div>
       <ul css={{ padding: 0, listStyle: "none" }}>
         {renderFilter("urban")}
         {renderFilter("rural")}
@@ -130,7 +133,14 @@ export function ZoneFilterPanel({ onFilterSelect, autoFocus }) {
                     {!current && <FontAwesomeIcon icon={faCircle} />}
                   </span>
                   <span>
-                    {label.length > 0 ? label : areaFilters[filterName].name.th}
+                    {label.length > 0 ? (
+                      label
+                    ) : (
+                      <InternationalizedText
+                        thai={areaFilters[filterName].name.th}
+                        english={areaFilters[filterName].name.en}
+                      />
+                    )}
                   </span>
                   {areaFilters[filterName].description ? (
                     <HelpTooltip
