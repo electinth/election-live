@@ -111,4 +111,17 @@ declare namespace ElectionDataSource {
     /** If result is overridden (see ResultOverride.js) */
     overridden?: true
   }
+
+  /**
+   * A file for each party which contains all necessary data to render
+   * the Per-Party view.
+   */
+  interface PerPartyJSON {
+    updatedAt: DateString
+    constituencyCandidates: PerPartyCandidate[]
+  }
+  interface PerPartyCandidate extends Candidate {
+    provinceId: number
+    zone: number
+  }
 }

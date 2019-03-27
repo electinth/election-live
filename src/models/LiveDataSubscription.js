@@ -241,6 +241,15 @@ export function usePerZoneData(provinceId, zoneNo) {
   )
 }
 
+/** @return {DataState<ElectionDataSource.PerPartyJSON>} */
+export function usePerPartyData(partyId) {
+  const state = useComputed(
+    () => getLatestDataFileState(`/PerPartyJSON/${partyId}.json`),
+    [partyId]
+  )
+  return useInertState(state)
+}
+
 function useMappedDataState(state, mapper) {
   return useMemo(
     () => (state.data ? { ...state, data: mapper(state.data) } : state),
