@@ -76,9 +76,11 @@ export default function ElectionMapTooltip({ positionId, positions }) {
         markColor = partyColor(getPartyById(candidate.partyId))
       }
     }
-  } else if (seat) {
-    const partyStats = nationwidePartyStatsFromSummaryJSON(data)
-    partyStat = _.find(partyStats, { party: { id: party.id } })
+  } else if (seat && completed) {
+    if (!!party) {
+      const partyStats = nationwidePartyStatsFromSummaryJSON(data)
+      partyStat = _.find(partyStats, { party: { id: party.id } })
+    }
     markColor = party ? party.color : "#ccc"
   }
 
@@ -113,8 +115,14 @@ export default function ElectionMapTooltip({ positionId, positions }) {
                 <div style={LARGE_FONT}>
                   <b>ส.ส. บัญชีรายชื่อ</b>
                 </div>
-                <div>{party ? `พรรค${party.name}` : null}</div>
-                <div>{partyStat.partyListSeats} ที่นั่ง</div>
+                {party && completed ? (
+                  <div>
+                    <div>{party ? `พรรค${party.name}` : null}</div>
+                    <div>{partyStat.partyListSeats} ที่นั่ง</div>
+                  </div>
+                ) : (
+                  <div>อันดับที่ {seat.no}</div>
+                )}
               </div>
             )}
           </td>
