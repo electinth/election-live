@@ -3,17 +3,18 @@ import { Link } from "gatsby"
 import { WIDE_NAV_MIN_WIDTH, media } from "../styles"
 import _ from "lodash"
 import LinkToSimulator from "./LinkToSimulator"
+import { __ } from "./LocalizedText"
 
 const menues = [
   {
     name: "by-area",
     route: "/",
-    label: "ดูผลตามพื้นที่",
+    label: __("ดูผลตามพื้นที่", "View by Area"),
   },
   {
     name: "by-party",
     route: "/party",
-    label: "ดูผลตามพรรค",
+    label: __("ดูผลตามพรรค", "View by Party"),
   },
   // {
   //   name: "overview",
@@ -23,7 +24,7 @@ const menues = [
   {
     name: "about",
     route: "/about",
-    label: "เกี่ยวกับ ELECT Live",
+    label: __("เกี่ยวกับ ELECT Live", "About ELECT Live!"),
   },
 ]
 
