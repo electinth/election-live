@@ -1,26 +1,14 @@
-import React, { useCallback, useContext, useMemo, useState } from "react"
-import {
-  checkFilter,
-  filters,
-  zones,
-  zonePath,
-  getZoneByProvinceIdAndZoneNo,
-} from "../models/information"
+import _ from "lodash"
+import React, { useCallback, useMemo } from "react"
+import { getSeatDisplayModel } from "../models/ConstituencySeat"
+import { zones } from "../models/information"
 import { useSummaryData } from "../models/LiveDataSubscription"
 import {
   isZoneFinished,
-  shouldDisplayZoneData,
   nationwidePartyStatsFromSummaryJSON,
 } from "../models/PartyStats"
-import ElectionMap, { electionMapLoadingData } from "./ElectionMap"
-import ElectionMapTooltip from "./ElectionMapTooltip"
-import ZoneMark from "./ZoneMark"
-import { ZoneFilterContext } from "./ZoneFilterPanel"
-import { navigate } from "gatsby"
-import { trackEvent } from "../util/analytics"
 import { media, WIDE_NAV_MIN_WIDTH } from "../styles"
-import { getSeatDisplayModel } from "../models/ConstituencySeat"
-import _ from "lodash"
+import ElectionMap, { electionMapLoadingData } from "./ElectionMap"
 
 /**
  * @param {import('../models/LiveDataSubscription').DataState<ElectionDataSource.SummaryJSON>} summaryState
