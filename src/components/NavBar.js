@@ -9,12 +9,12 @@ const menues = [
   {
     name: "by-area",
     route: "/",
-    label: __("ดูผลตามพื้นที่", "View by Area"),
+    label: __("ดูผลตามพื้นที่"),
   },
   {
     name: "by-party",
     route: "/party",
-    label: __("ดูผลตามพรรค", "View by Party"),
+    label: __("ดูผลตามพรรค"),
   },
   // {
   //   name: "overview",
@@ -24,7 +24,7 @@ const menues = [
   {
     name: "about",
     route: "/about",
-    label: __("เกี่ยวกับ ELECT Live", "About ELECT Live!"),
+    label: __("เกี่ยวกับ ELECT Live"),
   },
 ]
 

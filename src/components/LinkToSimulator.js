@@ -51,7 +51,7 @@ export default function LinkToSimulator() {
         window.open(url, "_blank")
       }}
     >
-      {__("ลองตั้งรัฐบาล", "Election Simulator")}
+      {__("ลองตั้งรัฐบาล")}
     </Link>
   )
 }

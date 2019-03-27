@@ -22,7 +22,7 @@ import {
   partyStatsFromSummaryJSON,
   partyStatsRowTotalSeats,
 } from "../models/PartyStats"
-import { __ } from "../components/LocalizedText"
+import { __, LocalizedText } from "../components/LocalizedText"
 
 export const MobileTabContext = createContext(
   /** @type {import('../components/ZoneMasterView').MobileTab} */ ("summary")
@@ -104,7 +104,12 @@ function SummaryHeaderContainer({ filterName }) {
   const currentFilter = filters[filterName]
   const totalZoneCount = zones.filter(zone => checkFilter(currentFilter, zone))
     .length
-  const title = __(currentFilter.name.th, currentFilter.name.en)
+  const title = (
+    <LocalizedText
+      thai={currentFilter.name.th}
+      english={currentFilter.name.en}
+    />
+  )
 
   if (!summaryState.completed) {
     return (
