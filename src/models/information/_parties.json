@@ -424,7 +424,8 @@
     "color": "#181f97",
     "id": 75,
     "name": "พลังปวงชนไทย",
-    "partylist": 62
+    "partylist": 62,
+    "supportNcpo": false
   },
   {
     "codeEN": "PTRT",
